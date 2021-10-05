@@ -150,9 +150,9 @@ Glossary updaten
 
     4. User stories
 
-As a gardener,
+As a gardener/garden manager/admin,
 I want to be able to login,
-So I can see all tasks.
+So I can do all things I want to do.
 
 As a gardener,
 I want to see a dynamic schedule,
@@ -191,9 +191,6 @@ I want to be able to message other users,
 So I can easily communicate with them
 
 
-As a garden manager,
-I want to be able to login,
-So I can do all things I want to do.
 
 As a garden manager, 
 I want a sowing overview,
