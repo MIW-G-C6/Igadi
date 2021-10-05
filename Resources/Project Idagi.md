@@ -1,0 +1,291 @@
+Project Idagi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Groepsleden: Ruerd de Jong, Tjerk Nagel, Annemarleen Bosma, Lukas de Ruiter
+Teamnaam:  Garden Gnomes
+Docent: J. Haverkort
+Inhoud
+    1. Glossary
+    2. Product backlog
+    3. Definition of Done
+    4. User stories
+    5. Minimal Viable Product
+    6. The meaning of 1 Story Point
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    1. GLOSSARY
+
+Admin beheerder- beheerder van het gehele systeem.
+
+Garden manager- beheerder van een moestuin.
+
+Gardener – vrijwilligers die uiteindelijk in een moestuin gaan werken.
+
+Patch – moestuinperk waar één soort gewas in groeit, dat wordt gebruikt voor de onderverdeling van de moestuin.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    2. Product backlog
+EPIC: Schematisch overzicht van takentijden van een gemeenschappelijke moestuin.
+1: Overzicht van patches.
+2: Overzicht van actuele gewassen.
+3: Overzicht van gedane taken.
+4: Overzicht van actuele taken.
+
+Een beheer-admin scherm met CRUD-functionaliteit  voor gebruikers.
+Een moestuin beheerder-scherm met een status overzicht van de moestuin en planning mogelijkheden voor de moestuin.
+Database met info van gewassen dat leesbaar is voor users/met CRUD mogelijkheden voor de moestuin beheerder. 
+Weerindicatie met gebruik van openweather.org API voor gebruikers/moestuin beheerder. 
+Applogo ontwikkelen.
+Teamlogo ontwikkelen.
+Beloningssysteem voor gebruikers.
+Visuele representatie voor de gebruikers van de status van de moestuin. 
+Rekening houden met applicatie voor telefoon. 
+Gereedschapsoverzicht per moestuin
+Gamified moestuinen met beanpoints
+
+
+
+
+
+
+
+
+
+
+
+    3. Definition of Done
+    • Write clean code
+    • No code smells
+    • No bad comments
+    • A peer review
+    • Het moet werken zoals het bedoelt is <- 
+    • Responsive Design (iets met telefoons)
+
+Glossary updaten
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    4. User stories
+
+As a gardener,
+I want to be able to login,
+So I can see all tasks.
+
+As a gardener,
+I want to see a dynamic schedule,
+So I can see what tasks I can do and enroll for the task.
+
+As a gardener,
+I want to be able to complete a task I am enrolled for,
+So I can earn beans and continue to the main page.
+
+As a gardener,
+I want to keep track of tasks done by me,
+So I can know what I “earn”.
+
+As a gardener,
+I want to be able to see my profile,
+So I can adjust my personal information and customize my profile.
+
+As a gardener, 
+I want to be able to review someone’s work,
+So I can ensure good use of the garden.
+
+As a gardener,
+I want to be able to give feedback on what to plant next,
+So I can contribute to the crop rotation.
+
+As a gardener,
+I want a plant information overview(wiki), 
+So I can learn about plants and know what to do and when. 
+
+As a gardener,
+ I want a plant wiki of plants/tasks/time of year/tools/stages/lengths,
+So I can learn about plants and know what to do and when
+
+As a gardener/garden manager,
+I want a weather view,
+So I can know what it means for my gardening
+
+
+
+As a Admin Beheerder,
+I want UserCRUD,
+So I can add/update/delete users.
+
+
+As a garden manager, 
+I want a sowing overview,
+So I can plant new plant beds. 
+
+As a garden manager,
+I want to manage return per gardener,
+So I can give people what they earned. 
+
+As a garden manager,
+I want to assign plants,
+So I can select what grows where.
+
+As a garden manager,
+I want to see an overview of the garden,
+So I can keep track of the plant progress.
+
+As a garden manager, 
+I want to be able to add custom tasks,
+So I can fill in gaps between regular tasks. 
+
+
+As a garden manager,
+I want a sowing overview,
+So I can plant new plantbeds/crops
+
+As a garden manager,
+I want to manage the plant wiki,
+So I can give gardeners information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    5. Minimal Viable Product
+
+Overzicht van alleen Todo-taken in de moestuin.
+Bereikbaar voor vrijwilligers als je hem host.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6. The meaning of 1 Storypoint
+
+Het maken van een knop en het implementeren van diens functie hebben wij gezet op 1 Storypoint. Bijvoorbeeld: een knop aanmaken (stap 1), informatie wordt uit de database gehaald of in de database gezet (stap2), er wordt informatie/reactie getoond aan gebruiker (stap3).
