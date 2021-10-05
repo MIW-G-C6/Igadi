@@ -179,31 +179,25 @@ I want to be able to give feedback on what to plant next,
 So I can contribute to the crop rotation.
 
 As a gardener,
-I want a plant information overview(wiki), 
-So I can learn about plants and know what to do and when. 
-
-As a gardener,
- I want a plant wiki of plants/tasks/time of year/tools/stages/lengths,
+I want a plant wiki of plants/tasks/time of year/tools/stages/lengths,
 So I can learn about plants and know what to do and when
 
 As a gardener/garden manager,
 I want a weather view,
 So I can know what it means for my gardening
 
+As a gardener/garden manager/admin,
+I want to be able to message other users,
+So I can easily communicate with them
 
 
-As a Admin Beheerder,
-I want UserCRUD,
-So I can add/update/delete users.
-
+As a garden manager,
+I want to be able to login,
+So I can do all things I want to do.
 
 As a garden manager, 
 I want a sowing overview,
-So I can plant new plant beds. 
-
-As a garden manager,
-I want to manage return per gardener,
-So I can give people what they earned. 
+So I can plant new plant beds/crops.
 
 As a garden manager,
 I want to assign plants,
@@ -213,22 +207,34 @@ As a garden manager,
 I want to see an overview of the garden,
 So I can keep track of the plant progress.
 
+As a garden manager,
+I want to manage return per gardener,
+So I can give people what they earned. 
+
 As a garden manager, 
 I want to be able to add custom tasks,
-So I can fill in gaps between regular tasks. 
-
-
-As a garden manager,
-I want a sowing overview,
-So I can plant new plantbeds/crops
+So I can fill in gaps between regular tasks.
 
 As a garden manager,
 I want to manage the plant wiki,
-So I can give gardeners information
+So I can give gardeners information.
+
+As a garden manager,
+I want poll CRUD,
+So I can control polls.
+
+As a garden manager,
+I want patch per garden CRUD,
+So I can control patches in a garden
 
 
+As a Admin Beheerder,
+I want CRUD of users and their roles,
+So I can add/update/delete users and control their roles.
 
-
+As an admin,
+I want garden CRUD,
+So I can control gardens
 
 
 
