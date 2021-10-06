@@ -1,4 +1,4 @@
-Project Igadi
+#Project Igadi
 
 
 
@@ -21,10 +21,11 @@ Project Igadi
 
 
 
-Groepsleden: Ruerd de Jong, Tjerk Nagel, Annemarleen Bosma, Lukas de Ruiter
+_Groepsleden: Ruerd de Jong, Tjerk Nagel, Annemarleen Bosma, Lukas de Ruiter
 Teamnaam:  Garden Gnomes
-Docent: J. Haverkort
-Inhoud
+Docent: J. Haverkort_
+
+##Inhoud
     1. Glossary
     2. Product backlog
     3. Definition of Done
