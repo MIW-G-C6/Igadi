@@ -130,7 +130,6 @@ Functionality has been tested/validated and does not interfere existing function
 
 Code has been merged and pushed to the master/main branch
 
-Glossary updaten
 
 
 
