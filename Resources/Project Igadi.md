@@ -1,4 +1,4 @@
-Project Igadi
+#Project Igadi
 
 
 
@@ -21,10 +21,11 @@ Project Igadi
 
 
 
-Groepsleden: Ruerd de Jong, Tjerk Nagel, Annemarleen Bosma, Lukas de Ruiter
+_Groepsleden: Ruerd de Jong, Tjerk Nagel, Annemarleen Bosma, Lukas de Ruiter
 Teamnaam:  Garden Gnomes
-Docent: J. Haverkort
-Inhoud
+Docent: J. Haverkort_
+
+##Inhoud
     1. Glossary
     2. Product backlog
     3. Definition of Done
@@ -57,7 +58,7 @@ Inhoud
 
 
 
-    1. GLOSSARY
+    ######1. GLOSSARY
 
 Admin beheerder- beheerder van het gehele systeem.
 
@@ -87,7 +88,7 @@ Patch – moestuinperk waar één soort gewas in groeit, dat wordt gebruikt voor
 
 
 
-    2. Product backlog
+    ######2. Product backlog
 EPIC: Schematisch overzicht van takentijden van een gemeenschappelijke moestuin.
 1: Overzicht van patches.
 2: Overzicht van actuele gewassen.
@@ -116,7 +117,7 @@ Gamified moestuinen met beanpoints
 
 
 
-    3. Definition of Done
+   ######3. Definition of Done
 
 Code is written according to quality standards
 
@@ -153,7 +154,7 @@ Code has been merged and pushed to the master/main branch
 
 
 
-    4. User stories
+   ######4. User stories
 
 As a gardener/garden manager/admin,
 I want to be able to login,
@@ -249,7 +250,7 @@ So I can control gardens
 
 
 
-    5. Minimal Viable Product
+   ######5. Minimal Viable Product
 
 Overzicht van alleen Todo-taken in de moestuin.
 Bereikbaar voor vrijwilligers als je hem host.
@@ -295,6 +296,6 @@ Bereikbaar voor vrijwilligers als je hem host.
 
 
 
-6. The meaning of 1 Storypoint
+######6. The meaning of 1 Storypoint
 
 Het maken van een knop en het implementeren van diens functie hebben wij gezet op 1 Storypoint. Bijvoorbeeld: een knop aanmaken (stap 1), informatie wordt uit de database gehaald of in de database gezet (stap2), er wordt informatie/reactie getoond aan gebruiker (stap3).
