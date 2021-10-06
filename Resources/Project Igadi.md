@@ -117,12 +117,18 @@ Gamified moestuinen met beanpoints
 
 
     3. Definition of Done
-    • Write clean code
-    • No code smells
-    • No bad comments
-    • A peer review
-    • Het moet werken zoals het bedoelt is <- 
-    • Responsive Design (iets met telefoons)
+
+Code is written according to quality standards
+
+Code and functionality is peer reviewed
+
+Code identifiers are created with standards language naming conventions in mind
+
+Glossary is up to date
+
+Functionality has been tested/validated and does not interfere existing functionality
+
+Code has been merged and pushed to the master/main branch
 
 Glossary updaten
 
@@ -173,7 +179,6 @@ So I can adjust my personal information and customize my profile.
 As a gardener, 
 I want to be able to review someone’s work,
 So I can ensure good use of the garden.
-</>
 
 As a gardener,
 I want to be able to give feedback on what to plant next,
@@ -186,18 +191,14 @@ So I can learn about plants and know what to do and when
 As a gardener/garden manager,
 I want a weather view,
 So I can know what it means for my gardening
-</>
 
 As a gardener/garden manager/admin,
 I want to be able to message other users,
 So I can easily communicate with them
 
-
-
 As a garden manager, 
 I want a sowing overview,
 So I can plant new plant beds/crops.
-</>
 
 As a garden manager,
 I want to assign plants,
@@ -206,12 +207,10 @@ So I can select what grows where.
 As a garden manager,
 I want to see an overview of the garden,
 So I can keep track of the plant progress.
-</>
 
 As a garden manager,
 I want to manage return per gardener,
 So I can give people what they earned.
-</>
 
 As a garden manager, 
 I want to be able to add custom tasks,
@@ -220,7 +219,6 @@ So I can fill in gaps between regular tasks.
 As a garden manager,
 I want to manage the plant wiki,
 So I can give gardeners information.
-</>
 
 As a garden manager,
 I want poll CRUD,
@@ -233,12 +231,10 @@ So I can control patches in a garden
 As a gardener/garden manager,
 I want an overview of previously completed tasks
 So I can see what has been done and who did it.
-</>
 
 As a Admin,
 I want CRUD of users and their roles,
 So I can add/update/delete users and control their roles.
-</>
 
 As an admin,
 I want garden CRUD,
