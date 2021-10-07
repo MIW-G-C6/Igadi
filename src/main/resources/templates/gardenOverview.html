@@ -16,9 +16,9 @@
             <th>GardenID</th>
             <th>Name</th>
         </tr>
-        <tr>
-            <th></th>
-            <th></th>
+        <tr th:each="garden : ${allGardens}">
+            <td th:text="${garden.gardenId}"></td>
+            <td th:text="${garden.gardenName}"></td>
         </tr>
     </table>
 
