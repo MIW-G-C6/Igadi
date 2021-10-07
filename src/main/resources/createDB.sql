@@ -1,5 +1,4 @@
-CREATE TABLE `igadi` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA `igadi` DEFAULT CHARACTER SET utf8 ;
 
-CREATE USER 'igadiadmin'@'localhost' IDENTIFIED BY 'igadipassword';
-GRANT ALL PRIVILEGES ON igadi.* TO 'igadiadmin'@'localhost';
-
+CREATE USER 'igadiAdmin'@'localhost' IDENTIFIED BY 'igadiPassword';
+GRANT ALL PRIVILEGES ON igadi.* TO 'igadiAdmin'@'localhost';
