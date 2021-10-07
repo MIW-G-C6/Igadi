@@ -27,9 +27,9 @@ public class Task {
     @Column(unique = true, nullable = false, name="isDone")
     private boolean isDone;
 
-    @ManyToOne
-    private int patchId;
+    @ManyToOne(optional = true)
+    private Patch patch;
 
     @ManyToOne
-    private int gardenId;
+    private Garden garden;
 }
