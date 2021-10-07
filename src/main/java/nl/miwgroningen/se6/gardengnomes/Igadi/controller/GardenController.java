@@ -21,7 +21,6 @@ public class GardenController {
     @GetMapping({"/", "/gardens"})
     protected String showGardenOverview(Model model) {
         model.addAttribute("allGardens", gardenRepository.findAll());
-        System.out.println("yess");
         return "gardenOverview";
     }
 
