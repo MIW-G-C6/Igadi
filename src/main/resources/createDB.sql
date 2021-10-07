@@ -1,5 +1,9 @@
-CREATE TABLE `igadi` DEFAULT CHARACTER SET utf8 ;
+DROP SCHEMA IF EXISTS Igadi;
 
-CREATE USER 'igadiadmin'@'localhost' IDENTIFIED BY 'igadipassword';
-GRANT ALL PRIVILEGES ON igadi.* TO 'igadiadmin'@'localhost';
+CREATE SCHEMA Igadi DEFAULT CHARACTER SET utf8;
 
+USE Igadi;
+
+CREATE USER 'igadiAdmin'@'localhost' IDENTIFIED BY 'igadipassword';
+DROP USER IF NOT EXISTS 'igadiAdmin'@'localhost'@'localhost';
+GRANT ALL PRIVILEGES ON Igadi.* TO 'igadiAdmin'@'localhost';
