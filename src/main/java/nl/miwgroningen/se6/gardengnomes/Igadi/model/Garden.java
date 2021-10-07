@@ -19,9 +19,10 @@ public class Garden {
     //Fields
     @Id
     @GeneratedValue
+    @Column(name="gardenId")
     private Integer gardenId;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, name="gardenName")
     private String gardenName;
 
     public Integer getGardenId() {
