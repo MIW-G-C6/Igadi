@@ -22,7 +22,10 @@ public class Patch<Patchid> {
 
     @Embeddable
     class PatchId implements Serializable {
-        private Integer gardenId;
+
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(gardenId = "gardenId")
+        private Garden garden;
         private Integer patchId;
     }
 }
