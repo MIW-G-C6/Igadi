@@ -1,9 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
@@ -12,6 +9,7 @@ import javax.persistence.ManyToOne;
  *     to one patch/garden per task. The isDone field represents if a task has been completed or not.
  */
 
+@Entity
 public class Task {
 
     //Fields
@@ -29,9 +27,9 @@ public class Task {
     @Column(unique = true, nullable = false, name="isDone")
     private boolean isDone;
 
-    @ManyToOne
-    private int patchId;
+/*    @ManyToOne
+    private Integer patchId;*/
 
     @ManyToOne
-    private int gardenId;
+    private Garden garden;
 }
