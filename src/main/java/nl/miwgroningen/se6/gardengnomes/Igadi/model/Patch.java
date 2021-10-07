@@ -11,21 +11,31 @@ import java.io.Serializable;
  */
 
 @Entity
-public class Patch<Patchid> {
+public class Patch {
 
 
     // Fields
-    @EmbeddedId
+    @Id
     @GeneratedValue
     @Column(name="patchId")
-    private PatchId patchId;
+    private Integer patchId;
 
-    @Embeddable
-    class PatchId implements Serializable {
+    @ManyToOne
+    private Garden garden;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(gardenId = "gardenId")
-        private Garden garden;
-        private Integer patchId;
+    public Integer getPatchId() {
+        return patchId;
+    }
+
+    public void setPatchId(Integer patchId) {
+        this.patchId = patchId;
+    }
+
+    public Garden getGarden() {
+        return garden;
+    }
+
+    public void setGarden(Garden garden) {
+        this.garden = garden;
     }
 }
