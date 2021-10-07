@@ -1,6 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author Tjerk Nagel
@@ -10,18 +11,18 @@ import javax.persistence.*;
  */
 
 @Entity
-@IdClass(PatchId.class)
-public class Patch {
+public class Patch<Patchid> {
 
-    @Id
-    @GeneratedValue
-    @Column(name="gardenId")
-    private Integer gardenId;
 
-    @Id
+    // Fields
+    @EmbeddedId
     @GeneratedValue
     @Column(name="patchId")
-    private Integer patchId;
+    private PatchId patchId;
 
-
+    @Embeddable
+    class PatchId implements Serializable {
+        private Integer gardenId;
+        private Integer patchId;
+    }
 }
