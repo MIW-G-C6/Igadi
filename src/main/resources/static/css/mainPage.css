@@ -1,7 +1,10 @@
+body{
+    background-color: lightblue;
+}
+
 .gardenTableContainer{
   margin: auto;
   width: 60vw;
-  height: 30rem;
   border: 10px solid pink;
 
   display: flex;
@@ -32,7 +35,7 @@
 
 .taskOverviewContainer{
   width: 25vw;
-  height: 100%;
+  height: 60rem;
   border: 10px solid purple;
   margin-left: auto;
 
@@ -43,6 +46,7 @@
 
 .taskTable{
     width: 100%;
+    height: 100%;
     border: 3px solid green;
     text-align: center;
 }
@@ -63,6 +67,7 @@
     display: flex;
     width: 100%;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .gardenCard{
@@ -77,9 +82,14 @@
     border-radius: 10px;
 }
 
-
-.container-fluid{
-    width: 30rem;
-    height: 30 rem;
-
+.taskCard{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(100, 100, 100, 0.5);
+    border: 3px solid black;
+    border-radius: 10px;
 }
+
+
