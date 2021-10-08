@@ -42,10 +42,12 @@
         <tr>
             <th>GardenID</th>
             <th>Name</th>
+            <th>Icon</th>
         </tr>
         <tr th:each="garden : ${allGardens}">
             <td th:text="${garden.gardenId}"></td>
             <td th:text="${garden.gardenName}"></td>
+            <td><img class="landTile" src="/images/icons/gardenIcon.svg"></td>
         </tr>
     </table>
 
@@ -58,29 +60,12 @@
                 <th>PatchID</th>
                 <th>Name</th>
             </tr>
-            <tr th:each="patch : ${allPatches}">
-                <!--            <td th:text="${garden.gardenName}"></td> DEZE KLOPT NOG NIET -->
-                <td th:text="${patch.patchId}"></td>
-                <td th:text="${patch.patchName}"></td>
-
-            </tr>
         </table>
 
     </div>
 
 <div class="taskOverviewContainer">
     <h1>Tasks</h1>
-
-    <table class="taskTable">
-        <tr>
-            <th>Task</th>
-            <th>TaskID</th>
-        </tr>
-        <tr th:each="task : ${allTasks}">
-            <td th:text="${task.taskName}"></td>
-            <td th:text="${task.taskId}"></td>
-        </tr>
-    </table>
 </div>
 
 </div>
