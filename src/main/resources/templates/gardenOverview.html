@@ -4,14 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Garden Overview</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/mainPage.css">
 </head>
 
 <body>
 
-<div class="container">
-    <h1>Gardens</h1>
+<div class="gardenTableContainer">
 
-    <table>
+    <div class="gardenPatchContainer">
+
+    <h1>Gardens</h1>
+    <table class="gardenTable">
         <tr>
             <th>GardenID</th>
             <th>Name</th>
@@ -22,7 +26,43 @@
         </tr>
     </table>
 
+
+        <h1>Patches</h1>
+
+        <table class="patchTable">
+            <tr>
+                <th>Garden</th>
+                <th>PatchID</th>
+                <th>Name</th>
+            </tr>
+            <tr th:each="patch : ${allPatches}">
+                <!--            <td th:text="${garden.gardenName}"></td> DEZE KLOPT NOG NIET -->
+                <td th:text="${patch.patchId}"></td>
+                <td th:text="${patch.patchName}"></td>
+
+            </tr>
+        </table>
+
+    </div>
+
+<div class="taskOverviewContainer">
+    <h1>Tasks</h1>
+
+    <table class="taskTable">
+        <tr>
+            <th>Task</th>
+            <th>TaskID</th>
+        </tr>
+        <tr th:each="task : ${allTasks}">
+            <td th:text="${task.taskName}"></td>
+            <td th:text="${task.taskId}"></td>
+        </tr>
+    </table>
 </div>
+
+</div>
+
+
 
 </body>
 </html>
