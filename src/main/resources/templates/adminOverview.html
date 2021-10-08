@@ -61,19 +61,17 @@
             <h4 th:text="${garden.gardenName}"></h4>
             <p th:text="${garden.gardenId}"></p>
         </div>
-
         </div>
-
 
         <h1>Patches</h1>
 
-        <table class="patchTable">
-            <tr>
-                <th>Garden</th>
-                <th>PatchID</th>
-                <th>Name</th>
-            </tr>
-        </table>
+        <div class="gardens">
+        <div class="gardenCard" th:each="patch : ${allPatches}">
+            <img class="landTile" src="/images/icons/patchIcon.svg">
+            <h4 th:text="${patch.patchId}"></h4>
+            <p th:text="${patch.garden.gardenId}"></p>
+        </div>
+        </div>
 
     </div>
 
@@ -87,39 +85,3 @@
 
 </body>
 </html>
-
-
-<!--<div class="container">-->
-<!--    <h1>Auteurs</h1>-->
-
-<!--    <h2>Overzicht</h2>-->
-<!--    <table>-->
-<!--        <tr>-->
-<!--            <th>Id</th>-->
-<!--            <th>Naam</th>-->
-<!--        </tr>-->
-<!--        <tr th:each="author : ${allAuthors}">-->
-<!--            <td th:text="${author.authorId}"></td>-->
-<!--            <td><a th:href="@{/authors/detail/{authorId}(authorId=${author.authorId})}" th:text="${author.displayName}"></a> </td>-->
-<!--        </tr>-->
-<!--    </table>-->
-
-<!--    <h2>Formulier voor nieuwe auteur</h2>-->
-<!--    <form th:action="@{authors/new}" method="post" th:object="${newAuthor}">-->
-<!--        <table>-->
-<!--            <tr>-->
-<!--                <td>Voornaam</td>-->
-<!--                <td><input type="text" th:field="*{firstName}"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>tussenvoegsel</td>-->
-<!--                <td><input type="text" th:field="*{infixName}"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>Achternaam</td>-->
-<!--                <td><input type="text" th:field="*{lastName}"></td>-->
-<!--            </tr>-->
-<!--        </table>-->
-<!--        <input type="submit" value="Sla auteur op">-->
-<!--    </form>-->
-<!--</div>-->

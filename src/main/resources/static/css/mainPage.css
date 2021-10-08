@@ -1,6 +1,6 @@
 .gardenTableContainer{
   margin: auto;
-  width: 50vw;
+  width: 60vw;
   height: 30rem;
   border: 10px solid pink;
 
@@ -45,6 +45,13 @@
     width: 100%;
     border: 3px solid green;
     text-align: center;
+}
+
+.gardenPatchContainer{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .landTile{
