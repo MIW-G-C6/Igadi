@@ -77,20 +77,14 @@
 
 <div class="taskOverviewContainer">
     <h1>Tasks</h1>
-    <table class="taskTable">
-        <tr>
-            <th>TaskId</th>
-            <th>Name of task</th>
-            <th>Description</th>
-            <th>Task done?</th>
-        </tr>
-        <tr th:each="task : ${allTasks} " >
-            <td th:text="${task.taskId}"></td>
-            <td th:text="${task.taskName}"></td>
-            <td th:text="${task.taskDescription}"></td>
-            <td th:text="${task.done}"></td>
-        </tr>
-    </table>
+
+    <div class="taskTable">
+        <div class="taskCard" th:each="task : ${allTasks}">
+            <p th:text="${task.taskName}"></p>
+            <p th:text="${task.taskDescription}"></p>
+            <p th:text="'Garden: ' + ${task.garden.getGardenName()}"></p>
+        </div>
+    </div>
 
 
 </div>
