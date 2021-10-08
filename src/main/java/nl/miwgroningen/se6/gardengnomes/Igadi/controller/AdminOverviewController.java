@@ -19,7 +19,8 @@ public class AdminOverviewController {
     private GardenRepository gardenRepository;
     private PatchRepository patchRepository;
 
-    public AdminOverviewController(GardenRepository gardenRepository) {
+    public AdminOverviewController(GardenRepository gardenRepository, PatchRepository patchrepository) {
+        this.patchRepository = patchrepository;
         this.gardenRepository = gardenRepository;
     }
 
