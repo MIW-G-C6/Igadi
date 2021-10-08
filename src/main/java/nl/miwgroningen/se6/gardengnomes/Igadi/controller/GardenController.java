@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
+ *
+ *     In this controller, we created functions for interaction between the database and parts of our application where
+ *     gardens are involved. This includes the gardenOverview page.
  */
 
 @Controller
@@ -21,7 +24,6 @@ public class GardenController {
     @GetMapping({"/", "/gardens"})
     protected String showGardenOverview(Model model) {
         model.addAttribute("allGardens", gardenRepository.findAll());
-        System.out.println("yess");
         return "gardenOverview";
     }
 

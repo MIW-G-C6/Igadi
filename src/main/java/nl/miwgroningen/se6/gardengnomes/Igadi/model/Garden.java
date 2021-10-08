@@ -16,7 +16,7 @@ import javax.persistence.Id;
 @Entity
 public class Garden {
 
-    //Fields
+    // Fields
     @Id
     @GeneratedValue
     @Column(name="gardenId")
