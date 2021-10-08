@@ -35,5 +35,4 @@ public class AdminOverviewController {
         model.addAttribute("allTasks", taskRepository.findAll());
         return "adminOverview";
     }
-
 }
