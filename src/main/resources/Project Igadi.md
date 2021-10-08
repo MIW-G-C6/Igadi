@@ -62,7 +62,7 @@ Docent: J. Haverkort_
 
 Admin beheerder- beheerder van het gehele systeem.
 
-Garden manager- beheerder van een moestuin.
+Garden manager- beheerder van één moestuin.
 
 Gardener – vrijwilligers die uiteindelijk in een moestuin gaan werken.
 
@@ -95,7 +95,7 @@ EPIC: Schematisch overzicht van takentijden van een gemeenschappelijke moestuin.
 3: Overzicht van gedane taken.
 4: Overzicht van actuele taken.
 
-Een beheer-admin scherm met CRUD-functionaliteit  voor gebruikers.
+Een beheer-admin scherm met CRUD-functionaliteit voor gebruikers.
 Een moestuin beheerder-scherm met een status overzicht van de moestuin en planning mogelijkheden voor de moestuin.
 Database met info van gewassen dat leesbaar is voor users/met CRUD mogelijkheden voor de moestuin beheerder. 
 Weerindicatie met gebruik van openweather.org API voor gebruikers/moestuin beheerder. 

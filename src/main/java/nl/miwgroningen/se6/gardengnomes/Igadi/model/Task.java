@@ -24,7 +24,7 @@ public class Task {
     @Column(unique = true, nullable = false, name="taskDescription")
     private String taskDescription;
 
-    @Column(unique = true, nullable = false, name="isDone")
+    @Column(nullable = false, name="isDone")
     private boolean isDone;
 
     @ManyToOne(optional = true)
@@ -32,4 +32,29 @@ public class Task {
 
     @ManyToOne
     private Garden garden;
+
+    public Integer getTaskId() {
+        return taskId;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public Patch getPatch() {
+        return patch;
+    }
+
+    public Garden getGarden() {
+        return garden;
+    }
+
 }
