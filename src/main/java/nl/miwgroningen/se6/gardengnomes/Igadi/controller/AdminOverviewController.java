@@ -19,8 +19,9 @@ public class AdminOverviewController {
     private GardenRepository gardenRepository;
     private PatchRepository patchRepository;
 
-    public AdminOverviewController(GardenRepository gardenRepository) {
+    public AdminOverviewController(GardenRepository gardenRepository, PatchRepository patchRepository) {
         this.gardenRepository = gardenRepository;
+        this.patchRepository = patchRepository;
     }
 
     @GetMapping({"/", "/overview"})
