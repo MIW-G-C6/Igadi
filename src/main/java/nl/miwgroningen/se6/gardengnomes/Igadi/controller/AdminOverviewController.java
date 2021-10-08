@@ -1,6 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +14,20 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
-public class GardenController {
+public class AdminOverviewController {
 
     private GardenRepository gardenRepository;
+    private PatchRepository patchRepository;
 
-    public GardenController(GardenRepository gardenRepository) {
+    public AdminOverviewController(GardenRepository gardenRepository) {
         this.gardenRepository = gardenRepository;
     }
 
-    @GetMapping({"/", "/gardens"})
+    @GetMapping({"/", "/overview"})
     protected String showGardenOverview(Model model) {
         model.addAttribute("allGardens", gardenRepository.findAll());
-        return "gardenOverview";
+        model.addAttribute("allPatches", patchRepository.findAll());
+        return "adminOverview";
     }
 
 }
