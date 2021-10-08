@@ -15,19 +15,17 @@
 
     <div class="gardenPatchContainer">
 
-    <h1>Gardens</h1>
-    <table class="gardenTable">
-        <tr>
-            <th>GardenID</th>
-            <th>Name</th>
-            <th>Icon</th>
-        </tr>
-        <tr th:each="garden : ${allGardens}">
-            <td th:text="${garden.gardenId}"></td>
-            <td th:text="${garden.gardenName}"></td>
-            <td><img class="landTile" src="/images/icons/gardenIcon.svg"></td>
-        </tr>
-    </table>
+        <h1>Gardens</h1>
+
+        <div class="gardens">
+
+        <div class="gardenCard" th:each="garden : ${allGardens}">
+            <img class="landTile" src="/images/icons/gardenIcon.svg">
+            <h4 th:text="${garden.gardenName}"></h4>
+            <p th:text="${garden.gardenId}"></p>
+        </div>
+
+        </div>
 
 
         <h1>Patches</h1>
