@@ -65,7 +65,7 @@
         <div class="gardenCard" th:each="patch : ${allPatches}">
             <img class="landTile" src="/images/icons/patchIcon.svg">
             <h4 th:text="${patch.patchId}"></h4>
-            <p th:text="${patch.garden.gardenId}"></p>
+            <p th:text="${patch.gardenDTO.getGardenName()}"></p>
         </div>
         </div>
 

@@ -4,6 +4,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
  * doel:
  */
 
+@Service
 public class PatchService {
 
     private PatchRepository patchRepository;
@@ -27,7 +29,8 @@ public class PatchService {
 
     // TODO test whether the patchrepository automatically loads entire gardens that are foreign key
     public List<PatchDTO> getAllPatches() {
-        return patchRepository.findAll().stream().map(this::convertToPatchDTO).collect(Collectors.toList());
+        List<Patch> patches = patchRepository.findAll();
+        return patches.stream().map(this::convertToPatchDTO).collect(Collectors.toList());
     }
 
     public List<PatchDTO> getAllPatchesByGardenId(int gardenId) {
