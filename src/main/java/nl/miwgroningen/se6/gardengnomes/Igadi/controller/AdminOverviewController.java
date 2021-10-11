@@ -3,6 +3,9 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.TaskRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.PatchService;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,22 +20,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AdminOverviewController {
 
-    private GardenRepository gardenRepository;
-    private PatchRepository patchRepository;
-    private TaskRepository taskRepository;
+    private GardenService gardenService;
+    private PatchService patchService;
+    private TaskService taskService;
 
-    public AdminOverviewController(GardenRepository gardenRepository, PatchRepository patchRepository,
-                                   TaskRepository taskRepository) {
-        this.gardenRepository = gardenRepository;
-        this.patchRepository = patchRepository;
-        this.taskRepository = taskRepository;
+    public AdminOverviewController(GardenService gardenService, PatchService patchService, TaskService taskService) {
+        this.gardenService = gardenService;
+        this.patchService = patchService;
+        this.taskService = taskService;
     }
 
     @GetMapping({"/", "/overview"})
     protected String showGardenOverview(Model model) {
-        model.addAttribute("allGardens", gardenRepository.findAll());
-        model.addAttribute("allPatches", patchRepository.findAll());
-        model.addAttribute("allTasks", taskRepository.findAll());
+        model.addAttribute("allGardens", gardenService.getAllGardens());
+        model.addAttribute("allPatches", patchService.getAllPatches());
         return "adminOverview";
     }
 }

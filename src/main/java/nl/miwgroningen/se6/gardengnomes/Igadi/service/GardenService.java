@@ -3,6 +3,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
  * doel:
  */
 
+@Service
 public class GardenService {
 
     private GardenRepository gardenRepository;
