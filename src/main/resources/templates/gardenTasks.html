@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Garden tasks</title>
+</head>
+<body>
+
+<h3 th:text="${garden.getGardenName()}"></h3>
+
+<table>
+    <tr>
+        <th>Task Id</th>
+        <th>Task name</th>
+        <th>Task description</th>
+        <th>Done?</th>
+    </tr>
+    <tr th:each="task : ${allGardenTasks}">
+        <td th:text="${task.getTaskId()}"></td>
+        <td th:text="${task.getTaskName()}"></td>
+        <td th:text="${task.getTaskDescription()}"></td>
+        <td th:text="${task.isDone()}"></td>
+
+    </tr>
+</table>
+
+</body>
+</html>

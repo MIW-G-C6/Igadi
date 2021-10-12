@@ -12,10 +12,12 @@
   <tr>
     <th>Patch Id</th>
     <th>garden Id</th>
+      <th>Tasks</th>
   </tr>
   <tr th:each="patch : ${allPatches}">
     <td th:text="${patch.patchId}"></td>
     <td th:text="${patch.gardenDTO.gardenId}"></td>
+    <td><a th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patch.getPatchId()})}">Patch tasks</a></td>
   </tr>
 </table>
 </body>
