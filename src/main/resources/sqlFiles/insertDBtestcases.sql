@@ -16,5 +16,5 @@ INSERT INTO Patch (patchId, garden_gardenId) VALUES (8, 1);
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (2, 2);
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (3, 3);
 
-INSERT INTO Task (taskId, taskName, taskDescription, isDone, garden_gardenId, patch_patchId) VALUES (1, "Watering the plants", "Watering the plants", false, 1, 1);
-INSERT INTO Task (taskId, taskName, taskDescription, isDone, garden_gardenId, patch_patchId) VALUES (2, "Feeding the garden", "Feeding the garden", true, 2, 2);
+INSERT INTO Task (DTYPE, taskId, taskName, taskDescription, isDone, garden_gardenId) VALUES (GardenTask, 1, "Watering the plants", "Watering the plants", false, 1);
+INSERT INTO Task (DTYPE, taskId, taskName, taskDescription, isDone, garden_gardenId) VALUES (GardenTask, 2, "Feeding the garden", "Feeding the garden", true, 2);

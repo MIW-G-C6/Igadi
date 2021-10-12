@@ -1,5 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
@@ -31,6 +32,11 @@ public class PatchService {
     public List<PatchDTO> getAllPatches() {
         List<Patch> patches = patchRepository.findAll();
         return patches.stream().map(this::convertToPatchDTO).collect(Collectors.toList());
+    }
+
+    public PatchDTO getPatchById(int patchId) {
+        Patch patch = patchRepository.getById(patchId);
+        return convertToPatchDTO(patch);
     }
 
     public List<PatchDTO> getAllPatchesByGardenId(int gardenId) {

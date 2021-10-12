@@ -1,22 +1,20 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
-import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
-import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
-import nl.miwgroningen.se6.gardengnomes.Igadi.repository.TaskRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchTaskDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenTaskService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.PatchService;
-import nl.miwgroningen.se6.gardengnomes.Igadi.service.TaskService;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.PatchTaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.swing.text.html.Option;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
@@ -30,12 +28,15 @@ public class AdminOverviewController {
 
     private GardenService gardenService;
     private PatchService patchService;
-    private TaskService taskService;
+    private GardenTaskService gardenTaskService;
+    private PatchTaskService patchTaskService;
 
-    public AdminOverviewController(GardenService gardenService, PatchService patchService, TaskService taskService) {
+    public AdminOverviewController(GardenService gardenService, PatchService patchService,
+                                   GardenTaskService gardenTaskService, PatchTaskService patchTaskService) {
         this.gardenService = gardenService;
         this.patchService = patchService;
-        this.taskService = taskService;
+        this.gardenTaskService = gardenTaskService;
+        this.patchTaskService = patchTaskService;
     }
 
     @GetMapping({"/", "/overview"})
@@ -53,5 +54,24 @@ public class AdminOverviewController {
         model.addAttribute("allPatches", allPatches);
         return "gardenDetails";
     }
+
+    @GetMapping("/overview/details/gardenTasks/{gardenId}")
+    protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model) {
+        GardenDTO garden = gardenService.getGardenById(gardenId);
+        List<GardenTaskDTO> allGardenTasks = gardenTaskService.getAllTasksByGardenId(gardenId);
+        model.addAttribute("garden", garden);
+        model.addAttribute("allGardenTasks", allGardenTasks);
+        return "gardenTasks";
+    }
+
+    @GetMapping("/overview/details/patchTasks/{patchId}")
+    protected String showPatchTasks(@PathVariable("patchId") int patchId, Model model) {
+        PatchDTO patch = patchService.getPatchById(patchId);
+        List<PatchTaskDTO> allPatchTasks = patchTaskService.getAllTasksByPatchId(patchId);
+        model.addAttribute("patch", patch);
+        model.addAttribute("allPatchTasks", allPatchTasks);
+        return "patchTasks";
+    }
+
 
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patch tasks</title>
+</head>
+<body>
+
+<h3 th:text="${patch.getPatchId()}"></h3>
+
+<table>
+  <tr>
+    <th>Task Id</th>
+    <th>Task name</th>
+    <th>Task description</th>
+    <th>Done?</th>
+  </tr>
+  <tr th:each="task : ${allPatchTasks}">
+    <td th:text="${task.getTaskId()}"></td>
+    <td th:text="${task.getTaskName()}"></td>
+    <td th:text="${task.getTaskDescription()}"></td>
+    <td th:text="${task.isDone()}"></td>
+
+  </tr>
+</table>
+</body>
+</html>
