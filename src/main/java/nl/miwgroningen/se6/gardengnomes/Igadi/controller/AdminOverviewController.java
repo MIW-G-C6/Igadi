@@ -72,6 +72,4 @@ public class AdminOverviewController {
         model.addAttribute("allPatchTasks", allPatchTasks);
         return "patchTasks";
     }
-
-
 }
