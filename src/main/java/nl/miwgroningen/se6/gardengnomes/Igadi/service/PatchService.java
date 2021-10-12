@@ -34,9 +34,8 @@ public class PatchService {
     }
 
     public List<PatchDTO> getAllPatchesByGardenId(int gardenId) {
-        List<Integer> searchIds = new ArrayList<>();
-        searchIds.add(gardenId);
-        return patchRepository.findAllById(searchIds).stream().map(this::convertToPatchDTO).collect(Collectors.toList());
+        List<Patch> patches = patchRepository.findAllBygarden_gardenId(gardenId);
+        return patches.stream().map(this::convertToPatchDTO).collect(Collectors.toList());
     }
 
     public PatchDTO convertToPatchDTO(Patch patch) {

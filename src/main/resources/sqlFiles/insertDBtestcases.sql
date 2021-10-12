@@ -9,6 +9,10 @@ INSERT INTO Garden (gardenId, gardenName) VALUES (7, "Stadspark");
 INSERT INTO Garden (gardenId, gardenName) VALUES (8, "Kostverloren");
 
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (1, 1);
+INSERT INTO Patch (patchId, garden_gardenId) VALUES (4, 1);
+INSERT INTO Patch (patchId, garden_gardenId) VALUES (6, 1);
+INSERT INTO Patch (patchId, garden_gardenId) VALUES (7, 1);
+INSERT INTO Patch (patchId, garden_gardenId) VALUES (8, 1);
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (2, 2);
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (3, 3);
 
