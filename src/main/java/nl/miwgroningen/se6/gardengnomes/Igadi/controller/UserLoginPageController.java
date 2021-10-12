@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
-public class LoginPageController {
+public class UserLoginPageController {
 
-    @GetMapping({"/", "/loginPage"})
+    @GetMapping({"/", "templates/userLoginPage.html"})
     protected String showIndexPage() {
-        return "loginPage";
+        return "userLoginPage";
     }
 }
 

@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link href="/css/indexPageStyle.css" rel="stylesheet">
 </head>
 <body>
-$END$
+
+<nav class="navbar-header">
+    <div class="container-fluid">
+        <a class="navbar-brand">Igadi</a>
+        <a class="navbar-brand float-right" href="templates/userLoginPage.html">
+            <img src="/images/icons/userIcon.png" alt="" width="30" height="24">
+        </a>
+    </div>
+</nav>
+<br>
+<div>
+    <p>
+    dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
+    pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
+    arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+    Integer tincidunt.
+    </p>
+</div>
+
 </body>
 </html>

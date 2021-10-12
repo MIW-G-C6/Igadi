@@ -1,0 +1,20 @@
+@media screen and (min-width: 40.5em) {
+    .userIcon {
+        width: 50%;
+        float: right;
+    }
+}
+
+.navbar-header {
+    background-color: darkgrey;
+}
+
+.d-flex {
+    align-content: center;
+}
+
+.container-fluid {
+    align-content: center;
+}
+
+
