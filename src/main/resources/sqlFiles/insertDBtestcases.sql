@@ -16,5 +16,13 @@ INSERT INTO Patch (patchId, garden_gardenId) VALUES (8, 1);
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (2, 2);
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (3, 3);
 
-INSERT INTO Task (DTYPE, taskId, taskName, taskDescription, isDone, garden_gardenId) VALUES (GardenTask, 1, "Watering the plants", "Watering the plants", false, 1);
-INSERT INTO Task (DTYPE, taskId, taskName, taskDescription, isDone, garden_gardenId) VALUES (GardenTask, 2, "Feeding the garden", "Feeding the garden", true, 2);
+INSERT INTO gardentask (taskId, taskName, taskDescription, isDone, garden_gardenId) VALUES (1, "Watering the plants", "Watering the plants", false, 1);
+INSERT INTO gardentask (taskId, taskName, taskDescription, isDone, garden_gardenId) VALUES (2, "Feeding the garden", "Feeding the garden", true, 2);
+
+
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (1, "Watering", "Watering the turnips", false, 2);
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (2, "Raking", "Raking the whole patch", true, 2);
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (3, "Composting", "Add some compost to the turnips", false, 2);
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (4, "Watering", "Watering the carrots", true, 3);
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (5, "Harvesting", "Time to haverst the carrots", false, 3);
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (6, "Watering", "Remember that all toaster toast toast", true, 1);
