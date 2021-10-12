@@ -8,7 +8,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.dto;
 public class PatchDTO {
 
     private Integer patchId;
-    private GardenDTO gardenDTO;
+    private GardenDTO garden;
 
     public Integer getPatchId() {
         return patchId;
@@ -19,10 +19,10 @@ public class PatchDTO {
     }
 
     public GardenDTO getGardenDTO() {
-        return gardenDTO;
+        return garden;
     }
 
     public void setGardenDTO(GardenDTO gardenDTO) {
-        this.gardenDTO = gardenDTO;
+        this.garden = gardenDTO;
     }
 }

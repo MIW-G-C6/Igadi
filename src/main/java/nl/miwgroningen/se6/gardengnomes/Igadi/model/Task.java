@@ -10,7 +10,8 @@ import javax.persistence.*;
  */
 
 @Entity
-public class Task {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Task {
 
     //Fields
     @Id
@@ -18,20 +19,14 @@ public class Task {
     @Column(name="taskId")
     private Integer taskId;
 
-    @Column(unique = true, nullable = false, name="taskName")
+    @Column(nullable = false, name="taskName")
     private String taskName;
 
-    @Column(unique = true, nullable = false, name="taskDescription")
+    @Column(nullable = false, name="taskDescription")
     private String taskDescription;
 
     @Column(nullable = false, name="isDone")
     private boolean isDone;
-
-    @ManyToOne(optional = true)
-    private Patch patch;
-
-    @ManyToOne
-    private Garden garden;
 
     public Integer getTaskId() {
         return taskId;
@@ -45,16 +40,7 @@ public class Task {
         return taskDescription;
     }
 
-    public boolean isDone() {
+    public boolean getIsDone() {
         return isDone;
     }
-
-    public Patch getPatch() {
-        return patch;
-    }
-
-    public Garden getGarden() {
-        return garden;
-    }
-
 }

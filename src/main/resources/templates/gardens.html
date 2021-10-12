@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Garden Overview</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="/css/mainPage.css">
+</head>
+
+<body>
+
+    <div class="container d-flex flex-column border-temp h-50">
+
+        <div class="border-temp mb-3">
+            <h1>Overview of all gardens</h1>
+        </div>
+        <div class="border-temp col-3 p-0">
+            <div class="d-flex mb-3 border-temp">
+                <p class="border-temp m-0 w-100">Name</p>
+                <p class="border-temp m-0">Id</p>
+            </div>
+            <ul th:each="garden: ${allGardens}" class="border-temp list-unstyled m-0">
+                <li class="border-temp mb-2">
+                    <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
+                       class="border-temp d-block text-decoration-none">
+                        <div class="d-flex">
+                            <p th:text="${garden.gardenName}" class="border-temp m-0 w-100"></p>
+                            <p th:text="${garden.gardenId}" class="border-temp m-0"></p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

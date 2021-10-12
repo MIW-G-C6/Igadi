@@ -1,5 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
@@ -27,16 +28,19 @@ public class PatchService {
         this.gardenService = gardenService;
     }
 
-    // TODO test whether the patchrepository automatically loads entire gardens that are foreign key
     public List<PatchDTO> getAllPatches() {
         List<Patch> patches = patchRepository.findAll();
         return patches.stream().map(this::convertToPatchDTO).collect(Collectors.toList());
     }
 
+    public PatchDTO getPatchById(int patchId) {
+        Patch patch = patchRepository.getById(patchId);
+        return convertToPatchDTO(patch);
+    }
+
     public List<PatchDTO> getAllPatchesByGardenId(int gardenId) {
-        List<Integer> searchIds = new ArrayList<>();
-        searchIds.add(gardenId);
-        return patchRepository.findAllById(searchIds).stream().map(this::convertToPatchDTO).collect(Collectors.toList());
+        List<Patch> patches = patchRepository.findAllBygarden_gardenId(gardenId);
+        return patches.stream().map(this::convertToPatchDTO).collect(Collectors.toList());
     }
 
     public PatchDTO convertToPatchDTO(Patch patch) {

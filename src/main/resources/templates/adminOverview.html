@@ -54,8 +54,11 @@
         <div class="gardens">
         <div class="gardenCard" th:each="garden : ${allGardens}">
             <img class="landTile" src="/images/icons/gardenIcon.svg">
-            <h4 th:text="${garden.gardenName}"></h4>
+            <h4><a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
+                   th:text="${garden.gardenName}"></a></h4>
             <p th:text="${garden.gardenId}"></p>
+            <h4><a th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"
+                   th:text="${garden.gardenName}"></a></h4>
         </div>
         </div>
 
