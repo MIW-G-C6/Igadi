@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Garden Overview</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/mainPage.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+    <div class="container min-h-100vw">
+
+        <h1>Overview of all gardends</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+            <tr th:each="product : ${allProducts}">
+                <td th:text="${product.productId}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td><a th:href="@{/products/new/{productId}(productId=${product.productId})}">Edit</a></td>
+                <td>
+                    <form th:action="@{/products}" method="post">
+                        <input type="hidden" th:value="${product.productId}" name="productId">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+
+            </tr>
+        </table>
+        <p>
+            <a th:href="@{/products/new}">Add a product in a new window</a>
+        </p>
+
+    </div>
+
+</body>
+</html>

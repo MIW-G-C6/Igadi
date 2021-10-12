@@ -27,7 +27,6 @@ public class PatchService {
         this.gardenService = gardenService;
     }
 
-    // TODO test whether the patchrepository automatically loads entire gardens that are foreign key
     public List<PatchDTO> getAllPatches() {
         List<Patch> patches = patchRepository.findAll();
         return patches.stream().map(this::convertToPatchDTO).collect(Collectors.toList());
