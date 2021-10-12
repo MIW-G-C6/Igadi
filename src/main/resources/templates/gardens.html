@@ -4,38 +4,33 @@
     <meta charset="UTF-8">
     <title>Garden Overview</title>
 
-    <link rel="stylesheet" type="text/css" href="/css/mainPage.css">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="/css/mainPage.css">
 </head>
 
 <body>
 
-    <div class="container min-h-100vw">
+    <div class="container d-flex flex-column border-temp h-50">
 
-        <h1>Overview of all gardends</h1>
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Price</th>
-            </tr>
-            <tr th:each="product : ${allProducts}">
-                <td th:text="${product.productId}"></td>
-                <td th:text="${product.name}"></td>
-                <td th:text="${product.price}"></td>
-                <td><a th:href="@{/products/new/{productId}(productId=${product.productId})}">Edit</a></td>
-                <td>
-                    <form th:action="@{/products}" method="post">
-                        <input type="hidden" th:value="${product.productId}" name="productId">
-                        <input type="submit" value="Delete">
-                    </form>
-                </td>
-
-            </tr>
-        </table>
-        <p>
-            <a th:href="@{/products/new}">Add a product in a new window</a>
-        </p>
+        <div class="border-temp mb-3">
+            <h1>Overview of all gardens</h1>
+        </div>
+        <div class="border-temp col-3 p-0">
+            <div class="d-flex mb-3 border-temp">
+                <p class="border-temp m-0 w-100">Name</p>
+                <p class="border-temp m-0">Id</p>
+            </div>
+            <ul th:each="garden: ${allGardens}" class="border-temp list-unstyled m-0">
+                <li class="border-temp mb-2">
+                    <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}" class="border-temp d-block text-decoration-none">
+                        <div class="d-flex">
+                            <p th:text="${garden.gardenName}" class="border-temp m-0 w-100"></p>
+                            <p th:text="${garden.gardenId}" class="border-temp m-0"></p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
     </div>
 
