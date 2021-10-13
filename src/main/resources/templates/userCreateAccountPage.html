@@ -20,6 +20,11 @@
         </tr>
 
     </table>
+
+    <select th:field="*{garden}">
+        <option th:each="garden : ${allGardens}" th:value="${garden.gardenId}" th:text="${garden.gardenName}"></option>
+    </select>
+    <p th:text="${errorMessage}" class="text-danger"></p>
     <input type="submit" value="save user">
 
 </form>

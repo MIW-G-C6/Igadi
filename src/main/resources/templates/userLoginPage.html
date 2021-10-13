@@ -4,11 +4,35 @@
     <title>Login Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-    <link href="/css/indexPageStyle.css" rel="stylesheet">
+    <link href="/css/userLoginPageStyle.css" rel="stylesheet">
+
 </head>
 <body>
 
-<h1>Loginpage will be available soon</h1>
+<div>
+
+    <br>
+    <div class="container">
+        <form th:action="@{/users/new}" method="post" th:object="${user}">
+            <div>
+                <input type="text" id="username" ><br>
+                <label for="username">Username</label>
+            </div>
+            <div>
+                <input type="password" id="password"><br>
+                <label for="password">Password</label>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </div>
+            <br>
+            <p><a class="text-muted" href="#">Forgot password?</a></p>
+            <p>Don't have an account yet? <a href="#">Create account</a></p>
+        </form>
+
+
+    </div>
+</div>
 
 </body>
 
