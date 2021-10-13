@@ -4,11 +4,79 @@
     <title>Login Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-    <link href="/css/indexPageStyle.css" rel="stylesheet">
+    <link href="/css/userLoginPageStyle.css" rel="stylesheet">
+
 </head>
 <body>
 
-<h1>Loginpage will be available soon</h1>
+<div>
+
+    <br>
+    <div class="container">
+        <form th:action="@{/users/new}" method="post" th:object="${user}">
+            <div>
+                <input type="text" id="username" ><br>
+                <label for="username">Username</label>
+            </div>
+            <div>
+                <input type="password" id="password"><br>
+                <label for="password">Password</label>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </div>
+            <br>
+            <p><a class="text-muted" href="#">Forgot password?</a></p>
+            <p>Don't have an account yet? <a href="#">Create account</a></p>
+        </form>
+
+
+    </div>
+</div>
+
+
+<!--<section class="vh-100">-->
+<!--    <div class="container-fluid">-->
+<!--        <div class="row">-->
+<!--            <div class="col-sm-6 text-black">-->
+
+<!--                <div class="px-5 ms-xl-4">-->
+<!--                    <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>-->
+<!--                    <span class="h1 fw-bold mb-0">Log in</span>-->
+<!--                </div>-->
+
+<!--                <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">-->
+
+<!--                    <form>-->
+
+<!--                        <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>-->
+
+<!--                        <div class="form-outline mb-4">-->
+<!--                            <input type="email" id="form2Example17" class="form-control form-control-lg" />-->
+<!--                            <label class="form-label" for="form2Example17">Email address</label>-->
+<!--                        </div>-->
+
+<!--                        <div class="form-outline mb-4">-->
+<!--                            <input type="password" id="form2Example27" class="form-control form-control-lg" />-->
+<!--                            <label class="form-label" for="form2Example27">Password</label>-->
+<!--                        </div>-->
+
+<!--                        <div class="pt-1 mb-4">-->
+<!--                            <button class="btn btn-info btn-lg btn-block" type="button">Login</button>-->
+<!--                        </div>-->
+
+<!--                        c
+
+<!--                    </form>-->
+
+<!--                </div>-->
+
+<!--            </div>-->
+<!--            -->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
 
 </body>
 

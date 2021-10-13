@@ -13,8 +13,8 @@
     align-content: center;
 }
 
-.container-fluid {
-    align-content: center;
+p {
+    padding: 2em 2em 2em 2em;
 }
 
 
