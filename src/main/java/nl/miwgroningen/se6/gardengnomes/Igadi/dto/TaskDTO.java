@@ -1,7 +1,5 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.dto;
 
-import javax.persistence.MappedSuperclass;
-
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
  */

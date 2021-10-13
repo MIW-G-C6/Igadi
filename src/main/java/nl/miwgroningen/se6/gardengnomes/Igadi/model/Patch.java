@@ -13,7 +13,6 @@ import java.io.Serializable;
 @Entity
 public class Patch {
 
-
     // Fields
     @Id
     @GeneratedValue

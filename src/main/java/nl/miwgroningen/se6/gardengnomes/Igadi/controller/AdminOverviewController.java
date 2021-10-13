@@ -39,7 +39,7 @@ public class AdminOverviewController {
         this.patchTaskService = patchTaskService;
     }
 
-    @GetMapping({"/", "/overview"})
+    @GetMapping({ "/overview"})
     protected String showGardenOverview(Model model) {
         model.addAttribute("allGardens", gardenService.getAllGardens());
         model.addAttribute("allPatches", patchService.getAllPatches());
@@ -72,6 +72,4 @@ public class AdminOverviewController {
         model.addAttribute("allPatchTasks", allPatchTasks);
         return "patchTasks";
     }
-
-
 }

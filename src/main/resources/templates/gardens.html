@@ -19,7 +19,8 @@
             </div>
             <ul th:each="garden: ${allGardens}" class="border-temp list-unstyled m-0">
                 <li class="border-temp mb-2">
-                    <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}" class="border-temp d-block text-decoration-none">
+                    <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
+                       class="border-temp d-block text-decoration-none">
                         <div class="d-flex">
                             <p th:text="${garden.gardenName}" class="border-temp m-0 w-100"></p>
                             <p th:text="${garden.gardenId}" class="border-temp m-0"></p>
