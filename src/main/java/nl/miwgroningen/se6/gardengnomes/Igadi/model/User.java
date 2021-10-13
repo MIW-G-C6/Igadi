@@ -1,5 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 /**
@@ -16,6 +18,7 @@ public class User {
     @GeneratedValue
     @Column(name="userId", unique = true)
     private Integer userId;
+
 
     @Column(unique = true, name = "userName", nullable = false)
     private String userName;

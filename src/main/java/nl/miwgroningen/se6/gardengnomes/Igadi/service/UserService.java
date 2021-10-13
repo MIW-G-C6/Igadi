@@ -7,6 +7,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<UserDTO> getAllGardens() {
+    public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream().map(this::convertToUserDTO).collect(Collectors.toList());
     }
 
@@ -43,5 +44,17 @@ public class UserService {
 
     public void saveUser(User user) {
         userRepository.save(user);
+    }
+
+    public boolean checkIfUserNameExists(String userName) {
+        boolean userNameIsInDatabase = false;
+        List<UserDTO> users = this.getAllUsers();
+        for(UserDTO user : users) {
+            if(user.getUserName().equals(userName)) {
+                userNameIsInDatabase = true;
+                break;
+            }
+        }
+        return userNameIsInDatabase;
     }
 }
