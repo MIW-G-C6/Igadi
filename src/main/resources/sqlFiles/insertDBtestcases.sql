@@ -1,3 +1,12 @@
+SET foreign_key_checks = 0;
+
+TRUNCATE TABLE garden;
+TRUNCATE TABLE gardentask;
+TRUNCATE TABLE patch;
+TRUNCATE TABLE patchtask;
+
+SET foreign_key_checks = 1;
+
 INSERT INTO Garden (gardenId, gardenName) VALUES (1, "Eden");
 INSERT INTO Garden (gardenId, gardenName) VALUES (2, "Noorderplantsoen");
 INSERT INTO Garden (gardenId, gardenName) VALUES (3, "Prinsjestuin");

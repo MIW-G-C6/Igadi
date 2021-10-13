@@ -1,9 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
