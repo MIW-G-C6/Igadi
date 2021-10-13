@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <title>Create a new account</title>
+</head>
+<body>
+
+<form th:action="@{/users/new}" method="post" th:object="${user}">
+    <table>
+        <tr>
+            <td>User Name</td>
+            <td><input type="text" th:field="*{userName}"></td>
+        </tr>
+
+        <tr>
+            <td>Password</td>
+            <td><input type="text" th:field="*{userPassword}"></td>
+        </tr>
+
+    </table>
+    <input type="submit" value="save user">
+
+</form>
+
+</body>
+</html>
