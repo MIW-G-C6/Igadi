@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserLoginPageController {
 
-    @GetMapping({"/", "templates/userLoginPage.html"})
+    @GetMapping({ "templates/userLoginPage.html"})
     protected String showIndexPage() {
         return "userLoginPage";
     }
