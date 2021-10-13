@@ -10,10 +10,10 @@
 <body>
     <div class="container d-flex flex-column border-temp h-50">
         <div class="border-temp mb-3">
-            <h1>Overview of all gardens</h1>
+            <h1>Create or update a garden</h1>
         </div>
         <div class="border-temp col-3 p-0">
-            <div class="d-flex mb-3 border-temp">
+            <!--<div class="d-flex mb-3 border-temp">
                 <p class="border-temp m-0 w-100">Name</p>
                 <p class="border-temp m-0">Id</p>
             </div>
@@ -26,7 +26,11 @@
                         </div>
                     </a>
                 </li>
-            </ul>
+            </ul>-->
+            <form th:action="@{/gardens/new}" method="post" th:object="${garden}">
+                <input type="text" th:field="*{gardenName}" class="form-control mb-3" placeholder="Name">
+                <button type="submit" class="btn btn-primary">Save garden</button>
+            </form>
         </div>
     </div>
 </body>
