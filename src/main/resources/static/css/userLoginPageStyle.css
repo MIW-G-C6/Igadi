@@ -1,0 +1,10 @@
+password + .glyphicon {
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.container {
+    alignment: center ;
+    padding: 10em 20em 20em 20em;
+}
+
