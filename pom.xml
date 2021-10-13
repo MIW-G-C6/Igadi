@@ -57,19 +57,12 @@
 			<artifactId>bootstrap</artifactId>
 			<version>4.6.0</version>
 		</dependency>
-<<<<<<< HEAD
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>webjars-locator</artifactId>
 			<version>0.42</version>
 		</dependency>
-=======
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>webjars-locator</artifactId>
-            <version>0.42</version>
-        </dependency>
->>>>>>> aeee93e69b08b77a9cd2027d991a337d27e891c1
+
 	</dependencies>
 
 	<build>

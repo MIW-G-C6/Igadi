@@ -66,9 +66,9 @@ Garden manager- beheerder van één moestuin.
 
 Gardener – vrijwilligers die uiteindelijk in een moestuin gaan werken.
 
-Patch – moestuinperk waar één soort gewas in groeit, dat wordt gebruikt voor de onderverdeling van de moestuin.
+Patch – moestuin-perk waar één soort gewas in groeit, dat wordt gebruikt voor de onderverdeling van de moestuin.
 
-
+Crop - het gewas dat wij planten in een moestuin-perk.
 
 
 

@@ -6,7 +6,7 @@ body{
 
 .border-temp {
     /*border: 1px solid black;*/
->>>>>>> aeee93e69b08b77a9cd2027d991a337d27e891c1
+
 }
 
 
@@ -100,28 +100,20 @@ border: 3px solid black;
 border-radius: 10px;
 }
 
-footer .copyright {
-    margin-top:5px;
-    text-align: center;
-    font-size: 13px;
-    color: #000d96;
-    margin-bottom: 0;
-}
-
-footer {
-    margin-top: auto;
-    position: relative;
+.footer{
     bottom: 0;
+    position: fixed;
     width: 100%;
-    padding: 10px 0;
-    color: black;
 }
 
+.footer{
+    background: blue;
+    height: 100px;
+    margin: auto;
+    width: 400px;
+    text-align:center;
+    padding:10px;
 
-.container {
-    width: 90vw;
-    margin: 0 auto;
-    padding: 30px 20px;
-    min-height: calc(60vh - 58px - 83px);
 }
+
 

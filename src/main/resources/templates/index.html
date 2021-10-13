@@ -7,25 +7,22 @@
     <link href="/css/indexPageStyle.css" rel="stylesheet">
 </head>
 <body>
+<div th:replace="fragments/general :: navbar"></div>
 
-<nav class="navbar-header">
-    <div class="container-fluid">
-        <a class="navbar-brand">Igadi</a>
-        <a class="navbar-brand float-right" href="templates/userLoginPage.html">
-            <img src="/images/icons/userIcon.png" alt="" width="30" height="24">
-        </a>
-    </div>
-</nav>
-<br>
-<div>
-    <p>
-    dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-    pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-    arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
-    Integer tincidunt.
-    </p>
-</div>
+<!--<nav class="navbar-header">-->
+<!--    <div class="container-fluid">-->
+<!--        <a class="navbar-brand">Igadi</a>-->
+<!--        <a class="navbar-brand float-right" href="templates/userLoginPage.html">-->
+<!--            <img src="/images/icons/userIcon.png" alt="" width="30" height="24">-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</nav>-->
+
+<div th:replace="fragments/general :: jumbotron"></div>
+
+<div th:replace="fragments/general :: footer"></div>
+
+<div th:replace="fragments/general :: bottomScripts"></div>
 
 </body>
 </html>
