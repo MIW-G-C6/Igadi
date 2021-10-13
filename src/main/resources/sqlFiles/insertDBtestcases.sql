@@ -9,8 +9,20 @@ INSERT INTO Garden (gardenId, gardenName) VALUES (7, "Stadspark");
 INSERT INTO Garden (gardenId, gardenName) VALUES (8, "Kostverloren");
 
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (1, 1);
+INSERT INTO Patch (patchId, garden_gardenId) VALUES (4, 1);
+INSERT INTO Patch (patchId, garden_gardenId) VALUES (6, 1);
+INSERT INTO Patch (patchId, garden_gardenId) VALUES (7, 1);
+INSERT INTO Patch (patchId, garden_gardenId) VALUES (8, 1);
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (2, 2);
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (3, 3);
 
-INSERT INTO Task (taskId, taskName, taskDescription, isDone, garden_gardenId, patch_patchId) VALUES (1, "Watering the plants", "Watering the plants", false, 1, 1);
-INSERT INTO Task (taskId, taskName, taskDescription, isDone, garden_gardenId, patch_patchId) VALUES (2, "Feeding the garden", "Feeding the garden", true, 2, 2);
+INSERT INTO gardentask (taskId, taskName, taskDescription, isDone, garden_gardenId) VALUES (1, "Watering the plants", "Watering the plants", false, 1);
+INSERT INTO gardentask (taskId, taskName, taskDescription, isDone, garden_gardenId) VALUES (2, "Feeding the garden", "Feeding the garden", true, 2);
+
+
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (1, "Watering", "Watering the turnips", false, 2);
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (2, "Raking", "Raking the whole patch", true, 2);
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (3, "Composting", "Add some compost to the turnips", false, 2);
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (4, "Watering", "Watering the carrots", true, 3);
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (5, "Harvesting", "Time to haverst the carrots", false, 3);
+INSERT INTO patchtask (taskId, taskName, taskDescription, isDone, patch_patchId) VALUES (6, "Watering", "Remember that all toaster toast toast", true, 1);

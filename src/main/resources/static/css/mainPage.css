@@ -1,5 +1,12 @@
 body{
+<<<<<<< HEAD
     background-color: green;
+=======
+}
+
+.border-temp {
+    /*border: 1px solid black;*/
+>>>>>>> aeee93e69b08b77a9cd2027d991a337d27e891c1
 }
 
 

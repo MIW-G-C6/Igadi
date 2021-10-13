@@ -32,4 +32,9 @@ public class GardenService {
         gardenDTO.setGardenName(garden.getGardenName());
         return gardenDTO;
     }
+
+    public GardenDTO getGardenById(int gardenId) {
+        Garden garden = gardenRepository.getById(gardenId);
+        return convertToGardenDTO(garden);
+    }
 }

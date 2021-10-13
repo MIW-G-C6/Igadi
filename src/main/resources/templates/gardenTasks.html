@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <title>Garden tasks</title>
+</head>
+<body>
+
+<div class="container d-flex flex-column border-temp h-50">
+
+    <div class="border-temp mb-3 text-center">
+        <h3 th:text="${garden.getGardenName()}"></h3>
+    </div>
+
+        <div class="container d-flex flex-row m-0 font-weight-bold">
+            <p class="p-2 w-25 m-0">Task Id</p>
+            <p class="p-2 w-25 m-0">Task Name</p>
+            <p class="p-2 w-25 m-0">Task description</p>
+            <p class="p-2 w-25 m-0">Done?</p>
+        </div>
+
+    <ul th:each="task : ${allGardenTasks}" class="d-flex mb-3 border-temp flex-column  m-0 container">
+        <li class="d-flex flex-row m-0">
+            <p class="p-2 w-25 m-0" th:text="${task.getTaskId()}"></p>
+            <p class="p-2 w-25 m-0" th:text="${task.getTaskName()}"></p>
+            <p class="p-2 w-25 m-0" th:text="${task.getTaskDescription()}"></p>
+            <p class="p-2 w-25 m-0" th:text="${task.isDone()}"></p>
+        </li>
+    </ul>
+
+</div>
+
+</body>
+</html>
