@@ -14,7 +14,7 @@
 <div class="container d-flex flex-column border-temp h-50">
 
   <div class="border-temp mb-3 text-center">
-  <h3 th:text="${garden.getGardenName()}"></h3>
+  <h1 th:text="${garden.getGardenName()}"></h1>
   </div>
 
   <div class="d-flex flex-row m-0 font-weight-bold">
@@ -23,12 +23,12 @@
     <p class="p-2 w-25 m-0">Tasks</p>
   </div>
 
-  <ul th:each="patch : ${allPatches}" class="d-flex mb-3 border-temp flex-column  m-0">
+  <ul th:each="patch : ${allPatches}" class="border-temp list-unstyled m-0 w-100">
     <li class="d-flex flex-row m-0">
       <p class="p-2 w-25 m-0" th:text="${patch.patchId}"></p>
       <p class="p-2 w-25 m-0" th:text="${patch.gardenDTO.gardenId}"></p>
       <p class="p-2 w-25 m-0"><a th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patch.getPatchId()})}">
-        Patch tasks</a></p>
+        <button class="btn btn-success mr-auto">Patch tasks</button></a></p>
     </li>
   </ul>
 

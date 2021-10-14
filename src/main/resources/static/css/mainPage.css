@@ -104,9 +104,6 @@ border-radius: 10px;
     width: 100%;
     padding: 10px 0;
     color: green;
-
-
-
 }
 
 
@@ -136,4 +133,8 @@ background-color: rgba(255, 255, 255, 0.3);
 
 .background-brown{
 background-color: green;
+}
+
+.bottoms{
+margin-bottom: 0;
 }

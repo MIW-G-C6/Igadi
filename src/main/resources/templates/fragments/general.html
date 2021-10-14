@@ -21,12 +21,6 @@
             <li class="nav-item glassButton" sec:authorize="isAuthenticated()">
                 <a class="nav-link text-white" th:href="@{/gardens}">Gardens</a>
             </li>
-            <li class="nav-item glassButton" sec:authorize="isAuthenticated()">
-                <a class="nav-link text-white" th:href="@{/gardens}">Patches</a>
-            </li>
-            <li class="nav-item glassButton" sec:authorize="isAuthenticated()">
-                <a class="nav-link text-white" th:href="@{/gardens}">Tasks</a>
-            </li>
             <li class="nav-item glassButton"sec:authorize="isAnonymous()">
                 <a class="nav-link text-white" th:href="@{/users/new}">Create account</a>
             </li>
@@ -51,9 +45,9 @@
             <li class="list-inline-item"><a th:href="@{/}" class="text-white">Home</a></li>
             <li class="list-inline-item"><a th:href="@{/about}" class="text-white">About</a></li>
             <li class="list-inline-item"><a th:href="@{/contact}" class="text-white">Contact</a></li>
+            <p class="footer text-white">&copy; 2021 GardenGnomes</p>
         </ul>
-        <p class="footer text-white">&copy; 2021 GardenGnomes</p>
-
+        <p class="footer"></p>
     </div>
 
     <div th:fragment="bottomScripts">
