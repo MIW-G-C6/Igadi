@@ -29,12 +29,14 @@ public class GardenController {
         model.addAttribute("allGardens", gardenService.getAllGardens());
         return "gardens";
     }
+    // TODO make a button to create a new garden
 
     @GetMapping("/gardens/new")
     protected String showGardenForm(Model model) {
         model.addAttribute("garden", new Garden());
         return "gardenForm";
-    } // TODO sort by id before returning
+    }
+    // TODO sort by id before returning
 
     @PostMapping("gardens/new")
     protected String createOrUpdateGarden(@ModelAttribute("garden") Garden garden, BindingResult result) {
@@ -42,5 +44,7 @@ public class GardenController {
             gardenService.saveGarden(garden);
         }
         return "redirect:/gardens";
-    } // TODO saving a new garden gives me an error (duplicate primary key no. 3) when there's already data in the database
+    }
+    // TODO saving a new garden gives me an error (duplicate primary key no. 3) when there's already data in the database
+    // TODO return a message to let the user know whether the create/update was successful
 }

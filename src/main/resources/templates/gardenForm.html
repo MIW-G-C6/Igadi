@@ -15,26 +15,16 @@
         <div class="border-temp mb-3">
             <h1>Create or update a garden</h1>
         </div>
-        <div class="border-temp col-3 p-0">
-            <!--<div class="d-flex mb-3 border-temp">
-                <p class="border-temp m-0 w-100">Name</p>
-                <p class="border-temp m-0">Id</p>
-            </div>
-            <ul th:each="garden: ${allGardens}" class="border-temp list-unstyled m-0">
-                <li class="border-temp mb-2">
-                    <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}" class="border-temp d-block text-decoration-none">
-                        <div class="d-flex">
-                            <p th:text="${garden.gardenName}" class="border-temp m-0 w-100"></p>
-                            <p th:text="${garden.gardenId}" class="border-temp m-0"></p>
-                        </div>
-                    </a>
-                </li>
-            </ul>-->
+        <div class="border-temp col-3 p-0 mb-3">
             <form th:action="@{/gardens/new}" method="post" th:object="${garden}">
                 <input type="text" th:field="*{gardenName}" class="form-control mb-3" placeholder="Name">
-                <button type="submit" class="btn btn-primary">Save garden</button>
+                <button type="submit" class="btn btn-primary mr-3">Save garden</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/gardens'">
+                    Cancel
+                </button>
             </form>
         </div>
+
     </div>
 
 <div th:replace="fragments/general :: footer"></div>

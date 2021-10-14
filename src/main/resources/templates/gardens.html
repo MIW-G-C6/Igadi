@@ -15,7 +15,7 @@
         <div class="border-temp mb-3">
             <h1>Overview of all gardens</h1>
         </div>
-        <div class="border-temp col-3 p-0">
+        <div class="border-temp col-3 p-0 mb-3">
             <div class="d-flex mb-3 border-temp">
                 <p class="border-temp m-0 w-100">Name</p>
                 <p class="border-temp m-0">Id</p>
@@ -32,6 +32,9 @@
                 </li>
             </ul>
         </div>
+        <button type="button" class="btn btn-primary mr-auto" onclick="location.href='/gardens/new'">
+            Create a new garden
+        </button>
     </div>
 
 <div th:replace="fragments/general :: footer"></div>
