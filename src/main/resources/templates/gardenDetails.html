@@ -17,13 +17,13 @@
   <h3 th:text="${garden.getGardenName()}"></h3>
   </div>
 
-  <div class="container d-flex flex-row m-0 font-weight-bold">
+  <div class="d-flex flex-row m-0 font-weight-bold">
     <p class="p-2 w-25 m-0">Patch Id</p>
     <p class="p-2 w-25 m-0">Garden</p>
     <p class="p-2 w-25 m-0">Tasks</p>
   </div>
 
-  <ul th:each="patch : ${allPatches}" class="d-flex mb-3 border-temp flex-column  m-0 container">
+  <ul th:each="patch : ${allPatches}" class="d-flex mb-3 border-temp flex-column  m-0">
     <li class="d-flex flex-row m-0">
       <p class="p-2 w-25 m-0" th:text="${patch.patchId}"></p>
       <p class="p-2 w-25 m-0" th:text="${patch.gardenDTO.gardenId}"></p>
