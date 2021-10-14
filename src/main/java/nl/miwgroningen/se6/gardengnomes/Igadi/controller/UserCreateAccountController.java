@@ -3,6 +3,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,10 +21,12 @@ public class UserCreateAccountController {
 
     private UserService userService;
     private GardenService gardenService;
+    PasswordEncoder passwordEncoder;
 
-    public UserCreateAccountController(UserService userService, GardenService gardenService) {
+    public UserCreateAccountController(UserService userService, GardenService gardenService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.gardenService = gardenService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/users/new")
@@ -44,6 +47,7 @@ public class UserCreateAccountController {
             return "redirect:/users/new";
         }
         if (!result.hasErrors()) {
+            user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
             userService.saveUser(user);
         }
         return "redirect:/users/new";
