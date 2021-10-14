@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <title>Create a new account</title>
 </head>
 <body>
+
+<div th:replace="fragments/general :: navbar"></div>
 
 <form th:action="@{/users/new}" method="post" th:object="${user}">
     <table>
@@ -28,6 +30,11 @@
     <input type="submit" value="save user">
 
 </form>
+<div th:replace="fragments/general :: container"></div>
+
+<div th:replace="fragments/general :: footer"></div>
+
+<div th:replace="fragments/general :: bottomScripts"></div>
 
 </body>
 </html>
