@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 
-<head>
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
     <meta charset="UTF-8">
     <title>Garden Overview</title>
     <link rel="stylesheet" type="text/css" href="/css/mainPage.css">
@@ -10,82 +10,51 @@
 
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">WebSiteName</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>
-        </ul>
-    </div>
-</nav>
-
-<div th:fragment="navbar">
-    <ul class="nav">
-        <li class="nav-item" sec:authorize="isAuthenticated()">
-            <a class="nav-link" th:href="@{/patches}">Patches</a>
-        </li>
-        <li class="nav-item" sec:authorize="isAuthenticated()">
-            <a class="nav-link" th:href="@{/tasks}">Tasks</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/plants}">Plants</a>
-        </li>
-        <li class="nav-item" sec:authorize="isAuthenticated()">
-            <a class="nav-link" th:href="@{/users/new}">Create new user</a>
-        </li>
-        <li class="nav-item" sec:authorize="isAnonymous()">
-            <a class="nav-link" th:href="@{/login}">Login</a>
-        </li>
-        <li class="nav-item" sec:authorize="isAuthenticated()">
-            <a class="nav-link" th:href="@{/logout}">Logout</a>
-        </li>
-    </ul>
-</div>
+<div th:replace="fragments/general :: navbar"></div>
 
 <div class="gardenTableContainer">
     <div class="gardenPatchContainer">
         <h1>Gardens</h1>
+
         <div class="gardens">
-        <div class="gardenCard" th:each="garden : ${allGardens}">
-            <img class="landTile" src="/images/icons/gardenIcon.svg">
-            <h4><a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
-                   th:text="${garden.gardenName}"></a></h4>
-            <p th:text="${garden.gardenId}"></p>
-            <h4><a th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"
-                   th:text="${garden.gardenName}"></a></h4>
-        </div>
+            <div class="gardenCard" th:each="garden : ${allGardens}">
+                <img class="landTile" src="/images/icons/gardenIcon.svg">
+                <h4><a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
+                       th:text="${garden.gardenName}"></a></h4>
+                <p th:text="${garden.gardenId}"></p>
+                <h4><a th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"
+                       th:text="${garden.gardenName}"></a></h4>
+            </div>
         </div>
 
         <h1>Patches</h1>
 
         <div class="gardens">
-        <div class="gardenCard" th:each="patch : ${allPatches}">
-            <img class="landTile" src="/images/icons/patchIcon.svg">
-            <h4 th:text="${patch.patchId}"></h4>
-            <p th:text="${patch.gardenDTO.getGardenName()}"></p>
-        </div>
-        </div>
-
-    </div>
-
-<div class="taskOverviewContainer">
-    <h1>Tasks</h1>
-
-    <div class="taskTable">
-        <div class="taskCard" th:each="task : ${allTasks}">
-            <p th:text="${task.taskName}"></p>
-            <p th:text="${task.taskDescription}"></p>
-            <p th:text="'Garden: ' + ${task.garden.getGardenName()}"></p>
+            <div class="gardenCard" th:each="patch : ${allPatches}">
+                <img class="landTile" src="/images/icons/patchIcon.svg">
+                <h4 th:text="${patch.patchId}"></h4>
+                <p th:text="${patch.gardenDTO.getGardenName()}"></p>
+            </div>
         </div>
     </div>
 
+    <div class="taskOverviewContainer">
+        <h1>Tasks</h1>
+
+        <div class="taskTable">
+            <div class="taskCard" th:each="task : ${allTasks}">
+                <p th:text="${task.taskName}"></p>
+                <p th:text="${task.taskDescription}"></p>
+                <p th:text="'Garden: ' + ${task.garden.getGardenName()}"></p>
+            </div>
+        </div>
+
+    </div>
 </div>
-</div>
+
+<div th:replace="fragments/general :: footer"></div>
+
+<div th:replace="fragments/general :: bottomScripts"></div>
 
 </body>
 </html>

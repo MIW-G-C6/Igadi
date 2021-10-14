@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
     <meta charset="UTF-8">
     <title>Garden Overview</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
@@ -8,6 +8,9 @@
 </head>
 
 <body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
     <div class="container d-flex flex-column border-temp h-50">
         <div class="border-temp mb-3">
             <h1>Create or update a garden</h1>
@@ -33,5 +36,10 @@
             </form>
         </div>
     </div>
+
+<div th:replace="fragments/general :: footer"></div>
+
+<div th:replace="fragments/general :: bottomScripts"></div>
+
 </body>
 </html>
