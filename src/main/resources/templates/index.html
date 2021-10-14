@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
     <title>Homepage</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-    <link href="/css/indexPageStyle.css" rel="stylesheet">
+
 </head>
 <body>
 <div th:replace="fragments/general :: navbar"></div>
 
-<!--<nav class="navbar-header">-->
-<!--    <div class="container-fluid">-->
-<!--        <a class="navbar-brand">Igadi</a>-->
-<!--        <a class="navbar-brand float-right" href="templates/userLoginPage.html">-->
-<!--            <img src="/images/icons/userIcon.png" alt="" width="30" height="24">-->
-<!--        </a>-->
-<!--    </div>-->
-<!--</nav>-->
-
-<div th:replace="fragments/general :: jumbotron"></div>
+<div th:replace="fragments/general :: container"></div>
 
 <div th:replace="fragments/general :: footer"></div>
 

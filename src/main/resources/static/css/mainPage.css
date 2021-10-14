@@ -100,20 +100,19 @@ border: 3px solid black;
 border-radius: 10px;
 }
 
-.footer{
+.footer {
+    margin-top: auto;
+    position: relative;
     bottom: 0;
-    position: fixed;
     width: 100%;
-}
-
-.footer{
-    background: blue;
-    height: 100px;
-    margin: auto;
-    width: 400px;
-    text-align:center;
-    padding:10px;
-
+    padding: 10px 0;
+    color: red;
 }
 
 
+.container {
+    width: 80vw;
+    margin: 0 auto;
+    padding: 30px 20px;
+    min-height: calc(100vh - 120px - 73px);
+}
