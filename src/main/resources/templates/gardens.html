@@ -12,26 +12,25 @@
 <div th:replace="fragments/general :: navbar"></div>
 
     <div class="container d-flex flex-column border-temp h-50">
-        <div class="border-temp mb-3">
+        <div class="border-temp mb-3 text-center">
             <h1>Overview of all gardens</h1>
         </div>
-        <div class="border-temp col-3 p-0 mb-3">
+
+        <div class="border-temp w-100 p-0 mb-3">
             <div class="d-flex mb-3 border-temp">
-                <p class="border-temp m-0 w-100">Name</p>
-                <p class="border-temp m-0">Id</p>
+                <p class="border-temp m-0 w-25 font-weight-bold">Name</p>
+                <p class="border-temp m-0 w-25 font-weight-bold">Id</p>
+                <p class="border-temp m-0 w-50 font-weight-bold">Tasks</p>
             </div>
-            <ul th:each="garden: ${allGardens}" class="border-temp list-unstyled m-0">
-                <li class="border-temp mb-2">
+
+            <ul th:each="garden: ${allGardens}" class="border-temp list-unstyled m-0 w-100">
+                <li class="border-temp mb-2 w-100 d-flex">
                     <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
-                       class="border-temp d-block text-decoration-none">
-                        <div class="d-flex">
-                            <p th:text="${garden.gardenName}" class="border-temp m-0 w-100"></p>
-                            <p th:text="${garden.gardenId}" class="border-temp m-0"></p>
-                            <a class="border-temp m-0  w-100"
+                       class="w-25"><p th:text="${garden.gardenName}" class="border-temp m-0"></p></a>
+                    <p th:text="${garden.gardenId}" class="border-temp m-0 w-25"></p>
+                    <a class="border-temp m-0 w-25"
                                th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}">
-                                <button>Garden tasks</button></a>
-                        </div>
-                    </a>
+                                <button class="btn btn-success mr-auto">Garden tasks</button></a>
                 </li>
             </ul>
         </div>
