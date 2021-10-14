@@ -24,7 +24,9 @@
                 </button>
             </form>
         </div>
-
+        <div>
+            <p th:class="${errorMessageColor}" th:text="${errorMessage}"></p>
+        </div>
     </div>
 
 <div th:replace="fragments/general :: footer"></div>
