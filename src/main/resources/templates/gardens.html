@@ -27,6 +27,9 @@
                         <div class="d-flex">
                             <p th:text="${garden.gardenName}" class="border-temp m-0 w-100"></p>
                             <p th:text="${garden.gardenId}" class="border-temp m-0"></p>
+                            <a class="border-temp m-0  w-100"
+                               th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}">
+                                <button>Garden tasks</button></a>
                         </div>
                     </a>
                 </li>
