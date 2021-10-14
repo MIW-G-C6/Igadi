@@ -25,7 +25,7 @@
             </form>
         </div>
         <div>
-            <p th:class="${errorMessageColor}" th:text="${errorMessage}"></p>
+            <p th:if="${!errorMessage.isEmpty()}" th:class="${errorMessage.get(1)}" th:text="${errorMessage.get(0)}"></p>
         </div>
     </div>
 

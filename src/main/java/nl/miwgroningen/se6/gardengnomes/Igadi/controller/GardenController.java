@@ -4,6 +4,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Tjerk Nagel
@@ -33,39 +37,31 @@ public class GardenController {
         return "gardens";
     }
 
+    // TODO sort by id before returning?
     @GetMapping("/gardens/new")
-    protected String showGardenForm(Model model, String errorMessage, String errorMessageColor) {
+    protected String showGardenForm(Model model, @ModelAttribute("errorMessage") ArrayList<String> errorMessage) {
         model.addAttribute("garden", new Garden());
-        if (errorMessage != null) {
+        if (!errorMessage.isEmpty()) {
             model.addAttribute("errorMessage", errorMessage);
-            model.addAttribute("errorMessageColor", errorMessageColor);
         }
         return "gardenForm";
     }
-    // TODO sort by id before returning?
 
+    // TODO put info for developer in logging
+    // TODO saving a new garden gives me an error (duplicate primary key no. 3) when there's already data in the database
     @PostMapping("gardens/new")
     protected String createOrUpdateGarden(@ModelAttribute("garden") Garden garden, BindingResult result,
                                           RedirectAttributes redirectAttributes) {
+        String errorMessage = "";
         if (!result.hasErrors()) {
-            try {
-                gardenService.saveGarden(garden);
-            } catch (DataIntegrityViolationException ex) {
-                String errorMessage = "That name already exists.";
-                redirectAttributes.addAttribute("errorMessage", errorMessage);
-                redirectAttributes.addAttribute("errorMessageColor", "redErrorMessage");
-                System.out.println(ex);
-                return "redirect:/gardens/new";
-            } catch (Exception ex) {
-                String errorMessage = "Something went wrong.";
-                redirectAttributes.addAttribute("errorMessage", errorMessage);
-                redirectAttributes.addAttribute("errorMessageColor", "redErrorMessage");
-                System.out.println(ex);
-                return "redirect:/gardens/new";
+            errorMessage = gardenService.saveGarden(garden);
+            if (errorMessage.equals("")) {
+                return "redirect:/gardens";
             }
+        } else {
+            errorMessage = "Something went wrong.";
         }
-        return "redirect:/gardens";
+        redirectAttributes.addAttribute("errorMessage", List.of(errorMessage, "redErrorMessage"));
+        return "redirect:/gardens/new";
     }
-    // TODO saving a new garden gives me an error (duplicate primary key no. 3) when there's already data in the database
-    // TODO return a message to let the user know whether the create/update was successful
 }
