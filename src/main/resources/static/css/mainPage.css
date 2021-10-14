@@ -1,7 +1,4 @@
 body{
-<<<<<<< HEAD
-    background-color: green;
-=======
 }
 
 .border-temp {
@@ -115,4 +112,8 @@ border-radius: 10px;
     margin: 0 auto;
     padding: 30px 20px;
     min-height: calc(100vh - 120px - 73px);
+}
+
+.redErrorMessage {
+    color: red;
 }
