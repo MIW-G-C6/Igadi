@@ -103,7 +103,10 @@ border-radius: 10px;
     bottom: 0;
     width: 100%;
     padding: 10px 0;
-    color: blue;
+    color: green;
+
+
+
 }
 
 
@@ -116,4 +119,21 @@ border-radius: 10px;
 
 .redErrorMessage {
     color: red;
+}
+
+.glassButton {
+background-color: rgba(255, 255, 255, 0.15);
+border-radius: 5px;
+margin-right: 1rem;
+transition-duration: 50ms;
+}
+
+.glassButton:hover{
+transition-duration 50ms;
+background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+.background-brown{
+background-color: green;
 }
