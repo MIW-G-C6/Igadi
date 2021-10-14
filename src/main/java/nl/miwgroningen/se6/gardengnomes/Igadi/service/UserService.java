@@ -5,6 +5,10 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.dto.UserDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,7 +20,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
 
@@ -56,5 +60,12 @@ public class UserService {
             }
         }
         return userNameIsInDatabase;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return userRepository.findUserByUserName(s).orElseThrow(
+                () -> new UsernameNotFoundException("Username " + s + " was not found!")
+        );
     }
 }
