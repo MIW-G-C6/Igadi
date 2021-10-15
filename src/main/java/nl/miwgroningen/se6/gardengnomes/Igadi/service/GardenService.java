@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -38,6 +39,15 @@ public class GardenService {
     public GardenDTO getGardenById(int gardenId) {
         Garden garden = gardenRepository.getById(gardenId);
         return convertToGardenDTO(garden);
+    }
+
+    public GardenDTO findGardenById(int gardenId) {
+        Optional<Garden> garden = gardenRepository.findById(gardenId);
+        if (garden.isEmpty()) {
+            return new GardenDTO(); // TODO what do we want to return here?
+        } else {
+            return convertToGardenDTO(garden.get());
+        }
     }
 
     public String saveGarden(Garden garden) {
