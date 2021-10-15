@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class GardenService {
-
     private GardenRepository gardenRepository;
 
     public GardenService(GardenRepository gardenRepository) {
@@ -55,7 +54,7 @@ public class GardenService {
         try {
             gardenRepository.save(garden);
         } catch (DataIntegrityViolationException ex) {
-            if (ex.getCause() instanceof ConstraintViolationException) {
+            if (ex.getCause() instanceof ConstraintViolationException) { // TODO make this more specific
                 errorMessage = "That name already exists.";
             } else {
                 errorMessage = "Something went wrong.";
