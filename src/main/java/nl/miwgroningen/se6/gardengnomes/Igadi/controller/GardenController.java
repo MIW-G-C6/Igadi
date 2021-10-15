@@ -1,20 +1,26 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+/**
+ * @author Tjerk Nagel
+ *
+ */
 
 @Controller
 public class GardenController {
@@ -42,6 +48,25 @@ public class GardenController {
         return "gardenForm";
     }
 
+    @GetMapping("/gardens/delete")
+    protected String showGardenForm(Model model) {
+        model.addAttribute("allGardens", gardenService.getAllGardens());
+        model.addAttribute("allGardens", gardenService.getAllGardens());
+        return "gardenDeleteForm";
+    }
+
+    @GetMapping("/gardens/delete/{gardenId}")
+    protected String showGardenForm(@PathVariable("gardenId") Integer gardenId, Model model) {
+        Optional<GardenDTO> garden = Optional.ofNullable(gardenService.getGardenById(gardenId));
+        if (garden.isPresent()) {
+            model.addAttribute("garden", garden.get());
+            return "gardenDeleteForm";
+        }
+        return "redirect:/gardens";
+    }
+
+    // TODO sort by id before returning?
+
     @PostMapping("gardens/new")
     protected String createOrUpdateGarden(@ModelAttribute("garden") Garden garden, BindingResult result,
                                           RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
@@ -60,5 +85,18 @@ public class GardenController {
         redirectAttributes.addAttribute("errorMessage", List.of(errorMessage, "redErrorMessage"));
         return "redirect:/gardens/new";
         // TODO don't renew form, for both create and update
+    }
+
+    // TODO saving a new garden gives me an error (duplicate primary key no. 3) when there's already data in the database
+    // TODO return a message to let the user know whether the create/update was successful
+
+
+    @PostMapping("gardens/delete")
+    protected String deleteGarden(@ModelAttribute("gardenId") Garden garden, BindingResult result,
+                                          RedirectAttributes redirectAttributes) {
+        if (!result.hasErrors()) {
+                gardenService.deleteGarden(garden);
+        }
+        return "redirect:/gardens";
     }
 }
