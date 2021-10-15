@@ -19,6 +19,10 @@ public class IndexController {
     protected String showIndexPage(Model model, @AuthenticationPrincipal User user) {
         if(user != null) {
             model.addAttribute(user);
+        } else {
+            user = new User();
+            user.setUserName("admin");
+            model.addAttribute(user);
         }
         return "index";
     }
