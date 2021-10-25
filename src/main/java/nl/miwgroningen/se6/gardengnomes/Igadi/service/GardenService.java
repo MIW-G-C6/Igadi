@@ -65,4 +65,9 @@ public class GardenService {
         }
         return errorMessage;
     }
+    
+    public void deleteGarden(Garden garden) {
+        gardenRepository.deleteById(garden.getGardenId());
+    }
 }
+
