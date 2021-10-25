@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class GardenService {
+
     private GardenRepository gardenRepository;
 
     public GardenService(GardenRepository gardenRepository) {
@@ -69,3 +70,4 @@ public class GardenService {
         gardenRepository.deleteById(garden.getGardenId());
     }
 }
+
