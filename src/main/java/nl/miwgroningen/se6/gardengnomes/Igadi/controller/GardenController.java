@@ -63,8 +63,6 @@ public class GardenController {
         return "redirect:/gardens";
     }
 
-    // TODO sort by id before returning?
-
     @PostMapping("gardens/new")
     protected String createOrUpdateGarden(@ModelAttribute("garden") Garden garden, BindingResult result,
                                           RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
@@ -72,7 +70,7 @@ public class GardenController {
         if (!result.hasErrors()) {
             errorMessage = gardenService.saveGarden(garden);
             if (errorMessage.equals("")) {
-                user.setGarden(garden);
+                user.setGarden(garden); // TODO this gives a nullpointerexception if the user is admin
                 user.setUserRole("garden manager");
                 userService.saveUser(user);
                 return "redirect:/gardens";
@@ -86,7 +84,6 @@ public class GardenController {
     }
 
     // TODO saving a new garden gives me an error (duplicate primary key no. 3) when there's already data in the database
-    // TODO return a message to let the user know whether the create/update was successful
 
 
     @PostMapping("gardens/delete")
