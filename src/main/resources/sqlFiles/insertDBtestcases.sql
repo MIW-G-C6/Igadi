@@ -8,14 +8,13 @@ TRUNCATE TABLE patchtask;
 SET foreign_key_checks = 1;
 
 INSERT INTO Garden (gardenId, gardenName) VALUES (1, "Eden");
-INSERT INTO Garden (gardenId, gardenName) VALUES (2, "Noorderplantsoen");
-INSERT INTO Garden (gardenId, gardenName) VALUES (3, "Prinsjestuin");
-
-INSERT INTO Garden (gardenId, gardenName) VALUES (4, "Holleboom");
-INSERT INTO Garden (gardenId, gardenName) VALUES (5, "Aardplaat");
-INSERT INTO Garden (gardenId, gardenName) VALUES (6, "Schuiftuin");
-INSERT INTO Garden (gardenId, gardenName) VALUES (7, "Stadspark");
-INSERT INTO Garden (gardenId, gardenName) VALUES (8, "Kostverloren");
+INSERT INTO Garden (gardenId, gardenName) VALUES (2, "Central Park");
+INSERT INTO Garden (gardenId, gardenName) VALUES (3, "Madison Square Garden");
+INSERT INTO Garden (gardenId, gardenName) VALUES (4, "Caketown");
+INSERT INTO Garden (gardenId, gardenName) VALUES (5, "Bowser's Big Balloon Castle");
+INSERT INTO Garden (gardenId, gardenName) VALUES (6, "Red Garden");
+INSERT INTO Garden (gardenId, gardenName) VALUES (7, "Blue Garden");
+INSERT INTO Garden (gardenId, gardenName) VALUES (8, "Thunder Garden");
 
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (1, 1);
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (4, 1);
