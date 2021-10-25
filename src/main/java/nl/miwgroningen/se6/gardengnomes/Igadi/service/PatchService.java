@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class PatchService {
 
     private PatchRepository patchRepository;
-    private GardenService gardenService; // TODO do really we want this GardenService here or higher up?
+    private GardenService gardenService;
 
     public PatchService(PatchRepository patchRepository, GardenService gardenService) {
         this.patchRepository = patchRepository;
