@@ -13,9 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author Tjerk Nagel
@@ -94,9 +92,7 @@ public class GardenController {
     @PostMapping("gardens/delete")
     protected String deleteGarden(@ModelAttribute("gardenId") Garden garden, BindingResult result,
                                           RedirectAttributes redirectAttributes) {
-        if (!result.hasErrors()) {
                 gardenService.deleteGarden(garden);
-        }
         return "redirect:/gardens";
     }
 }

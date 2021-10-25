@@ -10,7 +10,7 @@
 <div class="container d-flex flex-column border-temp h-50">
     <div class="border-temp mb-3 text-center">
         <h1 sec:authorize="isAnonymous()">Welcome to Igadi!</h1>
-<!--        <h1 sec:authorize="isAuthenticated()" th:text="'Welcome ' + ${user.getUserName()} + '!'"></h1>-->
+        <h1 sec:authorize="isAuthenticated()" th:text="'Welcome ' + ${user.getUserName()} + '!'"></h1>
         <h3 sec:authorize="isAnonymous()">Home of the green and the fresh!</h3>
         <h3 sec:authorize="isAuthenticated()">Good to see you again!</h3>
     </div>
