@@ -43,7 +43,7 @@ public class IgadiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/images/**", "/webjars/**").permitAll()
                 .antMatchers("/" , "/index", "/users/new").permitAll()
                 .anyRequest().authenticated().and()
-                .formLogin().and()
+                .formLogin().usernameParameter("email").and()
                 .logout().logoutSuccessUrl("/");
     }
 
