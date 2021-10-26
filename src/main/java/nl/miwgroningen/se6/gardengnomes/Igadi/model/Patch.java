@@ -15,7 +15,7 @@ public class Patch {
 
     // Fields
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="patchId")
     private Integer patchId;
 

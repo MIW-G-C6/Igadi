@@ -15,12 +15,14 @@ public class Garden {
 
     // Fields
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="gardenId")
     private Integer gardenId;
 
     @Column(unique = true, nullable = false, name="gardenName")
     private String gardenName;
+
+    // TODO add a list of patches here, instead of refering to Garden from Patch
 
     public Integer getGardenId() {
         return gardenId;
