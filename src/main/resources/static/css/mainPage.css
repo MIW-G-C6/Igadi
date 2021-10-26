@@ -138,5 +138,13 @@ background-color: green;
 margin-bottom: 0;
 }
 
+.right{
+  position: absolute;
+  right: 0px;
+}
 
 
+.rightaccount{
+  position: absolute;
+  right: 100px;
+}

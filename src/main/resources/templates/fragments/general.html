@@ -15,21 +15,30 @@
     <body>
     <nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-light bg-success">
         <ul class="navbar-nav">
+
             <li class="nav-item active glassButton">
                 <a class="nav-link text-white" th:href="@{/}">Igadi</a>
             </li>
             <li class="nav-item glassButton" sec:authorize="isAuthenticated()">
                 <a class="nav-link text-white" th:href="@{/gardens}">Gardens</a>
             </li>
+
+            <div class="rightaccount">
             <li class="nav-item glassButton" sec:authorize="isAnonymous()">
                 <a class="nav-link text-white" th:href="@{/users/new}">Create account</a>
             </li>
+            </div>
+
+            <div class="right">
             <li class="nav-item glassButton" sec:authorize="isAnonymous()">
                 <a class="nav-link text-white" th:href="@{/login}">Login</a>
             </li>
             <li class="nav-item glassButton" sec:authorize="isAuthenticated()">
                 <a class="nav-link text-white" th:href="@{/logout}">Logout</a>
             </li>
+            </div>
+
+
         </ul>
     </nav>
 
