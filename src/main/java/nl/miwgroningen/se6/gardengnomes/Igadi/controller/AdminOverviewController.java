@@ -66,7 +66,7 @@ public class AdminOverviewController {
 
     @GetMapping("/overview/details/patchTasks/{patchId}")
     protected String showPatchTasks(@PathVariable("patchId") int patchId, Model model) {
-        PatchDTO patch = patchService.getPatchById(patchId);
+        PatchDTO patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
         List<PatchTaskDTO> allPatchTasks = patchTaskService.getAllTasksByPatchId(patchId);
         model.addAttribute("patch", patch);
         model.addAttribute("allPatchTasks", allPatchTasks);

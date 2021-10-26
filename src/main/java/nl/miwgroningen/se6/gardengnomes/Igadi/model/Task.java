@@ -43,4 +43,20 @@ public abstract class Task {
     public boolean getIsDone() {
         return isDone;
     }
+
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
 }

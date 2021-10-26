@@ -2,6 +2,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -20,6 +21,10 @@ public class PatchTaskService {
     public PatchTaskService(PatchTaskRepository patchTaskRepository, PatchService patchService) {
         this.patchTaskRepository = patchTaskRepository;
         this.patchService = patchService;
+    }
+
+    public void savePatchTask(PatchTask patchTask) {
+        patchTaskRepository.save(patchTask);
     }
 
     public List<PatchTaskDTO> getAllPatchTasks() {
