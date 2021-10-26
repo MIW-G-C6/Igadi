@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
+ *
+ *     This service is meant for actions between the userRepository and the UserDTO/User model. Several methods are
+ *     overwritten from UserDetailsService, including the loadByUsername method. This does not look at usernames, but
+ *     at email addresses.
  */
 
 @Service
@@ -31,8 +35,8 @@ public class UserService implements UserDetailsService {
         UserDTO userDTO = new UserDTO();
         userDTO.setUserId(user.getUserId());
         userDTO.setUserName(user.getUserName());
-        userDTO.setUserPassword(user.getUserPassword());
         userDTO.setUserRole(user.getUserRole());
+        userDTO.setUserEmail(user.getUserEmail());
         return userDTO;
     }
 
@@ -48,8 +52,8 @@ public class UserService implements UserDetailsService {
     public boolean checkIfUserNameExists(String userName) {
         boolean userNameIsInDatabase = false;
         List<UserDTO> users = this.getAllUsers();
-        for(UserDTO user : users) {
-            if(user.getUserName().equals(userName)) {
+        for (UserDTO user : users) {
+            if (user.getUserName().equals(userName)) {
                 userNameIsInDatabase = true;
                 break;
             }
@@ -57,10 +61,22 @@ public class UserService implements UserDetailsService {
         return userNameIsInDatabase;
     }
 
+    public boolean checkIfUserEmailExists(String userEmail) {
+        boolean userEmailIsInDatabase = false;
+        List<UserDTO> users = this.getAllUsers();
+        for (UserDTO user : users) {
+            if (user.getUserEmail().equals(userEmail)) {
+                userEmailIsInDatabase = true;
+                break;
+            }
+        }
+        return userEmailIsInDatabase;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepository.findUserByUserName(s).orElseThrow(
-                () -> new UsernameNotFoundException("Username " + s + " was not found!")
+        return userRepository.findUserByUserEmail(s).orElseThrow(
+                () -> new UsernameNotFoundException("Email address " + s + " was not found!")
         );
     }
 }

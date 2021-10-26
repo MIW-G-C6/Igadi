@@ -92,9 +92,7 @@ public class GardenController {
     @PostMapping("gardens/delete")
     protected String deleteGarden(@ModelAttribute("gardenId") Garden garden, BindingResult result,
                                           RedirectAttributes redirectAttributes) {
-        if (!result.hasErrors()) {
                 gardenService.deleteGarden(garden);
-        }
         return "redirect:/gardens";
     }
 }

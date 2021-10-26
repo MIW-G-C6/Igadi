@@ -12,7 +12,8 @@ import java.util.List;
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
  *
  *     This user class is used for the creation of accounts. When the user creates an account, they are automatically
- *     saved with the role 'gardener'. They can get the role 'garden manager' when they create a garden.
+ *     saved with the role 'gardener'. They can get the role 'garden manager' when they create a garden. User login
+ *     with their email address and their self assigned password.
  */
 
 @Entity
@@ -23,8 +24,11 @@ public class User implements UserDetails {
     @Column(name="userId", unique = true)
     private Integer userId;
 
-    @Column(unique = true, name = "userName", nullable = false)
+    @Column(name = "userName", nullable = false)
     private String userName;
+
+    @Column(unique = true, name = "userEmail", nullable = false)
+    private String userEmail;
 
     @Column(name = "userPassword", nullable = false)
     private String userPassword;
@@ -49,6 +53,14 @@ public class User implements UserDetails {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getUserPassword() {
@@ -89,7 +101,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return userEmail;
     }
 
     @Override
