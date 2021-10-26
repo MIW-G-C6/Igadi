@@ -2,7 +2,6 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
