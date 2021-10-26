@@ -15,7 +15,7 @@ public class Garden {
 
     // Fields
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="gardenId")
     private Integer gardenId;
 

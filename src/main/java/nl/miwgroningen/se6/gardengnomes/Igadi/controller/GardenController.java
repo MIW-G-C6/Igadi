@@ -83,9 +83,6 @@ public class GardenController {
         // TODO don't renew form, for both create and update
     }
 
-    // TODO saving a new garden gives me an error (duplicate primary key no. 3) when there's already data in the database
-
-
     @PostMapping("gardens/delete")
     protected String deleteGarden(@ModelAttribute("gardenId") Garden garden, BindingResult result,
                                           RedirectAttributes redirectAttributes) {

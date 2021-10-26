@@ -15,7 +15,7 @@ public abstract class Task {
 
     //Fields
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="taskId")
     private Integer taskId;
 
