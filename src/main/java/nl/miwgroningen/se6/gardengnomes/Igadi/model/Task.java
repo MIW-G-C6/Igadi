@@ -15,7 +15,7 @@ public abstract class Task {
 
     //Fields
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE) // TODO correctly implement TABLE strategy and test if this works to prevent bug IG-89 (primary key violation bug) when you create a PatchTask or a GardenTask
     @Column(name="taskId")
     private Integer taskId;
 

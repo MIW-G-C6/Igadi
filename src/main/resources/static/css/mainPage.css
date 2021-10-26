@@ -86,15 +86,6 @@ border: 3px solid black;
 border-radius: 10px;
 }
 
-.footer {
-margin-top: auto;
-position: relative;
-bottom: 0;
-width: 100%;
-padding: 10px 0;
-color: green;
-}
-
 .container {
 width: 80vw;
 margin: 0 auto;
@@ -105,6 +96,16 @@ min-height: calc(100vh - 120px - 73px);
 .redErrorMessage {
 color: red;
 }
+
+.background-brown {
+background-color: green;
+}
+
+.bottoms {
+margin-bottom: 0;
+}
+
+/*contains general layout for hoover buttons*/
 
 .glassButton {
 background-color: rgba(255, 255, 255, 0.15);
@@ -118,13 +119,7 @@ transition-duration: 50ms;
 background-color: rgba(255, 255, 255, 0.3);
 }
 
-.background-brown {
-background-color: green;
-}
-
-.bottoms {
-margin-bottom: 0;
-}
+/*contains general position information for top navigation bar*/
 
 .navbarRightSide {
 position: absolute;
@@ -133,5 +128,21 @@ right: 0px;
 
 .navbarRightAccountCreate {
 position: absolute;
-right: 100px;
+right: 156px;
+}
+
+.equalBox{
+width: 140px;
+text-align: center;
+}
+
+/*contains general position information for the footer*/
+
+.footer {
+margin-top: auto;
+position: relative;
+bottom: 0;
+width: 100%;
+padding: 10px 0;
+color: green;
 }
