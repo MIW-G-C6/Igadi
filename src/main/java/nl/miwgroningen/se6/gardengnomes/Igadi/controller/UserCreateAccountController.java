@@ -40,9 +40,9 @@ public class UserCreateAccountController {
     @PostMapping("/users/new")
     protected String saveOrUpdateUser(@ModelAttribute("user") User user, BindingResult result,
                                       RedirectAttributes redirectAttributes) {
-        boolean duplicateUserName = userService.checkIfUserNameExists(user.getUserName());
-        if(duplicateUserName) {
-            String errorMessage = "This name is already taken!";
+        boolean duplicateEmail = userService.checkIfUserEmailExists(user.getUserEmail());
+        if(duplicateEmail) {
+            String errorMessage = "This email address has already been used!";
             redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
             return "redirect:/users/new";
         }

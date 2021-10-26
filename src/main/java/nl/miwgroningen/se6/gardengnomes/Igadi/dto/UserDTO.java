@@ -10,7 +10,7 @@ public class UserDTO {
 
     private Integer userId;
     private String userName;
-    private String userPassword;
+    private String userEmail;
     private String userRole;
     private Garden garden;
 
@@ -30,10 +30,6 @@ public class UserDTO {
         this.userName = userName;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
     public String getUserRole() {
         return userRole;
     }
@@ -48,5 +44,13 @@ public class UserDTO {
 
     public void setGarden(Garden garden) {
         this.garden = garden;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }
