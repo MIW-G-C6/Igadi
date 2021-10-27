@@ -25,4 +25,5 @@ public class GardenDTO {
     public void setGardenName(String gardenName) {
         this.gardenName = gardenName;
     }
+
 }

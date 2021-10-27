@@ -1,12 +1,19 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,7 +26,8 @@ import java.util.stream.Collectors;
 @Service
 public class GardenService {
 
-    private GardenRepository gardenRepository;
+    private final GardenRepository gardenRepository;
+
 
     public GardenService(GardenRepository gardenRepository) {
         this.gardenRepository = gardenRepository;
@@ -66,8 +74,11 @@ public class GardenService {
         return errorMessage;
     }
 
-    public void deleteGarden(Garden garden) {
-        gardenRepository.deleteById(garden.getGardenId());
+    @Transactional
+    public void deleteGarden(int garden){
+//       gardenRepository.findAllBygarden_gardenId(garden);
+        gardenRepository.deleteById(garden);
     }
+
 }
 

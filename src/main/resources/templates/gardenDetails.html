@@ -17,6 +17,12 @@
   <h1 th:text="${garden.getGardenName()}"></h1>
   </div>
 
+  <form th:action="@{/gardens/delete/{gardenId}(gardenId=${garden.getGardenId()})}" method="post" th:object="${garden}">
+    <button type="submit" class="btn btn-primary">
+      Delete garden
+    </button>
+  </form>
+
   <button class="btn btn-outline-success" onclick="location.href='/gardens/delete'">Delete garden</button></a>
 
   <div class="d-flex flex-row m-0 font-weight-bold">
