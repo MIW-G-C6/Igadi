@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -78,5 +79,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findUserByUserEmail(s).orElseThrow(
                 () -> new UsernameNotFoundException("Email address " + s + " was not found!")
         );
+    }
+
+    public User getUserByGardenId(int gardenId) {
+        User user = userRepository.findUserBygarden_gardenId(gardenId);
+        return user;
     }
 }

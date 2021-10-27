@@ -2,6 +2,8 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>

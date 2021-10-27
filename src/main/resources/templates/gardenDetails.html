@@ -31,7 +31,7 @@
     <p class="p-2 w-25 m-0">Tasks</p>
   </div>
 
-  <ul th:each="patch : ${allPatches}" class="border-temp list-unstyled m-0 w-100">
+  <ul th:each="patch : ${allPatches}" class="border-temp list-unstyled -0 w-100">
     <li class="d-flex flex-row m-0">
       <p class="p-2 w-25 m-0" th:text="${patch.patchId}"></p>
       <p class="p-2 w-25 m-0" th:text="${patch.gardenDTO.gardenId}"></p>

@@ -5,6 +5,8 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenTaskRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,10 +29,12 @@ import java.util.stream.Collectors;
 public class GardenService {
 
     private final GardenRepository gardenRepository;
+    private final GardenTaskRepository gardenTaskRepository;
 
 
-    public GardenService(GardenRepository gardenRepository) {
+    public GardenService(GardenRepository gardenRepository, GardenTaskRepository gardenTaskRepository) {
         this.gardenRepository = gardenRepository;
+        this.gardenTaskRepository = gardenTaskRepository;
     }
 
     public List<GardenDTO> getAllGardens() {
@@ -44,9 +48,9 @@ public class GardenService {
         return gardenDTO;
     }
 
-    public GardenDTO getGardenById(int gardenId) {
+    public Garden getGardenById(int gardenId) {
         Garden garden = gardenRepository.getById(gardenId);
-        return convertToGardenDTO(garden);
+        return garden;
     }
 
     public GardenDTO findGardenById(int gardenId) {
@@ -77,9 +81,14 @@ public class GardenService {
     }
 
     @Transactional
-    public void deleteGarden(int garden){
-//       gardenRepository.findAllBygarden_gardenId(garden);
-        gardenRepository.deleteById(garden);
+    public void deleteGarden(Garden garden){
+        List<GardenTask> tasks = gardenTaskRepository.findAllBygarden_gardenId(garden.getGardenId());
+        for(GardenTask task : tasks) {
+            task.setGarden(null);
+            gardenTaskRepository.delete(task);
+        }
+//        patchService.deleteAllPatchesWithGarden(garden);
+        gardenRepository.delete(garden);
     }
 
 }

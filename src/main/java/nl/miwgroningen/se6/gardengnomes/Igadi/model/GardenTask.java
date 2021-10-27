@@ -1,5 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 /**

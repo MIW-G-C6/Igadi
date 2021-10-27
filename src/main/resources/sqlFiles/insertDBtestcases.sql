@@ -25,6 +25,9 @@ INSERT INTO Patch (patchId, garden_gardenId) VALUES (8, 1);
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (2, 2);
 INSERT INTO Patch (patchId, garden_gardenId) VALUES (3, 3);
 
+INSERT INTO Patch (patchId, garden_gardenId) VALUES (9, 5);
+INSERT INTO Patch (patchId, garden_gardenId) VALUES (10, 5);
+
 INSERT INTO GardenTask (taskId, taskName, taskDescription, isDone, garden_gardenId) VALUES (1, "Watering the plants", "Watering the plants", false, 1);
 UPDATE idtable SET objectId = objectId + 1 WHERE object = "task";
 INSERT INTO GardenTask (taskId, taskName, taskDescription, isDone, garden_gardenId) VALUES (2, "Feeding the garden", "Feeding the garden", true, 2);
@@ -44,7 +47,7 @@ INSERT INTO PatchTask (taskId, taskName, taskDescription, isDone, patch_patchId)
 UPDATE idtable SET objectId = objectId + 1 WHERE object = "task";
 
 INSERT INTO User (userId, userEmail, userName, userPassword, userRole, garden_gardenId) VALUES (1, "user1@gmail.com", "user1", "12345", "gardener", 1);
-INSERT INTO User (userId, userEmail, userName, userPassword, userRole, garden_gardenId) VALUES (2, "user2@gmail.com", "user2", "123456", "gardener", 1);
-INSERT INTO User (userId, userEmail, userName, userPassword, userRole, garden_gardenId) VALUES (3, "user3@gmail.com", "user3", "1234567", "gardener", 1);
+INSERT INTO User (userId, userEmail, userName, userPassword, userRole, garden_gardenId) VALUES (2, "user2@gmail.com", "user2", "123456", "gardener", 2);
+INSERT INTO User (userId, userEmail, userName, userPassword, userRole, garden_gardenId) VALUES (3, "user3@gmail.com", "user3", "1234567", "gardener", 3);
 
 
