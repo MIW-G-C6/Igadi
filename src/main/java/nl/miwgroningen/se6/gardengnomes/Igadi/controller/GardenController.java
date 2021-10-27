@@ -7,7 +7,6 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -49,19 +48,18 @@ public class GardenController {
     @GetMapping("/gardens/delete")
     protected String showGardenForm(Model model) {
         model.addAttribute("allGardens", gardenService.getAllGardens());
-        model.addAttribute("allGardens", gardenService.getAllGardens());
         return "gardenDeleteForm";
     }
 
-    @GetMapping("/gardens/delete/{gardenId}")
-    protected String showGardenForm(@PathVariable("gardenId") Integer gardenId, Model model) {
-        Optional<GardenDTO> garden = Optional.ofNullable(gardenService.getGardenById(gardenId));
-        if (garden.isPresent()) {
-            model.addAttribute("garden", garden.get());
-            return "gardenDeleteForm";
-        }
-        return "redirect:/gardens";
-    }
+//    @GetMapping("/gardens/delete/{gardenId}")
+//    protected String showGardenForm(@PathVariable("gardenId") Integer gardenId, Model model) {
+//        Optional<GardenDTO> garden = Optional.ofNullable(gardenService.getGardenById(gardenId));
+//        if (garden.isPresent()) {
+//            model.addAttribute("garden", garden.get());
+//            return "gardenDeleteForm";
+//        }
+//        return "redirect:/gardens";
+//    }
 
     @PostMapping("gardens/new")
     protected String createOrUpdateGarden(@ModelAttribute("garden") Garden garden, BindingResult result,
@@ -83,10 +81,22 @@ public class GardenController {
         // TODO don't renew form, for both create and update
     }
 
-    @PostMapping("gardens/delete")
-    protected String deleteGarden(@ModelAttribute("gardenId") Garden garden, BindingResult result,
-                                          RedirectAttributes redirectAttributes) {
-                gardenService.deleteGarden(garden);
+//    @PostMapping("gardens/delete")
+//    protected String deleteGarden(@ModelAttribute("gardenId") Garden garden, BindingResult result,
+//                                          RedirectAttributes redirectAttributes) {
+//        gardenService.deleteGarden(garden);
+//    return "redirect:/gardens";
+//    }
+    // TODO saving a new garden gives me an error (duplicate primary key no. 3) when there's already data in the database
+    // TODO return a message to let the user know whether the create/update was successful
+
+
+    @PostMapping("gardens/delete/{gardenId}")
+    public String deleteGardenById(@PathVariable("gardenId") int gardenId) {
+        gardenService.deleteGarden(gardenId);
+
         return "redirect:/gardens";
     }
 }
+
+

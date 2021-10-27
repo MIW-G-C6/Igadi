@@ -1,10 +1,10 @@
 -- Please use Cascade, because of sql syntax in linux terminal
 SET foreign_key_checks = 0;
 
-TRUNCATE TABLE garden;
-TRUNCATE TABLE gardentask;
-TRUNCATE TABLE patch;
-TRUNCATE TABLE patchtask;
+TRUNCATE TABLE Garden;
+TRUNCATE TABLE Gardentask;
+TRUNCATE TABLE Patch;
+TRUNCATE TABLE Patchtask;
 
 SET foreign_key_checks = 1;
 
