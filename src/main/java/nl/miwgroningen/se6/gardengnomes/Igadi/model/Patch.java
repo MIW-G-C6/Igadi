@@ -1,5 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -21,7 +22,8 @@ public class Patch {
     @Column(name="patchId")
     private Integer patchId;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+
+    @ManyToOne()
 //    @OnDelete(action = OnDeleteAction.CASCADE)
 //    @JoinColumn(name = "garden_gardenId")
     private Garden garden;

@@ -2,8 +2,10 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.PatchService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -23,11 +25,13 @@ import java.util.*;
 public class GardenController {
 
     private GardenService gardenService;
+    private PatchService patchService;
     private UserService userService;
 
-    public GardenController(GardenService gardenService, UserService userService) {
+    public GardenController(GardenService gardenService, UserService userService, PatchService patchService) {
         this.gardenService = gardenService;
         this.userService = userService;
+        this.patchService = patchService;
     }
 
     @GetMapping("/gardens")
@@ -93,7 +97,20 @@ public class GardenController {
 
     @PostMapping("gardens/delete/{gardenId}")
     public String deleteGardenById(@PathVariable("gardenId") int gardenId) {
-        gardenService.deleteGarden(gardenId);
+        Garden garden = gardenService.getGardenById(gardenId);
+        User user = userService.getUserByGardenId(gardenId);
+        if(user != null) {
+            user.setGarden(null);
+            userService.saveUser(user);
+        }
+        ArrayList<Patch> patches = patchService.findAllPatchesByGardenId(gardenId);
+
+        if(!patches.isEmpty()) {
+            for(Patch patch : patches) {
+                patchService.deleteAllPatchesWithGarden(patch);
+            }
+        }
+        gardenService.deleteGarden(garden);
 
         return "redirect:/gardens";
     }

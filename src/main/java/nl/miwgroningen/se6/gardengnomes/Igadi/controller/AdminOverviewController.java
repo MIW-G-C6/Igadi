@@ -50,7 +50,7 @@ public class AdminOverviewController {
 
     @GetMapping("/overview/details/{gardenId}")
     protected String showGardenDetails(@PathVariable("gardenId") int gardenId, Model model) {
-        GardenDTO garden = gardenService.getGardenById(gardenId);
+        GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
         List<PatchDTO> allPatches = patchService.getAllPatchesByGardenId(gardenId);
         model.addAttribute("garden", garden);
         model.addAttribute("allPatches", allPatches);
@@ -59,7 +59,7 @@ public class AdminOverviewController {
 
     @GetMapping("/overview/details/gardenTasks/{gardenId}")
     protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model) {
-        GardenDTO garden = gardenService.getGardenById(gardenId);
+        GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
         List<GardenTaskDTO> allGardenTasks = gardenTaskService.getAllTasksByGardenId(gardenId);
         model.addAttribute("garden", garden);
         model.addAttribute("allGardenTasks", allGardenTasks);
