@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -56,7 +56,7 @@ public class GardenService {
     public GardenDTO findGardenById(int gardenId) {
         Optional<Garden> garden = gardenRepository.findById(gardenId);
         if (garden.isEmpty()) {
-            return new GardenDTO(); // TODO what do we want to return here?
+            return new GardenDTO();
         } else {
             return convertToGardenDTO(garden.get());
         }
@@ -67,7 +67,9 @@ public class GardenService {
         try {
             gardenRepository.save(garden);
         } catch (DataIntegrityViolationException ex) {
-            if (ex.getCause() instanceof ConstraintViolationException) { // TODO make this more specific
+            if (ex.getCause() instanceof ConstraintViolationException &&
+                    ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException &&
+                    ex.getCause().getCause().getMessage().contains("Duplicate entry")) {
                 errorMessage = "That name already exists.";
             } else {
                 errorMessage = "Something went wrong.";

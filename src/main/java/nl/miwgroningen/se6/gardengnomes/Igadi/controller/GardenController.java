@@ -72,7 +72,7 @@ public class GardenController {
         if (!result.hasErrors()) {
             errorMessage = gardenService.saveGarden(garden);
             if (errorMessage.equals("")) {
-                user.setGarden(garden); // TODO this gives a nullpointerexception if the user is admin
+                user.setGarden(garden);
                 user.setUserRole("garden manager");
                 userService.saveUser(user);
                 return "redirect:/gardens";
@@ -82,7 +82,6 @@ public class GardenController {
         }
         redirectAttributes.addAttribute("errorMessage", List.of(errorMessage, "redErrorMessage"));
         return "redirect:/gardens/new";
-        // TODO don't renew form, for both create and update
     }
 
 //    @PostMapping("gardens/delete")
@@ -91,8 +90,6 @@ public class GardenController {
 //        gardenService.deleteGarden(garden);
 //    return "redirect:/gardens";
 //    }
-    // TODO saving a new garden gives me an error (duplicate primary key no. 3) when there's already data in the database
-    // TODO return a message to let the user know whether the create/update was successful
 
 
     @PostMapping("gardens/delete/{gardenId}")
