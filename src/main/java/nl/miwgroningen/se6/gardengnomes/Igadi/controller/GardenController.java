@@ -37,10 +37,10 @@ public class GardenController {
     }
 
     @GetMapping("/gardens/new")
-    protected String showGardenForm(Model model, @ModelAttribute("errorMessage") ArrayList<String> errorMessage) {
+    protected String showGardenForm(Model model, @ModelAttribute("message") ArrayList<String> message) {
         model.addAttribute("garden", new Garden());
-        if (!errorMessage.isEmpty()) {
-            model.addAttribute("errorMessage", errorMessage);
+        if (!message.isEmpty()) {
+            model.addAttribute("message", message);
         }
         return "gardenForm";
     }
@@ -64,19 +64,19 @@ public class GardenController {
     @PostMapping("gardens/new")
     protected String createOrUpdateGarden(@ModelAttribute("garden") Garden garden, BindingResult result,
                                           RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
-        String errorMessage = "";
+        String message = "";
         if (!result.hasErrors()) {
-            errorMessage = gardenService.saveGarden(garden);
-            if (errorMessage.equals("")) {
+            message = gardenService.saveGarden(garden);
+            if (message.equals("")) {
                 user.setGarden(garden);
                 user.setUserRole("garden manager");
                 userService.saveUser(user);
                 return "redirect:/gardens";
             }
         } else {
-            errorMessage = "Something went wrong.";
+            message = "Something went wrong.";
         }
-        redirectAttributes.addAttribute("errorMessage", List.of(errorMessage, "redErrorMessage"));
+        redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
         return "redirect:/gardens/new";
     }
 

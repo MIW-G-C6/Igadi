@@ -2,32 +2,30 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
     <meta charset="UTF-8">
-    <title>Garden Overview</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" type="text/css" href="/css/mainPage.css">
+    <title>Garden Form</title>
 </head>
 
 <body>
 
 <div th:replace="fragments/general :: navbar"></div>
 
-    <div class="container d-flex flex-column border-temp h-50">
-        <div class="border-temp mb-3">
-            <h1>Create or update a garden</h1>
-        </div>
-        <div class="border-temp col-3 p-0 mb-3">
-            <form th:action="@{/gardens/new}" method="post" th:object="${garden}">
-                <input type="text" th:field="*{gardenName}" class="form-control mb-3" placeholder="Name">
-                <button type="submit" class="btn btn-primary mr-3">Save garden</button>
-                <button type="button" class="btn btn-primary" onclick="location.href='/gardens'">
-                    Cancel
-                </button>
-            </form>
-        </div>
-        <div>
-            <p th:if="${!errorMessage.isEmpty()}" th:class="${errorMessage.get(1)}" th:text="${errorMessage.get(0)}"></p>
-        </div>
+<div class="container d-flex flex-column border-temp h-50">
+    <div class="border-temp mb-3">
+        <h1>Create or update a garden</h1>
     </div>
+    <div class="border-temp col-3 p-0 mb-3">
+        <form th:action="@{/gardens/new}" method="post" th:object="${garden}">
+            <input type="text" th:field="*{gardenName}" class="form-control mb-3" placeholder="Name">
+            <button type="submit" class="btn btn-primary mr-3">Save garden</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='/gardens'">
+                Cancel
+            </button>
+        </form>
+    </div>
+    <div>
+        <p th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}"></p>
+    </div>
+</div>
 
 <div th:replace="fragments/general :: footer"></div>
 
