@@ -52,7 +52,7 @@ public class GardenService {
     public GardenDTO findGardenById(int gardenId) {
         Optional<Garden> garden = gardenRepository.findById(gardenId);
         if (garden.isEmpty()) {
-            return new GardenDTO(); // TODO what do we want to return here?
+            return new GardenDTO();
         } else {
             return convertToGardenDTO(garden.get());
         }
