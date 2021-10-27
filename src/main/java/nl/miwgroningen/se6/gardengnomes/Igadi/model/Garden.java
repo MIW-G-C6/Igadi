@@ -22,8 +22,6 @@ public class Garden {
     @Column(unique = true, nullable = false, name="gardenName")
     private String gardenName;
 
-    // TODO add a list of patches here, instead of refering to Garden from Patch
-
     public Integer getGardenId() {
         return gardenId;
     }
