@@ -7,6 +7,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -55,7 +56,9 @@ public class GardenService {
         try {
             gardenRepository.save(garden);
         } catch (DataIntegrityViolationException ex) {
-            if (ex.getCause() instanceof ConstraintViolationException) { // TODO make this more specific
+            if (ex.getCause() instanceof ConstraintViolationException &&
+                    ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException &&
+                    ex.getCause().getCause().getMessage().contains("Duplicate entry")) {
                 errorMessage = "That name already exists.";
             } else {
                 errorMessage = "Something went wrong.";
