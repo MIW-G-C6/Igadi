@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
  */
@@ -30,25 +33,32 @@ public class UserCreateAccountController {
     }
 
     @GetMapping("/users/new")
-    protected String showUserForm(Model model, @ModelAttribute("errorMessage") String errorMessage) {
-        System.out.println(errorMessage);
+    protected String showUserForm(Model model, @ModelAttribute("message") ArrayList<String> message) {
         model.addAttribute("user", new User());
-        model.addAttribute("allGardens", gardenService.getAllGardens());
+        if (!message.isEmpty()) {
+            model.addAttribute("message", message);
+        }
         return "userCreateAccountPage";
     }
 
     @PostMapping("/users/new")
     protected String saveOrUpdateUser(@ModelAttribute("user") User user, BindingResult result,
                                       RedirectAttributes redirectAttributes) {
-        boolean duplicateEmail = userService.checkIfUserEmailExists(user.getUserEmail());
-        if(duplicateEmail) {
-            String errorMessage = "This email address has already been used!";
-            redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
-            return "redirect:/users/new";
-        }
+        String message = "";
         if (!result.hasErrors()) {
-            user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
-            userService.saveUser(user);
+            boolean duplicateEmail = userService.checkIfUserEmailExists(user.getUserEmail());
+            if (duplicateEmail) {
+                message = "This email address has already been used!";
+                redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
+            } else {
+                user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
+                userService.saveUser(user);
+                message = "Account was successfully created.";
+                redirectAttributes.addAttribute("message", List.of(message, "greenMessage"));
+            }
+        } else {
+            message = "Something went wrong.";
+            redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
         }
         return "redirect:/users/new";
     }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
     <meta charset="UTF-8">
     <title>Create a new account</title>
@@ -9,31 +8,27 @@
 
 <div th:replace="fragments/general :: navbar"></div>
 
-<form th:action="@{/users/new}" method="post" th:object="${user}">
-    <table>
-        <tr>
-            <td>User Name</td>
-            <td><input type="text" th:field="*{userName}"></td>
-        </tr>
-        <tr>
-            <td>User Email</td>
-            <td><input type="email" th:field="*{userEmail}"></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" th:field="*{userPassword}"></td>
-        </tr>
+<div class="container d-flex flex-column border-temp h-50">
+    <div class="border-temp mb-3">
+        <h1>Create a new account</h1>
+    </div>
+    <div class="border-temp col-3 p-0 mb-3">
+        <form th:action="@{/users/new}" method="post" th:object="${user}">
+            <input type="text" th:field="*{userName}" class="form-control mb-3" placeholder="Username">
+            <input type="email" th:field="*{userEmail}" class="form-control mb-3" placeholder="Email">
+            <input type="password" th:field="*{userPassword}" class="form-control mb-3" placeholder="Password">
+            <button type="submit" class="btn btn-primary mr-3">Save user</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='/'">
+                Cancel
+            </button>
+        </form>
+    </div>
+    <div>
+        <p th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}"></p>
+    </div>
+</div>
 
-    </table>
 
-    <select th:field="*{garden}">
-        <option th:each="garden : ${allGardens}" th:value="${garden.gardenId}" th:text="${garden.gardenName}"></option>
-    </select>
-    <p th:text="${errorMessage}" class="text-danger"></p>
-    <input type="submit" value="save user">
-
-</form>
-<div th:replace="fragments/general :: container"></div>
 
 <div th:replace="fragments/general :: footer"></div>
 
