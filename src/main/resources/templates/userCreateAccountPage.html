@@ -13,10 +13,11 @@
         <h1>Create a new account</h1>
     </div>
     <div class="border-temp col-3 p-0 mb-3">
-        <form th:action="@{/users/new}" method="post" th:object="${user}">
+        <form th:action="@{/users/new}" method="post" th:object="${user}" name="createAccount">
             <input type="text" th:field="*{userName}" class="form-control mb-3" placeholder="Username">
             <input type="email" th:field="*{userEmail}" class="form-control mb-3" placeholder="Email">
-            <input type="password" th:field="*{userPassword}" class="form-control mb-3" placeholder="Password">
+            <input type="password" th:field="*{password1}" class="form-control mb-3" placeholder="Password">
+            <input type="password" th:field="*{password2}" class="form-control mb-3" placeholder="Repeat Password">
             <button type="submit" class="btn btn-primary mr-3">Save user</button>
             <button type="button" class="btn btn-primary" onclick="location.href='/'">
                 Cancel
@@ -27,8 +28,6 @@
         <p th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}"></p>
     </div>
 </div>
-
-
 
 <div th:replace="fragments/general :: footer"></div>
 
