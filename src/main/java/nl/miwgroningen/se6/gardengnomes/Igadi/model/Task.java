@@ -15,7 +15,9 @@ public abstract class Task {
 
     //Fields
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE) // TODO correctly implement TABLE strategy and test if this works to prevent bug IG-89 (primary key violation bug) when you create a PatchTask or a GardenTask
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "taskGenerator")
+    @TableGenerator(name="taskGenerator", table="idtable", pkColumnName="object", valueColumnName="objectId",
+            pkColumnValue="task", allocationSize=1)
     @Column(name="taskId")
     private Integer taskId;
 
@@ -42,5 +44,21 @@ public abstract class Task {
 
     public boolean getIsDone() {
         return isDone;
+    }
+
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
     }
 }

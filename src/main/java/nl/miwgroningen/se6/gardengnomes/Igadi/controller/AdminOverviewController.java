@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class AdminOverviewController {
 
     @GetMapping("/overview/details/{gardenId}")
     protected String showGardenDetails(@PathVariable("gardenId") int gardenId, Model model) {
-        GardenDTO garden = gardenService.getGardenById(gardenId);
+        GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
         List<PatchDTO> allPatches = patchService.getAllPatchesByGardenId(gardenId);
         model.addAttribute("garden", garden);
         model.addAttribute("allPatches", allPatches);
@@ -57,19 +59,12 @@ public class AdminOverviewController {
 
     @GetMapping("/overview/details/gardenTasks/{gardenId}")
     protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model) {
-        GardenDTO garden = gardenService.getGardenById(gardenId);
+        GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
         List<GardenTaskDTO> allGardenTasks = gardenTaskService.getAllTasksByGardenId(gardenId);
         model.addAttribute("garden", garden);
         model.addAttribute("allGardenTasks", allGardenTasks);
         return "gardenTasks";
     }
 
-    @GetMapping("/overview/details/patchTasks/{patchId}")
-    protected String showPatchTasks(@PathVariable("patchId") int patchId, Model model) {
-        PatchDTO patch = patchService.getPatchById(patchId);
-        List<PatchTaskDTO> allPatchTasks = patchTaskService.getAllTasksByPatchId(patchId);
-        model.addAttribute("patch", patch);
-        model.addAttribute("allPatchTasks", allPatchTasks);
-        return "patchTasks";
-    }
+
 }

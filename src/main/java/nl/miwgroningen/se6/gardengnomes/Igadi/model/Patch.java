@@ -1,7 +1,10 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * @author Tjerk Nagel
@@ -19,7 +22,10 @@ public class Patch {
     @Column(name="patchId")
     private Integer patchId;
 
-    @ManyToOne
+
+    @ManyToOne()
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JoinColumn(name = "garden_gardenId")
     private Garden garden;
 
     public Integer getPatchId() {

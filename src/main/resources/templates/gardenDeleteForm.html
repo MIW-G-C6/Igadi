@@ -16,12 +16,13 @@
         <h1>Are you sure you want to delete this garden?</h1>
     </div>
     <div class="border-temp col-3 p-0 mb-3">
-        <form th:action="@{/gardens/delete}" method="post" th:object="${garden}">
+        <form th:action="@{/gardens/delete}" method="post" th:object="${allGardens}">
             <select>
                 <option th:each="garden : ${allGardens}" th:value="${garden.gardenId}" th:text="${garden.gardenName}"></option>
+
             </select>
             <input type="text" class="form-control mb-3" placeholder="Name">
-            <button type="button" class="btn btn-primary" onclick="location.href='/gardens/delete'">
+            <button type="button" class="btn btn-primary" onclick="location.href='/gardens/delete/{gardenId}(gardenId=${garden.gardenId}})'">
                 Delete garden
             </button>
         </form>

@@ -40,6 +40,15 @@ public class UserService implements UserDetailsService {
         return userDTO;
     }
 
+    public User convertFromUserDTO(UserDTO userDTO) {
+        User user = new User();
+        user.setUserId(userDTO.getUserId());
+        user.setUserName(userDTO.getUserName());
+        user.setUserEmail(userDTO.getUserEmail());
+        user.setUserPassword(userDTO.getPassword1());
+        return user;
+    }
+
     public UserDTO getUserById(int userId) {
         User user = userRepository.getById(userId);
         return convertToUserDTO(user);
@@ -47,18 +56,6 @@ public class UserService implements UserDetailsService {
 
     public void saveUser(User user) {
         userRepository.save(user);
-    }
-
-    public boolean checkIfUserNameExists(String userName) {
-        boolean userNameIsInDatabase = false;
-        List<UserDTO> users = this.getAllUsers();
-        for (UserDTO user : users) {
-            if (user.getUserName().equals(userName)) {
-                userNameIsInDatabase = true;
-                break;
-            }
-        }
-        return userNameIsInDatabase;
     }
 
     public boolean checkIfUserEmailExists(String userEmail) {
@@ -78,5 +75,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findUserByUserEmail(s).orElseThrow(
                 () -> new UsernameNotFoundException("Email address " + s + " was not found!")
         );
+    }
+
+    public User getUserByGardenId(int gardenId) {
+        User user = userRepository.findUserBygarden_gardenId(gardenId);
+        return user;
     }
 }

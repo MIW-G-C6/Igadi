@@ -22,6 +22,10 @@ public class PatchTaskService {
         this.patchService = patchService;
     }
 
+    public void savePatchTask(PatchTask patchTask) {
+        patchTaskRepository.save(patchTask);
+    }
+
     public List<PatchTaskDTO> getAllPatchTasks() {
         return patchTaskRepository.findAll().stream().map(this::convertToPatchTaskDTO).collect(Collectors.toList());
     }
