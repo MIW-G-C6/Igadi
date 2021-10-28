@@ -1,5 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.UserDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
@@ -7,9 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class UserCreateAccountController {
 
     @GetMapping("/users/new")
     protected String showUserForm(Model model, @ModelAttribute("message") ArrayList<String> message) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserDTO());
         if (!message.isEmpty()) {
             model.addAttribute("message", message);
         }
@@ -42,15 +41,19 @@ public class UserCreateAccountController {
     }
 
     @PostMapping("/users/new")
-    protected String saveOrUpdateUser(@ModelAttribute("user") User user, BindingResult result,
+    protected String saveOrUpdateUser(@ModelAttribute("user") UserDTO userDTO, BindingResult result,
                                       RedirectAttributes redirectAttributes) {
         String message = "";
         if (!result.hasErrors()) {
-            boolean duplicateEmail = userService.checkIfUserEmailExists(user.getUserEmail());
+            boolean duplicateEmail = userService.checkIfUserEmailExists(userDTO.getUserEmail());
             if (duplicateEmail) {
                 message = "This email address has already been used!";
                 redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
+            } else if (!userDTO.getPassword1().equals(userDTO.getPassword2())) {
+                message = "Passwords are not the same!";
+                redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
             } else {
+                User user = userService.convertFromUserDTO(userDTO);
                 user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
                 userService.saveUser(user);
                 message = "Account was successfully created.";
