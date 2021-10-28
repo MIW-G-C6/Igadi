@@ -25,6 +25,15 @@ public class Garden {
     @Column(unique = true, nullable = false, name="gardenName")
     private String gardenName;
 
+    @OneToMany(mappedBy = "garden")
+    private List<GardenTask> gardenTasks;
+
+    @OneToMany(mappedBy = "garden")
+    private List<Patch> patches;
+
+    @OneToMany(mappedBy = "garden")
+    private List<User> users;
+
     public Integer getGardenId() {
         return gardenId;
     }

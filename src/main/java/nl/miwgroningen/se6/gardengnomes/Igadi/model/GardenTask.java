@@ -1,6 +1,8 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -11,9 +13,12 @@ import javax.persistence.*;
  */
 
 @Entity
+@PrimaryKeyJoinColumn(name = "task_taskId")
 public class GardenTask extends Task {
 
     @ManyToOne()
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "garden_gardenId")
     private Garden garden;
 
     public Garden getGarden() {

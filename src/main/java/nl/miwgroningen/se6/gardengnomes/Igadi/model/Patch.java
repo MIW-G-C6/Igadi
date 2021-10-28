@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author Tjerk Nagel
@@ -22,11 +23,13 @@ public class Patch {
     @Column(name="patchId")
     private Integer patchId;
 
-
     @ManyToOne()
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JoinColumn(name = "garden_gardenId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "garden_gardenId")
     private Garden garden;
+
+    @OneToMany(mappedBy = "patch")
+    private List<PatchTask> patchTasks;
 
     public Integer getPatchId() {
         return patchId;

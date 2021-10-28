@@ -4,9 +4,11 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenTaskRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.repository.UserRepository;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,11 +32,13 @@ public class GardenService {
 
     private final GardenRepository gardenRepository;
     private final GardenTaskRepository gardenTaskRepository;
+    private final UserService userService;
 
-
-    public GardenService(GardenRepository gardenRepository, GardenTaskRepository gardenTaskRepository) {
+    public GardenService(GardenRepository gardenRepository, GardenTaskRepository gardenTaskRepository,
+                         UserService userService) {
         this.gardenRepository = gardenRepository;
         this.gardenTaskRepository = gardenTaskRepository;
+        this.userService = userService;
     }
 
     public List<GardenDTO> getAllGardens() {
@@ -89,6 +93,15 @@ public class GardenService {
         }
 //        patchService.deleteAllPatchesWithGarden(garden);
         gardenRepository.delete(garden);
+    }
+
+    public void deleteGardenById(int gardenId) {
+        List<User> users = userService.findAllUsersByGardenId(gardenId);
+        for (User user: users) {
+            user.setGarden(null);
+            userService.saveUser(user);
+        }
+        gardenRepository.deleteById(gardenId);
     }
 
 }

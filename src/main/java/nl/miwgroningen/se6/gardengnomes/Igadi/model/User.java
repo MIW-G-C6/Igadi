@@ -1,5 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,6 +41,8 @@ public class User implements UserDetails {
     private String userRole = "gardener";
 
     @ManyToOne(optional = true)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JoinColumn(name = "garden_gardenId")
     private Garden garden;
 
     public Integer getUserId() {
