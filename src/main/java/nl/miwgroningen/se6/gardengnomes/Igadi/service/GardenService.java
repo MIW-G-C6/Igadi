@@ -89,7 +89,6 @@ public class GardenService {
             task.setGarden(null);
             gardenTaskRepository.delete(task);
         }
-//        patchService.deleteAllPatchesWithGarden(garden);
         gardenRepository.delete(garden);
     }
 
@@ -102,6 +101,5 @@ public class GardenService {
         gardenRepository.deleteById(gardenId);
         taskService.deleteUnreferencedEntries();
     }
-
 }
 

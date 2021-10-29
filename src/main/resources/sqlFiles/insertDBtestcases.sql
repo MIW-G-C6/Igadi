@@ -1,10 +1,10 @@
 -- Please use Cascade, because of sql syntax in linux terminal
 SET foreign_key_checks = 0;
 
-TRUNCATE TABLE Garden;
-TRUNCATE TABLE Gardentask;
-TRUNCATE TABLE Patch;
-TRUNCATE TABLE Patchtask;
+TRUNCATE TABLE garden;
+TRUNCATE TABLE gardentask;
+TRUNCATE TABLE patch;
+TRUNCATE TABLE patchtask;
 
 SET foreign_key_checks = 1;
 
@@ -44,10 +44,5 @@ INSERT INTO Task (taskId, taskName, taskDescription, isDone) VALUES (7, "Harvest
 INSERT INTO PatchTask(task_taskId, patch_patchId) VALUES (7, 3);
 INSERT INTO Task (taskId, taskName, taskDescription, isDone) VALUES (8, "Watering", "Remember that all toaster toast toast", true);
 INSERT INTO PatchTask(task_taskId, patch_patchId) VALUES (8, 1);
-
-
-INSERT INTO User (userId, userEmail, userName, userPassword, userRole, garden_gardenId) VALUES (1, "user1@gmail.com", "user1", "12345", "gardener", 1);
-INSERT INTO User (userId, userEmail, userName, userPassword, userRole, garden_gardenId) VALUES (2, "user2@gmail.com", "user2", "123456", "gardener", 2);
-INSERT INTO User (userId, userEmail, userName, userPassword, userRole, garden_gardenId) VALUES (3, "user3@gmail.com", "user3", "1234567", "gardener", 3);
 
 
