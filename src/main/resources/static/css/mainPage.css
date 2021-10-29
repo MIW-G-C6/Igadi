@@ -144,9 +144,15 @@
 
 .footer {
     margin-top: auto;
-    position: relative;
-    bottom: 0;
+    position: absolute;
     width: 100%;
+    top: 92%;
     padding: 10px 0;
     color: green;
+    height: 4.85rem;
+    margin-bottom: 0px;
+}
+
+body{
+height: 100vh;
 }
