@@ -10,14 +10,12 @@ import javax.persistence.*;
  */
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Task {
 
     //Fields
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "taskGenerator")
-    @TableGenerator(name="taskGenerator", table="idtable", pkColumnName="object", valueColumnName="objectId",
-            pkColumnValue="task", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="taskId")
     private Integer taskId;
 

@@ -40,6 +40,7 @@ public class UserService implements UserDetailsService {
         return userDTO;
     }
 
+
     public User convertFromUserDTO(UserDTO userDTO) {
         User user = new User();
         user.setUserId(userDTO.getUserId());
@@ -77,8 +78,11 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public User getUserByGardenId(int gardenId) {
-        User user = userRepository.findUserBygarden_gardenId(gardenId);
-        return user;
+    public User findUserByGardenId(int gardenId) {
+        return userRepository.findUserBygarden_gardenId(gardenId);
+    }
+
+    public List<User> findAllUsersByGardenId(int gardenId) {
+        return userRepository.findAllBygarden_gardenId(gardenId);
     }
 }

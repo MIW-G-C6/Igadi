@@ -72,9 +72,11 @@ public class GardenController {
         if (!result.hasErrors()) {
             message = gardenService.saveGarden(garden);
             if (message.equals("")) {
-                user.setGarden(garden);
-                user.setUserRole("garden manager");
-                userService.saveUser(user);
+                if (user != null) {
+                    user.setGarden(garden);
+                    user.setUserRole("garden manager");
+                    userService.saveUser(user);
+                }
                 return "redirect:/gardens";
             }
         } else {
@@ -94,7 +96,7 @@ public class GardenController {
 
     @PostMapping("gardens/delete/{gardenId}")
     public String deleteGardenById(@PathVariable("gardenId") int gardenId) {
-        Garden garden = gardenService.getGardenById(gardenId);
+        /*Garden garden = gardenService.getGardenById(gardenId);
         User user = userService.getUserByGardenId(gardenId);
         if(user != null) {
             user.setGarden(null);
@@ -107,7 +109,10 @@ public class GardenController {
                 patchService.deleteAllPatchesWithGarden(patch);
             }
         }
-        gardenService.deleteGarden(garden);
+        gardenService.deleteGarden(garden);*/
+
+
+        gardenService.deleteGardenById(gardenId);
 
         return "redirect:/gardens";
     }
