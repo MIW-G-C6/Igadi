@@ -66,22 +66,17 @@ public class GardenService {
         }
     }
 
-    public String saveGarden(Garden garden) {
-        String errorMessage = "";
-        try {
-            gardenRepository.save(garden);
-        } catch (DataIntegrityViolationException ex) {
-            if (ex.getCause() instanceof ConstraintViolationException &&
-                    ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException &&
-                    ex.getCause().getCause().getMessage().contains("Duplicate entry")) {
-                errorMessage = "That name already exists.";
-            } else {
-                errorMessage = "Something went wrong.";
-            }
-        } catch (Exception ex) {
-            errorMessage = "Something went wrong.";
+    public void saveGarden(Garden garden) {
+        gardenRepository.save(garden);
+    }
+
+    public void saveGardenAndUpdateUser(Garden garden, User user) {
+        gardenRepository.save(garden);
+        if (user != null) {
+            user.setGarden(garden);
+            user.setUserRole("garden manager");
+            userService.saveUser(user);
         }
-        return errorMessage;
     }
 
     @Transactional
@@ -103,6 +98,8 @@ public class GardenService {
         }
         gardenRepository.deleteById(gardenId);
     }
+
+
 
 }
 
