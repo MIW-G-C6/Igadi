@@ -4,6 +4,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.Task;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenTaskRepository;
@@ -33,12 +34,14 @@ public class GardenService {
     private final GardenRepository gardenRepository;
     private final GardenTaskRepository gardenTaskRepository;
     private final UserService userService;
+    private final TaskService taskService;
 
     public GardenService(GardenRepository gardenRepository, GardenTaskRepository gardenTaskRepository,
-                         UserService userService) {
+                         UserService userService, TaskService taskService) {
         this.gardenRepository = gardenRepository;
         this.gardenTaskRepository = gardenTaskRepository;
         this.userService = userService;
+        this.taskService = taskService;
     }
 
     public List<GardenDTO> getAllGardens() {
@@ -70,7 +73,7 @@ public class GardenService {
         gardenRepository.save(garden);
     }
 
-    public void saveGardenAndUpdateUser(Garden garden, User user) {
+    public void saveGardenAndMakeUserGardenManager(Garden garden, User user) {
         gardenRepository.save(garden);
         if (user != null) {
             user.setGarden(garden);
@@ -97,9 +100,8 @@ public class GardenService {
             userService.saveUser(user);
         }
         gardenRepository.deleteById(gardenId);
+        taskService.deleteUnreferencedEntries();
     }
-
-
 
 }
 

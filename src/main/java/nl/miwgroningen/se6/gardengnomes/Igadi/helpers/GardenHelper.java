@@ -6,11 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
-/**
- * @author Tjerk Nagel
- * doel:
- */
-
 @Component
 public class GardenHelper {
 

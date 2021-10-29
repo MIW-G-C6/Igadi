@@ -78,7 +78,7 @@ public class GardenController {
         String message = "Something went wrong.";
         if (!result.hasErrors()) {
             try {
-                gardenService.saveGardenAndUpdateUser(garden, user);
+                gardenService.saveGardenAndMakeUserGardenManager(garden, user);
                 return "redirect:/gardens";
             } catch (Exception ex) {
                 if (gardenHelper.IsGardenNameDuplicate(ex)) {
