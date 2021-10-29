@@ -7,6 +7,5 @@ import java.util.ArrayList;
 
 public interface PatchRepository extends JpaRepository<Patch, Integer> {
 
-
     ArrayList<Patch> findAllBygarden_gardenId(int gardenId);
 }

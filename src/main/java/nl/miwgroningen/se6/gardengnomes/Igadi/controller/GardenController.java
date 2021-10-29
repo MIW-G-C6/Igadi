@@ -1,8 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.PatchService;
@@ -55,16 +53,6 @@ public class GardenController {
         return "gardenDeleteForm";
     }
 
-//    @GetMapping("/gardens/delete/{gardenId}")
-//    protected String showGardenForm(@PathVariable("gardenId") Integer gardenId, Model model) {
-//        Optional<GardenDTO> garden = Optional.ofNullable(gardenService.getGardenById(gardenId));
-//        if (garden.isPresent()) {
-//            model.addAttribute("garden", garden.get());
-//            return "gardenDeleteForm";
-//        }
-//        return "redirect:/gardens";
-//    }
-
     @PostMapping("gardens/new")
     protected String createOrUpdateGarden(@ModelAttribute("garden") Garden garden, BindingResult result,
                                           RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
@@ -86,34 +74,9 @@ public class GardenController {
         return "redirect:/gardens/new";
     }
 
-//    @PostMapping("gardens/delete")
-//    protected String deleteGarden(@ModelAttribute("gardenId") Garden garden, BindingResult result,
-//                                          RedirectAttributes redirectAttributes) {
-//        gardenService.deleteGarden(garden);
-//    return "redirect:/gardens";
-//    }
-
-
     @PostMapping("gardens/delete/{gardenId}")
     public String deleteGardenById(@PathVariable("gardenId") int gardenId) {
-        /*Garden garden = gardenService.getGardenById(gardenId);
-        User user = userService.getUserByGardenId(gardenId);
-        if(user != null) {
-            user.setGarden(null);
-            userService.saveUser(user);
-        }
-        ArrayList<Patch> patches = patchService.findAllPatchesByGardenId(gardenId);
-
-        if(!patches.isEmpty()) {
-            for(Patch patch : patches) {
-                patchService.deleteAllPatchesWithGarden(patch);
-            }
-        }
-        gardenService.deleteGarden(garden);*/
-
-
         gardenService.deleteGardenById(gardenId);
-
         return "redirect:/gardens";
     }
 }

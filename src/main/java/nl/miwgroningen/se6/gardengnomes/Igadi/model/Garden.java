@@ -49,13 +49,5 @@ public class Garden {
     public void setGardenName(String gardenName) {
         this.gardenName = gardenName;
     }
-
-    // The 'mappedBy = "garden"' attribute specifies that the 'private Garden garden;' field in Patch owns the
-    // relationship (i.e. contains the foreign key for the query to find all patches for a Garden.)
-    // (https://en.wikibooks.org/wiki/Java_Persistence/ManyToOne)
-
-//    @OneToMany(mappedBy = "garden")
-//    private List<Patch> patches;
-
 }
 
