@@ -56,7 +56,6 @@ public class UserCreateAccountController {
             } else {
                 User user = userService.convertFromUserDTO(userDTO);
                 user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
-                System.out.println(user.getAuthorities());
                 userService.saveUser(user);
                 message = "Account was successfully created.";
                 redirectAttributes.addAttribute("message", List.of(message, "greenMessage"));
