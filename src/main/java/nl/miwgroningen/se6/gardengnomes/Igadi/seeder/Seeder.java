@@ -23,13 +23,13 @@ import java.util.Locale;
 @Component
 public class Seeder {
 
+    public static final int patchesPerGarden = 3;
     private final GardenService gardenService;
     private final GardenTaskService gardenTaskService;
     private final PatchService patchService;
     private final PatchTaskService patchTaskService;
     private final UserService userService;
-
-    PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public Seeder(GardenService gardenService, GardenTaskService gardenTaskService, PatchService patchService,
@@ -155,10 +155,11 @@ public class Seeder {
 
     public ArrayList<Patch> createPatchSeed(Garden garden) {
         ArrayList<Patch> patches = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < patchesPerGarden; i++) {
             Patch patch = new Patch();
             patch.setGarden(garden);
             patches.add(patch);
+
         }
         return patches;
     }
@@ -172,7 +173,6 @@ public class Seeder {
         for(int i = 0; i < titles.length; i++) {
             String title = titles[i] + " the " + crops[randomCrops];
             String description = "Please " + titles[i].toLowerCase() + " the " + crops[randomCrops] + " soon";
-
             PatchTask patchTask = new PatchTask();
             patchTask.setTaskName(title);
             patchTask.setTaskDescription(description);
