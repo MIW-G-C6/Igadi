@@ -129,4 +129,10 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public Collection<? extends GrantedAuthority> changeAuthority(String role) {
+        List<GrantedAuthority> authorityList = new ArrayList<>();
+        authorityList.add(new SimpleGrantedAuthority(role));
+        return authorityList;
+    }
 }
