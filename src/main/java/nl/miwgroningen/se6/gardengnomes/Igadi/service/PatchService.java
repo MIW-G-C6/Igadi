@@ -70,4 +70,8 @@ public class PatchService {
         }
         patchRepository.delete(patch);
     }
+
+    public void savePatch(Patch patch) {
+        patchRepository.save(patch);
+    }
 }

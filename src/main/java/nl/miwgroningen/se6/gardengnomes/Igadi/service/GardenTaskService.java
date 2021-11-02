@@ -1,7 +1,9 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenTaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +42,9 @@ public class GardenTaskService {
         gardenTaskDTO.setDone(gardenTask.getIsDone());
         gardenTaskDTO.setGardenDTO(gardenService.convertToGardenDTO(gardenTask.getGarden()));
         return gardenTaskDTO;
+    }
+
+    public void saveGardenTask(GardenTask gardenTask) {
+        gardenTaskRepository.save(gardenTask);
     }
 }
