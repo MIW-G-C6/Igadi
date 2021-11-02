@@ -35,7 +35,6 @@ public class UserService implements UserDetailsService {
         UserDTO userDTO = new UserDTO();
         userDTO.setUserId(user.getUserId());
         userDTO.setUserName(user.getUserName());
-        userDTO.setUserRole(user.getUserRole());
         userDTO.setUserEmail(user.getUserEmail());
         return userDTO;
     }
@@ -78,11 +77,11 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public User findUserByGardenId(int gardenId) {
+/*    public User findUserByGardenId(int gardenId) {
         return userRepository.findUserBygarden_gardenId(gardenId);
     }
 
     public List<User> findAllUsersByGardenId(int gardenId) {
         return userRepository.findAllBygarden_gardenId(gardenId);
-    }
+    }*/
 }

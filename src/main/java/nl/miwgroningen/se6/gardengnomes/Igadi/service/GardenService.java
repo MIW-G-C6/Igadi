@@ -74,12 +74,12 @@ public class GardenService {
     }
 
     public void saveGardenAndMakeUserGardenManager(Garden garden, User user) {
-        gardenRepository.save(garden);
+        /*gardenRepository.save(garden);
         if (user != null) {
             user.setGarden(garden);
             user.setUserRole("garden manager");
             userService.saveUser(user);
-        }
+        }*/
     }
 
     @Transactional
@@ -93,13 +93,13 @@ public class GardenService {
     }
 
     public void deleteGardenById(int gardenId) {
-        List<User> users = userService.findAllUsersByGardenId(gardenId);
+        /*List<User> users = userService.findAllUsersByGardenId(gardenId);
         for (User user: users) {
             user.setGarden(null);
             userService.saveUser(user);
         }
         gardenRepository.deleteById(gardenId);
-        taskService.deleteUnreferencedEntries();
+        taskService.deleteUnreferencedEntries();*/
     }
 }
 

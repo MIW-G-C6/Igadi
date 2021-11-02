@@ -1,5 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.GardenHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
@@ -38,7 +39,7 @@ public class GardenController {
     }
 
     @GetMapping("/gardens")
-    protected String showGardens(Model model) {
+    protected String showGardens(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("allGardens", gardenService.getAllGardens());
         return "gardens";
     }

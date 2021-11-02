@@ -32,7 +32,7 @@ public class Garden {
     private List<Patch> patches;
 
     @OneToMany(mappedBy = "garden")
-    private List<User> users;
+    private List<GardenUser> gardenUsers;
 
     public Integer getGardenId() {
         return gardenId;
