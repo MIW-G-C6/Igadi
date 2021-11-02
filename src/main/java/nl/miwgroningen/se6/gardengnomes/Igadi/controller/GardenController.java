@@ -1,5 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.GardenHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
@@ -81,6 +83,20 @@ public class GardenController {
         gardenService.deleteGardenById(gardenId);
         return "redirect:/gardens";
     }
+
+    @GetMapping({ "/overview"})
+    protected String showGardenOverview(Model model) {
+        model.addAttribute("allGardens", gardenService.getAllGardens());
+        model.addAttribute("allPatches", patchService.getAllPatches());
+        return "adminOverview";
+    }
+
+    @GetMapping("/overview/details/{gardenId}")
+    protected String showGardenDetails(@PathVariable("gardenId") int gardenId, Model model) {
+        GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
+        List<PatchDTO> allPatches = patchService.getAllPatchesByGardenId(gardenId);
+        model.addAttribute("garden", garden);
+        model.addAttribute("allPatches", allPatches);
+        return "gardenDetails";
+    }
 }
-
-
