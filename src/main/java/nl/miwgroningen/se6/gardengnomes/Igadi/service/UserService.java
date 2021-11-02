@@ -85,4 +85,9 @@ public class UserService implements UserDetailsService {
     public List<User> findAllUsersByGardenId(int gardenId) {
         return userRepository.findAllBygarden_gardenId(gardenId);
     }
+
+    public void saveSeededUser() {
+
+    }
+
 }

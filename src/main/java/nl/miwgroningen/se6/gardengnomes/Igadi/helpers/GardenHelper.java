@@ -15,5 +15,4 @@ public class GardenHelper {
                 ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException &&
                 ex.getCause().getCause().getMessage().contains("Duplicate entry");
     }
-
 }
