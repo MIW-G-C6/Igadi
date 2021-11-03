@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 /**
@@ -46,8 +47,15 @@ public class IgadiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/" , "/index", "/users/new").permitAll()
                 /*.antMatchers("/gardens").hasAuthority("garden_manager")*/
                 .anyRequest().authenticated().and()
-                .formLogin().usernameParameter("email").and()
-                .logout().logoutSuccessUrl("/");
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .permitAll();
     }
 
     @Bean

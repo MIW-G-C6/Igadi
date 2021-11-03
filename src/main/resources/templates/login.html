@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container d-flex flex-column border-temp h-50">
+    <div class="border-temp mb-3">
+        <h1>Login</h1>
+    </div>
+
+        <v class="border-temp col-3 p-0 mb-3">
+            <form th:action="@{/login}" method="post" th:object="${user}">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">Invalid email or password.</div>
+                </div>
+
+                <div>
+                <input type="email" id="username" name="username" class="form-control" autofocus="autofocus" placeholder="Email" />
+                <br>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" />
+                <br><br>
+                <input type="submit" name="login-submit" id="login-submit" class="btn btn-primary mr-3" value="Log in" />
+                </div>
+                <br>
+
+                <p>
+                    New user? <a th:href="@{/users/new}">Create account</a>
+                </p>
+            </form>
+    </div>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+</div>
+
+</body>
+
+</html>
+
+
+<!--            <button type="submit" value="Log in" class="btn btn-primary mr-3">Login</button>-->
+<!--        </form>-->
+
+
+<!--&lt;!&ndash;        <form action="/test" method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;            <button type="submit">&ndash;&gt;-->
+<!--&lt;!&ndash;                test&ndash;&gt;-->
+<!--&lt;!&ndash;            </button>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        </form>&ndash;&gt;-->
