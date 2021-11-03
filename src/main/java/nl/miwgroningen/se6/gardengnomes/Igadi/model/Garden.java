@@ -34,6 +34,9 @@ public class Garden {
     @OneToMany(mappedBy = "garden", fetch = FetchType.EAGER)
     private List<User> users;
 
+    @Column(name = "location", nullable = false)
+    private String location;
+
     public Integer getGardenId() {
         return gardenId;
     }
@@ -56,6 +59,14 @@ public class Garden {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
 

@@ -15,22 +15,19 @@
     </div>
 
     <div class="border-temp w-100 p-0 mb-3">
-        <div class="d-flex mb-3 border-temp">
+
+        <div class="d-flex mb-3 border-temp justify-content-center w-100">
             <p class="border-temp m-0 w-25 font-weight-bold">Name</p>
-            <p class="border-temp m-0 w-25 font-weight-bold">Amount of gardeners</p>
-            <p class="border-temp m-0 w-50 font-weight-bold">Tasks</p>
+            <p class="border-temp m-0 w-25 font-weight-bold">Location</p>
         </div>
 
-        <ul th:each="garden: ${allGardens}" class="border-temp list-unstyled m-0 w-100">
-            <li class="border-temp mb-2 w-100 d-flex">
+        <div th:each="garden: ${allGardens}" class="border-temp m-0 w-100 d-flex flex-column">
+            <div class="border-temp mb-2 w-100 d-flex justify-content-center">
                 <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
                    class="w-25"><p th:text="${garden.gardenName}" class="border-temp m-0"></p></a>
-                <p th:text="${garden.amountOfUsers}" class="border-temp m-0 w-25"></p>
-                <a class="border-temp m-0 w-25"
-                   th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}">
-                    <button class="btn btn-success mr-auto">View all tasks for this garden</button></a>
-            </li>
-        </ul>
+                <p class="border-temp m-0 w-25" th:text="${garden.location}"></p>
+            </div>
+        </div>
     </div>
     <button type="button" class="btn btn-primary mr-auto" onclick="location.href='/gardens/new'">
         Create a new garden

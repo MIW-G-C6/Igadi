@@ -53,6 +53,7 @@ public class GardenService {
         GardenDTO gardenDTO = new GardenDTO();
         gardenDTO.setGardenId(garden.getGardenId());
         gardenDTO.setGardenName(garden.getGardenName());
+        gardenDTO.setLocation(garden.getLocation());
         gardenDTO.setAmountOfUsers(countUsers(garden));
         return gardenDTO;
     }

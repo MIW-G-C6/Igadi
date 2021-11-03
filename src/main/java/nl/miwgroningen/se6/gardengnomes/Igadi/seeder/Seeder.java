@@ -68,8 +68,10 @@ public class Seeder {
             String[] gardenNames = {"Eden", "Hanging Gardens", "Central Park", "Madison Square Garden",
                     "Bowsers Big Balloon Castle", "Orange County Park", "Red Reindeer Square", "Thousand needles",
                     "The Barrens", "Howling Fjord"};
+            String[] locations = {"New York", "Hollywood", "OudeHaske", "London", "Toronto", "Buffalo", "Orlando",
+                    "Oxford", "Berlin", "Caketown"};
             for(int i = 0; i < gardenNames.length; i++) {
-                Garden garden = createGardenSeed(gardenNames[i]);
+                Garden garden = createGardenSeed(gardenNames[i], locations[i]);
                 gardenService.saveGarden(garden);
             }
         }
@@ -134,9 +136,10 @@ public class Seeder {
         return user;
     }
 
-    public Garden createGardenSeed(String gardenName) {
+    public Garden createGardenSeed(String gardenName, String location) {
         Garden garden = new Garden();
         garden.setGardenName(gardenName);
+        garden.setLocation(location);
         return garden;
     }
 

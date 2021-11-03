@@ -14,6 +14,7 @@ public class GardenDTO {
     private Integer gardenId;
     private String gardenName;
     private int amountOfUsers;
+    private String location;
 
     public Integer getGardenId() {
         return gardenId;
@@ -37,5 +38,13 @@ public class GardenDTO {
 
     public void setAmountOfUsers(int amountOfUsers) {
         this.amountOfUsers = amountOfUsers;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
