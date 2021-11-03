@@ -14,7 +14,7 @@
         <h1>Login</h1>
     </div>
 
-        <v class="border-temp col-3 p-0 mb-3">
+        <div class="border-temp col-3 p-0 mb-3">
             <form th:action="@{/login}" method="post" th:object="${user}">
                 <div th:if="${param.error}">
                     <div class="alert alert-danger">Invalid email or password.</div>
@@ -42,15 +42,3 @@
 </body>
 
 </html>
-
-
-<!--            <button type="submit" value="Log in" class="btn btn-primary mr-3">Login</button>-->
-<!--        </form>-->
-
-
-<!--&lt;!&ndash;        <form action="/test" method="post">&ndash;&gt;-->
-<!--&lt;!&ndash;            <button type="submit">&ndash;&gt;-->
-<!--&lt;!&ndash;                test&ndash;&gt;-->
-<!--&lt;!&ndash;            </button>&ndash;&gt;-->
-
-<!--&lt;!&ndash;        </form>&ndash;&gt;-->

@@ -1,6 +1,5 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.configuration;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
