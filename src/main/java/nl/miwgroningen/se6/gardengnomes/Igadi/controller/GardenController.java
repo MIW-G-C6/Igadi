@@ -1,6 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.GardenHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
@@ -13,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.*;
 
 /**
@@ -53,12 +52,6 @@ public class GardenController {
         return "gardenForm";
     }
 
-    @GetMapping("/gardens/delete")
-    protected String showGardenForm(Model model) {
-        model.addAttribute("allGardens", gardenService.getAllGardens());
-        return "gardenDeleteForm";
-    }
-
     @PostMapping("gardens/new")
     protected String createOrUpdateGarden(@ModelAttribute("garden") Garden garden, BindingResult result,
                                           RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
@@ -82,6 +75,13 @@ public class GardenController {
         gardenService.deleteGardenById(gardenId);
         return "redirect:/gardens";
     }
+
+    @GetMapping("/overview/details/{gardenId}")
+    protected String showGardenDetails(@PathVariable("gardenId") int gardenId, Model model) {
+        GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
+        List<PatchDTO> allPatches = patchService.getAllPatchesByGardenId(gardenId);
+        model.addAttribute("garden", garden);
+        model.addAttribute("allPatches", allPatches);
+        return "gardenDetails";
+    }
 }
-
-

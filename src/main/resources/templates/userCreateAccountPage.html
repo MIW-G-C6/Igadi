@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
@@ -10,15 +11,15 @@
 
 <div class="container d-flex flex-column border-temp h-50">
     <div class="border-temp mb-3">
-        <h1>Create a new account</h1>
+        <h1>Create account</h1>
     </div>
     <div class="border-temp col-3 p-0 mb-3">
         <form th:action="@{/users/new}" method="post" th:object="${user}" name="createAccount">
             <input type="text" th:field="*{userName}" class="form-control mb-3" placeholder="Username">
             <input type="email" th:field="*{userEmail}" class="form-control mb-3" placeholder="Email">
             <input type="password" th:field="*{password1}" class="form-control mb-3" placeholder="Password">
-            <input type="password" th:field="*{password2}" class="form-control mb-3" placeholder="Repeat Password">
-            <button type="submit" class="btn btn-primary mr-3">Save user</button>
+            <input type="password" th:field="*{password2}" class="form-control mb-3" placeholder="Repeat password">
+            <button type="submit" class="btn btn-primary mr-3">Save</button>
             <button type="button" class="btn btn-primary" onclick="location.href='/'">
                 Cancel
             </button>
