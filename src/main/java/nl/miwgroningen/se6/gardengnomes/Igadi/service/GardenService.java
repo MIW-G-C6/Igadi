@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -52,6 +53,7 @@ public class GardenService {
         GardenDTO gardenDTO = new GardenDTO();
         gardenDTO.setGardenId(garden.getGardenId());
         gardenDTO.setGardenName(garden.getGardenName());
+        gardenDTO.setAmountOfUsers(countUsers(garden));
         return gardenDTO;
     }
 
@@ -100,6 +102,15 @@ public class GardenService {
         }
         gardenRepository.deleteById(gardenId);
         taskService.deleteUnreferencedEntries();
+    }
+
+    public int countUsers(Garden garden) {
+        int amountOfUsers = 0;
+        List<User> users = garden.getUsers();
+        for(User user : users) {
+            amountOfUsers += 1;
+        }
+        return amountOfUsers;
     }
 }
 

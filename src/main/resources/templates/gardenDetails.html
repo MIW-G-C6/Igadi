@@ -26,15 +26,15 @@
 <!--  <button class="btn btn-outline-success" onclick="location.href='/gardens/delete'">Delete garden</button></a>-->
 
   <div class="d-flex flex-row m-0 font-weight-bold">
-    <p class="p-2 w-25 m-0">Patch Id</p>
+    <p class="p-2 w-25 m-0">Current Crop</p>
     <p class="p-2 w-25 m-0">Garden</p>
     <p class="p-2 w-25 m-0">Tasks</p>
   </div>
 
   <ul th:each="patch : ${allPatches}" class="border-temp list-unstyled -0 w-100">
     <li class="d-flex flex-row m-0">
-      <p class="p-2 w-25 m-0" th:text="${patch.patchId}"></p>
-      <p class="p-2 w-25 m-0" th:text="${patch.gardenDTO.gardenId}"></p>
+      <p class="p-2 w-25 m-0" th:text="${patch.crop}"></p>
+      <p class="p-2 w-25 m-0" th:text="${patch.gardenDTO.gardenName}"></p>
       <p class="p-2 w-25 m-0"><a th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patch.getPatchId()})}">
         <button class="btn btn-success mr-auto">Patch tasks</button></a></p>
     </li>

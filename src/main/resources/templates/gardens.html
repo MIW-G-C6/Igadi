@@ -17,7 +17,7 @@
     <div class="border-temp w-100 p-0 mb-3">
         <div class="d-flex mb-3 border-temp">
             <p class="border-temp m-0 w-25 font-weight-bold">Name</p>
-            <p class="border-temp m-0 w-25 font-weight-bold">Id</p>
+            <p class="border-temp m-0 w-25 font-weight-bold">Amount of gardeners</p>
             <p class="border-temp m-0 w-50 font-weight-bold">Tasks</p>
         </div>
 
@@ -25,10 +25,10 @@
             <li class="border-temp mb-2 w-100 d-flex">
                 <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
                    class="w-25"><p th:text="${garden.gardenName}" class="border-temp m-0"></p></a>
-                <p th:text="${garden.gardenId}" class="border-temp m-0 w-25"></p>
+                <p th:text="${garden.amountOfUsers}" class="border-temp m-0 w-25"></p>
                 <a class="border-temp m-0 w-25"
                    th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}">
-                    <button class="btn btn-success mr-auto">Garden tasks</button></a>
+                    <button class="btn btn-success mr-auto">View all tasks for this garden</button></a>
             </li>
         </ul>
     </div>

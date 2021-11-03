@@ -58,6 +58,7 @@ public class PatchService {
     public PatchDTO convertToPatchDTO(Patch patch) {
         PatchDTO patchDTO = new PatchDTO();
         patchDTO.setPatchId(patch.getPatchId());
+        patchDTO.setCrop(patch.getCrop());
         patchDTO.setGardenDTO(gardenService.convertToGardenDTO(patch.getGarden()));
         return patchDTO;
     }
