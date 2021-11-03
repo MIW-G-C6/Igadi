@@ -31,7 +31,7 @@ public class Garden {
     @OneToMany(mappedBy = "garden")
     private List<Patch> patches;
 
-    @OneToMany(mappedBy = "garden")
+    @OneToMany(mappedBy = "garden", fetch = FetchType.EAGER)
     private List<User> users;
 
     public Integer getGardenId() {
@@ -48,6 +48,14 @@ public class Garden {
 
     public void setGardenName(String gardenName) {
         this.gardenName = gardenName;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
 
