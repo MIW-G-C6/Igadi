@@ -157,6 +157,8 @@ body{
 height: 100vh;
 }
 
+/*contains general position and layout information for the gardens.html*/
+
 .igadi-garden-list-item-light{
     background-color: rgba(0, 175, 0, 0.15);
     cursor: pointer;
@@ -179,3 +181,28 @@ height: 100vh;
 .igadi-garden-list{
 
 }
+
+/*contains general position and layout information for the patchTasks.html*/
+
+.patchTaskColumn {
+    background-color: lightgreen;
+    border-radius: 25px;
+}
+
+/*contains general position and layout information for the gardens.html*/
+
+.gaNaarMiddenPoepKnop{
+     margin:auto;
+     display:block;
+}
+
+.brackets::before{
+ content: "("
+}
+
+.brackets::after{
+ content: ")"
+}
+
+/*contains general position and layout information for the patchTasks.html*/
+
