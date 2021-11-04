@@ -58,6 +58,14 @@ public class GardenService {
         return gardenDTO;
     }
 
+    public Garden convertFromGardenDTO(GardenDTO gardenDTO) {
+        Garden garden = new Garden();
+        garden.setGardenId(gardenDTO.getGardenId());
+        garden.setGardenName(gardenDTO.getGardenName());
+        garden.setLocation(gardenDTO.getLocation());
+        return garden;
+    }
+
     public Garden getGardenById(int gardenId) {
         Garden garden = gardenRepository.getById(gardenId);
         return garden;

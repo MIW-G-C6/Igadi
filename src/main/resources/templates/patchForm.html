@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <meta charset="UTF-8">
+  <title>Patch Form</title>
+</head>
+
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container d-flex flex-column border-temp h-50">
+  <div class="border-temp mb-3">
+    <h1>Create a new patch</h1>
+  </div>
+  <div class="border-temp col-3 p-0 mb-3">
+    <form th:action="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${gardenId})}" method="post" th:object="${patch}">
+      <input type="text" th:field="*{crop}" class="form-control mb-3" placeholder="What are you growing?">
+      <button type="submit" class="btn btn-primary mr-3">Save Patch</button>
+    </form>
+  </div>
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+
+</body>
+</html>
