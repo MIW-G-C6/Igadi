@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 /**
  * @author Annemarleen Bosma <makeItWork2021@annemarleenbosma.nl>
  *
@@ -20,5 +19,3 @@ public class LoginController {
         return "login";
     }
 }
-
-
