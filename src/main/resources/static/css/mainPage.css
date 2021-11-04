@@ -156,3 +156,26 @@
 body{
 height: 100vh;
 }
+
+.igadi-garden-list-item-light{
+    background-color: rgba(0, 175, 0, 0.15);
+    cursor: pointer;
+    transition-duration: 150ms;
+}
+
+.igadi-garden-list-item-light:hover {
+    transition-duration: 150ms;
+    background-color: rgba(0, 150, 0, 0.5);
+}
+
+.igadi-garden-list-item-dark {
+    background-color: rgba(0, 100, 0, 0.5);
+}
+
+.igadi-garden-list-overview {
+    overflow-y: scroll;
+}
+
+.igadi-garden-list{
+
+}

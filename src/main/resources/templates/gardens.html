@@ -14,21 +14,23 @@
         <h1>Overview of all gardens</h1>
     </div>
 
-    <div class="border-temp w-100 p-0 mb-3">
+    <ul class="border-temp w-100 h-75 p-0 mb-3 list-group align-items-center">
 
-        <div class="d-flex mb-3 border-temp justify-content-center w-100">
-            <p class="border-temp m-0 w-25 font-weight-bold">Name</p>
-            <p class="border-temp m-0 w-25 font-weight-bold">Location</p>
-        </div>
+        <li class="d-flex border-temp justify-content-center p-1 h-25 w-50 list-group-item-info igadi-garden-list-item-dark">
+            <h6 class="border-temp w-75 font-weight-bold text-black-50 text-center">Name</h6>
+            <h6 class="border-temp w-75 font-weight-bold text-black-50 text-center">Location</h6>
+        </li>
 
-        <div th:each="garden: ${allGardens}" class="border-temp m-0 w-100 d-flex flex-column">
+        <div class="igadi-garden-list-overview w-50">
+        <li th:each="garden: ${allGardens}" class="border-temp h-25 m-0 w-100 d-flex flex-column list-group-item igadi-garden-list-item-light">
+            <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
+               class="w-100 h-100 text-decoration-none text-black-50">
             <div class="border-temp mb-2 w-100 d-flex justify-content-center">
-                <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
-                   class="w-25"><p th:text="${garden.gardenName}" class="border-temp m-0"></p></a>
-                <p class="border-temp m-0 w-25" th:text="${garden.location}"></p>
-            </div>
-        </div>
-    </div>
+                <p th:text="${garden.gardenName}" class="border-temp m-0 font-weight-bolder w-75"></p>
+                <p class="border-temp m-0 w-75" th:text="${garden.location}"></p>
+            </div></a>
+        </li></div>
+    </ul>
     <button type="button" class="btn btn-primary mr-auto" onclick="location.href='/gardens/new'">
         Create a new garden
     </button>
