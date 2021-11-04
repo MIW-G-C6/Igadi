@@ -1,25 +1,13 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Task;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenTaskRepository;
-import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
-import nl.miwgroningen.se6.gardengnomes.Igadi.repository.UserRepository;
-import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -71,15 +59,6 @@ public class GardenService {
         return garden;
     }
 
-    public GardenDTO findGardenById(int gardenId) {
-        Optional<Garden> garden = gardenRepository.findById(gardenId);
-        if (garden.isEmpty()) {
-            return new GardenDTO();
-        } else {
-            return convertToGardenDTO(garden.get());
-        }
-    }
-
     public void saveGarden(Garden garden) {
         gardenRepository.save(garden);
     }
@@ -122,4 +101,3 @@ public class GardenService {
         return amountOfUsers;
     }
 }
-

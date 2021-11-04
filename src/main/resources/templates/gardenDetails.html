@@ -30,7 +30,7 @@
       <div th:each="patch : ${allPatches}" class="d-flex flex-row m-0 font-weight-bold justify-content-center">
         <div class="d-flex flex-row m-0 w-75 justify-content-center">
           <p class="p-2 w-50 m-0"><a th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patch.getPatchId()})}">
-            <button class="btn btn-success mr-auto w-100" th:text="*{patch.crop}"></button>
+            <button class="btn btn-success mr-auto w-100" th:text="${patch.showWhatIsGrowing()}"></button>
           </a></p>
         </div>
       </div>

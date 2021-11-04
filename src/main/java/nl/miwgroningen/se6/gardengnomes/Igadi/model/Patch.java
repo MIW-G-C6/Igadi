@@ -1,10 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,10 +15,9 @@ import java.util.List;
 @Entity
 public class Patch {
 
-    // Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="patchId")
+    @Column(name = "patchId")
     private Integer patchId;
 
     @ManyToOne()

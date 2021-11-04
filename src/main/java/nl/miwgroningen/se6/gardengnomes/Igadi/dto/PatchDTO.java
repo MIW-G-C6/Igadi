@@ -1,9 +1,5 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.dto;
 
-import org.apache.catalina.valves.rewrite.InternalRewriteMap;
-
-import java.util.Locale;
-
 /**
  * @author Tjerk Nagel
  * doel:
@@ -40,8 +36,21 @@ public class PatchDTO {
     }
 
     public String cropInGarden() {
-        String crop = this.crop.substring(0,1).toUpperCase() + this.crop.substring(1).toLowerCase();
-        String taskTitle = crop + " in " + garden.getGardenName();
-        return taskTitle;
+        if(!this.crop.equals("")) {
+            String crop = this.crop.substring(0, 1).toUpperCase() + this.crop.substring(1).toLowerCase();
+            String taskTitle = crop + " in " + garden.getGardenName();
+            return taskTitle;
+        } else {
+            String taskTitle = showWhatIsGrowing();
+            return taskTitle;
+        }
+    }
+
+    public String showWhatIsGrowing() {
+        if(this.crop.equals("")) {
+            return "Nothing is growing here at this moment";
+        } else {
+            return this.crop;
+        }
     }
 }
