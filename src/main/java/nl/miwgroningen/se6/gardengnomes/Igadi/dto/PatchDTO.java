@@ -1,8 +1,10 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.dto;
 
 /**
- * @author Tjerk Nagel
- * doel:
+ * @author Lukas de Ruiter
+ *
+ * This is the DTO for patches. The cropInGarden method has been added to display text to the front-end when viewing
+ * what is growing in the patch. If this is empty, it returns "empty" as a string.
  */
 
 public class PatchDTO {
@@ -48,7 +50,7 @@ public class PatchDTO {
 
     public String showWhatIsGrowing() {
         if(this.crop.equals("")) {
-            return "Nothing is growing here at this moment";
+            return "Empty";
         } else {
             return this.crop;
         }
