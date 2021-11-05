@@ -37,9 +37,6 @@ public class User implements UserDetails {
     @Column(name = "userPassword", nullable = false)
     private String userPassword;
 
-    /*@Column(name = "userRole", nullable = false)
-    private String userRole = "gardener";*/
-
     @OneToMany(mappedBy = "user")
     private List<GardenUser> gardenUsers;
 
@@ -78,9 +75,9 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-
-        /*if (this.userRole.equals("gardener")) {
-            authorityList.add(new SimpleGrantedAuthority("ROLE_GARDENER"));
+        /*for (GardenUser gardenUser : this.gardenUsers) {
+            authorityList.add(new SimpleGrantedAuthority(
+                    (gardenUser.getGarden().getGardenId() + "_" + gardenUser.getRole())));
         }*/
         return authorityList;
     }

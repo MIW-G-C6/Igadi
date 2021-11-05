@@ -16,14 +16,12 @@
   <div class="border-temp mb-3 text-center">
   <h1 th:text="${garden.getGardenName()}"></h1>
   </div>
-
+    
   <form th:action="@{/gardens/delete/{gardenId}(gardenId=${garden.getGardenId()})}" method="post" th:object="${garden}">
-    <button type="submit" class="btn btn-outline-success">
+    <button th:if="${isUserGardenManager}" type="submit" class="btn btn-outline-success">
       Delete garden
     </button>
   </form>
-
-<!--  <button class="btn btn-outline-success" onclick="location.href='/gardens/delete'">Delete garden</button></a>-->
 
   <div class="d-flex flex-row m-0 font-weight-bold">
     <p class="p-2 w-25 m-0">Patch Id</p>
