@@ -13,25 +13,27 @@
 <div class="container d-flex flex-column border-temp h-50">
 
 <div class="border-temp mb-3 text-center">
-  <h1 th:text="${patch.getPatchId()}"></h1>
+  <h1 th:text="${patch.cropInGarden()}"></h1>
 </div>
 
   <a th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
     <button class="btn btn-outline-success">Add a new task</button></a>
+  <a class="border-temp m-0"
+     th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
+    <button class="btn btn-outline-success">Change this patch</button>
+  </a>
 
   <div class="d-flex flex-row mb-3 w-100 border-temp font-weight-bold">
-    <p class="border-temp m-0 w-25">Task Id</p>
     <p class="border-temp m-0 w-25">Task Name</p>
-    <p class="border-temp m-0 w-25">Task description</p>
-    <p class="border-temp m-0 w-25">Done?</p>
+    <p class="border-temp m-0 w-25">Task Description</p>
+    <p class="border-temp m-0 w-25">Completed?</p>
   </div>
 
   <ul th:each="task : ${allPatchTasks}" class="border-temp list-unstyled m-0 w-100">
     <li class="border-temp mb-2 w-100 d-flex">
-      <p class="w-25 m-0" th:text="${task.getTaskId()}"></p>
       <p class="w-25 m-0" th:text="${task.getTaskName()}"></p>
       <p class="w-25 m-0" th:text="${task.getTaskDescription()}"></p>
-      <p class="w-25 m-0" th:text="${task.isDone()}"></p>
+      <p class="w-25 m-0" th:text="${task.doneOrNot()}"></p>
     </li>
   </ul>
 

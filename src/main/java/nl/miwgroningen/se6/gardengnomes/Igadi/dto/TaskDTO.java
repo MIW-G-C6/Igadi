@@ -42,4 +42,12 @@ public class TaskDTO {
     public void setDone(boolean done) {
         isDone = done;
     }
+
+    public String doneOrNot() {
+        if(this.isDone) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
 }

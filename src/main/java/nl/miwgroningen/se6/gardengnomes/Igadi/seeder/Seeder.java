@@ -44,8 +44,8 @@ public class Seeder {
 
     @EventListener
     public void seed(ContextRefreshedEvent event) {
-        seedUsers();
         seedGardens();
+        seedUsers();
         seedGardenTasks();
         seedPatches();
         seedPatchTasks();
@@ -68,8 +68,10 @@ public class Seeder {
             String[] gardenNames = {"Eden", "Hanging Gardens", "Central Park", "Madison Square Garden",
                     "Bowsers Big Balloon Castle", "Orange County Park", "Red Reindeer Square", "Thousand needles",
                     "The Barrens", "Howling Fjord"};
+            String[] locations = {"New York", "Hollywood", "OudeHaske", "London", "Toronto", "Buffalo", "Orlando",
+                    "Oxford", "Berlin", "Caketown"};
             for(int i = 0; i < gardenNames.length; i++) {
-                Garden garden = createGardenSeed(gardenNames[i]);
+                Garden garden = createGardenSeed(gardenNames[i], locations[i]);
                 gardenService.saveGarden(garden);
             }
         }
@@ -122,18 +124,22 @@ public class Seeder {
     }
 
     public User createUserSeed(String name) {
+        List<GardenDTO> allGardens = gardenService.getAllGardens();
+        int randomGarden = (int) (Math.random() * allGardens.size()) + 1;
         String email = name.toLowerCase(Locale.ROOT) + "@hotmail.com";
         String password = name.toLowerCase(Locale.ROOT) + "123";
         User user = new User();
         user.setUserName(name);
         user.setUserPassword(passwordEncoder.encode(password));
         user.setUserEmail(email);
+        /*user.setGarden(gardenService.getGardenById(randomGarden));*/
         return user;
     }
 
-    public Garden createGardenSeed(String gardenName) {
+    public Garden createGardenSeed(String gardenName, String location) {
         Garden garden = new Garden();
         garden.setGardenName(gardenName);
+        garden.setLocation(location);
         return garden;
     }
 
@@ -155,11 +161,13 @@ public class Seeder {
 
     public ArrayList<Patch> createPatchSeed(Garden garden) {
         ArrayList<Patch> patches = new ArrayList<>();
+        String[] crops = {"turnips", "carrots", "potatoes", "grapes", "pumpkins", "berry bushes", "strawberries"};
         for (int i = 0; i < patchesPerGarden; i++) {
+            int randomCrops = (int)Math.floor(Math.random() * crops.length);
             Patch patch = new Patch();
+            patch.setCrop(crops[randomCrops]);
             patch.setGarden(garden);
             patches.add(patch);
-
         }
         return patches;
     }
@@ -167,12 +175,10 @@ public class Seeder {
     public ArrayList<PatchTask> createPatchTaskSeed(Patch patch) {
         ArrayList<PatchTask> tasks = new ArrayList<>();
         String[] titles = {"Plant", "Fertilize", "Water", "Clean", "Prune", "Weed", "Hoe", "Harvest"};
-        String[] crops = {"turnips", "carrots", "potatoes", "grapes", "pumpkins", "berry bushes", "strawberries"};
-        int randomCrops = (int)Math.floor(Math.random() * crops.length);
-
         for(int i = 0; i < titles.length; i++) {
-            String title = titles[i] + " the " + crops[randomCrops];
-            String description = "Please " + titles[i].toLowerCase() + " the " + crops[randomCrops] + " soon";
+            String crop = patch.getCrop();
+            String title = titles[i] + " the " + crop;
+            String description = "Please " + titles[i].toLowerCase() + " the " + crop + " soon";
             PatchTask patchTask = new PatchTask();
             patchTask.setTaskName(title);
             patchTask.setTaskDescription(description);

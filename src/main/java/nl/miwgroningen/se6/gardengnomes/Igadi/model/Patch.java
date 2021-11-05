@@ -1,9 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,10 +15,9 @@ import java.util.List;
 @Entity
 public class Patch {
 
-    // Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="patchId")
+    @Column(name = "patchId")
     private Integer patchId;
 
     @ManyToOne()
@@ -30,6 +27,9 @@ public class Patch {
 
     @OneToMany(mappedBy = "patch")
     private List<PatchTask> patchTasks;
+
+    @Column(name = "crop", nullable = true)
+    private String crop;
 
     public Integer getPatchId() {
         return patchId;
@@ -45,5 +45,13 @@ public class Patch {
 
     public void setGarden(Garden garden) {
         this.garden = garden;
+    }
+
+    public String getCrop() {
+        return crop;
+    }
+
+    public void setCrop(String crop) {
+        this.crop = crop;
     }
 }

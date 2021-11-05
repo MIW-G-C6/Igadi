@@ -156,3 +156,45 @@
 body{
 height: 100vh;
 }
+
+.igadi-garden-list-item-light{
+    background-color: rgba(0, 175, 0, 0.15);
+    cursor: pointer;
+    transition-duration: 150ms;
+}
+
+.igadi-garden-list-item-light:hover {
+    transition-duration: 150ms;
+    background-color: rgba(0, 150, 0, 0.5);
+}
+
+.igadi-garden-list-item-dark {
+    background-color: rgba(0, 100, 0, 0.5);
+}
+
+.igadi-garden-list-overview {
+    overflow-y: scroll;
+}
+
+/* Patch Form */
+.patchFormContainer1{
+    border-radius: 15px;
+    background-color: rgba(0, 175, 0, 0.3);
+}
+
+.patchFormContainer2{
+    border-radius: 15px;
+    background-color: rgba(0, 100, 0, 0.15);
+}
+
+.patchFormBtn{
+    background-color: white;
+    color: green;
+    transition-duration: 150ms;
+}
+.patchFormBtn:hover{
+    background-color: rgba(255, 255, 255, 0.15);;
+    color: white;
+    transition-duration: 150ms;
+    box-shadow: 0 0 10px black;
+}

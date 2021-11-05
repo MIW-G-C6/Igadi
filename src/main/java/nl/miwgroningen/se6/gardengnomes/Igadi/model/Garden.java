@@ -34,6 +34,9 @@ public class Garden {
     @OneToMany(mappedBy = "garden")
     private List<GardenUser> gardenUsers;
 
+    @Column(name = "location", nullable = false)
+    private String location;
+
     public Integer getGardenId() {
         return gardenId;
     }
@@ -48,6 +51,38 @@ public class Garden {
 
     public void setGardenName(String gardenName) {
         this.gardenName = gardenName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public List<GardenTask> getGardenTasks() {
+        return gardenTasks;
+    }
+
+    public void setGardenTasks(List<GardenTask> gardenTasks) {
+        this.gardenTasks = gardenTasks;
+    }
+
+    public List<Patch> getPatches() {
+        return patches;
+    }
+
+    public void setPatches(List<Patch> patches) {
+        this.patches = patches;
+    }
+
+    public List<GardenUser> getGardenUsers() {
+        return gardenUsers;
+    }
+
+    public void setGardenUsers(List<GardenUser> gardenUsers) {
+        this.gardenUsers = gardenUsers;
     }
 }
 

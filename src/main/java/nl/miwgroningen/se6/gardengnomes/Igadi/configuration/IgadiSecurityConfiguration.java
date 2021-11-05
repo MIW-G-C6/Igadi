@@ -1,6 +1,5 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.configuration;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 /**
@@ -45,8 +45,15 @@ public class IgadiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/images/**", "/webjars/**").permitAll()
                 .antMatchers("/" , "/index", "/users/new").permitAll()
                 .anyRequest().authenticated().and()
-                .formLogin().usernameParameter("email").and()
-                .logout().logoutSuccessUrl("/");
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .permitAll();
     }
 
     @Bean
