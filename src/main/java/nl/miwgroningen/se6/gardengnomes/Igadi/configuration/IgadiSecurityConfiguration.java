@@ -44,7 +44,6 @@ public class IgadiSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/css/**", "/images/**", "/javascript/**", "/webjars/**").permitAll()
                 .antMatchers("/" , "/index", "/users/new").permitAll()
-                /*.antMatchers("/gardens").hasAuthority("garden_manager")*/
                 .anyRequest().authenticated().and()
                 .formLogin()
                 .loginPage("/login")

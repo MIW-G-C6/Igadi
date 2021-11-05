@@ -17,6 +17,7 @@
     <h1 th:text="${garden.getGardenName()}"></h1>
   </div>
 
+
   <!--  <button class="btn btn-outline-success" onclick="location.href='/gardens/delete'">Delete garden</button></a>-->
 
   <div class="d-flex w-100">
@@ -42,17 +43,18 @@
          th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}">
         <button class="btn btn-success float-right w-100">View all tasks for this garden</button>
       </a>
-      <a class="border-temp m-0"
+      <a class="border-temp m-0" th:if="${isUserGardenManager}"
          th:href="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${garden.gardenId})}">
         <button class="btn btn-success float-right w-100">Add a new patch</button>
       </a>
       <form th:action="@{/gardens/delete/{gardenId}(gardenId=${garden.getGardenId()})}" method="post"
             th:object="${garden}">
-        <button type="submit" class="btn btn-outline-danger float-right w-100">
+        <button th:if="${isUserGardenManager}" type="submit" class="btn btn-outline-danger float-right w-100">
           Delete garden
         </button>
       </form>
     </div>
+
 
   </div>
 </div>

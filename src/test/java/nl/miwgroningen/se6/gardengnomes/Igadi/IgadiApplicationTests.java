@@ -1,3 +1,4 @@
+/*
 package nl.miwgroningen.se6.gardengnomes.Igadi;
 
 import org.junit.jupiter.api.Test;
@@ -11,3 +12,4 @@ class IgadiApplicationTests {
 	}
 
 }
+*/
