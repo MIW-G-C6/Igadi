@@ -42,7 +42,7 @@ public class IgadiSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/css/**", "/images/**", "/webjars/**").permitAll()
+                .antMatchers("/css/**", "/images/**", "/javascript/**", "/webjars/**").permitAll()
                 .antMatchers("/" , "/index", "/users/new").permitAll()
                 /*.antMatchers("/gardens").hasAuthority("garden_manager")*/
                 .anyRequest().authenticated().and()
