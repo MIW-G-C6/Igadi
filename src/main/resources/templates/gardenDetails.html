@@ -43,7 +43,7 @@
          th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}">
         <button class="btn btn-success float-right w-100">View all tasks for this garden</button>
       </a>
-      <a class="border-temp m-0"
+      <a class="border-temp m-0" th:if="${isUserGardenManager}"
          th:href="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${garden.gardenId})}">
         <button class="btn btn-success float-right w-100">Add a new patch</button>
       </a>

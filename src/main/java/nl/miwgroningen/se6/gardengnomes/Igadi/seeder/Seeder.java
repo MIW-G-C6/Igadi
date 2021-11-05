@@ -1,5 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.seeder;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.*;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.*;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.*;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
@@ -30,16 +33,19 @@ public class Seeder {
     private final PatchTaskService patchTaskService;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final GardenUserService gardenUserService;
 
     @Autowired
     public Seeder(GardenService gardenService, GardenTaskService gardenTaskService, PatchService patchService,
-                  PatchTaskService patchTaskService, UserService userService, PasswordEncoder passwordEncoder) {
+                  PatchTaskService patchTaskService, UserService userService, PasswordEncoder passwordEncoder,
+                  GardenUserService gardenUserService) {
         this.gardenService = gardenService;
         this.gardenTaskService = gardenTaskService;
         this.patchService = patchService;
         this.patchTaskService = patchTaskService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.gardenUserService = gardenUserService;
     }
 
     @EventListener
@@ -58,6 +64,8 @@ public class Seeder {
             for(int i = 0; i < names.length; i++) {
                 User user = createUserSeed(names[i]);
                 userService.saveUser(user);
+                GardenUser gardenUser = createGardenUserSeed(user);
+                gardenUserService.saveGardenUser(gardenUser);
             }
         }
     }
@@ -125,15 +133,28 @@ public class Seeder {
 
     public User createUserSeed(String name) {
         List<GardenDTO> allGardens = gardenService.getAllGardens();
-        int randomGarden = (int) (Math.random() * allGardens.size()) + 1;
-        String email = name.toLowerCase(Locale.ROOT) + "@hotmail.com";
-        String password = name.toLowerCase(Locale.ROOT) + "123";
+        /*int randomGarden = (int) (Math.random() * allGardens.size()) + 1;*/
+        String email = name.toLowerCase() + "@hotmail.com";
+        String password = name.toLowerCase() + "123";
         User user = new User();
         user.setUserName(name);
         user.setUserPassword(passwordEncoder.encode(password));
         user.setUserEmail(email);
         /*user.setGarden(gardenService.getGardenById(randomGarden));*/
         return user;
+    }
+
+    public GardenUser createGardenUserSeed(User user) {
+        GardenUser gardenUser = new GardenUser();
+        gardenUser.setUser(user);
+        List<GardenDTO> allGardens = gardenService.getAllGardens();
+        int randomGarden = (int) (Math.random() * allGardens.size()) + 1;
+        gardenUser.setGarden(gardenService.convertFromGardenDTO(
+                allGardens.stream().filter(x -> x.getGardenId() == randomGarden).findFirst().get()));
+        String[] roles = new String[] {UserRole.GARDENER, UserRole.GARDEN_MANAGER};
+        int randomRole = (int) (Math.random() * roles.length);
+        gardenUser.setRole(roles[randomRole]);
+        return gardenUser;
     }
 
     public Garden createGardenSeed(String gardenName, String location) {
@@ -148,7 +169,7 @@ public class Seeder {
         String[] titles = {"Sweep the paths", "Remove weeds", "Gather trash", "Repair fences", "Paint fences", "Ponder",
                 "Toast toasters", "Empty trashcans"};
         for(int i = 0; i < titles.length; i++) {
-            String description = "Please " + titles[i].toLowerCase(Locale.ROOT) + " today";
+            String description = "Please " + titles[i].toLowerCase() + " today";
             GardenTask gardenTask = new GardenTask();
             gardenTask.setTaskName(titles[i]);
             gardenTask.setTaskDescription(description);
