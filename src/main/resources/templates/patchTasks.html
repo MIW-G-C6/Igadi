@@ -18,6 +18,10 @@
 
   <a th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
     <button class="btn btn-outline-success">Add a new task</button></a>
+  <a class="border-temp m-0"
+     th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
+    <button class="btn btn-outline-success">Change this patch</button>
+  </a>
 
   <div class="d-flex flex-row mb-3 w-100 border-temp font-weight-bold">
     <p class="border-temp m-0 w-25">Task Name</p>

@@ -19,11 +19,12 @@
   <div class="w-75 h-75 patchFormContainer2 shadow">
 
   <div class="w-100 h-100 d-flex justify-content-center align-items-center">
-    <form th:action="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${gardenId})}" method="post" th:object="${patch}"
+    <form th:action="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${patch.getGardenDTO().getGardenId()})}" method="post" th:object="${patch}"
           class="w-75 h-75 d-flex flex-column justify-content-center align-items-center">
-      <h4 class="w-100 text-center mb-2 text-light">Planted anything yet?</h4>
+      <h4 class="w-100 text-center mb-2 text-light">What will you plant?</h4>
+      <input type="hidden" th:field="*{patchId}">
       <input type="text" th:field="*{crop}" class="form-control mb-3 w-100 shadow mt-lg-5" placeholder="For example: 'carrots' or 'potatoes'">
-      <button type="submit" class="btn mr-3 patchFormBtn mt-lg-5 font-weight-bolder">Let's get growin'!</button>
+      <button type="submit" class="btn mr-3 patchFormBtn mt-lg-5 font-weight-bolder" th:text="${buttonText}"></button>
     </form>
   </div>
 
