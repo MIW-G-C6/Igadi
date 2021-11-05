@@ -179,12 +179,12 @@ height: 100vh;
 /* Patch Form */
 .patchFormContainer1{
     border-radius: 15px;
-    background-color: rgba(0, 175, 0, 0.7);
+    background-color: rgba(0, 175, 0, 0.3);
 }
 
 .patchFormContainer2{
     border-radius: 15px;
-    background-color: rgba(0, 100, 0, 0.5);
+    background-color: rgba(0, 100, 0, 0.15);
 }
 
 .patchFormBtn{
