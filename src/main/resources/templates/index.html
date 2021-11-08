@@ -13,7 +13,6 @@
         <h1 sec:authorize="isAuthenticated()" th:text="'Welcome ' + ${user.getUserName()} + '!'"></h1>
         <h3 sec:authorize="isAnonymous()">Home of the green and the fresh!</h3>
         <h3 sec:authorize="isAuthenticated()">Good to see you again!</h3>
-        <button th:value="'/javascript/sound/untitled.mp3'" id="clickkie">Do not click</button>
     </div>
 </div>
 
@@ -21,5 +20,4 @@
 
 </body>
 
-<script th:src="'/javascript/javascripttest.js'"></script>
 </html>
