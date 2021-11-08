@@ -8,6 +8,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -39,7 +40,7 @@ public class PatchService {
         return patch;
     }
 
-    public List<PatchDTO> getAllPatchesByGardenId(int gardenId) {
+    public List<PatchDTO> findAllPatchesByGardenId(int gardenId) {
         List<Patch> patches = patchRepository.findAllBygarden_gardenId(gardenId);
         return patches.stream().map(this::convertToPatchDTO).collect(Collectors.toList());
     }
@@ -62,5 +63,9 @@ public class PatchService {
 
     public void savePatch(Patch patch) {
         patchRepository.save(patch);
+    }
+
+    public Optional<Integer> findGardenIdByPatchId (int patchId) {
+        return patchRepository.findgarden_gardenIdById(patchId);
     }
 }
