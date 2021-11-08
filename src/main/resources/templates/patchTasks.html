@@ -18,11 +18,11 @@
 
     <div class="bigBox">
         <div class="grid-ish">
-            <div th:each="task : ${allPatchTasks}" class="col d-flex flex-column w-100 h-100 pt-1">
-                <div class="col-sm-4 patchTaskColumn float-left font-weight-bold" th:text="${task.getTaskName()}"></div>
-                <div>
-                    <div class="bg-info m-1 float-left" th:text="${task.getTaskDescription()}"></div>
-                    <div class="bg-danger m-1 float-right" th:text="${task.doneOrNot()}"></div>
+            <div th:each="task : ${allPatchTasks}" class="col d-flex flex-column w-100 h-100 gridSize">
+                <div class="patchTaskColumn float-left font-weight-bold" th:text="${task.getTaskName()}"></div>
+                <div class="boxed">
+                    <div class="m-1 float-left penis" th:text="${task.getTaskDescription()}"></div>
+                    <div class="m-1 float-right" th:text="${task.doneOrNot()}"></div>
                 </div>
             </div>
         </div>

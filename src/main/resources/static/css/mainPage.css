@@ -241,8 +241,11 @@ flex: 1 1 100%;
 .col{
 padding: 3em;
 background-color: lightgreen;
-border: 3px solid rgba(255,255,255);
+border: 2px solid;
 border-radius: 15px;
+border-color: grey;
+margin: 3px;
+
 }
 
 .titelPatchTasks{
@@ -259,5 +262,23 @@ justify-content: right;
 
 .patchTaskColumn {
     background-color: lightgreen;
+    font-size: 18px;
+    width: 100%;
 
+
+}
+
+.boxed{
+padding-top: 15px;
+word-wrap: break-word;
+
+}
+
+.gridSize{
+padding: 10px;
+word-wrap: break-word;
+}
+
+.penis{
+word-wrap: break-word;
 }
