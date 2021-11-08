@@ -10,33 +10,38 @@
 
 <div th:replace="fragments/general :: navbar"></div>
 
-<div class="container d-flex flex-column border-temp h-50">
+<div class="content flow">
 
-    <div class="border-temp mb-3 text-center">
+    <div class="border-temp mb-3 text-center titelPatchTasks">
         <h1 th:text="${patch.cropInGarden()}"></h1>
     </div>
 
-      <div class="d-flex flex-row mb-3 w-100 border-temp font-weight-bold justify-content-center text-center">
-        <div class="col-sm-3 patchTaskColumn">Task Name</div>
-<!--        <p class="col-sm-3">Task Description</p>-->
-<!--        <p class="col-sm-3 patchTaskColumn">Completed?</p>-->
-    </div>
-
-    <div th:each="task : ${allPatchTasks}" class="border-temp list-unstyled m-0 w-0">
-        <div class="border-temp mb-2 w-100 d-flex justify-content-center text-center">
-            <div class="col-sm-3 patchTaskColumn" th:text="${task.getTaskName()}"></div>
-<!--            <p class="col-sm-3" th:text="${task.getTaskDescription()}"></p>-->
-<!--            <p class="col-sm-3 patchTaskColumn" th:text="${task.doneOrNot()}"></p>-->
+    <div class="bigBox">
+        <div class="grid-ish">
+            <div th:each="task : ${allPatchTasks}" class="col d-flex flex-column w-100 h-100 pt-1">
+                <div class="col-sm-4 patchTaskColumn float-left font-weight-bold" th:text="${task.getTaskName()}"></div>
+                <div>
+                    <div class="bg-info m-1 float-left" th:text="${task.getTaskDescription()}"></div>
+                    <div class="bg-danger m-1 float-right" th:text="${task.doneOrNot()}"></div>
+                </div>
+            </div>
         </div>
+
+        <a th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
+            <button class="btn btn-outline-success">Add a new task</button>
+        </a>
+
     </div>
 
-    <a th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
-        <button class="btn btn-outline-success">Add a new task</button>
-    </a>
 
 </div>
 
-<div th:replace="fragments/general :: footer"></div>
+
+</div>
+
 
 </body>
+
+<div th:replace="fragments/general :: footer"></div>
+
 </html>
