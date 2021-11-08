@@ -6,7 +6,6 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
