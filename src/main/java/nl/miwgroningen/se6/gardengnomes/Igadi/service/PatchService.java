@@ -1,6 +1,8 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
@@ -8,6 +10,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,12 +26,17 @@ public class PatchService {
     private PatchRepository patchRepository;
     private GardenService gardenService;
     private PatchTaskRepository patchTaskRepository;
+    private GardenUserService gardenUserService;
+    private AuthorizationHelper authorizationHelper;
 
-    public PatchService(PatchRepository patchRepository,
-                        PatchTaskRepository patchTaskRepository, GardenService gardenService) {
+    public PatchService(PatchRepository patchRepository, GardenUserService gardenUserService,
+                        PatchTaskRepository patchTaskRepository, GardenService gardenService,
+                        AuthorizationHelper authorizationHelper) {
         this.patchRepository = patchRepository;
         this.gardenService = gardenService;
         this.patchTaskRepository = patchTaskRepository;
+        this.gardenUserService = gardenUserService;
+        this.authorizationHelper = authorizationHelper;
     }
 
     public List<PatchDTO> getAllPatches() {
@@ -54,6 +62,7 @@ public class PatchService {
         return patchDTO;
     }
 
+
     public Patch convertFromPatchDTO(PatchDTO patchDTO, Garden garden) {
         Patch patch  = new Patch();
         patch.setPatchId(patchDTO.getPatchId());
@@ -66,7 +75,16 @@ public class PatchService {
         patchRepository.save(patch);
     }
 
-    public Optional<Integer> findGardenIdByPatchId (int patchId) {
-        return patchRepository.findGardenIdByPatchId(patchId);
+/*    public void userSavePatch(Patch patch, int userId) {
+        if (authorizationHelper.isUserGardenManager(userId, )) {
+            deleteGardenById(gardenId);
+        } else {
+            throw new SecurityException("You are not allowed to delete this garden.");
+        }
+    }*/
+
+    public int findGardenIdByPatchId (int patchId) {
+        return patchRepository.findGardenIdByPatchId(patchId).orElseThrow(() ->
+                new EntityNotFoundException("No patch with this patchId was found."));
     }
 }

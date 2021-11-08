@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 
     @Modifying
-    @Query(value = "DELETE FROM task WHERE taskId NOT IN (SELECT task_taskId FROM gardenTask " +
-            "UNION SELECT task_taskId FROM patchTask)",
+    @Query(value = "DELETE FROM Task WHERE taskId NOT IN (SELECT task_taskId FROM GardenTask " +
+            "UNION SELECT task_taskId FROM PatchTask)",
             nativeQuery = true)
     void deleteUnreferencedEntries();
 }

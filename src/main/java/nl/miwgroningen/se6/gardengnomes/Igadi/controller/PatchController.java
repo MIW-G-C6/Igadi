@@ -35,34 +35,38 @@ public class PatchController {
         this.authorizationHelper = authorizationHelper;
     }
 
-    @GetMapping({"/overview/details/garden/patches/edit/{patchId}",
-            "/overview/details/garden/patches/new/{gardenId}"})
-    protected String editPatchForm(@PathVariable(value = "patchId", required = false) Integer patchId,
-                                   @PathVariable(value = "gardenId", required = false) Integer gardenId, Model model,
-                                   @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
-        PatchDTO patch;
-        String buttonText;
-        if(patchId == null && authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)) {
-            patch = new PatchDTO();
+    @GetMapping("/overview/details/garden/patches/new/{gardenId}")
+    protected String newPatchForm(@PathVariable(value = "gardenId") Integer gardenId, Model model,
+                                  @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
+        if (authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)) {
+            PatchDTO patch = new PatchDTO();
             patch.setGardenDTO(gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId)));
-            buttonText = "Create patch";
+            model.addAttribute("patch", patch);
+            model.addAttribute("buttonText", "Create patch");
+            return "patchForm";
         } else {
-            try {
-                if (authorizationHelper.isUserGardenManagerOfPatch(user.getUserId(), patchId)) {
-                    patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
-                    buttonText = "Update patch";
-                } else {
-                    redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-                    return "redirect:/error";
-                }
-            } catch (EntityNotFoundException ex) {
-                redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+            return "redirect:/error";
+        }
+    }
+
+    @GetMapping("/overview/details/garden/patches/edit/{patchId}")
+    protected String editPatchForm(@PathVariable(value = "patchId") Integer patchId, Model model,
+                                   @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
+        try {
+            if (authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId))) {
+                PatchDTO patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
+                model.addAttribute("patch", patch);
+                model.addAttribute("buttonText", "Update patch");
+                return "patchForm";
+            } else {
+                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
                 return "redirect:/error";
             }
+        } catch (EntityNotFoundException ex) {
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
+            return "redirect:/error";
         }
-        model.addAttribute("patch", patch);
-        model.addAttribute("buttonText", buttonText);
-        return "patchForm";
     }
 
     @PostMapping ("/overview/details/garden/patches/new/{gardenId}")

@@ -13,7 +13,7 @@ public interface PatchRepository extends JpaRepository<Patch, Integer> {
 
     ArrayList<Patch> findAllBygarden_gardenId(int gardenId);
 
-    @Query(value = "SELECT garden_gardenId FROM patch WHERE patchId = :patchId",
+    @Query(value = "SELECT garden_gardenId FROM Patch WHERE patchId = :patchId",
             nativeQuery = true)
     Optional<Integer> findGardenIdByPatchId(@Param("patchId") int patchId);
 }

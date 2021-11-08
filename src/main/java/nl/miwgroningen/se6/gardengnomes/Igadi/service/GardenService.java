@@ -16,10 +16,13 @@ public class GardenService {
 
     private GardenRepository gardenRepository;
     private GardenUserService gardenUserService;
+    private AuthorizationHelper authorizationHelper;
 
-    public GardenService(GardenRepository gardenRepository, GardenUserService gardenUserService) {
+    public GardenService(GardenRepository gardenRepository, GardenUserService gardenUserService,
+                         AuthorizationHelper authorizationHelper) {
         this.gardenRepository = gardenRepository;
         this.gardenUserService = gardenUserService;
+        this.authorizationHelper = authorizationHelper;
     }
 
     public List<GardenDTO> getAllGardens() {
@@ -60,7 +63,7 @@ public class GardenService {
     }
 
     public void userDeleteGarden(int userId, int gardenId) {
-        if (!gardenUserService.findAllGardenUsersByAll(gardenId, userId, UserRole.GARDEN_MANAGER).isEmpty()) {
+        if (authorizationHelper.isUserGardenManager(userId, gardenId)) {
             deleteGardenById(gardenId);
         } else {
             throw new SecurityException("You are not allowed to delete this garden.");

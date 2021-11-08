@@ -14,20 +14,12 @@ import java.util.Optional;
 public class AuthorizationHelper {
 
     private GardenUserService gardenUserService;
-    private PatchService patchService;
 
-    public AuthorizationHelper(GardenUserService gardenUserService, PatchService patchService) {
+    public AuthorizationHelper(GardenUserService gardenUserService) {
         this.gardenUserService = gardenUserService;
-        this.patchService = patchService;
     }
 
     public boolean isUserGardenManager(int userId, int gardenId) {
         return !gardenUserService.findAllGardenUsersByAll(gardenId, userId, UserRole.GARDEN_MANAGER).isEmpty();
-    }
-
-    public boolean isUserGardenManagerOfPatch(int userId, int patchId) {
-        int gardenId = patchService.findGardenIdByPatchId(patchId).orElseThrow(() ->
-                new EntityNotFoundException("No patch with this patchId was found."));
-        return isUserGardenManager(userId, gardenId);
     }
 }
