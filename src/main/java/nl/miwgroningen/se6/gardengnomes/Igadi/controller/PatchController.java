@@ -73,10 +73,20 @@ public class PatchController {
 
     @PostMapping ("/overview/details/garden/patches/new/{gardenId}")
     protected String saveNewPatch(@PathVariable("gardenId") int gardenId, @ModelAttribute("patch") PatchDTO patch,
-                                  BindingResult result) {
+                                  BindingResult result, @AuthenticationPrincipal User user,
+                                  RedirectAttributes redirectAttributes) {
         if (!result.hasErrors()) {
-            patchService.savePatch(patchService.convertFromPatchDTO(patch, gardenService.getGardenById(gardenId)));
+            try {
+                patchService.userSavePatch(patchService.convertFromPatchDTO(patch, gardenService.getGardenById(gardenId)),
+                        user.getUserId(), gardenId);
+                return "redirect:/overview/details/{gardenId}";
+            }
+            catch (SecurityException ex) {
+                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+                return "redirect:/error";
+            }
+        } else {
+            return "redirect:/overview/details/garden/patches/new/{gardenId}";
         }
-       return "redirect:/overview/details/{gardenId}";
     }
 }

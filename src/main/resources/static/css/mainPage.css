@@ -114,7 +114,6 @@
 .glassButton {
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 5px;
-    margin-right: 1rem;
     transition-duration: 50ms;
 }
 
