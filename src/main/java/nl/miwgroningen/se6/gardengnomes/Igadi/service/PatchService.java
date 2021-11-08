@@ -6,6 +6,8 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -65,6 +67,6 @@ public class PatchService {
     }
 
     public Optional<Integer> findGardenIdByPatchId (int patchId) {
-        return patchRepository.findgarden_gardenIdById(patchId);
+        return patchRepository.findGardenIdByPatchId(patchId);
     }
 }

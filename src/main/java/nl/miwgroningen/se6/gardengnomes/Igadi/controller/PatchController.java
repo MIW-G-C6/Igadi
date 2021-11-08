@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.EntityNotFoundException;
+
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
  */
@@ -44,12 +46,19 @@ public class PatchController {
             patch = new PatchDTO();
             patch.setGardenDTO(gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId)));
             buttonText = "Create patch";
-        } else if (authorizationHelper.isUserGardenManagerOfPatch(user.getUserId(), patchId)){
-            patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
-            buttonText = "Update patch";
         } else {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-            return "redirect:/error";
+            try {
+                if (authorizationHelper.isUserGardenManagerOfPatch(user.getUserId(), patchId)) {
+                    patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
+                    buttonText = "Update patch";
+                } else {
+                    redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+                    return "redirect:/error";
+                }
+            } catch (EntityNotFoundException ex) {
+                redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
+                return "redirect:/error";
+            }
         }
         model.addAttribute("patch", patch);
         model.addAttribute("buttonText", buttonText);
