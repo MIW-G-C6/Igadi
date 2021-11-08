@@ -161,6 +161,7 @@ height: 100vh;
     background-color: rgba(0, 175, 0, 0.15);
     cursor: pointer;
     transition-duration: 150ms;
+    min-width: 10rem;
 }
 
 .igadi-garden-list-item-light:hover {
@@ -173,7 +174,12 @@ height: 100vh;
 }
 
 .igadi-garden-list-overview {
-    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+.igadi-garden-icon{
+    background-color: lightblue;
+    border-radius: 50%;
 }
 
 /* Patch Form */
