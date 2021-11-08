@@ -37,13 +37,8 @@ public class User implements UserDetails {
     @Column(name = "userPassword", nullable = false)
     private String userPassword;
 
-    @Column(name = "userRole", nullable = false)
-    private String userRole = "gardener";
-
-    @ManyToOne(optional = true)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @JoinColumn(name = "garden_gardenId")
-    private Garden garden;
+    @OneToMany(mappedBy = "user")
+    private List<GardenUser> gardenUsers;
 
     public Integer getUserId() {
         return userId;
@@ -77,26 +72,13 @@ public class User implements UserDetails {
         this.userPassword = userPassword;
     }
 
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
-
-    public Garden getGarden() {
-        return garden;
-    }
-
-    public void setGarden(Garden garden) {
-        this.garden = garden;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        authorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
+        /*for (GardenUser gardenUser : this.gardenUsers) {
+            authorityList.add(new SimpleGrantedAuthority(
+                    (gardenUser.getGarden().getGardenId() + "_" + gardenUser.getRole())));
+        }*/
         return authorityList;
     }
 
@@ -134,5 +116,13 @@ public class User implements UserDetails {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority(role));
         return authorityList;
+    }
+
+    public List<GardenUser> getGardenUsers() {
+        return gardenUsers;
+    }
+
+    public void setGardenUsers(List<GardenUser> gardenUsers) {
+        this.gardenUsers = gardenUsers;
     }
 }

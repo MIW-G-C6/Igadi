@@ -2,12 +2,12 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.GardenHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
-import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
-import nl.miwgroningen.se6.gardengnomes.Igadi.service.PatchService;
-import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,43 +28,44 @@ public class GardenController {
     private PatchService patchService;
     private UserService userService;
     private GardenHelper gardenHelper;
+    private GardenUserService gardenUserService;
+    private AuthorizationHelper authorizationHelper;
+    private TaskService taskService;
 
     public GardenController(GardenService gardenService, UserService userService, PatchService patchService,
-                            GardenHelper gardenHelper) {
+                            GardenHelper gardenHelper, GardenUserService gardenUserService,
+                            AuthorizationHelper authorizationHelper, TaskService taskService) {
         this.gardenService = gardenService;
         this.userService = userService;
         this.patchService = patchService;
         this.gardenHelper = gardenHelper;
+        this.gardenUserService = gardenUserService;
+        this.authorizationHelper = authorizationHelper;
+        this.taskService = taskService;
     }
 
     @GetMapping("/gardens")
-    protected String showGardens(Model model) {
+    protected String showGardens(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("allGardens", gardenService.getAllGardens());
         return "gardens";
     }
 
     @GetMapping("/gardens/new")
     protected String showGardenForm(Model model, @ModelAttribute("message") ArrayList<String> message) {
-        model.addAttribute("garden", new Garden());
+        model.addAttribute("garden", new GardenDTO());
         if (!message.isEmpty()) {
             model.addAttribute("message", message);
         }
         return "gardenForm";
     }
 
-    @GetMapping("/gardens/delete")
-    protected String showGardenForm(Model model) {
-        model.addAttribute("allGardens", gardenService.getAllGardens());
-        return "gardenDeleteForm";
-    }
-
     @PostMapping("gardens/new")
-    protected String createOrUpdateGarden(@ModelAttribute("garden") Garden garden, BindingResult result,
+    protected String createOrUpdateGarden(@ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
                                           RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
         String message = "Something went wrong.";
         if (!result.hasErrors()) {
             try {
-                gardenService.saveGardenAndMakeUserGardenManager(garden, user);
+                gardenService.saveGardenAndMakeUserGardenManager(gardenService.convertFromGardenDTO(gardenDTO), user);
                 return "redirect:/gardens";
             } catch (Exception ex) {
                 if (gardenHelper.IsGardenNameDuplicate(ex)) {
@@ -77,24 +78,27 @@ public class GardenController {
     }
 
     @PostMapping("gardens/delete/{gardenId}")
-    public String deleteGardenById(@PathVariable("gardenId") int gardenId) {
-        gardenService.deleteGardenById(gardenId);
-        return "redirect:/gardens";
-    }
-
-    @GetMapping({ "/overview"})
-    protected String showGardenOverview(Model model) {
-        model.addAttribute("allGardens", gardenService.getAllGardens());
-        model.addAttribute("allPatches", patchService.getAllPatches());
-        return "adminOverview";
+    public String deleteGardenById(@PathVariable("gardenId") int gardenId, RedirectAttributes redirectAttributes,
+                                   @AuthenticationPrincipal User user) {
+        try {
+            gardenService.userDeleteGarden(user.getUserId(), gardenId);
+            taskService.deleteUnreferencedEntries();
+            return "redirect:/gardens";
+        } catch (SecurityException ex) {
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+            return "redirect:/error";
+        }
     }
 
     @GetMapping("/overview/details/{gardenId}")
-    protected String showGardenDetails(@PathVariable("gardenId") int gardenId, Model model) {
+    protected String showGardenDetails(@PathVariable("gardenId") int gardenId, Model model,
+                                       @AuthenticationPrincipal User user) {
         GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
         List<PatchDTO> allPatches = patchService.getAllPatchesByGardenId(gardenId);
         model.addAttribute("garden", garden);
         model.addAttribute("allPatches", allPatches);
+        model.addAttribute("isUserGardenManager",
+                authorizationHelper.isUserGardenManager(user.getUserId(), gardenId));
         return "gardenDetails";
     }
 }

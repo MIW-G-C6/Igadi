@@ -26,18 +26,28 @@ public class PatchController {
         this.gardenService = gardenService;
     }
 
-    @GetMapping("/overview/details/garden/patches/new/{gardenId}")
-    protected String createNewPatch(@PathVariable("gardenId") int gardenId, Model model) {
-        PatchDTO patch = new PatchDTO();
+    @GetMapping({"/overview/details/garden/patches/edit/{patchId}",
+            "/overview/details/garden/patches/new/{gardenId}"})
+    protected String editPatchForm(@PathVariable(value = "patchId", required = false) Integer patchId,
+                                   @PathVariable(value = "gardenId", required = false) Integer gardenId, Model model) {
+        PatchDTO patch;
+        String buttonText;
+        if(patchId == null) {
+            patch = new PatchDTO();
+            patch.setGardenDTO(gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId)));
+            buttonText = "Create patch";
+        } else {
+            patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
+            buttonText = "Update patch";
+        }
         model.addAttribute("patch", patch);
-        model.addAttribute("gardenId", gardenId);
+        model.addAttribute("buttonText", buttonText);
         return "patchForm";
     }
 
     @PostMapping ("/overview/details/garden/patches/new/{gardenId}")
     protected String saveNewPatch(@PathVariable("gardenId") int gardenId, @ModelAttribute("patch") PatchDTO patch,
                                   BindingResult result) {
-
         if (!result.hasErrors()) {
             patchService.savePatch(patchService.convertFromPatchDTO(patch, gardenService.getGardenById(gardenId)));
         }

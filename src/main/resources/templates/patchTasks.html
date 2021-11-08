@@ -27,9 +27,13 @@
             </div>
         </div>
 
-        <a th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
-            <button class="btn btn-outline-success">Add a new task</button>
-        </a>
+  <a th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
+    <button class="btn btn-outline-success">Add a new task</button></a>
+  <a class="border-temp m-0"
+     th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
+    <button class="btn btn-outline-success">Change this patch</button>
+  </a>
+
 
     </div>
 

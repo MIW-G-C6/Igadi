@@ -26,6 +26,20 @@
     </div>
     <div>
     <button type="button" class="btn btn-primary mr-auto gaNaarMiddenPoepKnop" onclick="location.href='/gardens/new'">
+
+    <ul class="border-temp w-100 h-75 p-0 mb-3 list-group align-items-center">
+
+        <div class="w-100 h-50 d-flex flex-row m-0 p-0 igadi-garden-list-overview">
+        <li th:each="garden: ${allGardens}" class="h-100 w-25 list-group-item igadi-garden-list-item-light">
+            <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
+               class="w-100 h-100 text-decoration-none text-black-50 m-0 p-0 d-flex flex-column align-items-center " >
+                <img th:src="'/images/icons/garden.png'" class="w-75 h-50 igadi-garden-icon">
+                <p th:text="${garden.gardenName}" class="border-temp m-0 font-weight-bolder w-100"></p>
+                <p class="border-temp m-0 w-100" th:text="${garden.location}"></p></a>
+        </li></div>
+    </ul>
+    <button type="button" class="btn btn-primary mr-auto" onclick="location.href='/gardens/new'">
+
         Create a new garden
     </button>
     </div>
