@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.constraints.Null;
 import java.util.*;
 
 /**
@@ -94,7 +96,7 @@ public class GardenController {
     protected String showGardenDetails(@PathVariable("gardenId") int gardenId, Model model,
                                        @AuthenticationPrincipal User user) {
         GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
-        List<PatchDTO> allPatches = patchService.getAllPatchesByGardenId(gardenId);
+        List<PatchDTO> allPatches = patchService.findAllPatchesByGardenId(gardenId);
         model.addAttribute("garden", garden);
         model.addAttribute("allPatches", allPatches);
         model.addAttribute("isUserGardenManager",
