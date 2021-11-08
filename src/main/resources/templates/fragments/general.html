@@ -14,28 +14,28 @@
 
 <body>
 
-<nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-light bg-success">
-    <div class="container-fluid">
-        <ul class="navbar-nav">
+<nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-light bg-success sticky-top">
+    <div class="container-fluid p-0">
+        <ul class="navbar-nav w-100">
 
             <li class="nav-item active glassButton">
                 <a class="nav-link text-white equalBox" th:href="@{/}">Igadi</a>
             </li>
-            <li class="nav-item glassButton" sec:authorize="isAuthenticated()">
+            <li class="nav-item glassButton ml-3" sec:authorize="isAuthenticated()">
                 <a class="nav-link text-white equalBox" th:href="@{/gardens}">Gardens</a>
             </li>
 
-            <div class="navbarRightAccountCreate">
+            <div class="ml-auto">
                 <li class="nav-item glassButton" sec:authorize="isAnonymous()">
                     <a class="nav-link text-white equalBox" th:href="@{/users/new}">Create account</a>
                 </li>
             </div>
 
-            <div class="navbarRightSide">
-                <li class="nav-item glassButton" sec:authorize="isAnonymous()">
+            <div>
+                <li class="nav-item glassButton ml-3" sec:authorize="isAnonymous()">
                     <a class="nav-link text-white equalBox" th:href="@{/login}">Login</a>
                 </li>
-                <li class="nav-item glassButton" sec:authorize="isAuthenticated()">
+                <li class="nav-item glassButton ml-3" sec:authorize="isAuthenticated()">
                     <a class="nav-link text-white equalBox" th:href="@{/logout}">Logout</a>
                 </li>
             </div>
