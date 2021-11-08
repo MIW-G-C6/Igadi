@@ -14,6 +14,7 @@
         <h1>Login</h1>
     </div>
 
+
         <div class="border-temp col-3 p-0 mb-3">
             <form th:action="@{/login}" method="post" th:object="${user}">
                 <div th:if="${param.error}">
@@ -24,13 +25,12 @@
                 <input type="email" id="username" name="username" class="form-control" autofocus="autofocus" placeholder="Email" />
                 <br>
                 <input type="password" id="password" name="password" class="form-control" placeholder="Password" />
-                <br><br>
+                <br>
                 <input type="submit" name="login-submit" id="login-submit" class="btn btn-primary mr-3" value="Log in" />
                 </div>
                 <br>
-
                 <p>
-                    New user? <a th:href="@{/users/new}">Create account</a>
+                    New user? <a th:href="@{/users/new}">Sign up</a>
                 </p>
             </form>
     </div>

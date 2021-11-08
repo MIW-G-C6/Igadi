@@ -123,6 +123,7 @@
     background-color: rgba(255, 255, 255, 0.3);
 }
 
+
 /*contains general position information for the links in the navigation bar*/
 
 .navbarRightSide {
@@ -144,18 +145,22 @@
 
 .footer {
     margin-top: auto;
-    position: absolute;
+    position: sticky;
     width: 100%;
     top: 92%;
     padding: 10px 0;
     color: green;
     height: 4.85rem;
     margin-bottom: 0px;
+
+
 }
 
 body{
 height: 100vh;
 }
+
+/*contains general position and layout information for the gardens.html*/
 
 .igadi-garden-list-item-light{
     background-color: rgba(0, 175, 0, 0.15);
@@ -205,11 +210,76 @@ height: 100vh;
     box-shadow: 0 0 10px black;
 }
 
-/* About pages */
-.teamImg{
-    border: 3px solid black;
-    border-radius: 50%;
-    width: 5rem;
-    height: 5rem;
-    overflow: hidden;
+/*contains general position and layout information for the gardens.html*/
+
+.gaNaarMiddenPoepKnop{
+     margin:auto;
+     display:block;
+}
+
+.brackets::before{
+ content: "("
+}
+
+.brackets::after{
+ content: ")"
+}
+
+/*contains general position and layout information for the patchTasks.html*/
+
+.grid-ish{
+display: flex;
+flex-wrap: wrap;
+width: 50%;
+justify-content: center;
+margin: auto;
+}
+
+.grid-ish > * {
+flex: 1 1 100%;
+}
+
+.col{
+padding: 3em;
+background-color: lightgreen;
+border: 2px solid;
+border-radius: 15px;
+border-color: grey;
+margin: 3px;
+
+}
+
+.titelPatchTasks{
+padding: 20px;
+}
+
+.bigBox{
+width:100vw;
+}
+
+.checkBox{
+justify-content: right;
+}
+
+.patchTaskColumn {
+    background-color: lightgreen;
+    font-size: 18px;
+    width: 100%;
+
+
+}
+
+.boxed{
+padding-top: 15px;
+word-wrap: break-word;
+
+}
+
+.gridSize{
+padding: 10px;
+word-wrap: break-word;
+}
+
+.penis{
+word-wrap: break-word;
 }
