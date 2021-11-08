@@ -45,9 +45,9 @@ public class TaskDTO {
 
     public String doneOrNot() {
         if(this.isDone) {
-            return "Yes";
+            return "Done";
         } else {
-            return "No";
+            return "Not Done";
         }
     }
 }

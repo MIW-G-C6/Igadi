@@ -17,7 +17,6 @@
 <nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-light bg-success sticky-top">
     <div class="container-fluid p-0">
         <ul class="navbar-nav w-100">
-
             <li class="nav-item active glassButton">
                 <a class="nav-link text-white equalBox" th:href="@{/}">Igadi</a>
             </li>
@@ -27,7 +26,7 @@
 
             <div class="ml-auto">
                 <li class="nav-item glassButton" sec:authorize="isAnonymous()">
-                    <a class="nav-link text-white equalBox" th:href="@{/users/new}">Create account</a>
+                    <a class="nav-link text-white equalBox" th:href="@{/users/new}">Sign up</a>
                 </li>
             </div>
 
