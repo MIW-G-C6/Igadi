@@ -32,16 +32,20 @@ public class PatchController {
                                    @PathVariable(value = "gardenId", required = false) Integer gardenId, Model model) {
         PatchDTO patch;
         String buttonText;
+        String titleText;
         if(patchId == null) {
             patch = new PatchDTO();
             patch.setGardenDTO(gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId)));
             buttonText = "Create patch";
+            titleText = "Create a new Patch!";
         } else {
             patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
             buttonText = "Update patch";
+            titleText = "Update this Patch!";
         }
         model.addAttribute("patch", patch);
         model.addAttribute("buttonText", buttonText);
+        model.addAttribute("titleText", titleText);
         return "patchForm";
     }
 

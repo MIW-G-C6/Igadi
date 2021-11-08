@@ -204,3 +204,12 @@ height: 100vh;
     transition-duration: 150ms;
     box-shadow: 0 0 10px black;
 }
+
+/* About pages */
+.teamImg{
+    border: 3px solid black;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    overflow: hidden;
+}

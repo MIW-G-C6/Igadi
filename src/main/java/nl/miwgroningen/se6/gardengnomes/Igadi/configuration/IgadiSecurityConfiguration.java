@@ -43,7 +43,7 @@ public class IgadiSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/css/**", "/images/**", "/javascript/**", "/webjars/**").permitAll()
-                .antMatchers("/" , "/index", "/users/new").permitAll()
+                .antMatchers("/" , "/about" , "/index", "/users/new").permitAll()
                 .anyRequest().authenticated().and()
                 .formLogin()
                 .loginPage("/login")
