@@ -145,7 +145,7 @@
 
 .footer {
     margin-top: auto;
-    position: sticky;
+    position: relative;
     width: 100%;
     top: 92%;
     padding: 10px 0;
@@ -286,10 +286,27 @@ word-wrap: break-word;
 }
 
 /*  About page */
+.igadi-bg-light{
+    background-color: rgba(0, 100, 0, 0.15);
+}
 .teamImg {
     border: 3px solid black;
     border-radius: 50%;
-    width: 5rem;
-    height: 5rem;
+    width: 8rem;
+    height: 8rem;
     overflow: hidden;
 }
+
+.igadi-quote{
+    background-color: rgba(0, 100, 0, 0.3);
+}
+
+.igadi-team-title{
+    margin-bottom: 1rem;
+    margin-top: 5rem;
+}
+
+.igadi-teammember-container{
+    background-color: rgba(0, 100, 0, 0.3);
+}
+
