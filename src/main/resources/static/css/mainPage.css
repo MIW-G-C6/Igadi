@@ -138,6 +138,27 @@
 .equalBox{
     width: 140px;
     text-align: center;
+
+}
+
+.equalBoxPatchTasksEdit{
+    width: 140px;
+    text-align: center;
+    margin-bottom: 10px;
+    position:absolute;
+         top: 85px;
+         right: 15px;
+
+
+}
+
+.equalBoxPatchTasksAdd{
+    width: 140px;
+    text-align: center;
+    margin-bottom: 10px;
+         position:absolute;
+         top: 150px;
+         right: 15px;
 }
 
 /*contains general position information for the footer*/
@@ -236,18 +257,32 @@ margin: auto;
 flex: 1 1 100%;
 }
 
-.colMakeUp{
-padding: 3em;
+.colMakeUpNotDone{
+padding: 1rem;
 background-color: rgba(255, 105, 97, 0.15);
 border: 2px solid;
 border-radius: 15px;
 border-color: grey;
 margin: 3px;
 
+
+
+}
+
+.colMakeUpDone{
+padding: 1rem;
+background-color: lightgreen;
+border: 2px solid;
+border-radius: 15px;
+border-color: grey;
+margin: 3px;
+
+
 }
 
 .titelPatchTasks{
 padding: 20px;
+
 }
 
 .bigBox{
@@ -278,6 +313,12 @@ word-wrap: break-word;
 .noBreakWord{
 word-wrap: break-word;
 }
+
+.inlineText{
+display: inline-block;
+}
+
+
 
 /*  About page */
 .igadi-bg-light{

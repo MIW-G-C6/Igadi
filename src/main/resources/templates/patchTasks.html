@@ -13,34 +13,51 @@
 <div class="content flow">
 
     <div class="border-temp mb-3 text-center titelPatchTasks">
-        <h1 th:text="${patch.cropInGarden()}"></h1>
+        <h1 class="inlineText" th:text="${patch.cropInGarden()}"></h1>
     </div>
-<div class="col w-100 text-center">Tasks</div>
-    <a th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
-        <button class="btn btn-outline-success">Add a new task</button>
-    </a>
+
+    <div>
+        <a th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
+            <button class="equalBoxPatchTasksEdit btn btn-outline-success float-left">Edit Name</button>
+        </a>
+
+        <a th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
+            <button class="equalBoxPatchTasksAdd btn btn-outline-success float-right">Add Task</button>
+        </a>
+    </div>
+
+    <div class="col w-100 text-center">
+        <h2 class="inlineText">Tasks</h2>
+    </div>
 
     <div class="bigBox">
         <div class="grid-ish">
-            <div th:each="task : ${allPatchTasks}" class="colMakeUp d-flex flex-column w-100 h-100 gridSize">
-                <div class="patchTaskColumn float-left font-weight-bold" th:text="${task.getTaskName()}"></div>
+
+            <div th:each="task : ${allPatchTasks}" class="d-flex flex-column w-100 h-100 gridSize"
+                 th:class="${task.doneOrNot()} == 'Done' ? 'colMakeUpDone' : 'colMakeUpNotDone'">
+
+                <form th:action="@{/overview/details/patchTasks/delete/{taskId}(taskId=${task.getTaskId()})}"
+                      th:method="post" th:object="${task}">
+
+                    
+                    <img th:src="'/images/icons/bin.png'" class="w-75 h-50  float-right">
+                </form>
+
+                <div class="patchTaskColumn float-left font-weight-bold" th:text="${task.getTaskName()}">
+                </div>
+
                 <div class="boxed">
                     <div class="m-1 float-left noBreakWord" th:text="${task.getTaskDescription()}"></div>
                     <div class="m-1 float-right" th:text="${task.doneOrNot()}"></div>
+
                 </div>
             </div>
         </div>
-
-
-        <a class="border-temp m-0"
-           th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
-            <button class="btn btn-outline-success">Change this patch</button>
-        </a>
     </div>
 </div>
 
 
-</div>
+
 
 
 </body>
