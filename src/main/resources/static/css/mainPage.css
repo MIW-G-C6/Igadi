@@ -204,7 +204,7 @@ height: 100vh;
     transition-duration: 150ms;
 }
 .patchFormBtn:hover{
-    background-color: rgba(255, 255, 255, 0.15);;
+    background-color: rgba(255, 255, 255, 0.15);
     color: white;
     transition-duration: 150ms;
     box-shadow: 0 0 10px black;
@@ -239,9 +239,9 @@ margin: auto;
 flex: 1 1 100%;
 }
 
-.col{
+.colMakeUp{
 padding: 3em;
-background-color: lightgreen;
+background-color: rgba(255, 105, 97, 0.15);
 border: 2px solid;
 border-radius: 15px;
 border-color: grey;
@@ -262,17 +262,15 @@ justify-content: right;
 }
 
 .patchTaskColumn {
-    background-color: lightgreen;
+
     font-size: 18px;
     width: 100%;
-
-
+    padding-left:4px;
 }
 
 .boxed{
 padding-top: 15px;
 word-wrap: break-word;
-
 }
 
 .gridSize{
@@ -280,6 +278,6 @@ padding: 10px;
 word-wrap: break-word;
 }
 
-.penis{
+.noBreakWord{
 word-wrap: break-word;
 }
