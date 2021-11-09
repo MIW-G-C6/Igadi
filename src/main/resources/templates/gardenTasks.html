@@ -20,7 +20,7 @@
             <p class="border-temp m-0 w-25">Name</p>
             <p class="border-temp m-0 w-25">Description</p>
             <p class="border-temp m-0 w-25">Completed?</p>
-            <p class="border-temp m-0 w-25">Delete</p>
+            <p th:if="${isUserGardenManager}" class="border-temp m-0 w-25">Delete</p>
         </div>
 
     <ul th:each="task : ${allGardenTasks}" class="border-temp list-unstyled m-0 w-100">
@@ -28,7 +28,7 @@
             <p class="w-25 m-0" th:text="${task.getTaskName()}"></p>
             <p class="w-25 m-0" th:text="${task.getTaskDescription()}"></p>
             <p class="w-25 m-0" th:text="${task.doneOrNot()}"></p>
-            <form th:action="@{/overview/details/gardenTasks/delete/{taskId}(taskId=${task.getTaskId()})}"
+            <form th:if="${isUserGardenManager}" th:action="@{/overview/details/gardenTasks/delete/{taskId}(taskId=${task.getTaskId()})}"
                   th:method="post" th:object="${task}"><button class="btn btn-danger">Delete task</button></form>
         </li>
     </ul>

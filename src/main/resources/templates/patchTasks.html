@@ -16,7 +16,7 @@
         <h1 th:text="${patch.cropInGarden()}"></h1>
     </div>
 <div class="col w-100 text-center">Tasks</div>
-    <a th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
+    <a th:if="${isUserGardenManager}" th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
         <button class="btn btn-outline-success">Add a new task</button>
     </a>
 
@@ -32,7 +32,7 @@
         </div>
 
 
-        <a class="border-temp m-0"
+        <a th:if="${isUserGardenManager}" class="border-temp m-0"
            th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
             <button class="btn btn-outline-success">Change this patch</button>
         </a>

@@ -42,17 +42,14 @@ public class PatchTaskController {
     protected String showPatchTasks(@PathVariable("patchId") int patchId, Model model, @AuthenticationPrincipal User user,
                                     RedirectAttributes redirectAttributes) {
         try {
-            if (authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId))) {
-                PatchDTO patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
-                List<PatchTaskDTO> allPatchTasks = patchTaskService.getAllTasksByPatchId(patchId);
-                model.addAttribute("patch", patch);
-                model.addAttribute("allPatchTasks", allPatchTasks);
-                return "patchTasks";
-            } else {
-                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-                return "redirect:/error";
-            }
-        }  catch (EntityNotFoundException ex) {
+            model.addAttribute("isUserGardenManager",
+                    authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId)));
+            PatchDTO patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
+            List<PatchTaskDTO> allPatchTasks = patchTaskService.getAllTasksByPatchId(patchId);
+            model.addAttribute("patch", patch);
+            model.addAttribute("allPatchTasks", allPatchTasks);
+            return "patchTasks";
+        } catch (EntityNotFoundException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
             return "redirect:/error";
         }

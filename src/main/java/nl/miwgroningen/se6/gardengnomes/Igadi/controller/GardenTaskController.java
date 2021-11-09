@@ -37,18 +37,15 @@ public class GardenTaskController {
     }
 
     @GetMapping("/overview/details/gardenTasks/{gardenId}")
-        protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model, @AuthenticationPrincipal User user,
+    protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model, @AuthenticationPrincipal User user,
                                          RedirectAttributes redirectAttributes) {
-        if (authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)) {
-            GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
-            List<GardenTaskDTO> allGardenTasks = gardenTaskService.getAllTasksByGardenId(gardenId);
-            model.addAttribute("garden", garden);
-            model.addAttribute("allGardenTasks", allGardenTasks);
-            return "gardenTasks";
-        } else {
-        redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-        return "redirect:/error";
-        }
+        GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
+        List<GardenTaskDTO> allGardenTasks = gardenTaskService.getAllTasksByGardenId(gardenId);
+        model.addAttribute("garden", garden);
+        model.addAttribute("allGardenTasks", allGardenTasks);
+        model.addAttribute("isUserGardenManager",
+                authorizationHelper.isUserGardenManager(user.getUserId(), gardenId));
+        return "gardenTasks";
     }
 
     @PostMapping("/overview/details/gardenTasks/delete/{taskId}")
