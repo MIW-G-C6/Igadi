@@ -35,8 +35,10 @@ public class GardenTaskController {
         protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model) {
             GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
             List<GardenTaskDTO> allGardenTasks = gardenTaskService.getAllTasksByGardenId(gardenId);
+            int chosenTask = 0;
             model.addAttribute("garden", garden);
             model.addAttribute("allGardenTasks", allGardenTasks);
+            model.addAttribute("chosenTask", chosenTask);
         return "gardenTasks";
     }
 

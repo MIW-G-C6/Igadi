@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org" xmlns="">
 
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
     <meta charset="UTF-8">
@@ -28,14 +28,44 @@
             <p class="w-25 m-0" th:text="${task.getTaskName()}"></p>
             <p class="w-25 m-0" th:text="${task.getTaskDescription()}"></p>
             <p class="w-25 m-0" th:text="${task.doneOrNot()}"></p>
-            <form th:action="@{/overview/details/gardenTasks/delete/{taskId}(taskId=${task.getTaskId()})}"
-                  th:method="post" th:object="${task}"><button class="btn btn-danger">Delete task</button></form>
+            <button class="btn btn-danger taskDeleteBtn" th:value="${task.getTaskId()}" data-toggle="modal"
+                    data-target="#igadiModal">Delete task</button>
         </li>
-    </ul>
 
+    <!-- Modal -->
+    <div class="modal modalfade" id="igadiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Are you sure you want to delete this task?</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body w-100">
+                    <img th:src="@{/images/icons/icons8-eye-24.png}" alt="trashcan"/>
+                </div>
+                <div class="modal-footer w-100 d-flex justify-content-center">
+                    <form class="w-25" th:action="@{/overview/details/gardenTasks/delete/{taskId}(taskId=${task.getTaskId()})}"
+                          th:method="post" th:object="${task}">
+                        <button th:type="submit" class=" w-100 btn btn-danger taskDeleteBtn w-25">Delete</button></form>
+                    <button type="button" class="btn btn-success w-25" data-dismiss="modal">Return</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </ul>
 </div>
+
+<script type="text/javascript" th:inline="javascript" th:src="@{/js/TaskModalManager.js}"></script>
 
 <div th:replace="fragments/general :: footer"></div>
 
 </body>
+
 </html>
+
+<!-- <form th:action="@{/overview/details/gardenTasks/delete/{taskId}(taskId=${task.getTaskId()})}"
+      th:method="post" th:object="${task}"></form> -->
