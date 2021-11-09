@@ -2,6 +2,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenTaskService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 /**
@@ -25,19 +27,28 @@ public class GardenTaskController {
 
     private final GardenService gardenService;
     private final GardenTaskService gardenTaskService;
+    private final AuthorizationHelper authorizationHelper;
 
-    public GardenTaskController(GardenService gardenService, GardenTaskService gardenTaskService) {
+    public GardenTaskController(GardenService gardenService, GardenTaskService gardenTaskService,
+                                AuthorizationHelper authorizationHelper) {
         this.gardenService = gardenService;
         this.gardenTaskService = gardenTaskService;
+        this.authorizationHelper = authorizationHelper;
     }
 
     @GetMapping("/overview/details/gardenTasks/{gardenId}")
-        protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model) {
+        protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model, @AuthenticationPrincipal User user,
+                                         RedirectAttributes redirectAttributes) {
+        if (authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)) {
             GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
             List<GardenTaskDTO> allGardenTasks = gardenTaskService.getAllTasksByGardenId(gardenId);
             model.addAttribute("garden", garden);
             model.addAttribute("allGardenTasks", allGardenTasks);
-        return "gardenTasks";
+            return "gardenTasks";
+        } else {
+        redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+        return "redirect:/error";
+        }
     }
 
     @PostMapping("/overview/details/gardenTasks/delete/{taskId}")
