@@ -1,6 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
@@ -19,10 +20,13 @@ public class GardenTaskService {
 
     private GardenTaskRepository gardenTaskRepository;
     private GardenService gardenService;
+    private AuthorizationHelper authorizationHelper;
 
-    public GardenTaskService(GardenTaskRepository gardenTaskRepository, GardenService gardenService) {
+    public GardenTaskService(GardenTaskRepository gardenTaskRepository, GardenService gardenService,
+                             AuthorizationHelper authorizationHelper) {
         this.gardenTaskRepository = gardenTaskRepository;
         this.gardenService = gardenService;
+        this.authorizationHelper = authorizationHelper;
     }
 
     public List<GardenTaskDTO> getAllGardenTasks() {
@@ -44,7 +48,29 @@ public class GardenTaskService {
         return gardenTaskDTO;
     }
 
+    public GardenTask convertFromGardenTaskDTO(GardenTaskDTO gardenTaskDTO) {
+        GardenTask gardenTask = new GardenTask();
+        gardenTask.setTaskId(gardenTaskDTO.getTaskId());
+        gardenTask.setTaskName(gardenTaskDTO.getTaskName());
+        gardenTask.setTaskDescription(gardenTaskDTO.getTaskDescription());
+        gardenTask.setDone(gardenTaskDTO.isDone());
+        gardenTask.setGarden(gardenService.getGardenById(gardenTaskDTO.getGardenDTO().getGardenId()));
+        return gardenTask;
+    }
+
     public void saveGardenTask(GardenTask gardenTask) {
         gardenTaskRepository.save(gardenTask);
+    }
+
+    public void deleteGardenTask(int userId, GardenTask gardenTask) {
+        if (authorizationHelper.isUserGardenManager(userId, gardenTask.getGarden().getGardenId())) {
+            gardenTaskRepository.delete(gardenTask);
+        } else {
+            throw new SecurityException("You are not allowed to delete this task.");
+        }
+    }
+
+    public GardenTask getGardenTaskById(int gardenTaskId) {
+        return gardenTaskRepository.getById(gardenTaskId);
     }
 }
