@@ -30,11 +30,11 @@
             <p class="w-25 m-0" th:text="${task.doneOrNot()}"></p>
 
             <button class="btn btn-danger taskDeleteBtn" th:value="${task.getTaskId()}" data-toggle="modal"
-                    data-target="#igadiModal">Delete task</button>
+                    th:data-target="'#igadiModal' + ${task.getTaskId()}">Delete task</button>
         </li>
 
     <!-- Modal -->
-    <div class="modal modalfade" id="igadiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal modalfade" th:id="'igadiModal' + ${task.getTaskId()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header w-100 d-flex justify-content-center text-center">
