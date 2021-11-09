@@ -90,7 +90,7 @@
     width: 80vw;
     margin: 0 auto;
     padding-top: 30px;
-    min-height: calc(100vh - 120px - 73px);
+    /*min-height: calc(100vh - 120px - 73px);*/
 }
 
 .redMessage {
@@ -143,20 +143,18 @@
 /*contains general position information for the footer*/
 
 .footer {
-    margin-top: auto;
-    position: absolute;
-    width: 100%;
-
-    padding: 10px 0;
-    color: green;
-    height: 4.85rem;
-    margin-bottom: 0px;
-
-
+margin-top: auto;
+padding: 10px 0;
+height: 4.85rem;
+color: green;
+width: 100%;
+margin-bottom: 0px;
 }
 
 body{
 min-height: 100vh;
+display: flex;
+flex-direction: column;
 }
 
 /*contains general position and layout information for the gardens.html*/
