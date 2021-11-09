@@ -293,10 +293,6 @@ word-wrap: break-word;
     overflow: hidden;
 }
 
-.igadi-quote{
-    background-color: rgba(0, 100, 0, 0.3);
-}
-
 .igadi-team-title{
     margin-bottom: 1rem;
     margin-top: 5rem;
@@ -306,3 +302,25 @@ word-wrap: break-word;
     background-color: rgba(0, 100, 0, 0.3);
 }
 
+.igadi-quote-left{
+    transform: translateX(-75px);
+}
+
+.igadi-quote-right{
+    transform: translateX(50px);
+}
+
+.igadi-about-container{
+    width:20rem;
+    line-height: 1.5rem;
+}
+
+.igadi-about-title{
+    padding-bottom: 1rem;
+    border-bottom: 2px solid darkslategray;
+}
+
+.igadi-about-subtitle{
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid darkslategray;
+}
