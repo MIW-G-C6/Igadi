@@ -43,6 +43,7 @@ public class PatchController {
             patch.setGardenDTO(gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId)));
             model.addAttribute("patch", patch);
             model.addAttribute("buttonText", "Create patch");
+            model.addAttribute("titleText", "Create a new patch!");
             return "patchForm";
         } else {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
@@ -58,6 +59,7 @@ public class PatchController {
                 PatchDTO patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
                 model.addAttribute("patch", patch);
                 model.addAttribute("buttonText", "Update patch");
+                model.addAttribute("titleText", "Update this patch!");
                 return "patchForm";
             } else {
                 redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
@@ -71,10 +73,20 @@ public class PatchController {
 
     @PostMapping ("/overview/details/garden/patches/new/{gardenId}")
     protected String saveNewPatch(@PathVariable("gardenId") int gardenId, @ModelAttribute("patch") PatchDTO patch,
-                                  BindingResult result) {
+                                  BindingResult result, @AuthenticationPrincipal User user,
+                                  RedirectAttributes redirectAttributes) {
         if (!result.hasErrors()) {
-            patchService.savePatch(patchService.convertFromPatchDTO(patch, gardenService.getGardenById(gardenId)));
+            try {
+                patchService.userSavePatch(patchService.convertFromPatchDTO(patch, gardenService.getGardenById(gardenId)),
+                        user.getUserId(), gardenId);
+                return "redirect:/overview/details/{gardenId}";
+            }
+            catch (SecurityException ex) {
+                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+                return "redirect:/error";
+            }
+        } else {
+            return "redirect:/overview/details/garden/patches/new/{gardenId}";
         }
-       return "redirect:/overview/details/{gardenId}";
     }
 }

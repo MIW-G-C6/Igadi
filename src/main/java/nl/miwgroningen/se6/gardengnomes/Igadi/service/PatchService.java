@@ -75,13 +75,13 @@ public class PatchService {
         patchRepository.save(patch);
     }
 
-/*    public void userSavePatch(Patch patch, int userId) {
-        if (authorizationHelper.isUserGardenManager(userId, )) {
-            deleteGardenById(gardenId);
+    public void userSavePatch(Patch patch, int userId, int gardenId) {
+        if (authorizationHelper.isUserGardenManager(userId, gardenId)) {
+            savePatch(patch);
         } else {
             throw new SecurityException("You are not allowed to delete this garden.");
         }
-    }*/
+    }
 
     public int findGardenIdByPatchId (int patchId) {
         return patchRepository.findGardenIdByPatchId(patchId).orElseThrow(() ->

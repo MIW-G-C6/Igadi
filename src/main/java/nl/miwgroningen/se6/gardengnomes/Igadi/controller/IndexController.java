@@ -26,5 +26,10 @@ public class IndexController {
         }
         return "index";
     }
+
+    @GetMapping("/about")
+    protected String showAboutPage(Model model) {
+        return "about";
+    }
 }
 

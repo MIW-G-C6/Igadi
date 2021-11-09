@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>Homepage</title>
+
+</head>
+<body>
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container d-flex flex-column border-temp h-50">
+  <div class="border-temp mb-3 text-center">
+    <h1>About Igadi</h1>
+  </div>
+
+  <div>
+    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus deleniti dolore earum error est eum expedita fuga fugiat laborum ratione, reprehenderit repudiandae, tenetur. Debitis fugiat incidunt possimus quo quos voluptatum?</span><span>Accusamus alias blanditiis cum dignissimos error esse, est expedita facilis id illo minima modi obcaecati omnis pariatur perferendis perspiciatis placeat porro, quaerat quasi qui quis quo quod rerum veritatis voluptatum!</span><span>Beatae, commodi consequatur consequuntur culpa debitis eius error fuga inventore itaque maxime, nihil non numquam quia ratione recusandae temporibus velit? Amet blanditiis cumque illo nam numquam quas reprehenderit totam voluptate?</span><span>Accusamus ad, aliquid autem delectus dicta ducimus ex exercitationem ipsum mollitia natus necessitatibus quis repellendus ut. Alias consequuntur culpa, est fugit ipsum natus nisi, non officiis provident, quas sed sunt.</span><span>Blanditiis cumque officiis optio possimus praesentium quia similique soluta tenetur. At ipsum minima ut vitae voluptas. Ab consectetur culpa, cupiditate, expedita itaque labore magni, mollitia nam obcaecati quo totam vel!</span>
+    </p>
+    <h3 class="font-weight-bold text-center">Our mission</h3>
+    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam aperiam dolores eos, error, eveniet id iure modi molestiae natus necessitatibus nesciunt nulla officia officiis quam qui sint totam voluptates!</span><span>Ex, minima, quasi! Architecto cumque, doloremque enim esse est, facere hic natus nesciunt nostrum optio pariatur quam quibusdam quisquam quos reiciendis sapiente sed tempora totam ullam ut vero voluptates voluptatibus!</span>
+      <blockquote class=" blockquote text-left igadi-quote">
+    <p>"Yes, I like this"</p>
+    <footer class="blockquote-footer">Kobo</footer>
+  </blockquote>
+      <span>A ab, animi at consequatur, culpa cum dignissimos ducimus eos incidunt laborum maxime minus molestias necessitatibus neque nisi odio officiis optio praesentium quasi quidem, sed sequi tempore totam ullam voluptates.</span><span>Aspernatur assumenda at aut autem corporis dolore dolorum earum et eveniet id illum iste iusto, mollitia natus non odio odit porro possimus quae quaerat quod ratione sapiente similique velit voluptatem!</span><span>Architecto at consequuntur cumque doloribus earum eos est, eveniet fuga fugit hic illum in ipsum iusto, labore minima nesciunt, nisi officia officiis perferendis quisquam soluta ullam unde veniam voluptatem voluptatum?</span></p>
+    <blockquote class=" blockquote text-right igadi-quote">
+      <p>"Amazing, I love watering the carrots!"</p>
+      <footer class="blockquote-footer">A happy gardener</footer>
+    </blockquote>
+  </div>
+
+  <h3 class="font-weight-bold text-center mt-lg-4">Our team</h3>
+  <div class="row igadi-bg-light">
+    <div class="col-md-4 d-flex flex-column text-center align-items-center igadi-teammember-container">
+      <img class="text-center teamImg" th:src="'/images/gnomes.jpg'"/>
+      <h4 class="font-weight-bold">Tjerk</h4>
+      <p>Developer & back-end specialist</p>
+    </div>
+
+    <div class="col-md-4 d-flex flex-column text-center  align-items-center">
+      <img class="text-center teamImg" th:src="'/images/gnomes2.jpg'"/>
+      <h4 class="font-weight-bold">Ruerd</h4>
+      <p>Developer & front-end specialist</p>
+    </div>
+
+    <div class="col-md-4 d-flex flex-column text-center  align-items-center igadi-teammember-container">
+      <img class="text-center teamImg" th:src="'/images/gnomes3.jpg'"/>
+      <h4 class="font-weight-bold">Annemarleen</h4>
+      <p>Developer & head security development</p>
+    </div>
+
+    <div class="col-md-4 d-flex flex-column text-center align-items-center">
+      <img class="text-center teamImg" th:src="'/images/gnomes4.jpg'"/>
+      <h4 class="font-weight-bold">Lukas</h4>
+      <p>Developer & scrum master</p>
+    </div>
+
+    <div class="col-md-4 d-flex flex-column text-center align-items-center  igadi-teammember-container">
+      <img class="text-center teamImg" th:src="'/images/gnomes5.jpg'"/>
+      <h4 class="font-weight-bold">Kobo</h4>
+      <p>Team mascot</p>
+    </div>
+
+  </div>
+
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+
+</body>
+
+</html>
