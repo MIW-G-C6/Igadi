@@ -37,6 +37,7 @@ public class GardenTaskController {
     }
 
     @GetMapping("/overview/details/gardenTasks/{gardenId}")
+
     protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model, @AuthenticationPrincipal User user,
                                          RedirectAttributes redirectAttributes) {
         GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));

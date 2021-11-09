@@ -367,3 +367,35 @@ display: inline-block;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid darkslategray;
 }
+
+/* Modal override  */
+.modal-backdrop {
+    opacity:0.5 !important;
+}
+
+.modal
+{
+    opacity:1 !important;
+}
+
+.modalfade {
+    animation: fadeIn 0.5s;
+    transform: translateY(5rem);
+}
+
+.binImage{
+    background-color: lightcoral;
+    padding: 1rem;
+    border-radius: 30%;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(-5rem);
+        opacity:0;
+    }
+    to {
+        transform: translateY(5rem);
+        opacity:1;
+    }
+}
