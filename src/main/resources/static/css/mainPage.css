@@ -318,6 +318,10 @@ word-wrap: break-word;
 display: inline-block;
 }
 
+.binIcon{
+    background-color: lightblue;
+
+}
 
 
 /*  About page */
