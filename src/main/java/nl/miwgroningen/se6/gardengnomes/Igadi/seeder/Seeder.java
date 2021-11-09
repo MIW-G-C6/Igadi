@@ -67,8 +67,11 @@ public class Seeder {
                 GardenUser gardenUser = createGardenUserSeed(user);
                 gardenUserService.saveGardenUser(gardenUser);
             }
+            seedChad();
         }
     }
+
+
 
     public void seedGardens() {
         List<GardenDTO> gardens = gardenService.getAllGardens();
@@ -154,6 +157,25 @@ public class Seeder {
         String[] roles = new String[] {UserRole.GARDENER, UserRole.GARDEN_MANAGER};
         int randomRole = (int) (Math.random() * roles.length);
         gardenUser.setRole(roles[randomRole]);
+        return gardenUser;
+    }
+
+    public void seedChad() {
+        User chad = createUserSeed("Chad");
+        userService.saveUser(chad);
+        List<Garden> allGardens = gardenService.getAllGardens().stream().map(gardenService::convertFromGardenDTO).
+                collect(Collectors.toList());
+        for (Garden garden : allGardens) {
+            GardenUser gardenUserChad = createGardenManagerSeed(chad, garden);
+            gardenUserService.saveGardenUser(gardenUserChad);
+        }
+    }
+
+    public GardenUser createGardenManagerSeed(User user, Garden garden) {
+        GardenUser gardenUser = new GardenUser();
+        gardenUser.setUser(user);
+        gardenUser.setGarden(garden);
+        gardenUser.setRole(UserRole.GARDEN_MANAGER);
         return gardenUser;
     }
 
