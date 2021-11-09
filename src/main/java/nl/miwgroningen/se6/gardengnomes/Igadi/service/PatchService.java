@@ -79,7 +79,7 @@ public class PatchService {
         if (authorizationHelper.isUserGardenManager(userId, gardenId)) {
             savePatch(patch);
         } else {
-            throw new SecurityException("You are not allowed to delete this garden.");
+            throw new SecurityException("You are not allowed to save this patch.");
         }
     }
 

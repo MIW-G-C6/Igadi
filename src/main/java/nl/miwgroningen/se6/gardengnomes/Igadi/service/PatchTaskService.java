@@ -2,7 +2,6 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
 import org.springframework.stereotype.Service;
@@ -29,6 +28,14 @@ public class PatchTaskService {
 
     public void savePatchTask(PatchTask patchTask) {
         patchTaskRepository.save(patchTask);
+    }
+
+    public void userSavePatchTask(PatchTask patchTask, int userId, int gardenId) {
+        if (authorizationHelper.isUserGardenManager(userId, gardenId)) {
+            savePatchTask(patchTask);
+        } else {
+            throw new SecurityException("You are not allowed to save this patch task.");
+        }
     }
 
     public List<PatchTaskDTO> getAllPatchTasks() {
