@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
@@ -94,6 +93,19 @@ public class PatchTaskController {
             }
         } else {
             return "redirect:/overview/details/patchTasks/new/{patchId}";
+        }
+    }
+
+    @PostMapping("/overview/details/patchTasks/delete/{taskId}")
+    public String deletePatchTaskById(@PathVariable("taskId") int taskId, @AuthenticationPrincipal User user,
+                                       RedirectAttributes redirectAttributes) {
+        try {
+            int patchId = patchTaskService.getPatchTaskById(taskId).getPatch().getPatchId();
+            patchTaskService.deletePatchTask(user.getUserId(), patchTaskService.getPatchTaskById(taskId));
+            return "redirect:/overview/details/patchTasks/" + patchId;
+        } catch (SecurityException ex) {
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+            return "redirect:/error";
         }
     }
 }

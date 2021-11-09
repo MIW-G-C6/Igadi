@@ -56,4 +56,16 @@ public class PatchTaskService {
         patchTaskDTO.setPatchDTO(patchService.convertToPatchDTO(patchTask.getPatch()));
         return patchTaskDTO;
     }
+
+    public void deletePatchTask(int userId, PatchTask patchTask) {
+        if (authorizationHelper.isUserGardenManager(userId, patchTask.getPatch().getGarden().getGardenId())) {
+            patchTaskRepository.delete(patchTask);
+        } else {
+            throw new SecurityException("You are not allowed to delete this task.");
+        }
+    }
+
+    public PatchTask getPatchTaskById(int patchTaskId) {
+        return patchTaskRepository.getById(patchTaskId);
+    }
 }

@@ -13,4 +13,8 @@ public class GardenTaskDTO extends TaskDTO {
     public void setGardenDTO(GardenDTO gardenDTO) {
         this.gardenDTO = gardenDTO;
     }
+
+    public GardenDTO getGardenDTO() {
+        return gardenDTO;
+    }
 }
