@@ -9,6 +9,16 @@
 <body>
 
 <div th:replace="fragments/general :: navbar"></div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/gardens">Gardens</a></li>
+        <li class="breadcrumb-item"><a th:text="${patch.getGardenDTO().getGardenName()}"
+                                       th:href="@{/overview/details/{gardenId}(gardenId=${patch.getGardenDTO().getGardenId()})}"></a>
+        </li>
+        <li class="breadcrumb-item active" th:text="${patch.cropInGarden()}" aria-current="page"></li>
+    </ol>
+</nav>
 
 <div class="content flow">
 
@@ -33,8 +43,6 @@
     <div class="bigBox">
         <div class="grid-ish">
 
-
-
             <div th:each="task : ${allPatchTasks}" class="d-flex flex-column w-100 h-100 gridSize"
                  th:class="${task.doneOrNot()} == 'Done' ? 'colMakeUpDone' : 'colMakeUpNotDone'">
 
@@ -43,10 +51,6 @@
 
                 <div class="patchTaskColumn float-left font-weight-bold w-50" th:text="${task.getTaskName()}">
                 </div>
-
-
-
-
 
                 <div class="boxed">
                     <div class="m-1 float-left noBreakWord w-50" th:text="${task.getTaskDescription()}"></div>
@@ -84,7 +88,6 @@
 
     </div>
 </div>
-
 
 </body>
 

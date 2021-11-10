@@ -2,6 +2,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,16 @@ public class PatchTaskService {
         patchTaskDTO.setDone(patchTask.getIsDone());
         patchTaskDTO.setPatchDTO(patchService.convertToPatchDTO(patchTask.getPatch()));
         return patchTaskDTO;
+    }
+
+    public PatchTask convertFromPatchTaskDTO(PatchTaskDTO patchTaskDTO, Patch patch) {
+        PatchTask patchTask = new PatchTask();
+        patchTask.setTaskId(patchTaskDTO.getTaskId());
+        patchTask.setTaskName(patchTaskDTO.getTaskName());
+        patchTask.setTaskDescription(patchTaskDTO.getTaskDescription());
+        patchTask.setDone(patchTaskDTO.isDone());
+        patchTask.setPatch(patch);
+        return patchTask;
     }
 
     public void deletePatchTask(int userId, PatchTask patchTask) {

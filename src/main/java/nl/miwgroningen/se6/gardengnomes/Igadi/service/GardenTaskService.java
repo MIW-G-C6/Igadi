@@ -2,9 +2,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenTaskRepository;
 import org.springframework.stereotype.Service;
 

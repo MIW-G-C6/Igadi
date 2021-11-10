@@ -264,9 +264,6 @@ border: 2px solid;
 border-radius: 15px;
 border-color: grey;
 margin: 3px;
-
-
-
 }
 
 .colMakeUpDone{
@@ -276,8 +273,6 @@ border: 2px solid;
 border-radius: 15px;
 border-color: grey;
 margin: 3px;
-
-
 }
 
 .titelPatchTasks{
@@ -294,11 +289,9 @@ justify-content: right;
 }
 
 .patchTaskColumn {
-
     font-size: 18px;
     width: 100%;
     padding-left:4px;
-
 }
 
 .boxed{
@@ -327,9 +320,7 @@ cursor: pointer;
 top: 10px;
 position: relative;
 right: 3rem;
-
 }
-
 
 /*  About page */
 .igadi-bg-light{

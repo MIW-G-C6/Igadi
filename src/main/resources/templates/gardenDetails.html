@@ -10,6 +10,13 @@
 <body>
 
 <div th:replace="fragments/general :: navbar"></div>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/gardens">Gardens</a></li>
+    <li class="breadcrumb-item active" th:text="${garden.getGardenName()}" aria-current="page"></li>
+  </ol>
+</nav>
 
 <div class="container d-flex flex-column border-temp h-50">
 
