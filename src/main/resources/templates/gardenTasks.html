@@ -25,7 +25,7 @@
     <div class="border-temp mb-3 text-center titelPatchTasks">
         <h1 class="inlineText" th:text="${garden.getGardenName()}"></h1>
     </div>
-    
+
     <div class="col w-100 text-center">
         <h2 class="inlineText">Tasks</h2>
     </div>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="modal-footer w-100 d-flex justify-content-center">
                                 <form class="w-25" th:if="${isUserGardenManager}"
-                                      th:action="@{/overview/details/patchTasks/delete/{taskId}(taskId=${task.getTaskId()})}"
+                                      th:action="@{/overview/details/gardenTasks/delete/{taskId}(taskId=${task.getTaskId()})}"
                                       th:method="post" th:object="${task}">
                                     <button th:type="submit" class=" w-100 btn btn-danger taskDeleteBtn w-25">Confirm
                                     </button>
@@ -75,7 +75,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
