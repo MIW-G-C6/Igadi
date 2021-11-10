@@ -1,9 +1,11 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenUserRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenUserConverter;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,9 +16,11 @@ import java.util.ArrayList;
 public class GardenUserService {
 
     private GardenUserRepository gardenUserRepository;
+    private GardenUserConverter gardenUserConverter;
 
-    public GardenUserService(GardenUserRepository gardenUserRepository) {
+    public GardenUserService(GardenUserRepository gardenUserRepository, GardenUserConverter gardenUserConverter) {
         this.gardenUserRepository = gardenUserRepository;
+        this.gardenUserConverter = gardenUserConverter;
     }
 
     public ArrayList<GardenUser> findAllGardenUsersByUserId(int userId) {

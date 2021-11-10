@@ -40,7 +40,7 @@ public class PatchController {
                                   @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
         if (authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)) {
             PatchDTO patch = new PatchDTO();
-            patch.setGardenDTO(gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId)));
+            patch.setGardenDTO(gardenService.getGardenById(gardenId));
             model.addAttribute("patch", patch);
             model.addAttribute("buttonText", "Create patch");
             model.addAttribute("titleText", "Create a new patch!");
@@ -56,7 +56,7 @@ public class PatchController {
                                    @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
         try {
             if (authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId))) {
-                PatchDTO patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
+                PatchDTO patch = patchService.getPatchById(patchId);
                 model.addAttribute("patch", patch);
                 model.addAttribute("buttonText", "Update patch");
                 model.addAttribute("titleText", "Update this patch!");
@@ -77,8 +77,7 @@ public class PatchController {
                                   RedirectAttributes redirectAttributes) {
         if (!result.hasErrors()) {
             try {
-                patchService.userSavePatch(patchService.convertFromPatchDTO(patch, gardenService.getGardenById(gardenId)),
-                        user.getUserId(), gardenId);
+                patchService.userSavePatch(patch, user.getUserId(), gardenId);
                 return "redirect:/overview/details/{gardenId}";
             }
             catch (SecurityException ex) {

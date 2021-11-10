@@ -1,5 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
@@ -35,13 +36,13 @@ public class IndexController {
         if(user != null) {
             user.setGardenUsers(gardenUserService.findAllGardenUsersByUserId(user.getUserId()));
 
-            ArrayList<Garden> gardens = new ArrayList<>();
+            ArrayList<GardenDTO> gardens = new ArrayList<>();
             for (GardenUser gardenUser : user.getGardenUsers()) {
-                Garden newGarden = gardenService.getGardenById(gardenUser.getGarden().getGardenId());
+                GardenDTO newGarden = gardenService.getGardenById(gardenUser.getGarden().getGardenId());
                 gardens.add(newGarden);
             }
             ArrayList<String> roles = new ArrayList<>();
-            for (Garden garden : gardens) {
+            for (GardenDTO garden : gardens) {
                 int gardenId1 = garden.getGardenId();
                 for (GardenUser gardenUser : user.getGardenUsers()) {
                     int gardenId2 = gardenUser.getGarden().getGardenId();

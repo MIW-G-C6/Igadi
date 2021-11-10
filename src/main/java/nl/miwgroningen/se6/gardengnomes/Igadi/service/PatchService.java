@@ -1,18 +1,16 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenConverter;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.PatchConverter;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -23,61 +21,49 @@ import java.util.stream.Collectors;
 @Service
 public class PatchService {
 
-    private PatchRepository patchRepository;
-    private GardenService gardenService;
-    private PatchTaskRepository patchTaskRepository;
-    private GardenUserService gardenUserService;
-    private AuthorizationHelper authorizationHelper;
+    private final PatchRepository patchRepository;
+    private final GardenService gardenService;
+    private final PatchTaskRepository patchTaskRepository;
+    private final GardenUserService gardenUserService;
+    private final AuthorizationHelper authorizationHelper;
+    private final GardenConverter gardenConverter;
+    private final PatchConverter patchConverter;
 
     public PatchService(PatchRepository patchRepository, GardenUserService gardenUserService,
                         PatchTaskRepository patchTaskRepository, GardenService gardenService,
-                        AuthorizationHelper authorizationHelper) {
+                        AuthorizationHelper authorizationHelper, GardenConverter gardenConverter,
+                        PatchConverter patchConverter) {
         this.patchRepository = patchRepository;
         this.gardenService = gardenService;
         this.patchTaskRepository = patchTaskRepository;
         this.gardenUserService = gardenUserService;
         this.authorizationHelper = authorizationHelper;
+        this.gardenConverter = gardenConverter;
+        this.patchConverter = patchConverter;
     }
 
     public List<PatchDTO> getAllPatches() {
         List<Patch> patches = patchRepository.findAll();
-        return patches.stream().map(this::convertToPatchDTO).collect(Collectors.toList());
+        return patches.stream().map(patchConverter::convertToPatchDTO).collect(Collectors.toList());
     }
 
-    public Patch getPatchById(int patchId) {
-        Patch patch = patchRepository.getById(patchId);
-        return patch;
+    public PatchDTO getPatchById(int patchId) {
+        PatchDTO patchDTO = patchConverter.convertToPatchDTO(patchRepository.getById(patchId));
+        return patchDTO;
     }
 
     public List<PatchDTO> findAllPatchesByGardenId(int gardenId) {
         List<Patch> patches = patchRepository.findAllBygarden_gardenId(gardenId);
-        return patches.stream().map(this::convertToPatchDTO).collect(Collectors.toList());
+        return patches.stream().map(patchConverter::convertToPatchDTO).collect(Collectors.toList());
     }
 
-    public PatchDTO convertToPatchDTO(Patch patch) {
-        PatchDTO patchDTO = new PatchDTO();
-        patchDTO.setPatchId(patch.getPatchId());
-        patchDTO.setCrop(patch.getCrop());
-        patchDTO.setGardenDTO(gardenService.convertToGardenDTO(patch.getGarden()));
-        return patchDTO;
+    public void savePatch(PatchDTO patchDTO) {
+        patchRepository.save(patchConverter.convertFromPatchDTO(patchDTO));
     }
 
-
-    public Patch convertFromPatchDTO(PatchDTO patchDTO, Garden garden) {
-        Patch patch  = new Patch();
-        patch.setPatchId(patchDTO.getPatchId());
-        patch.setCrop(patchDTO.getCrop());
-        patch.setGarden(garden);
-        return patch;
-    }
-
-    public void savePatch(Patch patch) {
-        patchRepository.save(patch);
-    }
-
-    public void userSavePatch(Patch patch, int userId, int gardenId) {
+    public void userSavePatch(PatchDTO patchDTO, int userId, int gardenId) {
         if (authorizationHelper.isUserGardenManager(userId, gardenId)) {
-            savePatch(patch);
+            savePatch(patchDTO);
         } else {
             throw new SecurityException("You are not allowed to save this patch.");
         }

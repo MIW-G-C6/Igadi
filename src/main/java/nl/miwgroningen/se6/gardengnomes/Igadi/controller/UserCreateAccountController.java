@@ -22,9 +22,9 @@ import java.util.List;
 @Controller
 public class UserCreateAccountController {
 
-    private UserService userService;
-    private GardenService gardenService;
-    PasswordEncoder passwordEncoder;
+    private final UserService userService;
+    private final GardenService gardenService;
+    private final PasswordEncoder passwordEncoder;
 
     public UserCreateAccountController(UserService userService, GardenService gardenService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
@@ -54,9 +54,8 @@ public class UserCreateAccountController {
                 message = "Passwords are not the same!";
                 redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
             } else {
-                User user = userService.convertFromUserDTO(userDTO);
-                user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
-                userService.saveUser(user);
+                userDTO.setPassword1(passwordEncoder.encode(userDTO.getPassword1()));
+                userService.saveUser(userDTO);
                 message = "Account was successfully created.";
                 redirectAttributes.addAttribute("message", List.of(message, "greenMessage"));
             }

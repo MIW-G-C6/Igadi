@@ -38,9 +38,9 @@ public class GardenTaskController {
     @GetMapping("/overview/details/gardenTasks/{gardenId}")
     protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model, @AuthenticationPrincipal User user,
                                          RedirectAttributes redirectAttributes) {
-        GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
+        GardenDTO gardenDTO = gardenService.getGardenById(gardenId);
         List<GardenTaskDTO> allGardenTasks = gardenTaskService.getAllTasksByGardenId(gardenId);
-        model.addAttribute("garden", garden);
+        model.addAttribute("garden", gardenDTO);
         model.addAttribute("allGardenTasks", allGardenTasks);
         model.addAttribute("isUserGardenManager",
                 authorizationHelper.isUserGardenManager(user.getUserId(), gardenId));
