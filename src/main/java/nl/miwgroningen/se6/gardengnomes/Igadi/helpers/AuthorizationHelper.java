@@ -2,13 +2,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.helpers;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenUserService;
-import nl.miwgroningen.se6.gardengnomes.Igadi.service.PatchService;
-import org.hibernate.ObjectNotFoundException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-
-import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
 
 @Component
 public class AuthorizationHelper {
