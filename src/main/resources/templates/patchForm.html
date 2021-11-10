@@ -8,6 +8,17 @@
 <body>
 
 <div th:replace="fragments/general :: navbar"></div>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/gardens">Gardens</a></li>
+    <li class="breadcrumb-item"><a th:text="${patch.getGardenDTO().getGardenName()}"
+                                   th:href="@{/overview/details/{gardenId}(gardenId=${patch.getGardenDTO()
+                                   .getGardenId()})}"></a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Current patch</li>
+  </ol>
+</nav>
 
 <div class="container aboutContainer d-flex flex-column h-50 align-items-center">
 

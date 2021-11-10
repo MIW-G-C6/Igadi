@@ -54,4 +54,23 @@ public class Patch {
     public void setCrop(String crop) {
         this.crop = crop;
     }
+
+    public String cropInGarden() {
+        if(!this.crop.equals("")) {
+            String crop = this.crop.substring(0, 1).toUpperCase() + this.crop.substring(1).toLowerCase();
+            String taskTitle = crop + " in " + garden.getGardenName();
+            return taskTitle;
+        } else {
+            String taskTitle = showWhatIsGrowing();
+            return taskTitle;
+        }
+    }
+
+    public String showWhatIsGrowing() {
+        if(this.crop.equals("")) {
+            return "Empty";
+        } else {
+            return this.crop;
+        }
+    }
 }

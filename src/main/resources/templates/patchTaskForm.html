@@ -10,6 +10,21 @@
 <body>
 
 <div th:replace="fragments/general :: navbar"></div>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/gardens">Gardens</a></li>
+    <li class="breadcrumb-item"><a th:text="${patchTask.getPatch().getGarden().getGardenName()}"
+                                   th:href="@{/overview/details/{gardenId}(gardenId=${patchTask.getPatch().getGarden()
+                                   .getGardenId()})}"></a>
+    </li>
+    <li class="breadcrumb-item"><a th:text="${patchTask.getPatch().cropInGarden()}"
+                                   th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patchTask.getPatch()
+                                   .getPatchId()})}"></a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">New Task</li>
+  </ol>
+</nav>
 
 <div class="container d-flex flex-column align-items-center border-temp h-50 text-center">
 

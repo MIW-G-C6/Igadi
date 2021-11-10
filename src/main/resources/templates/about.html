@@ -6,6 +6,12 @@
 </head>
 <body>
 <div th:replace="fragments/general :: navbar"></div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">About</li>
+    </ol>
+</nav>
 
 <div class="container d-flex flex-column border-temp align-items-center h-50 w-50 lh-lg igadi-about-container">
     <div class="w-75 d-flex flex-column">
