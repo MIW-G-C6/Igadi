@@ -27,11 +27,11 @@
     </div>
 
     <div>
-        <a th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
+        <a th:if="${isUserGardenManager}" th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
             <button class="equalBoxPatchTasksEdit btn btn-outline-success float-left">Edit Name</button>
         </a>
 
-        <a th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
+        <a th:if="${isUserGardenManager}" th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
             <button class="equalBoxPatchTasksAdd btn btn-outline-success float-right">Add Task</button>
         </a>
     </div>

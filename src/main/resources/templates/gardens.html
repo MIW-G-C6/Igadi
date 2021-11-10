@@ -16,25 +16,29 @@
     </ol>
 </nav>
 
+
 <div class="container d-flex flex-column border-temp h-50">
     <div class="border-temp mb-3 text-center">
         <h1>Overview of all Gardens</h1>
     </div>
-    <ul class="border-temp w-100 h-75 p-0 mb-3 list-group align-items-center">
-        <div class="w-100 h-50 d-flex flex-row m-0 p-0 igadi-garden-list-overview">
-            <li th:each="garden: ${allGardens}" class="h-100 w-25 list-group-item igadi-garden-list-item-light">
-                <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
-                   class="w-100 h-100 text-decoration-none text-black-50 m-0 p-0 d-flex flex-column align-items-center ">
-                    <img th:src="'/images/icons/garden.png'" class="w-75 h-50 igadi-garden-icon">
-                    <p th:text="${garden.gardenName}" class="border-temp m-0 font-weight-bolder w-100"></p>
-                    <p class="border-temp m-0 w-100" th:text="${garden.location}"></p></a>
-            </li>
-        </div>
-    </ul>
-    <button type="button" class="btn btn-primary mr-auto" onclick="location.href='/gardens/new'">
-        Create a new garden
-    </button>
 
+    <div class="border-temp w-100 p-0 mb-3">
+        <div th:each="garden: ${allGardens}" class="border-temp m-0 w-100 d-flex flex-column">
+            <div class="border-temp mb-2 w-100 d-flex justify-content-center text-center">
+                <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
+                   class="w-25 linksColor"><p th:text="${garden.gardenName}" class="border-temp m-0"></p></a>
+                <!--                <p class="brackets border-temp m-0 w-0" th:text="${garden.location}"></p>-->
+                <!--                //TODO locatie koppelen aan gardens//-->
+            </div>
+        </div>
+    </div>
+    <div>
+        <button type="button" class="equalBox btn btn-primary mr-auto gaNaarMiddenKnop"
+                onclick="location.href='/gardens/new'">
+            New garden
+        </button>
+    </div>
+</div>
 </div>
 
 <div th:replace="fragments/general :: footer"></div>

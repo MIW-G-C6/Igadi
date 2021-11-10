@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org" xmlns="">
-
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <title>Garden tasks</title>
 </head>
+
 <body>
 
 <div th:replace="fragments/general :: navbar"></div>
@@ -20,60 +20,66 @@
     </ol>
 </nav>
 
-<div class="container d-flex flex-column border-temp h-50">
+<div class="content flow">
 
-    <div class="border-temp mb-3 text-center">
-        <h1 th:text="${garden.getGardenName()}"></h1>
+    <div class="border-temp mb-3 text-center titelPatchTasks">
+        <h1 class="inlineText" th:text="${garden.getGardenName()}"></h1>
     </div>
 
-        <div class="d-flex flex-row mb-3 w-100 border-temp font-weight-bold">
-            <p class="border-temp m-0 w-25">Name</p>
-            <p class="border-temp m-0 w-25">Description</p>
-            <p class="border-temp m-0 w-25">Completed?</p>
-            <p th:if="${isUserGardenManager}" class="border-temp m-0 w-25">Delete</p>
-        </div>
+    <div class="col w-100 text-center">
+        <h2 class="inlineText">Tasks</h2>
+    </div>
 
-    <ul th:each="task : ${allGardenTasks}" class="border-temp list-unstyled m-0 w-100">
-        <li class="border-temp mb-2 w-100 d-flex">
-            <p class="w-25 m-0" th:text="${task.getTaskName()}"></p>
-            <p class="w-25 m-0" th:text="${task.getTaskDescription()}"></p>
-            <p class="w-25 m-0" th:text="${task.doneOrNot()}"></p>
+    <div class="bigBox">
+        <div class="grid-ish">
 
-            <button class="btn btn-danger taskDeleteBtn" th:if="${isUserGardenManager}"  th:value="${task.getTaskId()}"
-                    data-toggle="modal" th:data-target="'#igadiModal' + ${task.getTaskId()}">Delete task</button>
-        </li>
+            <div th:each="task : ${allGardenTasks}" class="d-flex flex-column w-100 h-100 gridSize"
+                 th:class="${task.doneOrNot()} == 'Done' ? 'colMakeUpDone' : 'colMakeUpNotDone'">
 
-    <div class="modal modalfade" th:id="'igadiModal' + ${task.getTaskId()}" tabindex="-1" role="dialog"
-         aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header w-100 d-flex justify-content-center text-center">
-                    <h5 class="modal-title" id="myModalLabel" th:text="${task.getTaskName()}"></h5>
+                <img th:src="'/images/icons/bin.png'" class="binIcon float-right" data-toggle="modal"
+                     th:data-target="'#igadiModal' + ${task.getTaskId()}">
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="patchTaskColumn float-left font-weight-bold w-50" th:text="${task.getTaskName()}">
                 </div>
-                <div class="modal-body w-100 d-flex justify-content-center text-center">
-                    <h4>Are you sure?</h4>
+
+                <div class="boxed">
+                    <div class="m-1 float-left noBreakWord w-50" th:text="${task.getTaskDescription()}"></div>
+                    <div class="m-1 float-right noBreakWord" th:text="${task.doneOrNot()}"></div>
+
                 </div>
-                <div class="modal-footer w-100 d-flex justify-content-center">
-                    <form class="w-25"
-                          th:action="@{/overview/details/gardenTasks/delete/{taskId}(taskId=${task.getTaskId()})}"
-                          th:method="post" th:object="${task}">
-                        <button th:type="submit" class=" w-100 btn btn-danger taskDeleteBtn w-25">Confirm</button>
-                    </form>
-                    <button type="button" class="btn btn-success w-25" data-dismiss="modal">Cancel</button>
+                <div class="modal modalfade" th:id="'igadiModal' + ${task.getTaskId()}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header w-100 d-flex justify-content-center text-center">
+                                <h5 class="modal-title" id="myModalLabel" th:text="${task.getTaskName()}"></h5>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body w-100 d-flex justify-content-center text-center">
+                                <h4>Are you sure?</h4>
+                            </div>
+                            <div class="modal-footer w-100 d-flex justify-content-center">
+                                <form class="w-25" th:if="${isUserGardenManager}"
+                                      th:action="@{/overview/details/gardenTasks/delete/{taskId}(taskId=${task.getTaskId()})}"
+                                      th:method="post" th:object="${task}">
+                                    <button th:type="submit" class=" w-100 btn btn-danger taskDeleteBtn w-25">Confirm
+                                    </button>
+                                </form>
+                                <button type="button" class="btn btn-success w-25" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    </ul>
 </div>
 
-<div th:replace="fragments/general :: footer"></div>
-
 </body>
+
+<div th:replace="fragments/general :: footer"></div>
 
 </html>
