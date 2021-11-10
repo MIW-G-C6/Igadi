@@ -6,6 +6,12 @@
 </head>
 <body>
 <div th:replace="fragments/general :: navbar"></div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">About</li>
+    </ol>
+</nav>
 
 <div class="container d-flex flex-column border-temp align-items-center h-50 w-50 lh-lg igadi-about-container">
     <div class="w-75 d-flex flex-column">
@@ -43,7 +49,7 @@
                 <span class="w-50">Ex, minima, quasi! Architecto cumque, doloremque enim esse est, facere hic natus
                   nesciunt nostrum optio pariatur quam quibusdam quisquam quos reiciendis sapiente sed tempora totam
                   ullam ut vero voluptates voluptatibus!</span>
-                <blockquote class=" blockquote text-right igadi-quote w-50 igadi-quote-right  d-flex flex-column
+                <blockquote class=" blockquote text-right igadi-quote w-50 igadi-quote-right d-flex flex-column
                 justify-content-center">
                     <p>"Yes, I like this!"</p>
                     <footer class="blockquote-footer">Kobo</footer>
@@ -65,7 +71,7 @@
           veniam voluptatem? Accusamus molestias nostrum pariatur.</span>
 
         <div class="d-flex flex-row">
-            <blockquote class=" blockquote text-left igadi-quote w-50 mt-2 igadi-quote-left  d-flex flex-column
+            <blockquote class=" blockquote text-left igadi-quote w-50 mt-2 igadi-quote-left d-flex flex-column
             justify-content-center">
                 <p>"Amazing, I love watering the carrots!"</p>
                 <footer class="blockquote-footer">A happy gardener</footer>
@@ -80,7 +86,7 @@
           reprehenderit, sequi sint suscipit voluptates, voluptatibus.</span></p>
     </div>
 </div>
-</div>
+
 
 <div th:replace="fragments/general :: footer"></div>
 

@@ -138,6 +138,27 @@
 .equalBox{
     width: 140px;
     text-align: center;
+
+}
+
+.equalBoxPatchTasksEdit{
+    width: 140px;
+    text-align: center;
+    margin-bottom: 10px;
+    position:absolute;
+         top: 105px;
+         right: 15px;
+
+
+}
+
+.equalBoxPatchTasksAdd{
+    width: 140px;
+    text-align: center;
+    margin-bottom: 10px;
+         position:absolute;
+         top: 150px;
+         right: 15px;
 }
 
 /*contains general position information for the footer*/
@@ -236,18 +257,27 @@ margin: auto;
 flex: 1 1 100%;
 }
 
-.colMakeUp{
-padding: 3em;
+.colMakeUpNotDone{
+padding: 1rem;
 background-color: rgba(255, 105, 97, 0.15);
 border: 2px solid;
 border-radius: 15px;
 border-color: grey;
 margin: 3px;
+}
 
+.colMakeUpDone{
+padding: 1rem;
+background-color: lightgreen;
+border: 2px solid;
+border-radius: 15px;
+border-color: grey;
+margin: 3px;
 }
 
 .titelPatchTasks{
 padding: 20px;
+
 }
 
 .bigBox{
@@ -259,7 +289,6 @@ justify-content: right;
 }
 
 .patchTaskColumn {
-
     font-size: 18px;
     width: 100%;
     padding-left:4px;
@@ -277,6 +306,20 @@ word-wrap: break-word;
 
 .noBreakWord{
 word-wrap: break-word;
+padding-top: 1rem;
+}
+
+.inlineText{
+display: inline-block;
+}
+
+.binIcon{
+width: 30px;
+height: 30px;
+cursor: pointer;
+top: 10px;
+position: relative;
+right: 3rem;
 }
 
 /*  About page */
@@ -321,4 +364,54 @@ word-wrap: break-word;
 .igadi-about-subtitle{
     padding-bottom: 0.5rem;
     border-bottom: 1px solid darkslategray;
+}
+
+/* Modal override  */
+.modal-backdrop {
+    opacity:0.5 !important;
+}
+
+.modal
+{
+    opacity:1 !important;
+}
+
+.modalfade {
+    animation: fadeIn 0.5s;
+    transform: translateY(5rem);
+}
+
+.binImage{
+    background-color: lightcoral;
+    padding: 1rem;
+    border-radius: 30%;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(-5rem);
+        opacity:0;
+    }
+    to {
+        transform: translateY(5rem);
+        opacity:1;
+    }
+}
+
+/* Breadcrumbs  */
+
+.igadi-item-green{
+    color: rgb(92, 184, 92);
+    transition-delay: 25ms;
+    transition-duration: 150ms;
+}
+
+.igadi-item-green:hover{
+    text-decoration: darkgreen;
+    text-decoration-line: underline;
+    color: rgb(92, 150, 92);
+    transition-delay: 25ms;
+    transition-duration: 150ms;
+    background-color: rgba(92, 200, 92, 0.1);
+    border-radius: 10px;
 }

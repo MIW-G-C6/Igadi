@@ -14,4 +14,8 @@ public class PatchTaskDTO extends TaskDTO {
     public void setPatchDTO(PatchDTO patchDTO) {
         this.patchDTO = patchDTO;
     }
+
+    public PatchDTO getPatchDTO() {
+        return patchDTO;
+    }
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * @author Annemarleen Bosma <makeItWork2021@annemarleenbosma.nl>
  *
+ *     Endpoint for the loginpage.
+ *
  */
 
 @Controller

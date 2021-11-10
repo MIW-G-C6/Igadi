@@ -8,6 +8,13 @@
 <body>
 
 <div th:replace="fragments/general :: navbar"></div>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
+    <li class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>
+    <li class="breadcrumb-item active" aria-current="page" th:text="${patch.getGardenDTO().getGardenName()}"></li>
+  </ol>
+</nav>
 
 <div class="container aboutContainer d-flex flex-column h-50 align-items-center">
 
@@ -24,8 +31,10 @@
               class="w-75 h-75 d-flex flex-column justify-content-center align-items-center">
           <h4 class="w-100 text-center mb-2 text-light">What will you plant?</h4>
           <input type="hidden" th:field="*{patchId}">
-          <input type="text" th:field="*{crop}" class="form-control mb-3 w-100 shadow mt-lg-5" placeholder="For example: 'carrots' or 'potatoes'">
-          <button type="submit" class="btn mr-3 patchFormBtn mt-lg-5 font-weight-bolder" th:text="${buttonText}"></button>
+          <input type="text" th:field="*{crop}" class="form-control mb-3 w-100 shadow mt-lg-5"
+                 placeholder="For example: 'carrots' or 'potatoes'">
+          <button type="submit" class="btn mr-3 patchFormBtn mt-lg-5 font-weight-bolder" th:text="${buttonText}">
+          </button>
         </form>
       </div>
     </div>
