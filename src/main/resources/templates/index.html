@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
-<head th:replace="fragments/general :: baseHeader(~{:: title})">
-    <title>Homepage</title>
 
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <title>Homepage</title>
 </head>
+
 <body>
 <div th:replace="fragments/general :: navbar"></div>
 
-<div class="container d-flex flex-column border-temp h-50">
+<div id="userProfileBorder" class="container d-flex flex-column border-temp h-50">
     <div class="border-temp mb-3 text-center">
         <h1 sec:authorize="isAnonymous()">Welcome to Igadi!</h1>
-        <h1 sec:authorize="isAuthenticated()" th:text="'Welcome ' + ${user.getUserName()} + '!'"></h1>
+        <h2 sec:authorize="isAuthenticated()" th:text="'Welcome ' + ${user.getUserName()} + '!'"></h2>
         <h3 sec:authorize="isAnonymous()">Home of the Green and the Fresh!</h3>
         <h3 sec:authorize="isAuthenticated()">Good to see you again!</h3>
     </div>
+
+    <container sec:authorize="isAuthenticated()" class="container profilecard">
+        <span id="listsOfGardens">
+            <div class="container d-flex flex-column border-temp h-50 row" th:align="center" width="fit-content">
+                <table class="table table-md table-bordered">
+                    <div class="card-body" th:align="left" >
+                        <h2 class="card-title" sec:authorize="isAuthenticated()" th:text="'This is your profile page'"></h2>
+                        <p class="card-text"  th:text="|You are enrolled in the following gardens: |">
+                        <ul  class="list-group list-group-flush" th:each="garden : ${gardens}">
+                            <li class="list-group-item" th:text="${garden.getGardenName()}"></li>
+                        </ul>
+                        <ul class="list-group list-group-flush" th:each="role : ${roles}">
+                            <li class="list-group-item" th:text="${role}"></li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-success glassButton">Change profile</a>
+                    </div>
+                </table>
+            </div>
+        </span>
+    </container>
+
 </div>
 
 <div th:replace="fragments/general :: footer"></div>
 
 </body>
-
 </html>
