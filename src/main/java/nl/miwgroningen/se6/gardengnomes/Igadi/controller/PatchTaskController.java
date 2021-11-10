@@ -27,9 +27,9 @@ import java.util.List;
 @Controller
 public class PatchTaskController {
 
-    private PatchService patchService;
-    private PatchTaskService patchTaskService;
-    private AuthorizationHelper authorizationHelper;
+    private final PatchService patchService;
+    private final PatchTaskService patchTaskService;
+    private final AuthorizationHelper authorizationHelper;
 
     public PatchTaskController(PatchService patchService, PatchTaskService patchTaskService,
                                AuthorizationHelper authorizationHelper) {
@@ -56,8 +56,8 @@ public class PatchTaskController {
     }
 
     @GetMapping("/overview/details/patchTasks/new/{patchId}")
-    protected String showPatchTaskForm(@PathVariable("patchId") int patchId, Model model, @AuthenticationPrincipal User user,
-                                       RedirectAttributes redirectAttributes) {
+    protected String showPatchTaskForm(@PathVariable("patchId") int patchId, Model model,
+                                       @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
         try {
             if (authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId))) {
                 PatchTask patchTask = new PatchTask();
@@ -76,12 +76,14 @@ public class PatchTaskController {
     }
 
     @PostMapping("/overview/details/patchTasks/new/{patchId}")
-    protected String saveOrUpdatePatchTask(@PathVariable("patchId") int patchId, @ModelAttribute("patchTask") PatchTask patchTask,
+    protected String saveOrUpdatePatchTask(@PathVariable("patchId") int patchId,
+                                           @ModelAttribute("patchTask") PatchTask patchTask,
                                            BindingResult result, @AuthenticationPrincipal User user,
                                            RedirectAttributes redirectAttributes) {
         if (!result.hasErrors()) {
             try {
-                patchTaskService.userSavePatchTask(patchTask, user.getUserId(), patchService.findGardenIdByPatchId(patchId));
+                patchTaskService.userSavePatchTask(patchTask, user.getUserId(),
+                        patchService.findGardenIdByPatchId(patchId));
                 return "redirect:/overview/details/patchTasks/{patchId}";
             }
             catch (SecurityException ex) {

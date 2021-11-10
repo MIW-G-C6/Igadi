@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 /**
@@ -37,7 +36,6 @@ public class GardenTaskController {
     }
 
     @GetMapping("/overview/details/gardenTasks/{gardenId}")
-
     protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model, @AuthenticationPrincipal User user,
                                          RedirectAttributes redirectAttributes) {
         GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
