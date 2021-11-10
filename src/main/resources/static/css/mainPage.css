@@ -404,6 +404,7 @@ position: relative;
 }
 
 
+
 /* link and the colors*/
 
 .linksColor{
@@ -414,4 +415,21 @@ color:green;
 color: lightgreen;
   background-color: transparent;
   text-decoration: underline;
+
+/* Breadcrumbs  */
+
+.igadi-item-green{
+    color: rgb(92, 184, 92);
+    transition-delay: 25ms;
+    transition-duration: 150ms;
+}
+
+.igadi-item-green:hover{
+    text-decoration: darkgreen;
+    text-decoration-line: underline;
+    color: rgb(92, 150, 92);
+    transition-delay: 25ms;
+    transition-duration: 150ms;
+    background-color: rgba(92, 200, 92, 0.1);
+    border-radius: 10px;
 }

@@ -12,13 +12,13 @@
 <div th:replace="fragments/general :: navbar"></div>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item"><a href="/gardens">Gardens</a></li>
-    <li class="breadcrumb-item"><a th:text="${patchTask.getPatch().getGarden().getGardenName()}"
-                                   th:href="@{/overview/details/{gardenId}(gardenId=${patchTask.getPatch().getGarden()
+    <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
+    <li class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>
+    <li class="breadcrumb-item"><a class="igadi-item-green" th:text="${patchTask.getPatch().getGarden()
+    .getGardenName()}" th:href="@{/overview/details/{gardenId}(gardenId=${patchTask.getPatch().getGarden()
                                    .getGardenId()})}"></a>
     </li>
-    <li class="breadcrumb-item"><a th:text="${patchTask.getPatch().cropInGarden()}"
+    <li class="breadcrumb-item"><a class="igadi-item-green" th:text="${patchTask.getPatch().cropInGarden()}"
                                    th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patchTask.getPatch()
                                    .getPatchId()})}"></a>
     </li>
