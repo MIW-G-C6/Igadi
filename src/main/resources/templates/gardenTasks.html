@@ -11,9 +11,9 @@
 <div th:replace="fragments/general :: navbar"></div>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="/gardens">Gardens</a></li>
-        <li class="breadcrumb-item"><a th:text="${garden.getGardenName()}"
+        <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
+        <li class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>
+        <li class="breadcrumb-item"><a class="igadi-item-green" th:text="${garden.getGardenName()}"
                                        th:href="@{/overview/details/{gardenId}(gardenId=${garden.getGardenId()})}"></a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Tasks</li>
