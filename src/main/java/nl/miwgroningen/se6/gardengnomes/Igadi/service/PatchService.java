@@ -8,11 +8,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -85,6 +81,6 @@ public class PatchService {
 
     public int findGardenIdByPatchId (int patchId) {
         return patchRepository.findGardenIdByPatchId(patchId).orElseThrow(() ->
-                new EntityNotFoundException("No patch with this patchId was found."));
+                new NullPointerException("No patch with this patchId was found."));
     }
 }

@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import javax.persistence.EntityNotFoundException;
+
+import javax.validation.constraints.Null;
 import java.util.List;
 
 /**
@@ -49,7 +50,7 @@ public class PatchTaskController {
             model.addAttribute("patch", patch);
             model.addAttribute("allPatchTasks", allPatchTasks);
             return "patchTasks";
-        } catch (EntityNotFoundException ex) {
+        } catch (NullPointerException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
             return "redirect:/error";
         }
@@ -69,7 +70,7 @@ public class PatchTaskController {
                 redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
                 return "redirect:/error";
             }
-        }  catch (EntityNotFoundException ex) {
+        }  catch (NullPointerException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
             return "redirect:/error";
         }

@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.persistence.EntityNotFoundException;
-
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
  */
@@ -65,7 +63,7 @@ public class PatchController {
                 redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
                 return "redirect:/error";
             }
-        } catch (EntityNotFoundException ex) {
+        } catch (NullPointerException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
             return "redirect:/error";
         }
