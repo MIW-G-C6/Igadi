@@ -431,3 +431,26 @@ color: lightgreen;
     background-color: rgba(92, 200, 92, 0.1);
     border-radius: 10px;
 }
+
+/* Gardendetails page */
+.gardenDetailsButton{
+width: 250px;
+        height: 100px;
+        background-color: lightgreen;
+        display:flex;
+}
+
+.rapper{
+flex-wrap: wrap;
+display: flex;
+}
+
+.plusIcon{
+width: 25px;
+height: 25px;
+cursor: pointer;
+
+
+}
+
+
