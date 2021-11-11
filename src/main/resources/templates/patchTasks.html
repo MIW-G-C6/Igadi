@@ -50,7 +50,7 @@
             <div th:each="task : ${allPatchTasks}" class="d-flex flex-column w-100 h-100 gridSize"
                  th:class="${task.doneOrNot()} == 'Done' ? 'colMakeUpDone' : 'colMakeUpNotDone'">
 
-                <img th:src="'/images/icons/bin.png'" class="binIcon float-right" data-toggle="modal"
+                <img th:if="${isUserGardenManager}" th:src="'/images/icons/bin.png'" class="binIcon float-right" data-toggle="modal"
                      th:data-target="'#igadiModal' + ${task.getTaskId()}">
 
                 <div class="patchTaskColumn float-left font-weight-bold w-50" th:text="${task.getTaskName()}">
@@ -77,7 +77,7 @@
                                 <h4>Are you sure?</h4>
                             </div>
                             <div class="modal-footer w-100 d-flex justify-content-center">
-                                <form class="w-25" th:if="${isUserGardenManager}"
+                                <form class="w-25"
                                       th:action="@{/overview/details/patchTasks/delete/{taskId}(taskId=${task.getTaskId()})}"
                                       th:method="post" th:object="${task}">
                                     <button th:type="submit" class=" w-100 btn btn-danger taskDeleteBtn w-25">Confirm

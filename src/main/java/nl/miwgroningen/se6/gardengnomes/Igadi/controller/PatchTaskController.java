@@ -102,7 +102,7 @@ public class PatchTaskController {
                                        RedirectAttributes redirectAttributes) {
         try {
             int patchId = patchTaskService.getPatchTaskById(taskId).getPatch().getPatchId();
-            patchTaskService.deletePatchTask(user.getUserId(), patchTaskService.getPatchTaskById(taskId));
+            patchTaskService.userDeletePatchTask(user.getUserId(), patchTaskService.getPatchTaskById(taskId));
             return "redirect:/overview/details/patchTasks/" + patchId;
         } catch (SecurityException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);

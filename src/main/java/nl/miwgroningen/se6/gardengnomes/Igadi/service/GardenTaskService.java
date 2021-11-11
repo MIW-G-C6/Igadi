@@ -45,6 +45,7 @@ public class GardenTaskService {
         gardenTaskRepository.save(gardenTaskConverter.convertFromGardenTaskDTO(gardenTaskDTO));
     }
 
+
     public void userSaveGardenTask(GardenTaskDTO gardenTaskDTO, int userId, int gardenId) {
         if (authorizationHelper.isUserGardenManager(userId, gardenId)) {
             saveGardenTask(gardenTaskDTO);
@@ -52,8 +53,7 @@ public class GardenTaskService {
             throw new SecurityException("You are not allowed to save this garden task.");
         }
     }
-
-    public void deleteGardenTask(int userId, GardenTask gardenTask) {
+    public void userDeleteGardenTask(int userId, GardenTask gardenTask) {
         if (authorizationHelper.isUserGardenManager(userId, gardenTask.getGarden().getGardenId())) {
             gardenTaskRepository.delete(gardenTask);
         } else {
