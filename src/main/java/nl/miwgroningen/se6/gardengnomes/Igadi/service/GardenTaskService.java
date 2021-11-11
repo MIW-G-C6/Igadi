@@ -4,6 +4,8 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenTaskRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenConverter;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenTaskConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,48 +18,30 @@ import java.util.stream.Collectors;
 @Service
 public class GardenTaskService {
 
-    private GardenTaskRepository gardenTaskRepository;
-    private GardenService gardenService;
-    private AuthorizationHelper authorizationHelper;
+    private final GardenTaskRepository gardenTaskRepository;
+    private final GardenService gardenService;
+    private final AuthorizationHelper authorizationHelper;
+    private final GardenTaskConverter gardenTaskConverter;
 
     public GardenTaskService(GardenTaskRepository gardenTaskRepository, GardenService gardenService,
-                             AuthorizationHelper authorizationHelper) {
+                             AuthorizationHelper authorizationHelper, GardenTaskConverter gardenTaskConverter) {
         this.gardenTaskRepository = gardenTaskRepository;
         this.gardenService = gardenService;
         this.authorizationHelper = authorizationHelper;
+        this.gardenTaskConverter= gardenTaskConverter;
     }
 
     public List<GardenTaskDTO> getAllGardenTasks() {
-        return gardenTaskRepository.findAll().stream().map(this::convertToGardenTaskDTO).collect(Collectors.toList());
+        return gardenTaskRepository.findAll().stream().map(gardenTaskConverter::convertToGardenTaskDTO).collect(Collectors.toList());
     }
 
     public List<GardenTaskDTO> getAllTasksByGardenId(int gardenId) {
         List<GardenTask> tasks = gardenTaskRepository.findAllBygarden_gardenId(gardenId);
-        return tasks.stream().map(this::convertToGardenTaskDTO).collect(Collectors.toList());
+        return tasks.stream().map(gardenTaskConverter::convertToGardenTaskDTO).collect(Collectors.toList());
     }
 
-    public GardenTaskDTO convertToGardenTaskDTO(GardenTask gardenTask) {
-        GardenTaskDTO gardenTaskDTO = new GardenTaskDTO();
-        gardenTaskDTO.setTaskId(gardenTask.getTaskId());
-        gardenTaskDTO.setTaskName(gardenTask.getTaskName());
-        gardenTaskDTO.setTaskDescription(gardenTask.getTaskDescription());
-        gardenTaskDTO.setDone(gardenTask.getIsDone());
-        gardenTaskDTO.setGardenDTO(gardenService.convertToGardenDTO(gardenTask.getGarden()));
-        return gardenTaskDTO;
-    }
-
-    public GardenTask convertFromGardenTaskDTO(GardenTaskDTO gardenTaskDTO) {
-        GardenTask gardenTask = new GardenTask();
-        gardenTask.setTaskId(gardenTaskDTO.getTaskId());
-        gardenTask.setTaskName(gardenTaskDTO.getTaskName());
-        gardenTask.setTaskDescription(gardenTaskDTO.getTaskDescription());
-        gardenTask.setDone(gardenTaskDTO.isDone());
-        gardenTask.setGarden(gardenService.getGardenById(gardenTaskDTO.getGardenDTO().getGardenId()));
-        return gardenTask;
-    }
-
-    public void saveGardenTask(GardenTask gardenTask) {
-        gardenTaskRepository.save(gardenTask);
+    public void saveGardenTask(GardenTaskDTO gardenTaskDTO) {
+        gardenTaskRepository.save(gardenTaskConverter.convertFromGardenTaskDTO(gardenTaskDTO));
     }
 
     public void deleteGardenTask(int userId, GardenTask gardenTask) {

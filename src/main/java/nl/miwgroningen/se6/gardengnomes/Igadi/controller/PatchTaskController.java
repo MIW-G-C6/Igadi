@@ -45,7 +45,7 @@ public class PatchTaskController {
         try {
             model.addAttribute("isUserGardenManager",
                     authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId)));
-            PatchDTO patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
+            PatchDTO patch = patchService.getPatchById(patchId);
             List<PatchTaskDTO> allPatchTasks = patchTaskService.getAllTasksByPatchId(patchId);
             model.addAttribute("patch", patch);
             model.addAttribute("allPatchTasks", allPatchTasks);
@@ -61,10 +61,10 @@ public class PatchTaskController {
                                        @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
         try {
             if (authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId))) {
-                PatchTask patchTask = new PatchTask();
-                patchTask.setPatch(patchService.getPatchById(patchId));
-                patchTask.setDone(false);
-                model.addAttribute("patchTask", patchTask);
+                PatchTaskDTO patchTaskDTO = new PatchTaskDTO();
+                patchTaskDTO.setPatchDTO(patchService.getPatchById(patchId));
+                patchTaskDTO.setDone(false);
+                model.addAttribute("patchTask", patchTaskDTO);
                 return "patchTaskForm";
             } else {
                 redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
@@ -78,12 +78,13 @@ public class PatchTaskController {
 
     @PostMapping("/overview/details/patchTasks/new/{patchId}")
     protected String saveOrUpdatePatchTask(@PathVariable("patchId") int patchId,
-                                           @ModelAttribute("patchTask") PatchTask patchTask,
+                                           @ModelAttribute("patchTask") PatchTaskDTO patchTaskDTO,
                                            BindingResult result, @AuthenticationPrincipal User user,
                                            RedirectAttributes redirectAttributes) {
         if (!result.hasErrors()) {
             try {
-                patchTaskService.userSavePatchTask(patchTask, user.getUserId(),
+                patchTaskDTO.setPatchDTO(patchService.getPatchById(patchId));
+                patchTaskService.userSavePatchTask(patchTaskDTO, user.getUserId(),
                         patchService.findGardenIdByPatchId(patchId));
                 return "redirect:/overview/details/patchTasks/{patchId}";
             }
@@ -92,6 +93,8 @@ public class PatchTaskController {
                 return "redirect:/error";
             }
         } else {
+            System.out.println("test4");
+            System.out.println(result.getAllErrors());
             return "redirect:/overview/details/patchTasks/new/{patchId}";
         }
     }

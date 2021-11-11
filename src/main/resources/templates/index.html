@@ -9,6 +9,13 @@
 
 <body>
 <div th:replace="fragments/general :: navbar"></div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
+        <li class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>
+        <li class="breadcrumb-item active" aria-current="page">New Garden</li>
+    </ol>
+</nav>
 
 <div id="userProfileBorder" class="container d-flex flex-column border-temp h-50">
     <div class="border-temp mb-3 text-center">
@@ -19,23 +26,35 @@
     </div>
 
     <container sec:authorize="isAuthenticated()" class="container profilecard">
-        <span id="listsOfGardens">
-            <div class="container d-flex flex-column border-temp h-50 row" th:align="center" width="fit-content">
-                <table class="table table-md table-bordered">
-                    <div class="card-body" th:align="left" >
-                        <h2 class="card-title" sec:authorize="isAuthenticated()" th:text="'This is your profile page'"></h2>
-                        <p class="card-text"  th:text="|You are enrolled in the following gardens: |">
-                        <ul  class="list-group list-group-flush" th:each="garden : ${gardens}">
-                            <li class="list-group-item" th:text="${garden.getGardenName()}"></li>
-                        </ul>
-                        <ul class="list-group list-group-flush" th:each="role : ${roles}">
-                            <li class="list-group-item" th:text="${role}"></li>
-                        </ul>
-                        <a href="#" class="btn btn-outline-success glassButton">Change profile</a>
-                    </div>
-                </table>
+        <div id="listsOfGardens" >
+            <h2 sec:authorize="isAuthenticated()" th:text="|Profile page|"></h2>
+            <br>
+
+            <div class="d-flex">
+                <div class="col-6 p-0"><strong th:text="|Gardens |"></strong></div>
+                <div class="col-6 p-0"><strong th:text="|Your role|"></strong></div>
             </div>
-        </span>
+        </div>
+        <br>
+
+        <div class="d-flex">
+            <div class="col-6 p-0">
+                <div th:each="garden : ${gardens}">
+                    <div th:text="${garden.getGardenName()}"></div>
+                </div>
+            </div>
+            <div class="col-6 p-0">
+                <div th:each="role : ${roles}">
+                    <div th:text="${role}"></div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+<!--        <div>-->
+<!--            <button type="submit" class="equalBox btn btn-success mr-3 mr-auto"-->
+<!--                    data-toggle="tooltip" data-placement="top" title="Change profile settings" >Change</button>-->
+<!--        </div>-->
     </container>
 
 </div>

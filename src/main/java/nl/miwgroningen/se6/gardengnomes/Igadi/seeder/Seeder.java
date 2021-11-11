@@ -53,6 +53,7 @@ public class Seeder {
         seedGardenTasks();
         seedPatches();
         seedPatchTasks();
+        seedGardenUsers();
     }
 
     public void seedUsers() {
@@ -60,28 +61,42 @@ public class Seeder {
         if(users.isEmpty()) {
             String[] names = {"Jan", "Pete", "Hank", "Cees", "Rodger", "Michael", "Billy", "Luigi", "Phillip", "Peter"};
             for(int i = 0; i < names.length; i++) {
-                User user = createUserSeed(names[i]);
-                userService.saveUser(user);
-                GardenUser gardenUser = createGardenUserSeed(user);
-                gardenUserService.saveGardenUser(gardenUser);
+                UserDTO userDTO = createUserSeed(names[i]);
+                userService.saveUser(userDTO);
+                /*UserDTO newUserDTO = userService.findUserByUsername(userDTO.getUserName());
+                GardenUserDTO gardenUserDTO = createGardenUserSeed(newUserDTO);
+                gardenUserService.saveGardenUser(gardenUserDTO);*/
+            }
+            /*seedChad();*/
+        }
+    }
+
+    public void seedGardenUsers() {
+        List<GardenUserDTO> gardenUsers = gardenUserService.getAllGardenUsers();
+        if(gardenUsers.isEmpty()) {
+            List<UserDTO> users = userService.getAllUsers();
+            List<GardenDTO> gardens = gardenService.getAllGardens();
+            for (int i = 0; i < users.size(); i++) {
+                GardenUserDTO gardenUserDTO1 = createGardenUserSeed(users.get(i), gardens.get(i), UserRole.GARDEN_MANAGER);
+                gardenUserService.saveGardenUser(gardenUserDTO1);
+                GardenUserDTO gardenUserDTO2 = createGardenUserSeed(users.get(i), gardens.get(i+1), UserRole.GARDENER);
+                gardenUserService.saveGardenUser(gardenUserDTO2);
             }
             seedChad();
         }
     }
-
-
 
     public void seedGardens() {
         List<GardenDTO> gardens = gardenService.getAllGardens();
         if(gardens.isEmpty()) {
             String[] gardenNames = {"Eden", "Hanging Gardens", "Central Park", "Madison Square Garden",
                     "Bowsers Big Balloon Castle", "Orange County Park", "Red Reindeer Square", "Thousand needles",
-                    "The Barrens", "Howling Fjord"};
+                    "The Barrens", "Howling Fjord", "Extra Garden"};
             String[] locations = {"New York", "Hollywood", "OudeHaske", "London", "Toronto", "Buffalo", "Orlando",
-                    "Oxford", "Berlin", "Caketown"};
+                    "Oxford", "Berlin", "Caketown", "Groningen"};
             for(int i = 0; i < gardenNames.length; i++) {
-                Garden garden = createGardenSeed(gardenNames[i], locations[i]);
-                gardenService.saveGarden(garden);
+                GardenDTO gardenDTO = createGardenSeed(gardenNames[i], locations[i]);
+                gardenService.saveGarden(gardenDTO);
             }
         }
     }
@@ -91,11 +106,8 @@ public class Seeder {
         if(gardenTasks.isEmpty()) {
             List<GardenDTO> allGardens = gardenService.getAllGardens();
             for (GardenDTO garden : allGardens) {
-                Garden realGarden = new Garden();
-                realGarden.setGardenId(garden.getGardenId());
-                realGarden.setGardenName(garden.getGardenName());
-                ArrayList<GardenTask> tasks = createGardenTaskSeed(realGarden);
-                for(GardenTask task: tasks) {
+                ArrayList<GardenTaskDTO> tasks = createGardenTaskSeed(garden);
+                for(GardenTaskDTO task: tasks) {
                     gardenTaskService.saveGardenTask(task);
                 }
             }
@@ -107,11 +119,11 @@ public class Seeder {
         if(patches.isEmpty()) {
             List<GardenDTO> allGardens = gardenService.getAllGardens();
             for (GardenDTO garden : allGardens) {
-                Garden realGarden = new Garden();
+                GardenDTO realGarden = new GardenDTO();
                 realGarden.setGardenId(garden.getGardenId());
                 realGarden.setGardenName(garden.getGardenName());
-                ArrayList<Patch> patchesPerGarden = createPatchSeed(realGarden);
-                for (Patch patch : patchesPerGarden) {
+                ArrayList<PatchDTO> patchesPerGarden = createPatchSeed(realGarden);
+                for (PatchDTO patch : patchesPerGarden) {
                     patchService.savePatch(patch);
                 }
             }
@@ -123,109 +135,108 @@ public class Seeder {
         if(patchTasks.isEmpty()) {
             List<PatchDTO> allPatches = patchService.getAllPatches();
             for(PatchDTO patch : allPatches) {
-                Patch realPatch = patchService.getPatchById(patch.getPatchId());
-                ArrayList<PatchTask> allTasksForThisPatch = createPatchTaskSeed(realPatch);
-                for(PatchTask task : allTasksForThisPatch) {
+                PatchDTO realPatch = patchService.getPatchById(patch.getPatchId());
+                ArrayList<PatchTaskDTO> allTasksForThisPatch = createPatchTaskSeed(realPatch);
+                for(PatchTaskDTO task : allTasksForThisPatch) {
                     patchTaskService.savePatchTask(task);
                 }
             }
         }
     }
 
-    public User createUserSeed(String name) {
+    public UserDTO createUserSeed(String name) {
         List<GardenDTO> allGardens = gardenService.getAllGardens();
         /*int randomGarden = (int) (Math.random() * allGardens.size()) + 1;*/
         String email = name.toLowerCase() + "@hotmail.com";
         String password = name.toLowerCase() + "123";
-        User user = new User();
+        UserDTO user = new UserDTO();
         user.setUserName(name);
-        user.setUserPassword(passwordEncoder.encode(password));
+        user.setPassword1(passwordEncoder.encode(password));
         user.setUserEmail(email);
         /*user.setGarden(gardenService.getGardenById(randomGarden));*/
         return user;
     }
 
-    public GardenUser createGardenUserSeed(User user) {
-        GardenUser gardenUser = new GardenUser();
-        gardenUser.setUser(user);
+    /*public GardenUserDTO createGardenUserSeed(UserDTO userDTO) {
+        GardenUserDTO gardenUserDTO = new GardenUserDTO();
+        gardenUserDTO.setUserDTO(userDTO);
         List<GardenDTO> allGardens = gardenService.getAllGardens();
         int randomGarden = (int) (Math.random() * allGardens.size()) + 1;
-        gardenUser.setGarden(gardenService.convertFromGardenDTO(
-                allGardens.stream().filter(x -> x.getGardenId() == randomGarden).findFirst().get()));
+        gardenUserDTO.setGardenDTO(allGardens.stream().filter(x -> x.getGardenId() == randomGarden).findFirst().get());
         String[] roles = new String[] {UserRole.GARDENER, UserRole.GARDEN_MANAGER};
         int randomRole = (int) (Math.random() * roles.length);
-        gardenUser.setRole(roles[randomRole]);
-        return gardenUser;
+        gardenUserDTO.setRole(roles[randomRole]);
+        return gardenUserDTO;
+    }*/
+
+    public GardenUserDTO createGardenUserSeed(UserDTO userDTO, GardenDTO gardenDTO, String role) {
+        GardenUserDTO gardenUserDTO = new GardenUserDTO();
+        gardenUserDTO.setUserDTO(userDTO);
+        gardenUserDTO.setGardenDTO(gardenDTO);
+        gardenUserDTO.setRole(role);
+        return gardenUserDTO;
     }
 
     public void seedChad() {
-        User chad = createUserSeed("Chad");
+        UserDTO chad = createUserSeed("Chad");
         userService.saveUser(chad);
-        List<Garden> allGardens = gardenService.getAllGardens().stream().map(gardenService::convertFromGardenDTO).
-                collect(Collectors.toList());
-        for (Garden garden : allGardens) {
-            GardenUser gardenUserChad = createGardenManagerSeed(chad, garden);
+        UserDTO newChad = userService.findUserByUsername("Chad");
+        List<GardenDTO> allGardens = gardenService.getAllGardens();
+        for (GardenDTO gardenDTO : allGardens) {
+            GardenUserDTO gardenUserChad = createGardenUserSeed(newChad, gardenDTO, UserRole.GARDEN_MANAGER);
             gardenUserService.saveGardenUser(gardenUserChad);
         }
     }
 
-    public GardenUser createGardenManagerSeed(User user, Garden garden) {
-        GardenUser gardenUser = new GardenUser();
-        gardenUser.setUser(user);
-        gardenUser.setGarden(garden);
-        gardenUser.setRole(UserRole.GARDEN_MANAGER);
-        return gardenUser;
+    public GardenDTO createGardenSeed(String gardenName, String location) {
+        GardenDTO gardenDTO = new GardenDTO();
+        gardenDTO.setGardenName(gardenName);
+        gardenDTO.setLocation(location);
+        return gardenDTO;
     }
 
-    public Garden createGardenSeed(String gardenName, String location) {
-        Garden garden = new Garden();
-        garden.setGardenName(gardenName);
-        garden.setLocation(location);
-        return garden;
-    }
-
-    public ArrayList<GardenTask> createGardenTaskSeed(Garden garden) {
-        ArrayList<GardenTask> tasks = new ArrayList<>();
+    public ArrayList<GardenTaskDTO> createGardenTaskSeed(GardenDTO gardenDTO) {
+        ArrayList<GardenTaskDTO> tasks = new ArrayList<>();
         String[] titles = {"Sweep the paths", "Remove weeds", "Gather trash", "Repair fences", "Paint fences", "Ponder",
                 "Toast toasters", "Empty trashcans"};
         for(int i = 0; i < titles.length; i++) {
             String description = "Please " + titles[i].toLowerCase() + " today";
-            GardenTask gardenTask = new GardenTask();
-            gardenTask.setTaskName(titles[i]);
-            gardenTask.setTaskDescription(description);
-            gardenTask.setDone(false);
-            gardenTask.setGarden(garden);
-            tasks.add(gardenTask);
+            GardenTaskDTO gardenTaskDTO = new GardenTaskDTO();
+            gardenTaskDTO.setTaskName(titles[i]);
+            gardenTaskDTO.setTaskDescription(description);
+            gardenTaskDTO.setDone(false);
+            gardenTaskDTO.setGardenDTO(gardenDTO);
+            tasks.add(gardenTaskDTO);
         }
         return tasks;
     }
 
-    public ArrayList<Patch> createPatchSeed(Garden garden) {
-        ArrayList<Patch> patches = new ArrayList<>();
+    public ArrayList<PatchDTO> createPatchSeed(GardenDTO gardenDTO) {
+        ArrayList<PatchDTO> patches = new ArrayList<>();
         String[] crops = {"turnips", "carrots", "potatoes", "grapes", "pumpkins", "berry bushes", "strawberries"};
         for (int i = 0; i < patchesPerGarden; i++) {
             int randomCrops = (int)Math.floor(Math.random() * crops.length);
-            Patch patch = new Patch();
-            patch.setCrop(crops[randomCrops]);
-            patch.setGarden(garden);
-            patches.add(patch);
+            PatchDTO patchDTO = new PatchDTO();
+            patchDTO.setCrop(crops[randomCrops]);
+            patchDTO.setGardenDTO(gardenDTO);
+            patches.add(patchDTO);
         }
         return patches;
     }
 
-    public ArrayList<PatchTask> createPatchTaskSeed(Patch patch) {
-        ArrayList<PatchTask> tasks = new ArrayList<>();
+    public ArrayList<PatchTaskDTO> createPatchTaskSeed(PatchDTO patchDTO) {
+        ArrayList<PatchTaskDTO> tasks = new ArrayList<>();
         String[] titles = {"Plant", "Fertilize", "Water", "Clean", "Prune", "Weed", "Hoe", "Harvest"};
         for(int i = 0; i < titles.length; i++) {
-            String crop = patch.getCrop();
+            String crop = patchDTO.getCrop();
             String title = titles[i] + " the " + crop;
             String description = "Please " + titles[i].toLowerCase() + " the " + crop + " soon";
-            PatchTask patchTask = new PatchTask();
-            patchTask.setTaskName(title);
-            patchTask.setTaskDescription(description);
-            patchTask.setDone(false);
-            patchTask.setPatch(patch);
-            tasks.add(patchTask);
+            PatchTaskDTO patchTaskDTO = new PatchTaskDTO();
+            patchTaskDTO.setTaskName(title);
+            patchTaskDTO.setTaskDescription(description);
+            patchTaskDTO.setDone(false);
+            patchTaskDTO.setPatchDTO(patchDTO);
+            tasks.add(patchTaskDTO);
         }
         return tasks;
     }

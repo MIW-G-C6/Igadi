@@ -2,11 +2,15 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.UserDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.*;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenConverter;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenUserConverter;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,52 +18,42 @@ import java.util.stream.Collectors;
 @Service
 public class GardenService {
 
-    private GardenRepository gardenRepository;
-    private GardenUserService gardenUserService;
-    private AuthorizationHelper authorizationHelper;
+    private final GardenRepository gardenRepository;
+    private final GardenUserService gardenUserService;
+    private final AuthorizationHelper authorizationHelper;
+    private final GardenConverter gardenConverter;
+    private final GardenUserConverter gardenUserConverter;
 
     public GardenService(GardenRepository gardenRepository, GardenUserService gardenUserService,
-                         AuthorizationHelper authorizationHelper) {
+                         AuthorizationHelper authorizationHelper, GardenConverter gardenConverter,
+                         GardenUserConverter gardenUserConverter) {
         this.gardenRepository = gardenRepository;
         this.gardenUserService = gardenUserService;
         this.authorizationHelper = authorizationHelper;
+        this.gardenConverter = gardenConverter;
+        this.gardenUserConverter = gardenUserConverter;
     }
 
     public List<GardenDTO> getAllGardens() {
-        return gardenRepository.findAll().stream().map(this::convertToGardenDTO).collect(Collectors.toList());
+        return gardenRepository.findAll().stream().map(gardenConverter::convertToGardenDTO).collect(Collectors.toList());
     }
 
-    public GardenDTO convertToGardenDTO(Garden garden) {
-        GardenDTO gardenDTO = new GardenDTO();
-        gardenDTO.setGardenId(garden.getGardenId());
-        gardenDTO.setGardenName(garden.getGardenName());
-        gardenDTO.setLocation(garden.getLocation());
-        return gardenDTO;
+    public GardenDTO getGardenById(int gardenId) {
+        return gardenConverter.convertToGardenDTO(gardenRepository.getById(gardenId));
     }
 
-    public Garden convertFromGardenDTO(GardenDTO gardenDTO) {
-        Garden garden = new Garden();
-        garden.setGardenId(gardenDTO.getGardenId());
-        garden.setGardenName(gardenDTO.getGardenName());
-        garden.setLocation(gardenDTO.getLocation());
-        return garden;
+    public void saveGarden(GardenDTO garden) {
+        gardenRepository.save(gardenConverter.convertFromGardenDTO(garden));
     }
 
-    public Garden getGardenById(int gardenId) {
-        return gardenRepository.getById(gardenId);
-    }
-
-    public void saveGarden(Garden garden) {
+    public void saveGardenAndMakeUserGardenManager(GardenDTO gardenDTO, User user) {
+        Garden garden = gardenConverter.convertFromGardenDTO(gardenDTO);
         gardenRepository.save(garden);
-    }
-
-    public void saveGardenAndMakeUserGardenManager(Garden garden, User user) {
-        gardenRepository.save(garden);
-        GardenUser gardenUser = new GardenUser();
-        gardenUser.setGarden(garden);
-        gardenUser.setUser(user);
-        gardenUser.setRole(UserRole.GARDEN_MANAGER);
-        gardenUserService.saveGardenUser(gardenUser);
+        GardenUserDTO gardenUserDTO = new GardenUserDTO();
+        gardenUserDTO.setGardenDTO(gardenConverter.convertToGardenDTO(garden));
+        gardenUserDTO.setUser(user);
+        gardenUserDTO.setRole(UserRole.GARDEN_MANAGER);
+        gardenUserService.saveGardenUser(gardenUserDTO);
     }
 
     public void userDeleteGarden(int userId, int gardenId) {
@@ -73,5 +67,4 @@ public class GardenService {
     public void deleteGardenById(int gardenId) {
         gardenRepository.deleteById(gardenId);
     }
-
 }

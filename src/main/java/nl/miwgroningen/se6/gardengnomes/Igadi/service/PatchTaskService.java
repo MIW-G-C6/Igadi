@@ -5,6 +5,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.PatchTaskConverter;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,56 +17,39 @@ import java.util.stream.Collectors;
 @Service
 public class PatchTaskService {
 
-    private PatchTaskRepository patchTaskRepository;
-    private PatchService patchService;
-    private AuthorizationHelper authorizationHelper;
+    private final PatchTaskRepository patchTaskRepository;
+    private final PatchService patchService;
+    private final AuthorizationHelper authorizationHelper;
+    private final PatchTaskConverter patchTaskConverter;
 
     public PatchTaskService(PatchTaskRepository patchTaskRepository, PatchService patchService,
-                            AuthorizationHelper authorizationHelper) {
+                            AuthorizationHelper authorizationHelper, PatchTaskConverter patchTaskConverter) {
         this.patchTaskRepository = patchTaskRepository;
         this.patchService = patchService;
         this.authorizationHelper = authorizationHelper;
+        this.patchTaskConverter = patchTaskConverter;
     }
 
-    public void savePatchTask(PatchTask patchTask) {
-        patchTaskRepository.save(patchTask);
+    public void savePatchTask(PatchTaskDTO patchTaskDTO) {
+        patchTaskRepository.save(patchTaskConverter.convertFromPatchTaskDTO(patchTaskDTO));
     }
 
-    public void userSavePatchTask(PatchTask patchTask, int userId, int gardenId) {
+    public void userSavePatchTask(PatchTaskDTO patchTaskDTO, int userId, int gardenId) {
         if (authorizationHelper.isUserGardenManager(userId, gardenId)) {
-            savePatchTask(patchTask);
+            savePatchTask(patchTaskDTO);
         } else {
             throw new SecurityException("You are not allowed to save this patch task.");
         }
     }
 
     public List<PatchTaskDTO> getAllPatchTasks() {
-        return patchTaskRepository.findAll().stream().map(this::convertToPatchTaskDTO).collect(Collectors.toList());
+        return patchTaskRepository.findAll().stream().map(patchTaskConverter::convertToPatchTaskDTO)
+                .collect(Collectors.toList());
     }
 
     public List<PatchTaskDTO> getAllTasksByPatchId(int patchId) {
         List<PatchTask> tasks = patchTaskRepository.findAllBypatch_patchId(patchId);
-        return tasks.stream().map(this::convertToPatchTaskDTO).collect(Collectors.toList());
-    }
-
-    public PatchTaskDTO convertToPatchTaskDTO(PatchTask patchTask) {
-        PatchTaskDTO patchTaskDTO = new PatchTaskDTO();
-        patchTaskDTO.setTaskId(patchTask.getTaskId());
-        patchTaskDTO.setTaskName(patchTask.getTaskName());
-        patchTaskDTO.setTaskDescription(patchTask.getTaskDescription());
-        patchTaskDTO.setDone(patchTask.getIsDone());
-        patchTaskDTO.setPatchDTO(patchService.convertToPatchDTO(patchTask.getPatch()));
-        return patchTaskDTO;
-    }
-
-    public PatchTask convertFromPatchTaskDTO(PatchTaskDTO patchTaskDTO, Patch patch) {
-        PatchTask patchTask = new PatchTask();
-        patchTask.setTaskId(patchTaskDTO.getTaskId());
-        patchTask.setTaskName(patchTaskDTO.getTaskName());
-        patchTask.setTaskDescription(patchTaskDTO.getTaskDescription());
-        patchTask.setDone(patchTaskDTO.isDone());
-        patchTask.setPatch(patch);
-        return patchTask;
+        return tasks.stream().map(patchTaskConverter::convertToPatchTaskDTO).collect(Collectors.toList());
     }
 
     public void deletePatchTask(int userId, PatchTask patchTask) {

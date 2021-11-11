@@ -5,6 +5,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.PatchService;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -25,12 +26,15 @@ public class PatchController {
 
     private final PatchService patchService;
     private final GardenService gardenService;
+    private final TaskService taskService;
     private final AuthorizationHelper authorizationHelper;
 
-    public PatchController(PatchService patchService, GardenService gardenService, AuthorizationHelper authorizationHelper) {
+    public PatchController(PatchService patchService, GardenService gardenService,
+                           AuthorizationHelper authorizationHelper, TaskService taskService) {
         this.patchService = patchService;
         this.gardenService = gardenService;
         this.authorizationHelper = authorizationHelper;
+        this.taskService = taskService;
     }
 
     @GetMapping("/overview/details/garden/patches/new/{gardenId}")
@@ -38,7 +42,7 @@ public class PatchController {
                                   @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
         if (authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)) {
             PatchDTO patch = new PatchDTO();
-            patch.setGardenDTO(gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId)));
+            patch.setGardenDTO(gardenService.getGardenById(gardenId));
             model.addAttribute("patch", patch);
             model.addAttribute("buttonText", "Create patch");
             model.addAttribute("titleText", "Create a new patch!");
@@ -54,7 +58,7 @@ public class PatchController {
                                    @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
         try {
             if (authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId))) {
-                PatchDTO patch = patchService.convertToPatchDTO(patchService.getPatchById(patchId));
+                PatchDTO patch = patchService.getPatchById(patchId);
                 model.addAttribute("patch", patch);
                 model.addAttribute("buttonText", "Update patch");
                 model.addAttribute("titleText", "Update this patch!");
@@ -75,8 +79,8 @@ public class PatchController {
                                   RedirectAttributes redirectAttributes) {
         if (!result.hasErrors()) {
             try {
-                patchService.userSavePatch(patchService.convertFromPatchDTO(patch, gardenService.getGardenById(gardenId)),
-                        user.getUserId(), gardenId);
+                patch.setGardenDTO(gardenService.getGardenById(gardenId));
+                patchService.userSavePatch(patch, user.getUserId(), gardenId);
                 return "redirect:/overview/details/{gardenId}";
             }
             catch (SecurityException ex) {
@@ -85,6 +89,20 @@ public class PatchController {
             }
         } else {
             return "redirect:/overview/details/garden/patches/new/{gardenId}";
+        }
+    }
+
+    @PostMapping("/overview/details/patch/delete/{patchId}")
+    public String deletePatchById(@PathVariable("patchId") int patchId, @AuthenticationPrincipal User user,
+                                      RedirectAttributes redirectAttributes) {
+        try {
+            int gardenId = patchService.getPatchById(patchId).getGardenDTO().getGardenId();
+            patchService.deletePatch(user.getUserId(), patchService.getPatchById(patchId));
+            taskService.deleteUnreferencedEntries();
+            return "redirect:/overview/details/" + gardenId;
+        } catch (SecurityException ex) {
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+            return "redirect:/error";
         }
     }
 }

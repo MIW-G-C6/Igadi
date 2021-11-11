@@ -162,6 +162,15 @@
          right: 15px;
 }
 
+.equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv{
+    width: 140px;
+    text-align: center;
+    margin-bottom: 10px;
+    position:absolute;
+    top: 25%;
+    right: 15px;
+}
+
 /*contains general position information for the footer*/
 
 .footer {
@@ -432,6 +441,7 @@ color: lightgreen;
     border-radius: 10px;
 }
 
+
 /* Gardendetails page */
 .gardenDetailsButton{
 width: 250px;
@@ -453,4 +463,18 @@ cursor: pointer;
 
 }
 
+
+
+/* Profile index   */
+.profilecard {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
 

@@ -3,9 +3,11 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.UserDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.UserRepository;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.UserConverter;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,40 +23,25 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final UserConverter userConverter;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, UserConverter userConverter) {
         this.userRepository = userRepository;
+        this.userConverter = userConverter;
     }
 
     public List<UserDTO> getAllUsers() {
-        return userRepository.findAll().stream().map(this::convertToUserDTO).collect(Collectors.toList());
-    }
-
-    public UserDTO convertToUserDTO(User user) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUserId(user.getUserId());
-        userDTO.setUserName(user.getUserName());
-        userDTO.setUserEmail(user.getUserEmail());
-        return userDTO;
-    }
-
-
-    public User convertFromUserDTO(UserDTO userDTO) {
-        User user = new User();
-        user.setUserId(userDTO.getUserId());
-        user.setUserName(userDTO.getUserName());
-        user.setUserEmail(userDTO.getUserEmail());
-        user.setUserPassword(userDTO.getPassword1());
-        return user;
+        return userRepository.findAll().stream().map(userConverter::convertToUserDTO).collect(Collectors.toList());
     }
 
     public UserDTO getUserById(int userId) {
         User user = userRepository.getById(userId);
-        return convertToUserDTO(user);
+        return userConverter.convertToUserDTO(user);
     }
 
-    public void saveUser(User user) {
+    public void saveUser(UserDTO userDTO) {
+        User user = userConverter.convertFromUserDTO(userDTO);
         userRepository.save(user);
     }
 
@@ -77,7 +64,9 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public void saveSeededUser() {
-
+    public UserDTO findUserByUsername(String username) {
+        return userConverter.convertToUserDTO(userRepository.findUserByUserName(username).orElseThrow(
+                () -> new UsernameNotFoundException("Name " + username + " was not found!")
+        ));
     }
 }

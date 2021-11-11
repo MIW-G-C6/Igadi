@@ -67,7 +67,7 @@ public class GardenController {
         String message = "Something went wrong.";
         if (!result.hasErrors()) {
             try {
-                gardenService.saveGardenAndMakeUserGardenManager(gardenService.convertFromGardenDTO(gardenDTO), user);
+                gardenService.saveGardenAndMakeUserGardenManager(gardenDTO, user);
                 return "redirect:/gardens";
             } catch (Exception ex) {
                 if (gardenHelper.IsGardenNameDuplicate(ex)) {
@@ -95,7 +95,7 @@ public class GardenController {
     @GetMapping("/overview/details/{gardenId}")
     protected String showGardenDetails(@PathVariable("gardenId") int gardenId, Model model,
                                        @AuthenticationPrincipal User user) {
-        GardenDTO garden = gardenService.convertToGardenDTO(gardenService.getGardenById(gardenId));
+        GardenDTO garden = gardenService.getGardenById(gardenId);
         List<PatchDTO> allPatches = patchService.findAllPatchesByGardenId(gardenId);
         model.addAttribute("garden", garden);
         model.addAttribute("allPatches", allPatches);
