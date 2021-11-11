@@ -34,6 +34,8 @@
         <a th:if="${isUserGardenManager}" th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
             <button class="equalBoxPatchTasksAdd btn btn-outline-success float-right">Add Task</button>
         </a>
+            <button th:if="${isUserGardenManager}" class="equalBoxPatchTasksAdd btn btn-outline-danger float-right" data-toggle="modal"
+                    data-target="#igadiPatchDeleteModal">Delete patch</button>
     </div>
 
     <div class="col w-100 text-center">
@@ -85,6 +87,36 @@
                 </div>
             </div>
         </div>
+
+    </div>
+
+    <!-- Patch Modal -->
+    <div class="modal modalfade" id="igadiPatchDeleteModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header w-100 d-flex justify-content-center text-center">
+                    <h5 class="modal-title" th:text="${patch.cropInGarden()}"></h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body w-100 d-flex justify-content-center text-center">
+                    <h4>Are you sure?</h4>
+                </div>
+                <div class="modal-footer w-100 d-flex justify-content-center">
+                    <form class="w-25" th:if="${isUserGardenManager}"
+                          th:action="@{/overview/details/patch/delete/{patchId}(patchId=${patch.getPatchId()})}"
+                          th:method="post" th:object="${patch}">
+                        <button th:type="submit" class=" w-100 btn btn-danger taskDeleteBtn w-25">Confirm
+                        </button>
+                    </form>
+                    <button type="button" class="btn btn-success w-25" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+
 
     </div>
 </div>

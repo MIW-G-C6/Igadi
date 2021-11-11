@@ -31,7 +31,6 @@ public class PatchTaskService {
     }
 
     public void savePatchTask(PatchTaskDTO patchTaskDTO) {
-
         patchTaskRepository.save(patchTaskConverter.convertFromPatchTaskDTO(patchTaskDTO));
     }
 

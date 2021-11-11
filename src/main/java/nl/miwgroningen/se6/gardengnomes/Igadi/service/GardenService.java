@@ -47,9 +47,10 @@ public class GardenService {
     }
 
     public void saveGardenAndMakeUserGardenManager(GardenDTO gardenDTO, User user) {
-        gardenRepository.save(gardenConverter.convertFromGardenDTO(gardenDTO));
+        Garden garden = gardenConverter.convertFromGardenDTO(gardenDTO);
+        gardenRepository.save(garden);
         GardenUserDTO gardenUserDTO = new GardenUserDTO();
-        gardenUserDTO.setGardenDTO(gardenDTO);
+        gardenUserDTO.setGardenDTO(gardenConverter.convertToGardenDTO(garden));
         gardenUserDTO.setUser(user);
         gardenUserDTO.setRole(UserRole.GARDEN_MANAGER);
         gardenUserService.saveGardenUser(gardenUserDTO);
