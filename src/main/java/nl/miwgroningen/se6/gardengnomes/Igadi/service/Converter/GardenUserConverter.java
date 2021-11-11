@@ -27,7 +27,7 @@ public class GardenUserConverter {
         gardenUserDTO.setGardenUserId(gardenUser.getGardenUserId());
         gardenUserDTO.setRole(gardenUser.getRole());
         gardenUserDTO.setGardenDTO(gardenConverter.convertToGardenDTO(gardenUser.getGarden()));
-        gardenUserDTO.setUser(gardenUser.getUser());
+        gardenUserDTO.setUserDTO(userConverter.convertToUserDTO(gardenUser.getUser()));
         return gardenUserDTO;
     }
 
@@ -36,7 +36,11 @@ public class GardenUserConverter {
         gardenUser.setGardenUserId(gardenUserDTO.getGardenUserId());
         gardenUser.setRole(gardenUserDTO.getRole());
         gardenUser.setGarden(gardenConverter.convertFromGardenDTO(gardenUserDTO.getGardenDTO()));
-        gardenUser.setUser(gardenUserDTO.getUser());
+        if (gardenUserDTO.getUser() != null) {
+            gardenUser.setUser(gardenUserDTO.getUser());
+        } else {
+            gardenUser.setUser(userConverter.convertFromUserDTO(gardenUserDTO.getUserDTO()));
+        }
         return gardenUser;
     }
 

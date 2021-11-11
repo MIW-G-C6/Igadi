@@ -64,6 +64,12 @@ public class UserService implements UserDetailsService {
         );
     }
 
+    public UserDTO findUserByUsername(String username) {
+        return userConverter.convertToUserDTO(userRepository.findUserByUserName(username).orElseThrow(
+                () -> new UsernameNotFoundException("Name " + username + " was not found!")
+        ));
+    }
+
     public void saveSeededUser() {
 
     }

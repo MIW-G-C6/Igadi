@@ -48,11 +48,11 @@ public class GardenService {
 
     public void saveGardenAndMakeUserGardenManager(GardenDTO gardenDTO, User user) {
         gardenRepository.save(gardenConverter.convertFromGardenDTO(gardenDTO));
-        GardenUser gardenUser = new GardenUser();
-        gardenUser.setGarden(gardenConverter.convertFromGardenDTO(gardenDTO));
-        gardenUser.setUser(user);
-        gardenUser.setRole(UserRole.GARDEN_MANAGER);
-        //gardenUserService.saveGardenUser(gardenUser);
+        GardenUserDTO gardenUserDTO = new GardenUserDTO();
+        gardenUserDTO.setGardenDTO(gardenDTO);
+        gardenUserDTO.setUser(user);
+        gardenUserDTO.setRole(UserRole.GARDEN_MANAGER);
+        gardenUserService.saveGardenUser(gardenUserDTO);
     }
 
     public void userDeleteGarden(int userId, int gardenId) {
