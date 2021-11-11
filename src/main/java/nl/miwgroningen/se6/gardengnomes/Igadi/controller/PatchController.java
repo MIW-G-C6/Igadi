@@ -86,4 +86,17 @@ public class PatchController {
             return "redirect:/overview/details/garden/patches/new/{gardenId}";
         }
     }
+
+    @PostMapping("/overview/details/patchTasks/delete/{patchId}")
+    public String deletePatchById(@PathVariable("patchId") int patchId, @AuthenticationPrincipal User user,
+                                      RedirectAttributes redirectAttributes) {
+        try {
+            int gardenId = patchService.getPatchById(patchId).getGardenDTO().getGardenId();
+            patchService.deletePatch(user.getUserId(), patchService.getPatchById(patchId));
+            return "redirect:/overview/details/" + gardenId;
+        } catch (SecurityException ex) {
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+            return "redirect:/error";
+        }
+    }
 }
