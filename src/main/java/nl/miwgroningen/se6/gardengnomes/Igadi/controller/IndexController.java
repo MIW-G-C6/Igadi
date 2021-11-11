@@ -1,7 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
@@ -12,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Annemarleen Bosma <makeItWork2021@annemarleenbosma.nl>
- * This controller acts as the default page of homepage.
+ *
+ * This controller acts as the default page when not logged in.
+ *
+ * When logged in, the user will get to see the right profile page.
  *
  */
 
@@ -67,4 +68,5 @@ public class IndexController {
     protected String showAboutPage(Model model) {
         return "about";
     }
+
 }

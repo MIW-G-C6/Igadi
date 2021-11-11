@@ -138,8 +138,6 @@
 .equalBox{
     width: 140px;
     text-align: center;
-
-
 }
 
 .equalBoxPatchTasksEdit{
@@ -149,8 +147,6 @@
     position:absolute;
          top: 15%;
          right: 15px;
-
-
 }
 
 .equalBoxPatchTasksAdd{
@@ -165,18 +161,18 @@
 /*contains general position information for the footer*/
 
 .footer {
-margin-top: auto;
-padding: 10px 0;
-height: 4.85rem;
-color: green;
-width: 100%;
-margin-bottom: 0px;
+    margin-top: auto;
+    padding: 10px 0;
+    height: 4.85rem;
+    color: green;
+    width: 100%;
+    margin-bottom: 0px;
 }
 
 body{
-min-height: 100vh;
-display: flex;
-flex-direction: column;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /*contains general position and layout information for the gardens.html*/
@@ -207,6 +203,7 @@ flex-direction: column;
 }
 
 /* Patch Form */
+
 .patchFormContainer1{
     border-radius: 15px;
     background-color: rgba(0, 175, 0, 0.3);
@@ -222,6 +219,7 @@ flex-direction: column;
     color: green;
     transition-duration: 150ms;
 }
+
 .patchFormBtn:hover{
     background-color: rgba(255, 255, 255, 0.15);
     color: white;
@@ -247,46 +245,46 @@ flex-direction: column;
 /*contains general position and layout information for the patchTasks.html*/
 
 .grid-ish{
-display: flex;
-flex-wrap: wrap;
-width: 50%;
-justify-content: center;
-margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    justify-content: center;
+    margin: auto;
 }
 
 .grid-ish > * {
-flex: 1 1 100%;
+    flex: 1 1 100%;
 }
 
 .colMakeUpNotDone{
-padding: 1rem;
-background-color: rgba(255, 105, 97, 0.15);
-border: 2px solid;
-border-radius: 15px;
-border-color: grey;
-margin: 3px;
+    padding: 1rem;
+    background-color: rgba(255, 105, 97, 0.15);
+    border: 2px solid;
+    border-radius: 15px;
+    border-color: grey;
+    margin: 3px;
 }
 
 .colMakeUpDone{
-padding: 1rem;
-background-color: lightgreen;
-border: 2px solid;
-border-radius: 15px;
-border-color: grey;
-margin: 3px;
+    padding: 1rem;
+    background-color: lightgreen;
+    border: 2px solid;
+    border-radius: 15px;
+    border-color: grey;
+    margin: 3px;
 }
 
 .titelPatchTasks{
-padding: 20px;
+    padding: 20px;
 
 }
 
 .bigBox{
-width:100vw;
+    width:100vw;
 }
 
 .checkBox{
-justify-content: right;
+    justify-content: right;
 }
 
 .patchTaskColumn {
@@ -296,41 +294,43 @@ justify-content: right;
 }
 
 .boxed{
-padding-top: 15px;
-word-wrap: break-word;
+    padding-top: 15px;
+    word-wrap: break-word;
 }
 
 .gridSize{
-padding: 10px;
-word-wrap: break-word;
+    padding: 10px;
+    word-wrap: break-word;
 }
 
 .noBreakWord{
-word-wrap: break-word;
-padding-top: 1rem;
+    word-wrap: break-word;
+    padding-top: 1rem;
 }
 
 .noBreakWord{
-word-wrap: break-word;
-padding-top: 1rem;
+    word-wrap: break-word;
+    padding-top: 1rem;
 }
 
 .inlineText{
-display: inline-block;
+    display: inline-block;
 }
 
 .binIcon{
-width: 15px;
-height: 15px;
-cursor: pointer;
-position: relative;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    position: relative;
 
 }
 
 /*  About page */
+
 .igadi-bg-light{
     background-color: rgba(0, 100, 0, 0.15);
 }
+
 .teamImg {
     border: 3px solid black;
     border-radius: 50%;
@@ -372,6 +372,7 @@ position: relative;
 }
 
 /* Modal override  */
+
 .modal-backdrop {
     opacity:0.5 !important;
 }
@@ -432,15 +433,62 @@ color: lightgreen;
     border-radius: 10px;
 }
 
-/* Profile index   */
-.profilecard {
-    flex-direction: row;
+/* Profile  */
+.profile-container {
+    width: 100%;
+    flex-direction: column;
     justify-content: center;
     gap: 10px;
 }
 
-.container {
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
+.profile-jumbotron-parent {
+    position: relative;
+    background-color: #F5F5F5;
+}
+
+.profile-userImage-child1 {
+    position: relative;
+    margin-right: 1.5rem;
+    background-color: #F5F5F5;
+    /*visibility: hidden;*/
+}
+
+.child2 {
+    display: inline-block;
+    margin-left: 0.5rem;
+    position: absolute;
+    width: 80%;
+    padding-bottom: 0.5rem;
+    /*background-color: #ff885c;*/
+}
+
+.profile-btn {
+    /*float: right;*/
+    /*display: inline-block;*/
+}
+
+.profile-userDetails-child3 {
+    position: relative;
+    top: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30%;
+    margin-left: 2.5rem;
+
+    /*background-color: #ac707a;*/
+    width: 80%;
+}
+
+.profile-gardens-en-roles {
+    position: relative;
+    font-weight: bold;
+}
+
+.profile-userName {
+    margin-top: 1.5rem;
+    width: inherit;
+}
+
+.profile-profilePage {
+    width: fit-content;
 }
