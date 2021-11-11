@@ -52,7 +52,7 @@ public class PatchTaskService {
         return tasks.stream().map(patchTaskConverter::convertToPatchTaskDTO).collect(Collectors.toList());
     }
 
-    public void deletePatchTask(int userId, PatchTask patchTask) {
+    public void userDeletePatchTask(int userId, PatchTask patchTask) {
         if (authorizationHelper.isUserGardenManager(userId, patchTask.getPatch().getGarden().getGardenId())) {
             patchTaskRepository.delete(patchTask);
         } else {

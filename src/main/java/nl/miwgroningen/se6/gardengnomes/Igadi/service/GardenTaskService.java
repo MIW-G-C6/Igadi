@@ -44,7 +44,7 @@ public class GardenTaskService {
         gardenTaskRepository.save(gardenTaskConverter.convertFromGardenTaskDTO(gardenTaskDTO));
     }
 
-    public void deleteGardenTask(int userId, GardenTask gardenTask) {
+    public void userDeleteGardenTask(int userId, GardenTask gardenTask) {
         if (authorizationHelper.isUserGardenManager(userId, gardenTask.getGarden().getGardenId())) {
             gardenTaskRepository.delete(gardenTask);
         } else {
