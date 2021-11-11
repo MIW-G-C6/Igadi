@@ -53,6 +53,7 @@ public class Seeder {
         seedGardenTasks();
         seedPatches();
         seedPatchTasks();
+        seedGardenUsers();
     }
 
     public void seedUsers() {
@@ -62,10 +63,26 @@ public class Seeder {
             for(int i = 0; i < names.length; i++) {
                 UserDTO userDTO = createUserSeed(names[i]);
                 userService.saveUser(userDTO);
-                //GardenUserDTO gardenUser = createGardenUserSeed(userDTO);
-                //gardenUserService.saveGardenUser(gardenUser);
+                /*UserDTO newUserDTO = userService.findUserByUsername(userDTO.getUserName());
+                GardenUserDTO gardenUserDTO = createGardenUserSeed(newUserDTO);
+                gardenUserService.saveGardenUser(gardenUserDTO);*/
             }
-            //seedChad();
+            /*seedChad();*/
+        }
+    }
+
+    public void seedGardenUsers() {
+        List<GardenUserDTO> gardenUsers = gardenUserService.getAllGardenUsers();
+        if(gardenUsers.isEmpty()) {
+            List<UserDTO> users = userService.getAllUsers();
+            List<GardenDTO> gardens = gardenService.getAllGardens();
+            for (int i = 0; i < users.size(); i++) {
+                GardenUserDTO gardenUserDTO1 = createGardenUserSeed(users.get(i), gardens.get(i), UserRole.GARDEN_MANAGER);
+                gardenUserService.saveGardenUser(gardenUserDTO1);
+                GardenUserDTO gardenUserDTO2 = createGardenUserSeed(users.get(i), gardens.get(i+1), UserRole.GARDENER);
+                gardenUserService.saveGardenUser(gardenUserDTO2);
+            }
+            seedChad();
         }
     }
 
@@ -74,9 +91,9 @@ public class Seeder {
         if(gardens.isEmpty()) {
             String[] gardenNames = {"Eden", "Hanging Gardens", "Central Park", "Madison Square Garden",
                     "Bowsers Big Balloon Castle", "Orange County Park", "Red Reindeer Square", "Thousand needles",
-                    "The Barrens", "Howling Fjord"};
+                    "The Barrens", "Howling Fjord", "Extra Garden"};
             String[] locations = {"New York", "Hollywood", "OudeHaske", "London", "Toronto", "Buffalo", "Orlando",
-                    "Oxford", "Berlin", "Caketown"};
+                    "Oxford", "Berlin", "Caketown", "Groningen"};
             for(int i = 0; i < gardenNames.length; i++) {
                 GardenDTO gardenDTO = createGardenSeed(gardenNames[i], locations[i]);
                 gardenService.saveGarden(gardenDTO);
@@ -140,9 +157,9 @@ public class Seeder {
         return user;
     }
 
-    public GardenUserDTO createGardenUserSeed(User user) {
+    /*public GardenUserDTO createGardenUserSeed(UserDTO userDTO) {
         GardenUserDTO gardenUserDTO = new GardenUserDTO();
-        gardenUserDTO.setUser(user);
+        gardenUserDTO.setUserDTO(userDTO);
         List<GardenDTO> allGardens = gardenService.getAllGardens();
         int randomGarden = (int) (Math.random() * allGardens.size()) + 1;
         gardenUserDTO.setGardenDTO(allGardens.stream().filter(x -> x.getGardenId() == randomGarden).findFirst().get());
@@ -150,27 +167,25 @@ public class Seeder {
         int randomRole = (int) (Math.random() * roles.length);
         gardenUserDTO.setRole(roles[randomRole]);
         return gardenUserDTO;
+    }*/
+
+    public GardenUserDTO createGardenUserSeed(UserDTO userDTO, GardenDTO gardenDTO, String role) {
+        GardenUserDTO gardenUserDTO = new GardenUserDTO();
+        gardenUserDTO.setUserDTO(userDTO);
+        gardenUserDTO.setGardenDTO(gardenDTO);
+        gardenUserDTO.setRole(role);
+        return gardenUserDTO;
     }
 
     public void seedChad() {
         UserDTO chad = createUserSeed("Chad");
         userService.saveUser(chad);
+        UserDTO newChad = userService.findUserByUsername("Chad");
         List<GardenDTO> allGardens = gardenService.getAllGardens();
         for (GardenDTO gardenDTO : allGardens) {
-            GardenUserDTO gardenUserChad = createGardenManagerSeed(chad, gardenDTO);
-            //gardenUserService.saveGardenUser(gardenUserChad);
+            GardenUserDTO gardenUserChad = createGardenUserSeed(newChad, gardenDTO, UserRole.GARDEN_MANAGER);
+            gardenUserService.saveGardenUser(gardenUserChad);
         }
-    }
-
-    public GardenUserDTO createGardenManagerSeed(UserDTO userDTO, GardenDTO gardenDTO) {
-        GardenUserDTO gardenUserDTO = new GardenUserDTO();
-        //Here there needs to be a fix
-        /*
-        gardenUserDTO.setUser(userDTO);
-         */
-        gardenUserDTO.setGardenDTO(gardenDTO);
-        gardenUserDTO.setRole(UserRole.GARDEN_MANAGER);
-        return gardenUserDTO;
     }
 
     public GardenDTO createGardenSeed(String gardenName, String location) {

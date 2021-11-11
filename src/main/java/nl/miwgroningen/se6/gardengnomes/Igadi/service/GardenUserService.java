@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GardenUserService {
@@ -23,11 +25,15 @@ public class GardenUserService {
         this.gardenUserConverter = gardenUserConverter;
     }
 
-    public ArrayList<GardenUser> findAllGardenUsersByUserId(int userId) {
+    public List<GardenUserDTO> getAllGardenUsers() {
+        return gardenUserRepository.findAll().stream().map(gardenUserConverter::convertToGardenUserDTO).collect(Collectors.toList());
+    }
+
+    public List<GardenUser> findAllGardenUsersByUserId(int userId) {
         return gardenUserRepository.findAllByuser_userId(userId);
     }
 
-    public ArrayList<GardenUser> findAllGardenUsersByUserIdAndGardenId(int gardenId, int userId) {
+    public List<GardenUser> findAllGardenUsersByUserIdAndGardenId(int gardenId, int userId) {
         Garden garden = new Garden();
         garden.setGardenId(gardenId);
         User user = new User();
@@ -35,7 +41,7 @@ public class GardenUserService {
         return gardenUserRepository.findAllByGardenAndUser(garden, user);
     }
 
-    public ArrayList<GardenUser> findAllGardenUsersByAll(int gardenId, int userId, String role) {
+    public List<GardenUser> findAllGardenUsersByAll(int gardenId, int userId, String role) {
         Garden garden = new Garden();
         garden.setGardenId(gardenId);
         User user = new User();
@@ -43,7 +49,8 @@ public class GardenUserService {
         return gardenUserRepository.findAllByGardenAndUserAndRole(garden, user, role);
     }
 
-    public void saveGardenUser(GardenUser gardenUser) {
+    public void saveGardenUser(GardenUserDTO gardenUserDTO) {
+        GardenUser gardenUser = gardenUserConverter.convertFromGardenUserDTO(gardenUserDTO);
         gardenUserRepository.save(gardenUser);
     }
 }
