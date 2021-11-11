@@ -107,7 +107,7 @@
                 </div>
                 <div class="modal-footer w-100 d-flex justify-content-center">
                     <form class="w-25" th:if="${isUserGardenManager}"
-                          th:action="@{/overview/details/patchTasks/delete/{patchId}(patchId=${patch.getPatchId()})}"
+                          th:action="@{/overview/details/patch/delete/{patchId}(patchId=${patch.getPatchId()})}"
                           th:method="post" th:object="${patch}">
                         <button th:type="submit" class=" w-100 btn btn-danger taskDeleteBtn w-25">Confirm
                         </button>
