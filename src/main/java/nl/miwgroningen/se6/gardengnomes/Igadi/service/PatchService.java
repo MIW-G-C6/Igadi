@@ -73,7 +73,7 @@ public class PatchService {
                 new NullPointerException("No patch with this patchId was found."));
     }
 
-    public void deletePatch(int userId, PatchDTO patchDTO) {
+    public void userDeletePatch(int userId, PatchDTO patchDTO) {
         if (authorizationHelper.isUserGardenManager(userId, patchDTO.getGardenDTO().getGardenId())) {
             patchRepository.delete(patchConverter.convertFromPatchDTO(patchDTO));
         } else {
