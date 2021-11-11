@@ -3,6 +3,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.PatchTaskRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenConverter;
@@ -70,5 +71,13 @@ public class PatchService {
     public int findGardenIdByPatchId (int patchId) {
         return patchRepository.findGardenIdByPatchId(patchId).orElseThrow(() ->
                 new NullPointerException("No patch with this patchId was found."));
+    }
+
+    public void deletePatch(int userId, PatchDTO patchDTO) {
+        if (authorizationHelper.isUserGardenManager(userId, patchDTO.getGardenDTO().getGardenId())) {
+            patchRepository.delete(patchConverter.convertFromPatchDTO(patchDTO));
+        } else {
+            throw new SecurityException("You are not allowed to delete this patch.");
+        }
     }
 }
