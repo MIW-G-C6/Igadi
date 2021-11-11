@@ -34,7 +34,9 @@
         <a th:if="${isUserGardenManager}" th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
             <button class="equalBoxPatchTasksAdd btn btn-outline-success float-right">Add Task</button>
         </a>
-            <button th:if="${isUserGardenManager}" class="equalBoxPatchTasksAdd btn btn-outline-danger float-right" data-toggle="modal"
+            <button th:if="${isUserGardenManager}"
+                    class="equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv
+                     btn btn-outline-danger float-right" data-toggle="modal"
                     data-target="#igadiPatchDeleteModal">Delete patch</button>
     </div>
 
@@ -102,8 +104,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body w-100 d-flex justify-content-center text-center">
+                <div class="modal-body w-100 d-flex justify-content-center text-center d-flex flex-column">
                     <h4>Are you sure?</h4>
+                    <p>* All tasks in this patch will also be deleted</p>
                 </div>
                 <div class="modal-footer w-100 d-flex justify-content-center">
                     <form class="w-25" th:if="${isUserGardenManager}"

@@ -162,6 +162,15 @@
          right: 15px;
 }
 
+.equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv{
+    width: 140px;
+    text-align: center;
+    margin-bottom: 10px;
+    position:absolute;
+    top: 25%;
+    right: 15px;
+}
+
 /*contains general position information for the footer*/
 
 .footer {

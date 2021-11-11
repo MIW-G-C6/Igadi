@@ -69,12 +69,4 @@ public class UserService implements UserDetailsService {
                 () -> new UsernameNotFoundException("Name " + username + " was not found!")
         ));
     }
-
-    public void saveSeededUser() {
-
-    }
-
-    public User temporaryConvertForSeeder(UserDTO userDTO) {
-        return userConverter.convertFromUserDTO(userDTO);
-    }
 }

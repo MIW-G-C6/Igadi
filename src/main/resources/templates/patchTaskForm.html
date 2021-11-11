@@ -14,12 +14,12 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
     <li class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>
-    <li class="breadcrumb-item"><a class="igadi-item-green" th:text="${patchTask.getPatch().getGarden()
-    .getGardenName()}" th:href="@{/overview/details/{gardenId}(gardenId=${patchTask.getPatch().getGarden()
+    <li class="breadcrumb-item"><a class="igadi-item-green" th:text="${patchTask.getPatchDTO().getGardenDTO()
+    .getGardenName()}" th:href="@{/overview/details/{gardenId}(gardenId=${patchTask.getPatchDTO().getGardenDTO()
                                    .getGardenId()})}"></a>
     </li>
-    <li class="breadcrumb-item"><a class="igadi-item-green" th:text="${patchTask.getPatch().cropInGarden()}"
-                                   th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patchTask.getPatch()
+    <li class="breadcrumb-item"><a class="igadi-item-green" th:text="${patchTask.getPatchDTO().cropInGarden()}"
+                                   th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patchTask.getPatchDTO()
                                    .getPatchId()})}"></a>
     </li>
     <li class="breadcrumb-item active" aria-current="page">New Task</li>
@@ -33,9 +33,8 @@
   </div>
 
   <div class="border-temp col-3 p-0 mb-3">
-    <form th:action="@{/overview/details/patchTasks/new/{patchId}(patchId=*{patch.getPatchId()})}"
+    <form th:action="@{/overview/details/patchTasks/new/{patchId}(patchId=*{patchDTO.getPatchId()})}"
           method="post" th:object="${patchTask}">
-      <input type="hidden" th:field="*{patch}" th:value="patchId">
       <input type="text" th:field="*{taskName}" class="form-control mb-3" placeholder="Title">
       <input type="text" th:field="*{taskDescription}" class="form-control mb-3" placeholder="Description">
       <button type="submit" class="btn btn-primary mr-3">Save task</button>

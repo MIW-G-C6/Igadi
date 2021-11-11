@@ -67,8 +67,4 @@ public class GardenService {
     public void deleteGardenById(int gardenId) {
         gardenRepository.deleteById(gardenId);
     }
-
-    public Garden temporaryConvertForSeeder(GardenDTO gardenDTO) {
-        return gardenConverter.convertFromGardenDTO(gardenDTO);
-    }
 }
