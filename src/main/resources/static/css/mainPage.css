@@ -158,6 +158,15 @@
          right: 15px;
 }
 
+.equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv{
+    width: 140px;
+    text-align: center;
+    margin-bottom: 10px;
+    position:absolute;
+    top: 25%;
+    right: 15px;
+}
+
 /*contains general position information for the footer*/
 
 .footer {
@@ -433,6 +442,33 @@ color: lightgreen;
     border-radius: 10px;
 }
 
+
+/* Gardendetails page */
+.gardenDetailsButton{
+width: 250px;
+        height: 100px;
+        background-color: lightgreen;
+        display:flex;
+}
+
+.rapper{
+flex-wrap: wrap;
+display: flex;
+}
+
+.plusIcon{
+width: 25px;
+height: 25px;
+cursor: pointer;
+
+
+}
+
+
+
+/* Profile index   */
+.profilecard {
+    flex-direction: row;
 /* Profile  */
 .profile-container {
     width: 100%;
@@ -445,6 +481,8 @@ color: lightgreen;
     position: relative;
     background-color: #F5F5F5;
 }
+
+
 
 .profile-userImage-child1 {
     position: relative;

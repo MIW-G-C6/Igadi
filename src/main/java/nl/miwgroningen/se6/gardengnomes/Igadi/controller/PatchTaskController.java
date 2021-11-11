@@ -61,10 +61,10 @@ public class PatchTaskController {
                                        @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
         try {
             if (authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId))) {
-                PatchTask patchTask = new PatchTask();
-                //patchTask.setPatch(patchService.getPatchById(patchId));
-                patchTask.setDone(false);
-                model.addAttribute("patchTask", patchTask);
+                PatchTaskDTO patchTaskDTO = new PatchTaskDTO();
+                patchTaskDTO.setPatchDTO(patchService.getPatchById(patchId));
+                patchTaskDTO.setDone(false);
+                model.addAttribute("patchTask", patchTaskDTO);
                 return "patchTaskForm";
             } else {
                 redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
@@ -83,6 +83,7 @@ public class PatchTaskController {
                                            RedirectAttributes redirectAttributes) {
         if (!result.hasErrors()) {
             try {
+                patchTaskDTO.setPatchDTO(patchService.getPatchById(patchId));
                 patchTaskService.userSavePatchTask(patchTaskDTO, user.getUserId(),
                         patchService.findGardenIdByPatchId(patchId));
                 return "redirect:/overview/details/patchTasks/{patchId}";
@@ -92,6 +93,8 @@ public class PatchTaskController {
                 return "redirect:/error";
             }
         } else {
+            System.out.println("test4");
+            System.out.println(result.getAllErrors());
             return "redirect:/overview/details/patchTasks/new/{patchId}";
         }
     }
