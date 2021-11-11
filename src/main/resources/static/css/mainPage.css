@@ -431,3 +431,16 @@ color: lightgreen;
     background-color: rgba(92, 200, 92, 0.1);
     border-radius: 10px;
 }
+
+/* Profile index   */
+.profilecard {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
