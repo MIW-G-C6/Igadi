@@ -33,20 +33,22 @@ public class GardenUserService {
         return gardenUserRepository.findAllByuser_userId(userId);
     }
 
-    public List<GardenUser> findAllGardenUsersByUserIdAndGardenId(int gardenId, int userId) {
+    public List<GardenUserDTO> findAllGardenUsersByUserIdAndGardenId(int gardenId, int userId) {
         Garden garden = new Garden();
         garden.setGardenId(gardenId);
         User user = new User();
         user.setUserId(userId);
-        return gardenUserRepository.findAllByGardenAndUser(garden, user);
+        return gardenUserRepository.findAllByGardenAndUser(garden, user)
+                .stream().map(gardenUserConverter::convertToGardenUserDTO).collect(Collectors.toList());
     }
 
-    public List<GardenUser> findAllGardenUsersByAll(int gardenId, int userId, String role) {
+    public List<GardenUserDTO> findAllGardenUsersByAll(int gardenId, int userId, String role) {
         Garden garden = new Garden();
         garden.setGardenId(gardenId);
         User user = new User();
         user.setUserId(userId);
-        return gardenUserRepository.findAllByGardenAndUserAndRole(garden, user, role);
+        return gardenUserRepository.findAllByGardenAndUserAndRole(garden, user, role)
+                .stream().map(gardenUserConverter::convertToGardenUserDTO).collect(Collectors.toList());
     }
 
     public void saveGardenUser(GardenUserDTO gardenUserDTO) {

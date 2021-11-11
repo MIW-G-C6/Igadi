@@ -1,6 +1,9 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.helpers;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.UserDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
@@ -11,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -25,15 +29,15 @@ class AuthorizationHelperTest {
     @BeforeEach
     void setUp() {
         authorizationHelper = new AuthorizationHelper(gardenUserService);
-        ArrayList<GardenUser> gardenUsers = new ArrayList<>();
-        GardenUser gardenUser = new GardenUser();
+        List<GardenUserDTO> gardenUsers = new ArrayList<>();
+        GardenUserDTO gardenUser = new GardenUserDTO();
         gardenUser.setGardenUserId(1);
-        Garden garden = new Garden();
+        GardenDTO garden = new GardenDTO();
         garden.setGardenId(1);
-        gardenUser.setGarden(garden);
-        User user = new User();
+        gardenUser.setGardenDTO(garden);
+        UserDTO user = new UserDTO();
         user.setUserId(1);
-        gardenUser.setUser(user);
+        gardenUser.setUserDTO(user);
         gardenUser.setRole(UserRole.GARDEN_MANAGER);
         gardenUsers.add(gardenUser);
         when(gardenUserService.findAllGardenUsersByAll(1, 1, UserRole.GARDEN_MANAGER)).thenReturn(gardenUsers);
