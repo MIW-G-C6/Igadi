@@ -26,6 +26,12 @@
         <h1 class="inlineText" th:text="${garden.getGardenName()}"></h1>
     </div>
 
+    <div class="equalBoxPatchTasksAdd d-flex flex-column">
+        <a th:if="${isUserGardenManager}" th:href="@{/overview/details/gardenTasks/new/{gardenId}(gardenId=${garden.getGardenId()})}">
+            <button class="w-100 btn btn-outline-success">Add task</button>
+        </a>
+    </div>
+
     <div class="col w-100 text-center">
         <h2 class="inlineText">Tasks</h2>
     </div>
