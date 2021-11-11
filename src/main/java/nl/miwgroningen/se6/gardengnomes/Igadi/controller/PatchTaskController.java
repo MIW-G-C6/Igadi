@@ -93,8 +93,6 @@ public class PatchTaskController {
                 return "redirect:/error";
             }
         } else {
-            System.out.println("test4");
-            System.out.println(result.getAllErrors());
             return "redirect:/overview/details/patchTasks/new/{patchId}";
         }
     }

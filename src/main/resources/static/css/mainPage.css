@@ -171,6 +171,11 @@
     right: 15px;
 }
 
+.borderBox{
+    margin-top: 0.2rem;
+    border-top: 2px solid green;
+}
+
 /*contains general position information for the footer*/
 
 .footer {
@@ -423,6 +428,16 @@ color: lightgreen;
   background-color: transparent;
   text-decoration: underline;
 }
+
+.linksColorGreen{
+    color:green;
+}
+
+.linksColorGreen:hover{
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+}
 /* Breadcrumbs  */
 
 .igadi-item-green{
@@ -459,8 +474,14 @@ display: flex;
 width: 25px;
 height: 25px;
 cursor: pointer;
+    transition-delay: 25ms;
+    transition-duration: 75ms;
+}
 
-
+.plusIcon:hover{
+    transition-delay: 25ms;
+    transition-duration: 75ms;
+    transform: scale(1.5);
 }
 
 

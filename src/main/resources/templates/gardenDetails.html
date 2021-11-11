@@ -29,45 +29,57 @@
 <!--        <button class="equalBoxPatchTasksEdit btn btn-outline-success float-left">Add new</button>-->
 <!--    </a>-->
 
+    <div class="equalBoxPatchTasksAdd d-flex flex-column">
     <a class="border-temp m-0"
        th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}">
-        <button class="equalBoxPatchTasksAdd btn btn-outline-success float-right">View all tasks for this garden
+        <button class="w-100 btn btn-outline-success float-right mb-2">View all tasks for this garden
         </button>
     </a>
+        <form th:if="${isUserGardenManager}" class="w-100 mb-2"
+              th:action="@{/gardens/delete/{gardenId}(gardenId=${garden.getGardenId()})}"
+              method="post" th:object="${garden}">
+            <button type="submit" class="btn btn-outline-danger float-right w-100 ">
+                Delete garden
+            </button>
+        </form>
+        </div>
 
-    <div class="w-50 text-center d-flex m-auto">
+
+    <div class="w-50 text-center d-flex m-auto borderBox">
 
 
         <h2 class="inlineText w-100">Patches</h2>
 
-
-                <img th:src="'/images/icons/pngwing.com.png'" class="plusIcon">
-
-
-
-    </div>
+        <a class="border-temp m-0" th:if="${isUserGardenManager}"
+           th:href="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${garden.gardenId})}">
+                            <img th:src="'/images/icons/pngwing.com.png'" class="plusIcon"></a>
 
 
-    <div class="bigBox">
 
-        <div class="grid-ish">
-
-            <div th:each="patch : ${allPatches}" class="colMakeUpDone d-flex flex-column w-100 h-100 gridSize">
-
-                <div class="patchTaskColumn float-left font-weight-bold w-100 text-center"
-                     th:text="${patch.showWhatIsGrowing()}">
                 </div>
 
+
+                <div class="bigBox">
+
+                    <div class="grid-ish">
+
+                        <a th:each="patch : ${allPatches}" th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patch.getPatchId()})}">
+                        <div class="colMakeUpDone d-flex flex-column w-100 h-100 gridSize">
+
+                            <div class="patchTaskColumn float-left font-weight-bold w-100 text-center linksColorGreen"
+                                 th:text="${patch.showWhatIsGrowing()}">
+                            </div>
+
+                        </div></a>
+                    </div>
+                </div>
+
+              </div>
+
             </div>
-        </div>
-    </div>
 
-  </div>
+            </body>
 
-</div>
+            <div th:replace="fragments/general :: footer"></div>
 
-</body>
-
-<div th:replace="fragments/general :: footer"></div>
-
-</html>
+            </html>

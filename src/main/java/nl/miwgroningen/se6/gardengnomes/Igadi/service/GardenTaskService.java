@@ -1,6 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenTaskRepository;
@@ -42,6 +43,14 @@ public class GardenTaskService {
 
     public void saveGardenTask(GardenTaskDTO gardenTaskDTO) {
         gardenTaskRepository.save(gardenTaskConverter.convertFromGardenTaskDTO(gardenTaskDTO));
+    }
+
+    public void userSaveGardenTask(GardenTaskDTO gardenTaskDTO, int userId, int gardenId) {
+        if (authorizationHelper.isUserGardenManager(userId, gardenId)) {
+            saveGardenTask(gardenTaskDTO);
+        } else {
+            throw new SecurityException("You are not allowed to save this garden task.");
+        }
     }
 
     public void deleteGardenTask(int userId, GardenTask gardenTask) {

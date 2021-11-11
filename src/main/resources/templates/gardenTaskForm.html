@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <meta charset="UTF-8">
+  <title>Add new garden task</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css" href="/css/mainPage.css">
+</head>
+
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
+    <li class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>
+    <li class="breadcrumb-item"><a class="igadi-item-green" th:text="${gardenTask.getGardenDTO().getGardenName()}"
+                                   th:href="@{/overview/details/{gardenId}(gardenId=${gardenTask.getGardenDTO()
+                                   .getGardenId()})}"></a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">New Task</li>
+  </ol>
+</nav>
+
+<div class="container d-flex flex-column align-items-center border-temp h-50 text-center">
+
+  <div class="border-temp mb-3">
+    <h1>Create a new task for this garden</h1>
+  </div>
+
+  <div class="border-temp col-3 p-0 mb-3">
+    <form th:action="@{/overview/details/gardenTasks/new/{gardenId}(gardenId=*{gardenDTO.getGardenId()})}"
+          method="post" th:object="${gardenTask}">
+      <input type="text" th:field="*{taskName}" class="form-control mb-3" placeholder="Title">
+      <input type="text" th:field="*{taskDescription}" class="form-control mb-3" placeholder="Description">
+      <button type="submit" class="btn btn-primary mr-3">Save task</button>
+    </form>
+  </div>
+
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+
+</body>
+</html>
