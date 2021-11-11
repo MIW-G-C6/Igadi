@@ -41,6 +41,7 @@ public class IndexController {
                 GardenDTO newGarden = gardenService.getGardenById(gardenUser.getGarden().getGardenId());
                 gardens.add(newGarden);
             }
+
             ArrayList<String> roles = new ArrayList<>();
             for (GardenDTO garden : gardens) {
                 int gardenId1 = garden.getGardenId();
@@ -66,5 +67,4 @@ public class IndexController {
     protected String showAboutPage(Model model) {
         return "about";
     }
-
 }
