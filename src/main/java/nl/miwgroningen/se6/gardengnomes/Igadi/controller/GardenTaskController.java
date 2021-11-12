@@ -53,8 +53,8 @@ public class GardenTaskController {
     public String deleteGardenTaskById(@PathVariable("taskId") int taskId, @AuthenticationPrincipal User user,
                                         RedirectAttributes redirectAttributes) {
         try {
-            gardenTaskService.userDeleteGardenTask(user.getUserId(), gardenTaskService.getGardenTaskById(taskId));
             int gardenId = gardenTaskService.getGardenTaskById(taskId).getGarden().getGardenId();
+            gardenTaskService.userDeleteGardenTask(user.getUserId(), gardenTaskService.getGardenTaskById(taskId));
             return "redirect:/overview/details/gardenTasks/" + gardenId;
         } catch (SecurityException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
