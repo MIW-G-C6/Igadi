@@ -42,6 +42,11 @@
                 Delete garden
             </button>
         </form>
+        <a class="border-temp m-0"
+           th:href="@{/overview/details/{gardenId}/gardeners(gardenId=${garden.gardenId})}">
+            <button class="w-100 btn btn-outline-success float-right mb-2">Administer gardeners
+            </button>
+        </a>
         </div>
 
 

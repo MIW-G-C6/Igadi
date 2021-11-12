@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,5 +70,14 @@ public class UserService implements UserDetailsService {
         return userConverter.convertToUserDTO(userRepository.findUserByUserName(username).orElseThrow(
                 () -> new UsernameNotFoundException("Name " + username + " was not found!")
         ));
+    }
+
+    public List<UserDTO> findByNameContains(String keyword){
+        List<User> foundList = userRepository.findByUserNameContains(keyword);
+        List<UserDTO> userDTOs = new ArrayList<>();
+        for(User user : foundList) {
+            userDTOs.add(userConverter.convertToUserDTO(user));
+        }
+        return userDTOs;
     }
 }

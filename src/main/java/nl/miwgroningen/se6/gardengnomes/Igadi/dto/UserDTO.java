@@ -14,7 +14,7 @@ public class UserDTO {
     private String userRole;
     private String password1;
     private String password2;
-    private Garden garden;
+    private GardenDTO gardenDTO;
 
     public Integer getUserId() {
         return userId;
@@ -40,12 +40,12 @@ public class UserDTO {
         this.userRole = userRole;
     }
 
-    public Garden getGarden() {
-        return garden;
+    public GardenDTO getGardenDTO() {
+        return gardenDTO;
     }
 
-    public void setGarden(Garden garden) {
-        this.garden = garden;
+    public void setGarden(GardenDTO gardenDTO) {
+        this.gardenDTO = gardenDTO;
     }
 
     public String getUserEmail() {
