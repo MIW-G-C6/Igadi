@@ -34,10 +34,11 @@
         <a th:if="${isUserGardenManager}" th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
             <button class="equalBoxPatchTasksAdd btn btn-outline-success float-right">Add task</button>
         </a>
-            <button th:if="${isUserGardenManager}"
-                    class="equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv
-                     btn btn-outline-danger float-right" data-toggle="modal"
-                    data-target="#igadiPatchDeleteModal">Delete patch</button>
+        <button th:if="${isUserGardenManager}"
+                class="equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv
+                 btn btn-outline-danger float-right" data-toggle="modal"
+                data-target="#igadiPatchDeleteModal">Delete patch
+        </button>
     </div>
 
     <div class="col w-100 text-center">

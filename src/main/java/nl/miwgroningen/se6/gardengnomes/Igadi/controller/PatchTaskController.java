@@ -101,8 +101,8 @@ public class PatchTaskController {
     public String deletePatchTaskById(@PathVariable("taskId") int taskId, @AuthenticationPrincipal User user,
                                        RedirectAttributes redirectAttributes) {
         try {
-            patchTaskService.userDeletePatchTask(user.getUserId(), patchTaskService.getPatchTaskById(taskId));
             int patchId = patchTaskService.getPatchTaskById(taskId).getPatch().getPatchId();
+            patchTaskService.userDeletePatchTask(user.getUserId(), patchTaskService.getPatchTaskById(taskId));
             return "redirect:/overview/details/patchTasks/" + patchId;
         } catch (SecurityException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
