@@ -541,3 +541,7 @@ cursor: pointer;
     margin-top: 0.5rem;
     float: right;
 }
+
+.mr-10 {
+    margin-right: 10rem;
+}
