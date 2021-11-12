@@ -96,9 +96,9 @@ public class PatchController {
     public String deletePatchById(@PathVariable("patchId") int patchId, @AuthenticationPrincipal User user,
                                       RedirectAttributes redirectAttributes) {
         try {
-            int gardenId = patchService.getPatchById(patchId).getGardenDTO().getGardenId();
-            patchService.deletePatch(user.getUserId(), patchService.getPatchById(patchId));
+            patchService.userDeletePatch(user.getUserId(), patchService.getPatchById(patchId));
             taskService.deleteUnreferencedEntries();
+            int gardenId = patchService.getPatchById(patchId).getGardenDTO().getGardenId();
             return "redirect:/overview/details/" + gardenId;
         } catch (SecurityException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);

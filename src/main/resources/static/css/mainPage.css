@@ -486,11 +486,8 @@ cursor: pointer;
 }
 
 
-
-/* Profile index   */
-.profilecard {
-    flex-direction: row;
 /* Profile  */
+
 .profile-container {
     width: 100%;
     flex-direction: column;
@@ -503,8 +500,6 @@ cursor: pointer;
     background-color: #F5F5F5;
 }
 
-
-
 .profile-userImage-child1 {
     position: relative;
     margin-right: 1.5rem;
@@ -512,35 +507,19 @@ cursor: pointer;
     /*visibility: hidden;*/
 }
 
-.child2 {
+.profile-userDetails-child2 {
     display: inline-block;
     margin-left: 0.5rem;
     position: absolute;
-    width: 80%;
+    width: 90%;
     padding-bottom: 0.5rem;
-    /*background-color: #ff885c;*/
-}
-
-.profile-btn {
-    /*float: right;*/
-    /*display: inline-block;*/
+    visibility: visible;
 }
 
 .profile-userDetails-child3 {
     position: relative;
     top: 1.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 30%;
-    margin-left: 2.5rem;
-
-    /*background-color: #ac707a;*/
-    width: 80%;
-}
-
-.profile-gardens-en-roles {
-    position: relative;
-    font-weight: bold;
+    margin-left: 8rem;
 }
 
 .profile-userName {
@@ -550,4 +529,13 @@ cursor: pointer;
 
 .profile-profilePage {
     width: fit-content;
+}
+
+.profile-gardens-en-roles {
+    position: relative;
+}
+
+.profile-btn {
+    margin-top: 0.5rem;
+    float: right;
 }
