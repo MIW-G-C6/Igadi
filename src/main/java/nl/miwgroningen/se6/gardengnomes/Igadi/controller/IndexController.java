@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author Annemarleen Bosma <makeItWork2021@annemarleenbosma.nl>
@@ -53,6 +54,7 @@ public class IndexController {
                     }
                 }
             }
+            Collections.replaceAll(roles, "gardenManager", "garden manager");
             model.addAttribute("user", user);
             model.addAttribute("gardens", gardens);
             model.addAttribute("roles", roles);
