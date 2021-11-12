@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 
@@ -13,7 +12,8 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
-        <li sec:authorize="isAuthenticated()" class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>
+        <li sec:authorize="isAuthenticated()" class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a>
+        </li>
         <li sec:authorize="isAuthenticated()" class="breadcrumb-item active" aria-current="page">Profile</li>
     </ol>
 </nav>
@@ -21,9 +21,7 @@
 <div id="userProfileBorder" class="container d-flex flex-column border-temp h-50">
     <div class="border-temp mb-3 text-center">
         <h1 sec:authorize="isAnonymous()">Welcome to Igadi!</h1>
-        <!--        <h2 sec:authorize="isAuthenticated()" th:text="'Welcome ' + ${user.getUserName()} + '!'"></h2>-->
         <h3 sec:authorize="isAnonymous()">Home of the Green and the Fresh!</h3>
-        <!--        <h3 sec:authorize="isAuthenticated()">Good to see you again!</h3>-->
     </div>
 
     <!--When the user logged in succesfully, he will have acces/ will see the following -->
@@ -35,8 +33,10 @@
                 <img src="/images/icons/avatarBlack/icons8-user-50.png" alt="avatar" width="150">
 
                 <div class="profile-userDetails-child2">
-                    <h2 sec:authorize="isAuthenticated()" th:text="${user.getUserName()}" class="col-8 p-0 profile-userName"></h2>
-                    <h5 sec:authorize="isAuthenticated()" th:text="|Profile page|" class="col-8 p-0 profile-profilePage"></h5>
+                    <h2 sec:authorize="isAuthenticated()" th:text="${user.getUserName()}"
+                        class="col-8 p-0 profile-userName"></h2>
+                    <h5 sec:authorize="isAuthenticated()" th:text="|Profile page|"
+                        class="col-8 p-0 profile-profilePage"></h5>
                 </div>
             </div>
 
@@ -47,7 +47,8 @@
                     <div class="col-4">
                         <div th:each="garden : ${gardens}">
                             <div class="border-temp mb-2">
-                                <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}" class="w-25 linksColor">
+                                <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
+                                   class="w-25 linksColor">
                                     <div th:text="${garden.gardenName}" class="border-temp m-0">
                                     </div>
                                 </a>
@@ -64,9 +65,9 @@
                     </div>
                 </div>
 
-<!--                <div>-->
-<!--                    <button type="button" class="btn btn-success mr-3 mr-auto profile-btn">Change profile settings</button>-->
-<!--                </div>-->
+                <!--                <div>-->
+                <!--                    <button type="button" class="btn btn-success mr-3 mr-auto profile-btn">Change profile settings</button>-->
+                <!--                </div>-->
 
             </div>
         </div>
