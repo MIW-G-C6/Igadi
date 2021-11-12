@@ -21,15 +21,12 @@
 <div id="userProfileBorder" class="container d-flex flex-column border-temp h-50">
     <div class="border-temp mb-3 text-center">
         <h1 sec:authorize="isAnonymous()">Welcome to Igadi!</h1>
-        <!--        <h2 sec:authorize="isAuthenticated()" th:text="'Welcome ' + ${user.getUserName()} + '!'"></h2>-->
         <h3 sec:authorize="isAnonymous()">Home of the Green and the Fresh!</h3>
-        <!--        <h3 sec:authorize="isAuthenticated()">Good to see you again!</h3>-->
     </div>
 
     <!--When the user logged in succesfully, he will have acces/ will see the following -->
     <div sec:authorize="isAuthenticated()" class="jumbotron profile-jumbotron-parent">
         <div>
-
 
             <div class="profile-userImage-child1">
                 <img src="/images/icons/avatarBlack/icons8-user-50.png" alt="avatar" width="150">
