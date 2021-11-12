@@ -56,7 +56,7 @@ public class IgadiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
-                .permitAll();
+                .permitAll().and().csrf().disable().cors();
     }
 
     @Override
