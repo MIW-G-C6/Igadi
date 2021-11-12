@@ -490,6 +490,7 @@ cursor: pointer;
 /* Profile index   */
 .profilecard {
     flex-direction: row;
+}
 /* Profile  */
 .profile-container {
     width: 100%;
