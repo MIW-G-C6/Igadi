@@ -97,7 +97,7 @@ public class PatchController {
                                       RedirectAttributes redirectAttributes) {
         try {
             int gardenId = patchService.getPatchById(patchId).getGardenDTO().getGardenId();
-            patchService.deletePatch(user.getUserId(), patchService.getPatchById(patchId));
+            patchService.userDeletePatch(user.getUserId(), patchService.getPatchById(patchId));
             taskService.deleteUnreferencedEntries();
             return "redirect:/overview/details/" + gardenId;
         } catch (SecurityException ex) {
