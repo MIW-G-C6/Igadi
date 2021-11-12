@@ -1,0 +1,46 @@
+
+/* Contact */
+.main-container-jumbotron {
+    flex-direction: column;
+    justify-content: center;
+
+    position: relative;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    align-content: center;
+    background-color: #F5F5F5;
+
+}
+
+.square {
+    position: relative;
+    background-color: #F5F5F5;
+    padding: 5rem;
+    align-content: center;
+    align-items: center;
+}
+
+.main-text-box {
+    position: relative;
+    top: 0;
+    text-align: center;
+}
+
+.contact-information {
+    position: relative;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid darkslategray;
+}
+
+.adres-informationBox {
+    position: relative;
+    margin: 1.5rem;
+    text-align: left;
+    width: 90%;
+}
+
+.contact-informationBox {
+    margin: 1.5rem;
+    text-align: left;
+}
