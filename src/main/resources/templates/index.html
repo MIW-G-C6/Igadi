@@ -12,8 +12,12 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
+<<<<<<< HEAD
         <li sec:authorize="isAuthenticated()" class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a>
         </li>
+=======
+<!--        <li sec:authorize="isAuthenticated()" class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>-->
+>>>>>>> bafee26f8d57e31f0b15e5dc1b93f6d1f3e3f3a8
         <li sec:authorize="isAuthenticated()" class="breadcrumb-item active" aria-current="page">Profile</li>
     </ol>
 </nav>
@@ -27,7 +31,6 @@
     <!--When the user logged in succesfully, he will have acces/ will see the following -->
     <div sec:authorize="isAuthenticated()" class="jumbotron profile-jumbotron-parent">
         <div>
-
 
             <div class="profile-userImage-child1">
                 <img src="/images/icons/avatarBlack/icons8-user-50.png" alt="avatar" width="150">

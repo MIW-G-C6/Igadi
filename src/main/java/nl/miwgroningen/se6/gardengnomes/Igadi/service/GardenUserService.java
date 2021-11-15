@@ -1,6 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
@@ -17,8 +18,8 @@ import java.util.stream.Collectors;
 @Service
 public class GardenUserService {
 
-    private GardenUserRepository gardenUserRepository;
-    private GardenUserConverter gardenUserConverter;
+    private final GardenUserRepository gardenUserRepository;
+    private final GardenUserConverter gardenUserConverter;
 
     public GardenUserService(GardenUserRepository gardenUserRepository, GardenUserConverter gardenUserConverter) {
         this.gardenUserRepository = gardenUserRepository;
@@ -26,11 +27,17 @@ public class GardenUserService {
     }
 
     public List<GardenUserDTO> getAllGardenUsers() {
-        return gardenUserRepository.findAll().stream().map(gardenUserConverter::convertToGardenUserDTO).collect(Collectors.toList());
+        return gardenUserRepository.findAll().stream().map(gardenUserConverter::convertToGardenUserDTO)
+                .collect(Collectors.toList());
     }
 
     public List<GardenUser> findAllGardenUsersByUserId(int userId) {
         return gardenUserRepository.findAllByuser_userId(userId);
+    }
+
+    public List<GardenUserDTO> findAllGardenUsersByGardenId(int gardenId) {
+        return gardenUserRepository.findAllBygarden_gardenId(gardenId).stream()
+                .map(gardenUserConverter::convertToGardenUserDTO).collect(Collectors.toList());
     }
 
     public List<GardenUserDTO> findAllGardenUsersByUserIdAndGardenId(int gardenId, int userId) {
@@ -54,5 +61,12 @@ public class GardenUserService {
     public void saveGardenUser(GardenUserDTO gardenUserDTO) {
         GardenUser gardenUser = gardenUserConverter.convertFromGardenUserDTO(gardenUserDTO);
         gardenUserRepository.save(gardenUser);
+    }
+
+    public void createNewGardenUser(GardenUserDTO gardenUserDTO){
+            saveGardenUser(gardenUserDTO);
+       // } else {
+         //  throw new SecurityException("You are not allowed to accept this user.");
+       // }
     }
 }

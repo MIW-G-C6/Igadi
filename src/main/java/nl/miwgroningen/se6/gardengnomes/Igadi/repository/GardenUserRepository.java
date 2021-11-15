@@ -12,6 +12,8 @@ public interface GardenUserRepository extends JpaRepository<GardenUser, Integer>
 
     List<GardenUser> findAllByuser_userId(int userId);
 
+    List<GardenUser> findAllBygarden_gardenId(int gardenId);
+
     List<GardenUser> findAllByGardenAndUser(Garden garden, User user);
 
     List<GardenUser> findAllByGardenAndUserAndRole(Garden garden, User user, String role);

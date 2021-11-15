@@ -45,7 +45,7 @@ public class IgadiSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
 
                 .antMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
-                .antMatchers("/" , "/index", "/about", "/users/new", "/login").permitAll()
+                .antMatchers("/" , "/index", "/about", "/contact", "/users/new", "/login").permitAll()
                 /*.antMatchers("/gardens").hasAuthority("garden_manager")*/
                 .anyRequest().authenticated().and()
                 .formLogin()
@@ -56,7 +56,7 @@ public class IgadiSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
-                .permitAll();
+                .permitAll().and().csrf().disable().cors();
     }
 
     @Override
