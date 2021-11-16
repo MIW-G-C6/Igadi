@@ -78,9 +78,9 @@ function fillTable(data){
         addButton.classList.add("btn", "btn-outline-danger", "w-100");
         addForm.classList.add("w-100", "mb-2");
         addButton.setAttribute("type", "submit");
-        addForm.setAttribute("th:action", addMapping);
+        addForm.setAttribute("action", addMapping);
         addForm.setAttribute("method", "post");
-        addForm.setAttribute("th:object", "${user}");
+        addForm.setAttribute("object", "${user}");
         addButton.innerHTML = "Add to garden";
 
         td.appendChild(text);

@@ -134,27 +134,4 @@ public class GardenController {
         gardenUserService.createNewGardenUser(gardenUserDTO);
         return "redirect:/overview/details/{gardenId}/gardeners";
     }
-
-    @PostMapping("/overview/details/{gardenId}/gardeners")
-    public ResponseEntity<?> getSearchResultViaAjax(@PathVariable("gardenId") int gardenId,
-                                                    @Valid @RequestBody GardenerSearchCriteriaDTO searchGardeners,
-                                                    Errors errors) {
-
-        List<UserDTO> users = userService.getAllUsers();
-        List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
-        for(GardenUserDTO gardenUserDTO : alreadyAddedUser) {
-            users.removeIf(realUsers -> gardenUserDTO.getUserDTO().getUserId() == realUsers.getUserId());
-        }
-
-
-        if(searchGardeners.getKeywords() != null && searchGardeners.getKeywords().trim().isEmpty()) {
-            users = userService.getAllUsers();
-        }
-        else{
-            users = userService.findByNameContains(searchGardeners.getKeywords());
-        }
-
-        return ResponseEntity.ok(users);
-
-    }
 }
