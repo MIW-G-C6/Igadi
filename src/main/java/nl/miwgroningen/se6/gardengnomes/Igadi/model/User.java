@@ -1,4 +1,4 @@
-package nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model;
+package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

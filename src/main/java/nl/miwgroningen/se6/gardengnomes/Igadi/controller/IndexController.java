@@ -1,8 +1,8 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.GardenUser;
-import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.User;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenUserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

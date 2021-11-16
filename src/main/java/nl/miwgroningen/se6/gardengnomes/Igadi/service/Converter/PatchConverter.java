@@ -1,7 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.Patch;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import org.springframework.stereotype.Component;
 
 /**
