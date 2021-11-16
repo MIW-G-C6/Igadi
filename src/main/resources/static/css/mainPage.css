@@ -591,6 +591,16 @@ padding-left: 1rem;
     text-align: left;
 }
 
+.hiddenGarden{
+    display: none;
+}
+
+.igadi-add-person-btn{
+    border-radius: 0px;
+    text-align: left;
+    height: 3rem;
+    color: black;
+}
 
 /* Information about login page*/
 
