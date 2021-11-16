@@ -1,0 +1,590 @@
+gardenTableContainer {
+    margin: auto;
+    width: 60vw;
+    border: 10px solid pink;
+    display: flex;
+    flex-direction: row;
+}
+
+.gardenTable {
+    width: 100%;
+    border: 3px solid green;
+    text-align: center;
+}
+
+.patchOverview {
+    margin: auto;
+    width: 50vw;
+    border: 3px solid blue;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.patchTable {
+    width: 100%;
+    border: 3px solid green;
+    text-align: center;
+}
+
+.taskOverviewContainer {
+    width: 25vw;
+    height: 60rem;
+    border: 10px solid purple;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.taskTable {
+    width: 100%;
+    height: 100%;
+    border: 3px solid green;
+    text-align: center;
+}
+
+.gardenPatchContainer {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.landTile {
+    width: 3rem;
+    height: 3rem;
+}
+
+.gardens {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.gardenCard {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    width: 8rem;
+    height: 10rem;
+    background-color: rgba(100, 100, 100, 0.5);
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.taskCard {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(100, 100, 100, 0.5);
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.container {
+    width: 80vw;
+    margin: 0 auto;
+    padding-top: 30px;
+    /*min-height: calc(100vh - 120px - 73px);*/
+}
+
+.redMessage {
+    color: red;
+}
+
+.greenMessage {
+    color: green;
+}
+
+.background-brown {
+    background-color: green;
+}
+
+.bottoms {
+    margin-bottom: 0;
+}
+
+/*contains general layout for hoover links*/
+
+.glassButton {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
+    transition-duration: 50ms;
+}
+
+.glassButton:hover {
+    transition-duration: 50ms;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+/*contains general position information for the links in the navigation bar*/
+
+.navbarRightSide {
+    position: absolute;
+    right: 0px;
+}
+
+.navbarRightAccountCreate {
+    position: absolute;
+    right: 156px;
+}
+
+.equalBox{
+    width: 140px;
+    text-align: center;
+}
+
+.equalBoxPatchTasksEdit{
+    width: 140px;
+    text-align: center;
+    margin-bottom: 10px;
+    position:absolute;
+    top: 15%;
+    right: 15px;
+}
+
+.equalBoxPatchTasksAdd{
+    width: 140px;
+    text-align: center;
+    margin-bottom: 10px;
+    position:absolute;
+    top: 20%;
+    right: 15px;
+}
+
+.equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv{
+    width: 140px;
+    text-align: center;
+    margin-bottom: 10px;
+    position:absolute;
+    top: 25%;
+    right: 15px;
+}
+
+
+
+.borderBox{
+    margin-top: 0.2rem;
+    border-top: 2px solid green;
+}
+
+/*contains general position information for the footer*/
+
+.footer {
+    margin-top: auto;
+    padding: 10px 0;
+    height: 4.85rem;
+    color: green;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*contains general position and layout information for the gardens.html*/
+
+.igadi-garden-list-item-light{
+    background-color: rgba(0, 175, 0, 0.15);
+    cursor: pointer;
+    transition-duration: 150ms;
+    min-width: 10rem;
+}
+
+.igadi-garden-list-item-light:hover {
+    transition-duration: 150ms;
+    background-color: rgba(0, 150, 0, 0.5);
+}
+
+.igadi-garden-list-item-dark {
+    background-color: rgba(0, 100, 0, 0.5);
+}
+
+.igadi-garden-list-overview {
+    overflow-x: scroll;
+}
+
+.igadi-garden-icon{
+    background-color: lightblue;
+    border-radius: 50%;
+}
+
+/* Patch Form */
+
+.patchFormContainer1{
+    border-radius: 15px;
+    background-color: rgba(0, 175, 0, 0.3);
+}
+
+.patchFormContainer2{
+    border-radius: 15px;
+    background-color: rgba(0, 100, 0, 0.15);
+}
+
+.patchFormBtn{
+    background-color: white;
+    color: green;
+    transition-duration: 150ms;
+}
+
+.patchFormBtn:hover{
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    transition-duration: 150ms;
+    box-shadow: 0 0 10px black;
+}
+
+/*contains general position and layout information for the gardens.html*/
+
+.gaNaarMiddenKnop{
+    margin:auto;
+    display:block;
+}
+
+.brackets::before{
+    content: "("
+}
+
+.brackets::after{
+    content: ")"
+}
+
+/*contains general position and layout information for the patchTasks.html*/
+
+.grid-ish{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    justify-content: center;
+    margin: auto;
+}
+
+.grid-ish > * {
+    flex: 1 1 100%;
+}
+
+.colMakeUpNotDone{
+    padding: 1rem;
+    background-color: rgba(255, 105, 97, 0.15);
+    border: 2px solid;
+    border-radius: 15px;
+    border-color: grey;
+    margin: 3px;
+}
+
+.colMakeUpDone{
+    padding: 1rem;
+    background-color: lightgreen;
+    border: 2px solid;
+    border-radius: 15px;
+    border-color: grey;
+    margin: 3px;
+}
+
+.titelPatchTasks{
+    padding: 20px;
+
+}
+
+.bigBox{
+    width:100vw;
+}
+
+.checkBox{
+    justify-content: right;
+}
+
+.patchTaskColumn {
+    font-size: 18px;
+    width: 100%;
+    padding-left:4px;
+}
+
+.boxed{
+    padding-top: 15px;
+    word-wrap: break-word;
+}
+
+.gridSize{
+    padding: 10px;
+    word-wrap: break-word;
+}
+
+.noBreakWord{
+    word-wrap: break-word;
+    padding-top: 1rem;
+}
+
+.noBreakWord{
+    word-wrap: break-word;
+    padding-top: 1rem;
+}
+
+.inlineText{
+    display: inline-block;
+}
+
+.binIcon{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    position: relative;
+
+}
+
+/*  About page */
+
+.igadi-bg-light{
+    background-color: rgba(0, 100, 0, 0.15);
+}
+
+.teamImg {
+    border: 3px solid black;
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+    overflow: hidden;
+}
+
+.igadi-team-title{
+    margin-bottom: 1rem;
+    margin-top: 5rem;
+}
+
+.igadi-teammember-container{
+    background-color: rgba(0, 100, 0, 0.3);
+}
+
+.igadi-quote-left{
+    transform: translateX(-75px);
+}
+
+.igadi-quote-right{
+    transform: translateX(50px);
+}
+
+.igadi-about-container{
+    width:20rem;
+    line-height: 1.5rem;
+}
+
+.igadi-about-title{
+    padding-bottom: 1rem;
+    border-bottom: 2px solid darkslategray;
+}
+
+.igadi-about-subtitle{
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid darkslategray;
+}
+
+/* Modal override  */
+
+.modal-backdrop {
+    opacity:0.5 !important;
+}
+
+.modal {
+    opacity:1 !important;
+}
+
+.modalfade {
+    animation: fadeIn 0.5s;
+    transform: translateY(5rem);
+}
+
+.binImage{
+    background-color: lightcoral;
+    padding: 1rem;
+    border-radius: 30%;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(-5rem);
+        opacity:0;
+    }
+    to {
+        transform: translateY(5rem);
+        opacity:1;
+    }
+}
+
+/* link and the colors*/
+
+.linksColor{
+    color:green;
+}
+
+.linksColor:hover{
+    color: lightgreen;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.linksColorGreen{
+    color:green;
+}
+
+.linksColorGreen:hover{
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+/* Breadcrumbs  */
+
+.igadi-item-green{
+    color: rgb(92, 184, 92);
+    transition-delay: 25ms;
+    transition-duration: 150ms;
+}
+
+.igadi-item-green:hover{
+    text-decoration: darkgreen;
+    text-decoration-line: underline;
+    color: rgb(92, 150, 92);
+    transition-delay: 25ms;
+    transition-duration: 150ms;
+    background-color: rgba(92, 200, 92, 0.1);
+    border-radius: 10px;
+}
+
+
+/* Gardendetails page */
+
+.gardenDetailsButton{
+    width: 250px;
+    height: 100px;
+    background-color: lightgreen;
+    display:flex;
+}
+
+.rapper{
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.plusIcon{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    transition-delay: 25ms;
+    transition-duration: 75ms;
+}
+
+.plusIcon:hover{
+    transition-delay: 25ms;
+    transition-duration: 75ms;
+    transform: scale(1.5);
+}
+
+
+/* Profile  */
+
+.profile-container {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.profile-jumbotron-parent {
+    position: relative;
+    background-color: #F5F5F5;
+}
+
+.profile-userImage-child1 {
+    position: relative;
+    margin-right: 1.5rem;
+    background-color: #F5F5F5;
+    /*visibility: hidden;*/
+}
+
+.profile-userDetails-child2 {
+    display: inline-block;
+    margin-left: 0.5rem;
+    position: absolute;
+    width: 90%;
+    padding-bottom: 0.5rem;
+    visibility: visible;
+}
+
+.profile-userDetails-child3 {
+    position: relative;
+    top: 1.5rem;
+    margin-left: 8rem;
+}
+
+.profile-userName {
+    margin-top: 1.5rem;
+    width: inherit;
+}
+
+.profile-profilePage {
+    width: fit-content;
+}
+
+.profile-gardens-en-roles {
+    position: relative;
+}
+
+.profile-btn {
+    margin-top: 0.5rem;
+    float: right;
+}
+
+/* Contact */
+.main-container-jumbotron {
+    flex-direction: column;
+    justify-content: center;
+
+    position: relative;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    align-content: center;
+    background-color: #F5F5F5;
+
+}
+
+.square {
+    position: relative;
+    background-color: #F5F5F5;
+    padding: 5rem;
+    align-content: center;
+    align-items: center;
+}
+
+.main-text-box {
+    position: relative;
+    top: 0;
+    text-align: center;
+}
+
+.contact-information {
+    position: relative;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid darkslategray;
+}
+
+.adres-informationBox {
+    position: relative;
+    margin: 1.5rem;
+    text-align: left;
+    width: 90%;
+}
+
+.contact-informationBox {
+    margin: 1.5rem;
+    text-align: left;
+}
