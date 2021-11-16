@@ -9,18 +9,6 @@
 
 <body>
 <div th:replace="fragments/general :: navbar"></div>
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
-<<<<<<< HEAD
-        <li sec:authorize="isAuthenticated()" class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a>
-        </li>
-=======
-<!--        <li sec:authorize="isAuthenticated()" class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>-->
->>>>>>> bafee26f8d57e31f0b15e5dc1b93f6d1f3e3f3a8
-        <li sec:authorize="isAuthenticated()" class="breadcrumb-item active" aria-current="page">Profile</li>
-    </ol>
-</nav>
 
 <div id="userProfileBorder" class="container d-flex flex-column border-temp h-50">
     <div class="border-temp mb-3 text-center">

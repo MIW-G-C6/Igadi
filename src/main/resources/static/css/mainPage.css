@@ -218,6 +218,10 @@ body{
     border-radius: 50%;
 }
 
+.closeToO{
+margin-left: 3.75rem;
+}
+
 /* Patch Form */
 
 .patchFormContainer1{
@@ -273,7 +277,7 @@ body{
 }
 
 .colMakeUpNotDone{
-    padding: 1rem;
+    padding: .3rem;
     background-color: rgba(255, 105, 97, 0.15);
     border: 2px solid;
     border-radius: 15px;
@@ -282,7 +286,7 @@ body{
 }
 
 .colMakeUpDone{
-    padding: 1rem;
+    padding: .3rem;
     background-color: lightgreen;
     border: 2px solid;
     border-radius: 15px;
@@ -321,12 +325,7 @@ body{
 
 .noBreakWord{
     word-wrap: break-word;
-    padding-top: 1rem;
-}
-
-.noBreakWord{
-    word-wrap: break-word;
-    padding-top: 1rem;
+    padding-top: 0;
 }
 
 .inlineText{
@@ -338,8 +337,7 @@ body{
     height: 15px;
     cursor: pointer;
     position: relative;
-
-}
+   }
 
 /*  About page */
 
@@ -488,6 +486,9 @@ cursor: pointer;
     transform: scale(1.5);
 }
 
+.gardenDetailsPatchesOrdered{
+padding-left: .75rem;
+}
 
 /* Profile  */
 
@@ -588,3 +589,14 @@ cursor: pointer;
     margin: 1.5rem;
     text-align: left;
 }
+
+
+/* Information about login page*/
+
+.eyeBox{
+height: 2.35rem;
+}
+
+.rounded{
+border-radius: 25px;
+width: 98%;}

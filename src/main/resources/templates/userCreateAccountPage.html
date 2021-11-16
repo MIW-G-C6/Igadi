@@ -20,31 +20,34 @@
                 <input type="text" th:field="*{userName}" class="form-control mb-3" placeholder="Username">
                 <input type="email" th:field="*{userEmail}" class="form-control mb-3" placeholder="Email">
 
-            <div id="passwordInputFields">
-                <div class="form-group input-group">
-                    <input type="password" th:field="*{password1}" class="form-control mb-3" placeholder="Password" id="inputfieldPassword1">
+                <div id="passwordInputFields">
+                    <div class="form-group input-group mb-0">
+                        <input type="password" th:field="*{password1}" class="form-control mb-3" placeholder="Password"
+                               id="inputfieldPassword1">
 
-                    <div class="form-group input-group-prepend">
-                        <div class="input-group-text">
-                            <a href="#" class="text-dark" id="icon-click">
-                                <img id="iconPasswordEyeVisible" th:src="@{/images/icons/icons8-eye-24.png}" alt="eye that is open"/>
-                            </a>
+                        <div class="form-group input-group-prepend eyeBox">
+                            <div class="input-group-text rounded">
+                                <a href="#" class="text-dark" id="icon-click">
+                                    <img id="iconPasswordEyeVisible" th:src="@{/images/icons/icons8-eye-24.png}"
+                                         alt="eye that is open"/>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                 </div>
-                <div>
-                    <input type="password" th:field="*{password2}" class="form-control mb-3" placeholder="Repeat password"
-                           id="inputfieldRepeatPassword1">
+                    <div>
+                        <input type="password" th:field="*{password2}" class="form-control mb-3"
+                               placeholder="Repeat password"
+                               id="inputfieldRepeatPassword1">
+                    </div>
                 </div>
-            </div>
 
             </div>
 
             <div class="d-flex">
-            <button type="submit" class="equalBox btn btn-success mr-3">Save</button>
-            <button type="button" class="equalBox btn btn-success mr-3 mr-auto" onclick="location.href='/'">
-                Cancel
-            </button>
+                <button type="submit" class="equalBox btn btn-success mr-3">Save</button>
+                <button type="button" class="equalBox btn btn-success mr-3 mr-auto" onclick="location.href='/'">
+                    Cancel
+                </button>
             </div>
         </form>
     </div>
