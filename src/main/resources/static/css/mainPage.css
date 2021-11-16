@@ -1,4 +1,4 @@
-.gardenTableContainer {
+gardenTableContainer {
     margin: auto;
     width: 60vw;
     border: 10px solid pink;
@@ -145,17 +145,17 @@
     text-align: center;
     margin-bottom: 10px;
     position:absolute;
-         top: 15%;
-         right: 15px;
+    top: 15%;
+    right: 15px;
 }
 
 .equalBoxPatchTasksAdd{
     width: 140px;
     text-align: center;
     margin-bottom: 10px;
-         position:absolute;
-         top: 20%;
-         right: 15px;
+    position:absolute;
+    top: 20%;
+    right: 15px;
 }
 
 .equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv{
@@ -250,16 +250,16 @@ margin-left: 3.75rem;
 /*contains general position and layout information for the gardens.html*/
 
 .gaNaarMiddenKnop{
-     margin:auto;
-     display:block;
+    margin:auto;
+    display:block;
 }
 
 .brackets::before{
- content: "("
+    content: "("
 }
 
 .brackets::after{
- content: ")"
+    content: ")"
 }
 
 /*contains general position and layout information for the patchTasks.html*/
@@ -425,8 +425,8 @@ margin-left: 3.75rem;
 
 .linksColor:hover{
     color: lightgreen;
-  background-color: transparent;
-  text-decoration: underline;
+    background-color: transparent;
+    text-decoration: underline;
 }
 
 .linksColorGreen{
@@ -468,14 +468,14 @@ margin-left: 3.75rem;
 }
 
 .rapper{
-flex-wrap: wrap;
-display: flex;
+    flex-wrap: wrap;
+    display: flex;
 }
 
 .plusIcon{
-width: 25px;
-height: 25px;
-cursor: pointer;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
     transition-delay: 25ms;
     transition-duration: 75ms;
 }

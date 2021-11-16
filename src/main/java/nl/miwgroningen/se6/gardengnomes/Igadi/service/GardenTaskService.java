@@ -1,11 +1,9 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenTaskRepository;
-import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenConverter;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenTaskConverter;
 import org.springframework.stereotype.Service;
 

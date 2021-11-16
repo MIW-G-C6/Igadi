@@ -2,7 +2,6 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.repository;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

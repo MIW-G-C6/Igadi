@@ -1,7 +1,5 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 

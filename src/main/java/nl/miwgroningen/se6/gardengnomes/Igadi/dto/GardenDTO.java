@@ -1,9 +1,5 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.dto;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
-
-import java.util.List;
-
 /**
  * @author Tjerk Nagel
  * doel:
