@@ -1,4 +1,4 @@
-.gardenTableContainer {
+gardenTableContainer {
     margin: auto;
     width: 60vw;
     border: 10px solid pink;
@@ -145,17 +145,17 @@
     text-align: center;
     margin-bottom: 10px;
     position:absolute;
-         top: 15%;
-         right: 15px;
+    top: 15%;
+    right: 15px;
 }
 
 .equalBoxPatchTasksAdd{
     width: 140px;
     text-align: center;
     margin-bottom: 10px;
-         position:absolute;
-         top: 20%;
-         right: 15px;
+    position:absolute;
+    top: 20%;
+    right: 15px;
 }
 
 .equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv{
@@ -218,6 +218,10 @@ body{
     border-radius: 50%;
 }
 
+.closeToO{
+margin-left: 3.75rem;
+}
+
 /* Patch Form */
 
 .patchFormContainer1{
@@ -246,16 +250,16 @@ body{
 /*contains general position and layout information for the gardens.html*/
 
 .gaNaarMiddenKnop{
-     margin:auto;
-     display:block;
+    margin:auto;
+    display:block;
 }
 
 .brackets::before{
- content: "("
+    content: "("
 }
 
 .brackets::after{
- content: ")"
+    content: ")"
 }
 
 /*contains general position and layout information for the patchTasks.html*/
@@ -273,7 +277,7 @@ body{
 }
 
 .colMakeUpNotDone{
-    padding: 1rem;
+    padding: .3rem;
     background-color: rgba(255, 105, 97, 0.15);
     border: 2px solid;
     border-radius: 15px;
@@ -282,7 +286,7 @@ body{
 }
 
 .colMakeUpDone{
-    padding: 1rem;
+    padding: .3rem;
     background-color: lightgreen;
     border: 2px solid;
     border-radius: 15px;
@@ -321,12 +325,7 @@ body{
 
 .noBreakWord{
     word-wrap: break-word;
-    padding-top: 1rem;
-}
-
-.noBreakWord{
-    word-wrap: break-word;
-    padding-top: 1rem;
+    padding-top: 0;
 }
 
 .inlineText{
@@ -338,8 +337,7 @@ body{
     height: 15px;
     cursor: pointer;
     position: relative;
-
-}
+   }
 
 /*  About page */
 
@@ -427,8 +425,8 @@ body{
 
 .linksColor:hover{
     color: lightgreen;
-  background-color: transparent;
-  text-decoration: underline;
+    background-color: transparent;
+    text-decoration: underline;
 }
 
 .linksColorGreen{
@@ -470,14 +468,14 @@ body{
 }
 
 .rapper{
-flex-wrap: wrap;
-display: flex;
+    flex-wrap: wrap;
+    display: flex;
 }
 
 .plusIcon{
-width: 25px;
-height: 25px;
-cursor: pointer;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
     transition-delay: 25ms;
     transition-duration: 75ms;
 }
@@ -488,6 +486,9 @@ cursor: pointer;
     transform: scale(1.5);
 }
 
+.gardenDetailsPatchesOrdered{
+padding-left: .75rem;
+}
 
 /* Profile  */
 
@@ -599,3 +600,13 @@ cursor: pointer;
     height: 3rem;
     color: black;
 }
+
+/* Information about login page*/
+
+.eyeBox{
+height: 2.35rem;
+}
+
+.rounded{
+border-radius: 25px;
+width: 98%;}

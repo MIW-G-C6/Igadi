@@ -3,7 +3,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.helpers.AuthorizationHelper;
+import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
