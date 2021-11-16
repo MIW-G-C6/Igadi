@@ -1,7 +1,5 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.dto;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
-
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
  */

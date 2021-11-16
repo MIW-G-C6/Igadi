@@ -1,14 +1,10 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.repository;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.ArrayList;
 import java.util.List;
-
 
 public interface GardenRepository extends JpaRepository<Garden, Integer> {
 

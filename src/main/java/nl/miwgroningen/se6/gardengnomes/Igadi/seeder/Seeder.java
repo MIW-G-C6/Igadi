@@ -2,7 +2,6 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.seeder;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.*;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.*;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -11,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>

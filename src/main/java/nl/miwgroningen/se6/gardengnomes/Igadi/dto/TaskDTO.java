@@ -47,7 +47,7 @@ public class TaskDTO {
         if(this.isDone) {
             return "Done";
         } else {
-            return "Not Done";
+            return "Not done";
         }
     }
 }
