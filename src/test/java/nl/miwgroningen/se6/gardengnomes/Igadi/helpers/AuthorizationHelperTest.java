@@ -29,7 +29,17 @@ class AuthorizationHelperTest {
     @BeforeEach
     void setUp() {
         authorizationHelper = new AuthorizationHelper(gardenUserService);
+    }
+
+    @Test
+    void isUserGardenManager() {
+        // case: no one is garden manager of any garden.
         List<GardenUserDTO> gardenUsers = new ArrayList<>();
+        when(gardenUserService.findAllGardenUsersByAll(1, 1, UserRole.GARDEN_MANAGER)).thenReturn(gardenUsers);
+        assertFalse(authorizationHelper.isUserGardenManager(1,1));
+        assertFalse(authorizationHelper.isUserGardenManager(2, 2)); // why does this return false?
+
+        // case: user 1 is garden manager of garden 1, but not of other gardens. No one else is garden manager of any garden.
         GardenUserDTO gardenUser = new GardenUserDTO();
         gardenUser.setGardenUserId(1);
         GardenDTO garden = new GardenDTO();
@@ -40,12 +50,31 @@ class AuthorizationHelperTest {
         gardenUser.setUserDTO(user);
         gardenUser.setRole(UserRole.GARDEN_MANAGER);
         gardenUsers.add(gardenUser);
-        when(gardenUserService.findAllGardenUsersByAll(1, 1, UserRole.GARDEN_MANAGER)).thenReturn(gardenUsers);
+        assertTrue(authorizationHelper.isUserGardenManager(1, 1));
+        assertFalse(authorizationHelper.isUserGardenManager(1, 2));
+        assertFalse(authorizationHelper.isUserGardenManager(2, 5));
     }
 
     @Test
-    void isUserGardenManager() {
-        assertTrue(authorizationHelper.isUserGardenManager(1, 1));
-        assertFalse(authorizationHelper.isUserGardenManager(1, 2));
+    void isUserGardenMember() {
+        // case: no one is a member of any garden.
+        List<GardenUserDTO> gardenUsers = new ArrayList<>();
+        when(gardenUserService.findAllGardenUsersByUserIdAndGardenId(1, 1)).thenReturn(gardenUsers);
+        assertFalse(authorizationHelper.isUserGardenMember(1,1));
+
+        // case: user 1 is gardener of garden 1, but is not a member of other gardens. No one else is a member of any garden.
+        GardenUserDTO gardenUser = new GardenUserDTO();
+        gardenUser.setGardenUserId(1);
+        GardenDTO garden = new GardenDTO();
+        garden.setGardenId(1);
+        gardenUser.setGardenDTO(garden);
+        UserDTO user = new UserDTO();
+        user.setUserId(1);
+        gardenUser.setUserDTO(user);
+        gardenUser.setRole(UserRole.GARDENER);
+        gardenUsers.add(gardenUser);
+        assertTrue(authorizationHelper.isUserGardenMember(1,1));
+        assertFalse(authorizationHelper.isUserGardenMember(1, 2));
+        assertFalse(authorizationHelper.isUserGardenManager(2, 5));
     }
 }

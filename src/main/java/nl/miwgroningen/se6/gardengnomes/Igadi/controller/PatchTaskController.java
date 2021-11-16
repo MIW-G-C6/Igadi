@@ -42,16 +42,23 @@ public class PatchTaskController {
     @GetMapping("/overview/details/patchTasks/{patchId}")
     protected String showPatchTasks(@PathVariable("patchId") int patchId, Model model, @AuthenticationPrincipal User user,
                                     RedirectAttributes redirectAttributes) {
+        int gardenId;
         try {
+            gardenId = patchService.findGardenIdByPatchId(patchId);
+        } catch (NullPointerException ex) {
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
+            return "redirect:/error";
+        }
+        if (authorizationHelper.isUserGardenMember(user.getUserId(), gardenId)) {
             model.addAttribute("isUserGardenManager",
-                    authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId)));
+                    authorizationHelper.isUserGardenManager(user.getUserId(), gardenId));
             PatchDTO patch = patchService.getPatchById(patchId);
             List<PatchTaskDTO> allPatchTasks = patchTaskService.getAllTasksByPatchId(patchId);
             model.addAttribute("patch", patch);
             model.addAttribute("allPatchTasks", allPatchTasks);
             return "patchTasks";
-        } catch (NullPointerException ex) {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
+        } else {
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
             return "redirect:/error";
         }
     }
