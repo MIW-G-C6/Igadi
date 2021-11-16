@@ -107,13 +107,9 @@ public class GardenController {
     @GetMapping("/overview/details/{gardenId}/gardeners")
     protected String showPotentialGardeners(@PathVariable("gardenId") int gardenId, Model model,
                                   @AuthenticationPrincipal User user) {
-        List<UserDTO> users = userService.getAllUsers();
-        List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
-        for(GardenUserDTO gardenUserDTO : alreadyAddedUser) {
-            users.removeIf(realUsers -> gardenUserDTO.getUserDTO().getUserId() == realUsers.getUserId());
-        }
-        model.addAttribute("users", users);
+        GardenDTO garden = gardenService.getGardenById(gardenId);
         model.addAttribute("gardenId", gardenId);
+        model.addAttribute("garden", garden);
         model.addAttribute("isUserGardenManager", authorizationHelper
                 .isUserGardenManager(user.getUserId(), gardenId));
         return "gardeners";
@@ -123,7 +119,6 @@ public class GardenController {
     @PostMapping("/overview/details/{gardenId}/gardeners/{requestId}")
     protected String postPotentialGardeners(@PathVariable("gardenId") int gardenId, @PathVariable("requestId") int requestId,
                                        Model model, @AuthenticationPrincipal User user) {
-
         GardenDTO garden = gardenService.getGardenById(gardenId);
         UserDTO userDTO = userService.getUserById(requestId);
         userDTO.setGarden(garden);

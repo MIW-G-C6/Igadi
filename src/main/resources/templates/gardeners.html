@@ -19,65 +19,28 @@
 
 <div class="container d-flex flex-column border-temp h-50">
   <div class="border-temp mb-3 text-center">
-    <h1>Gardeners</h1>
+    <h1 th:text="${garden.getGardenName()} + ' Gardeners'"></h1>
   </div>
 
   <form class="form-horizontal" id="search-form">
     <div class="form-group form-group-lg">
-      <label class="col-sm-2 control-label">Keywords</label>
-      <div class="col-sm-10">
+      <div class="w-100 d-flex flex-column align-items-center">
 
 
-        <input class="form-control" oninput="fire_ajax_submit()" id="keywordsBox" type="text"/>
-        <div id="garden" th:text="${gardenId}"></div>
-      </div>
-    </div>
+        <input class="form-control w-50" oninput="fire_ajax_submit()" id="keywordsBox" placeholder="Search gardeners by name" type="search"/>
 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button class="btn btn-primary btn-lg" id="bth-search"
-                type="submit">Search
-        </button>
+        <div id="result" class=" w-50"><ul class="list-group-item-success w-100"></ul></div>
+
+
+        <div id="garden" th:text="${gardenId}" class="hiddenGarden"></div>
       </div>
     </div>
   </form>
-
-  <div>
-
-    <table id="resultTable" class="table table-striped table-bordered" style="width:80%">
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>Add to garden</th>
-      </tr>
-      </thead>
-      <tbody>
-
-
-      </tbody>
-    </table>
-
-  </div>
-
 
   <div id="feedback"></div>
 
 </div>
 
-
-<div class="border-temp w-100 p-0 mb-3" id="userContainer">
-    <div th:each="user : ${users}" class="border-temp m-0 w-100 d-flex flex-column">
-      <div class="border-temp mb-2 w-100 d-flex justify-content-center text-center" th:text="${user.getUserName()}">
-      </div>
-      <form th:if="${isUserGardenManager}" class="w-100 mb-2"
-            th:action="@{/overview/details/{gardenId}/gardeners/{requestId}(requestId=${user.getUserId()},gardenId=${gardenId})}"
-            method="post" th:object="${user}">
-        <button type="submit" class="btn btn-outline-danger float-right w-100 ">Add to garden</button>
-      </form>
-  </div>
-  <div>
-  </div>
-</div>
 </div>
 
 <div th:replace="fragments/general :: footer"></div>
