@@ -1,17 +1,13 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.Garden;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.GardenUser;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenUserRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenUserConverter;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

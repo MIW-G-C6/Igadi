@@ -1,7 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.repository;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Task;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

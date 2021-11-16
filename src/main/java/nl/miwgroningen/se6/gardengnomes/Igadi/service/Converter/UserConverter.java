@@ -1,12 +1,8 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.UserDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.User;
 import org.springframework.stereotype.Component;
-
-import javax.persistence.Converter;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>

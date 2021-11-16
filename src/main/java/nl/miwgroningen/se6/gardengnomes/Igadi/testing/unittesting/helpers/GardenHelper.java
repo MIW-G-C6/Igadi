@@ -1,4 +1,4 @@
-package nl.miwgroningen.se6.gardengnomes.Igadi.helpers;
+package nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.helpers;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;

@@ -1,11 +1,10 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.repository;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.Garden;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.GardenUser;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface GardenUserRepository extends JpaRepository<GardenUser, Integer> {

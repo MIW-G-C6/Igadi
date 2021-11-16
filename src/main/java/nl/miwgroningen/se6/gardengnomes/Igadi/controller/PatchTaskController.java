@@ -2,9 +2,8 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchTaskDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.helpers.AuthorizationHelper;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.PatchService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.PatchTaskService;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.constraints.Null;
 import java.util.List;
 
 /**
