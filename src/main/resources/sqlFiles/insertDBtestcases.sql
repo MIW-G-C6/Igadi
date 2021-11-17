@@ -1,4 +1,4 @@
--- Please use Cascade, because of sql syntax in linux terminal
+-- Please use camelCase, because of sql syntax in linux terminal
 SET foreign_key_checks = 0;
 
 TRUNCATE TABLE garden;
