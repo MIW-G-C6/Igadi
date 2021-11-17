@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
 
     $("#search-form").submit(function (event) {
@@ -38,20 +37,21 @@ function fire_ajax_submit() {
         });
 }
 
-
 function fillTable(data){
     let newList = document.createElement("ul");
     newList.classList.add("list-group-item", "p-0", "m-0", "w-100");
 
     data.forEach(userDTO => {
         let text = document.createTextNode(userDTO.userName);
-
         let listItem = document.createElement("li");
         let userContainerDiv = document.createElement("div");
+        userContainerDiv.classList.add("igadi-resultList-appear");
         let userText = document.createElement("p");
         userText.innerHTML = userDTO.userName;
-
         let addButton = document.createElement("button");
+        let buttonImg = document.createElement("img");
+        buttonImg.src = "/images/icons/plus.png";
+        buttonImg.classList.add("igadi-add-gardener-img", "float-right");
         let addForm = document.createElement("form");
         let addMapping = "/overview/details/" + document.getElementById("garden").innerHTML +
             "/gardeners/" + userDTO.userId;
@@ -63,18 +63,11 @@ function fillTable(data){
         addForm.setAttribute("method", "post");
         addForm.setAttribute("object", "${user}");
         addButton.innerHTML = userDTO.userName;
-
-
-        //userContainerDiv.appendChild(userText);
+        addButton.appendChild(buttonImg);
         addForm.appendChild(addButton);
         userContainerDiv.appendChild(addForm);
         listItem.appendChild(userContainerDiv);
         newList.appendChild(listItem);
-
-
-
-
-
     });
 
     let oldList = document.getElementById("result").firstChild;
