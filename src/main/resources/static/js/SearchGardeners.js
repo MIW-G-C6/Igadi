@@ -1,3 +1,9 @@
+/* This file is part of the gardeners.html view. It returns  a list of users that aren't added to the garden yet, but
+can be added by the garden managers
+
+- Lukas de Ruiter
+ */
+
 $(document).ready(function () {
 
     $("#search-form").submit(function (event) {

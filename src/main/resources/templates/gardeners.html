@@ -12,26 +12,22 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Gardens</li>
+    <li class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>
+    <li class="breadcrumb-item active" th:text="${garden.getGardenName()}" aria-current="page"></li>
   </ol>
 </nav>
 
-
 <div class="container d-flex flex-column border-temp h-50" th:if="${isUserGardenManager}">
-  <div class="border-temp mb-3 text-center">
+  <div class="border-temp mb-3">
     <h1 th:text="${garden.getGardenName()} + ' Gardeners'"></h1>
   </div>
 
   <form class="form-horizontal" id="search-form">
     <div class="form-group form-group-lg">
-      <div class="w-100 d-flex flex-column align-items-center">
-
-
-        <input class="form-control w-50" oninput="fire_ajax_submit()" id="keywordsBox" placeholder="Search gardeners by name" type="search"/>
-
+      <div class="w-100 d-flex flex-column align-items-left">
+        <input class="form-control w-50" oninput="fire_ajax_submit()" id="keywordsBox"
+               placeholder="Search gardeners by name" type="search"/>
         <div id="result" class="resultList w-50"><ul class="list-group-item-success w-100"></ul></div>
-
-
         <div id="garden" th:text="${gardenId}" class="hiddenGarden"></div>
       </div>
     </div>
@@ -39,20 +35,18 @@
 
   <div id="feedback"></div>
 
-  <div class="border-temp mb-3 text-center">
+  <div class="d-flex flex-column align-items-left">
+    <div class="d-flex flex-column align-items-start">
     <h5>Current members</h5>
-  </div>
-
-  <div class="d-flex flex-column text-center">
-    <div th:each="gardener: ${currentGardeners}">
-    <p th:text="${gardener.getUserName()} + '(' + ${gardener.getUserRole()} + ')'"></p>
+    <div th:each="gardener: ${currentGardeners}" class="d-flex flex-row">
+    <p th:text="${gardener.getUserName()}"></p>
+      <img th:if="${gardener.getUserRole().equals('gardenManager')}" th:src="@{/images/icons/laurel.png}"
+           class="igadi-manager-star mt-1 ml-2" />
       </div>
+    </div>
     </div>
 
 </div>
-
-
-
 </div>
 
 <div th:replace="fragments/general :: footer"></div>

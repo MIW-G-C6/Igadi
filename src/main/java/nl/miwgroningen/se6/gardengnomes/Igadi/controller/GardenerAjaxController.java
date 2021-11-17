@@ -18,6 +18,8 @@ import java.util.List;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
+ *
+ *     Complexity is rather high on the methods here, because it involves a ajax-request.
  */
 
 @RestController
@@ -38,17 +40,20 @@ public class GardenerAjaxController {
     public ResponseEntity<?> getSearchResultViaAjax(@PathVariable("gardenId") int gardenId,
                                                     @Valid @RequestBody GardenerSearchCriteriaDTO searchGardeners,
                                                     Errors errors) {
-
         List<UserDTO> users = userService.getAllUsers();
         List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
 
-        if (searchGardeners.getKeywords() != null && searchGardeners.getKeywords().trim().isEmpty()) {
-            users.clear();
-        } else {
-            users = userService.findByNameContains(searchGardeners.getKeywords());
+        if(!searchGardeners.getKeywords().contains(".js")) {
+            if (searchGardeners.getKeywords() != null && searchGardeners.getKeywords().trim().isEmpty()) {
+                users.clear();
+            } else {
+                users = userService.findByNameContains(searchGardeners.getKeywords());
             }
-        for (GardenUserDTO gardenUserDTO : alreadyAddedUser) {
-            users.removeIf(realUsers -> gardenUserDTO.getUserDTO().getUserId() == realUsers.getUserId());
+            for (GardenUserDTO gardenUserDTO : alreadyAddedUser) {
+                users.removeIf(realUsers -> gardenUserDTO.getUserDTO().getUserId() == realUsers.getUserId());
+            }
+        } else {
+            users.clear();
         }
         return ResponseEntity.ok(users);
     }
