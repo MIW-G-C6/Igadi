@@ -6,16 +6,12 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.GardenHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.*;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.Valid;
 import java.util.*;
 
 /**
@@ -112,54 +108,43 @@ public class GardenController {
     @GetMapping("/overview/details/{gardenId}/gardeners")
     protected String showPotentialGardeners(@PathVariable("gardenId") int gardenId, Model model,
                                   @AuthenticationPrincipal User user) {
-        List<UserDTO> users = userService.getAllUsers();
+        ArrayList<UserDTO> currentGardeners = new ArrayList<>();
         List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
-        for(GardenUserDTO gardenUserDTO : alreadyAddedUser) {
-            users.removeIf(realUsers -> gardenUserDTO.getUserDTO().getUserId() == realUsers.getUserId());
+        for(GardenUserDTO userSubscription : alreadyAddedUser) {
+            if(userSubscription.getGardenDTO().getGardenId() == gardenId) {
+                UserDTO userToAdd = userService.getUserById(userSubscription.getUserDTO().getUserId());
+                userToAdd.setUserRole(userSubscription.getRole());
+                currentGardeners.add(userToAdd);
+            }
         }
-        model.addAttribute("users", users);
+        GardenDTO garden = gardenService.getGardenById(gardenId);
         model.addAttribute("gardenId", gardenId);
+        model.addAttribute("garden", garden);
+        model.addAttribute("currentGardeners", currentGardeners);
         model.addAttribute("isUserGardenManager", authorizationHelper
                 .isUserGardenManager(user.getUserId(), gardenId));
         return "gardeners";
     }
 
-
     @PostMapping("/overview/details/{gardenId}/gardeners/{requestId}")
-    protected String postPotentialGardeners(@PathVariable("gardenId") int gardenId, @PathVariable("requestId") int requestId,
-                                       Model model, @AuthenticationPrincipal User user) {
-
-        GardenDTO garden = gardenService.getGardenById(gardenId);
-        UserDTO userDTO = userService.getUserById(requestId);
-        userDTO.setGarden(garden);
-        GardenUserDTO gardenUserDTO = new GardenUserDTO();
-        gardenUserDTO.setGardenDTO(garden);
-        gardenUserDTO.setUserDTO(userDTO);
-        gardenUserDTO.setRole("gardener");
-        gardenUserService.createNewGardenUser(gardenUserDTO);
+    protected String postPotentialGardeners(@PathVariable("gardenId") int gardenId,
+                                            @PathVariable("requestId") int requestId, @AuthenticationPrincipal User user,
+                                            RedirectAttributes redirectAttributes) {
+        if(authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)){
+            try {
+                GardenDTO garden = gardenService.getGardenById(gardenId);
+                UserDTO userDTO = userService.getUserById(requestId);
+                userDTO.setGarden(garden);
+                GardenUserDTO gardenUserDTO = new GardenUserDTO();
+                gardenUserDTO.setGardenDTO(garden);
+                gardenUserDTO.setUserDTO(userDTO);
+                gardenUserDTO.setRole("gardener");
+                gardenUserService.saveGardenUser(gardenUserDTO);
+            } catch (SecurityException ex) {
+                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+                return "redirect:/error";
+            }
+        }
         return "redirect:/overview/details/{gardenId}/gardeners";
-    }
-
-    @PostMapping("/overview/details/{gardenId}/gardeners")
-    public ResponseEntity<?> getSearchResultViaAjax(@PathVariable("gardenId") int gardenId,
-                                                    @Valid @RequestBody GardenerSearchCriteriaDTO searchGardeners,
-                                                    Errors errors) {
-
-        List<UserDTO> users = userService.getAllUsers();
-        List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
-        for(GardenUserDTO gardenUserDTO : alreadyAddedUser) {
-            users.removeIf(realUsers -> gardenUserDTO.getUserDTO().getUserId() == realUsers.getUserId());
-        }
-
-
-        if(searchGardeners.getKeywords() != null && searchGardeners.getKeywords().trim().isEmpty()) {
-            users = userService.getAllUsers();
-        }
-        else{
-            users = userService.findByNameContains(searchGardeners.getKeywords());
-        }
-
-        return ResponseEntity.ok(users);
-
     }
 }

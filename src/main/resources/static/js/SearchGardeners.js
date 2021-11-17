@@ -1,17 +1,9 @@
-
 $(document).ready(function () {
 
     $("#search-form").submit(function (event) {
-        //stop submit the form, we will post it manually.
         event.preventDefault();
-
         fire_ajax_submit();
     });
-
-    //$('#keywordsBox').on('input', function() {
-    //    fire_ajax_submit();
-    //});
-
 });
 
 function fire_ajax_submit() {
@@ -33,68 +25,51 @@ function fire_ajax_submit() {
             timeout: 6000,
 
             success: function (resultData) {
-
-                var json = "<h4>Ajax Response</h4>"
-                    + JSON.stringify(resultData, null, 4);
-                $('#feedback').html(json);
-
                 fillTable(resultData)
-
                 console.log("POST: ", searchData);
                 console.log("SUCCESS : ", resultData);
                 $("#btn-search").prop("disabled", false);
-
             },
-
             error: function (e) {
-
-                var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-                    + e.responseText + "&lt;/pre&gt;";
-                $('#feedback').html(json);
-
                 console.log("ERROR : ", e);
                 $("#btn-search").prop("disabled", false);
-
             }
         });
 }
 
-
 function fillTable(data){
-
-    let new_tbody = document.createElement('tbody');
+    let newList = document.createElement("ul");
+    newList.classList.add("list-group-item", "p-0", "m-0", "w-100");
 
     data.forEach(userDTO => {
-
         let text = document.createTextNode(userDTO.userName);
-
-        let tr = document.createElement('tr');
-
-        let td = document.createElement('td');
-        let td2 = document.createElement('td');
+        let listItem = document.createElement("li");
+        let userContainerDiv = document.createElement("div");
+        userContainerDiv.classList.add("igadi-resultList-appear");
+        let userText = document.createElement("p");
+        userText.innerHTML = userDTO.userName;
         let addButton = document.createElement("button");
+        let buttonImg = document.createElement("img");
+        buttonImg.src = "/images/icons/plus.png";
+        buttonImg.classList.add("igadi-add-gardener-img", "float-right");
         let addForm = document.createElement("form");
-        let addMapping = "/overview/details/" + document.getElementById("garden").innerHTML + "/gardeners/" + userDTO.userId;
-        addButton.classList.add("btn", "btn-outline-danger", "w-100");
-        addForm.classList.add("w-100", "mb-2");
+        let addMapping = "/overview/details/" + document.getElementById("garden").innerHTML +
+            "/gardeners/" + userDTO.userId;
+        listItem.classList.add("list-unstyled");
+        addButton.classList.add("btn", "btn-outline-success", "w-100", "igadi-add-person-btn");
+        addForm.classList.add("w-100");
         addButton.setAttribute("type", "submit");
-        addForm.setAttribute("th:action", addMapping);
+        addForm.setAttribute("action", addMapping);
         addForm.setAttribute("method", "post");
-        addForm.setAttribute("th:object", "${user}");
-        addButton.innerHTML = "Add to garden";
-
-        td.appendChild(text);
-        tr.appendChild(td);
-        tr.appendChild(td2)
+        addForm.setAttribute("object", "${user}");
+        addButton.innerHTML = userDTO.userName;
+        addButton.appendChild(buttonImg);
         addForm.appendChild(addButton);
-        td2.appendChild(addForm)
-
-        new_tbody.append(tr);
+        userContainerDiv.appendChild(addForm);
+        listItem.appendChild(userContainerDiv);
+        newList.appendChild(listItem);
     });
 
-    let old_tbody = document.getElementById("resultTable").tBodies.item(0);
-
-    document.getElementById("resultTable").replaceChild(new_tbody, old_tbody)
-
-
+    let oldList = document.getElementById("result").firstChild;
+    document.getElementById("result").replaceChild(newList, oldList);
 }
