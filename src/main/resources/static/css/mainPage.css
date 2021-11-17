@@ -600,6 +600,20 @@ padding-left: 1.1rem;
     color: black;
 }
 
+.igadi-add-gardener-img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.igadi-resultList-appear{
+    animation: listAppears 0.5s 1;
+}
+
+@keyframes listAppears {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
 /* Information about login page*/
 
 .eyeBox{

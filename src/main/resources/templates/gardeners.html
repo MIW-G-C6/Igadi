@@ -17,7 +17,7 @@
 </nav>
 
 
-<div class="container d-flex flex-column border-temp h-50">
+<div class="container d-flex flex-column border-temp h-50" th:if="${isUserGardenManager}">
   <div class="border-temp mb-3 text-center">
     <h1 th:text="${garden.getGardenName()} + ' Gardeners'"></h1>
   </div>
@@ -29,7 +29,7 @@
 
         <input class="form-control w-50" oninput="fire_ajax_submit()" id="keywordsBox" placeholder="Search gardeners by name" type="search"/>
 
-        <div id="result" class=" w-50"><ul class="list-group-item-success w-100"></ul></div>
+        <div id="result" class="resultList w-50"><ul class="list-group-item-success w-100"></ul></div>
 
 
         <div id="garden" th:text="${gardenId}" class="hiddenGarden"></div>
@@ -39,7 +39,19 @@
 
   <div id="feedback"></div>
 
+  <div class="border-temp mb-3 text-center">
+    <h5>Current members</h5>
+  </div>
+
+  <div class="d-flex flex-column text-center">
+    <div th:each="gardener: ${currentGardeners}">
+    <p th:text="${gardener.getUserName()} + '(' + ${gardener.getUserRole()} + ')'"></p>
+      </div>
+    </div>
+
 </div>
+
+
 
 </div>
 

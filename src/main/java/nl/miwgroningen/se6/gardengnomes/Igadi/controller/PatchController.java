@@ -77,11 +77,12 @@ public class PatchController {
     protected String saveNewPatch(@PathVariable("gardenId") int gardenId, @ModelAttribute("patch") PatchDTO patch,
                                   BindingResult result, @AuthenticationPrincipal User user,
                                   RedirectAttributes redirectAttributes) {
+        System.out.println(patch.getPatchId());
         if (!result.hasErrors()) {
             try {
                 patch.setGardenDTO(gardenService.getGardenById(gardenId));
                 patchService.userSavePatch(patch, user.getUserId(), gardenId);
-                return "redirect:/overview/details/{gardenId}";
+                return "redirect:/overview/details/patchTasks/" + patch.getPatchId();
             }
             catch (SecurityException ex) {
                 redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
