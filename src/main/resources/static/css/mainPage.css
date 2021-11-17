@@ -87,9 +87,10 @@ gardenTableContainer {
 }
 
 .container {
-    width: 80vw;
-    margin: 0 auto;
-    padding-top: 30px;
+    width: 55vw;
+    background-color: white;
+    flex-grow: 1;
+    padding: 5rem;
     /*min-height: calc(100vh - 120px - 73px);*/
 }
 
@@ -187,6 +188,7 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #eff5e8;
 }
 
 /*contains general position and layout information for the gardens.html*/
@@ -595,7 +597,10 @@ padding-left: 1.1rem;
 }
 
 .igadi-add-person-btn{
-    border-radius: 0px;
+    border-left: 1px solid rgba(200, 200, 200, 0.3);
+    border-right: 1px solid rgba(200, 200, 200, 0.3);
+    border-top: 0.5px solid rgba(200, 200, 200, 0.3);
+    border-bottom: 0.5px solid rgba(200, 200, 200, 0.3);
     text-align: left;
     height: 3rem;
     color: black;
@@ -615,6 +620,11 @@ padding-left: 1.1rem;
     100% {opacity: 1;}
 }
 
+.igadi-manager-star{
+    width: 1rem;
+    height: 1rem;
+}
+
 /* Information about login page*/
 
 .eyeBox{
@@ -625,6 +635,10 @@ height: 2.37rem;
 .rond{
 border-radius: 15px 50px 30px 5px;
 width: 98%;
+}
+
+.mb-2point5 {
+    margin-bottom: 0.75rem;
 }
 
 /* Information about login page*/

@@ -44,7 +44,7 @@ public class GardenController {
 
     @GetMapping("/gardens")
     protected String showGardens(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("allGardens", gardenService.getAllGardens());
+        model.addAttribute("allGardens", gardenService.findAllGardensByUserId(user.getUserId()));
         return "gardens";
     }
 
@@ -90,14 +90,19 @@ public class GardenController {
 
     @GetMapping("/overview/details/{gardenId}")
     protected String showGardenDetails(@PathVariable("gardenId") int gardenId, Model model,
-                                       @AuthenticationPrincipal User user) {
-        GardenDTO garden = gardenService.getGardenById(gardenId);
-        List<PatchDTO> allPatches = patchService.findAllPatchesByGardenId(gardenId);
-        model.addAttribute("garden", garden);
-        model.addAttribute("allPatches", allPatches);
-        model.addAttribute("isUserGardenManager",
-                authorizationHelper.isUserGardenManager(user.getUserId(), gardenId));
-        return "gardenDetails";
+                                       @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
+        if (authorizationHelper.isUserGardenMember(user.getUserId(), gardenId)) {
+            GardenDTO garden = gardenService.getGardenById(gardenId);
+            List<PatchDTO> allPatches = patchService.findAllPatchesByGardenId(gardenId);
+            model.addAttribute("garden", garden);
+            model.addAttribute("allPatches", allPatches);
+            model.addAttribute("isUserGardenManager",
+                    authorizationHelper.isUserGardenManager(user.getUserId(), gardenId));
+            return "gardenDetails";
+        } else {
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+            return "redirect:/error";
+        }
     }
 
     @GetMapping("/overview/details/{gardenId}/gardeners")

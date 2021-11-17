@@ -1,7 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
@@ -42,8 +41,8 @@ public class GardenUserService {
         garden.setGardenId(gardenId);
         User user = new User();
         user.setUserId(userId);
-        return gardenUserRepository.findAllByGardenAndUser(garden, user)
-                .stream().map(gardenUserConverter::convertToGardenUserDTO).collect(Collectors.toList());
+        List<GardenUser> gardenUsers = gardenUserRepository.findAllByGardenAndUser(garden, user);
+        return gardenUsers.stream().map(gardenUserConverter::convertToGardenUserDTO).collect(Collectors.toList());
     }
 
     public List<GardenUserDTO> findAllGardenUsersByAll(int gardenId, int userId, String role) {

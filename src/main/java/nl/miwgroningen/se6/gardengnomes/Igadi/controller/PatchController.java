@@ -45,7 +45,7 @@ public class PatchController {
             patch.setGardenDTO(gardenService.getGardenById(gardenId));
             model.addAttribute("patch", patch);
             model.addAttribute("buttonText", "Create patch");
-            model.addAttribute("titleText", "Create a new patch!");
+            model.addAttribute("titleText", "Create a new patch");
             return "patchForm";
         } else {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
@@ -77,7 +77,6 @@ public class PatchController {
     protected String saveNewPatch(@PathVariable("gardenId") int gardenId, @ModelAttribute("patch") PatchDTO patch,
                                   BindingResult result, @AuthenticationPrincipal User user,
                                   RedirectAttributes redirectAttributes) {
-        System.out.println(patch.getPatchId());
         if (!result.hasErrors()) {
             try {
                 patch.setGardenDTO(gardenService.getGardenById(gardenId));
@@ -89,7 +88,7 @@ public class PatchController {
                 return "redirect:/error";
             }
         } else {
-            return "redirect:/overview/details/garden/patches/new/{gardenId}";
+            return "redirect:/overview/details/patchTasks/" + patch.getPatchId();
         }
     }
 
