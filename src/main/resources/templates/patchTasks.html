@@ -43,7 +43,7 @@
         </button>
     </div>
 
-    <div class="col w-100 text-center">
+    <div class="col w-50 text-right">
         <h2 class="inlineText">Tasks</h2>
     </div>
 
@@ -57,11 +57,11 @@
                      data-toggle="modal"
                      th:data-target="'#igadiModal' + ${task.getTaskId()}">
 
-                <div class="patchTaskColumn float-left font-weight-bold w-50" th:text="${task.getTaskName()}">
+                <div class="patchTaskColumn float-left font-weight-bold w-75" th:text="${task.getTaskName()}">
                 </div>
 
                 <div class="boxed">
-                    <div class="m-1 float-left noBreakWord w-50" th:text="${task.getTaskDescription()}"></div>
+                    <div class="m-1 float-left noBreakWord w-75" th:text="${task.getTaskDescription()}"></div>
                     <div class="m-1 float-right noBreakWord" th:text="${task.doneOrNot()}"></div>
 
                 </div>

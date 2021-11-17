@@ -265,7 +265,7 @@ margin-left: 4.3rem;
 .grid-ish{
     display: flex;
     flex-wrap: wrap;
-    width: 50%;
+    width: 33%;
     justify-content: center;
     margin: auto;
 }
@@ -281,6 +281,7 @@ margin-left: 4.3rem;
     border-radius: 15px;
     border-color: grey;
     margin: 3px;
+
 }
 
 .colMakeUpDone{
@@ -319,7 +320,7 @@ margin-left: 4.3rem;
 .gridSize{
     padding: 10px;
     word-wrap: break-word;
-}
+    }
 
 .noBreakWord{
     word-wrap: break-word;
