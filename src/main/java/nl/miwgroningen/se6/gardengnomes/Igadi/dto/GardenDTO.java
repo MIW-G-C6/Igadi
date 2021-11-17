@@ -43,4 +43,5 @@ public class GardenDTO {
     public void setLocation(String location) {
         this.location = location;
     }
+    
 }
