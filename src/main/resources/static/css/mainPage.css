@@ -87,9 +87,10 @@ gardenTableContainer {
 }
 
 .container {
-    width: 80vw;
-    margin: 0 auto;
-    padding-top: 30px;
+    width: 55vw;
+    background-color: white;
+    flex-grow: 1;
+    padding: 5rem;
     /*min-height: calc(100vh - 120px - 73px);*/
 }
 
@@ -189,6 +190,7 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #eff5e8;
 }
 
 /*contains general position and layout information for the gardens.html*/
@@ -624,3 +626,7 @@ height: 2.35rem;
 .rounded{
 border-radius: 25px;
 width: 98%;}
+
+.mb-2point5 {
+    margin-bottom: 0.75rem;
+}
