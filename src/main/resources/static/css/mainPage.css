@@ -167,8 +167,6 @@ gardenTableContainer {
     right: 15px;
 }
 
-
-
 .borderBox{
     margin-top: 0.2rem;
     border-top: 2px solid green;
@@ -219,7 +217,7 @@ body{
 }
 
 .closeToO{
-margin-left: 3.75rem;
+margin-left: 4.3rem;
 }
 
 /* Patch Form */
@@ -373,6 +371,7 @@ margin-left: 3.75rem;
 .igadi-about-container{
     width:20rem;
     line-height: 1.5rem;
+    background-color: #e9ecef;
 }
 
 .igadi-about-title{
@@ -487,7 +486,7 @@ margin-left: 3.75rem;
 }
 
 .gardenDetailsPatchesOrdered{
-padding-left: .75rem;
+padding-left: 1.1rem;
 }
 
 /* Profile  */
@@ -626,9 +625,22 @@ padding-left: .75rem;
 /* Information about login page*/
 
 .eyeBox{
-height: 2.35rem;
+height: 2.37rem;
+
 }
 
-.rounded{
-border-radius: 25px;
-width: 98%;}
+.rond{
+border-radius: 15px 50px 30px 5px;
+width: 98%;
+}
+
+/* Information about login page*/
+
+.inliner{
+    display: inline-block;
+}
+
+.equalBoxSmall{
+    width: 130px;
+    text-align: center;
+}
