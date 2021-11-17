@@ -1,15 +1,10 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.helpers;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
-import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.dto.UserDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenUserService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
@@ -19,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
 class AuthorizationHelperTest {
 
     private GardenUserService createGardenUserServiceMock() {
