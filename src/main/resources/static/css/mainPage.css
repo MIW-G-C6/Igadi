@@ -167,8 +167,6 @@ gardenTableContainer {
     right: 15px;
 }
 
-
-
 .borderBox{
     margin-top: 0.2rem;
     border-top: 2px solid green;
@@ -219,7 +217,7 @@ body{
 }
 
 .closeToO{
-margin-left: 4.5rem;
+margin-left: 4.3rem;
 }
 
 /* Patch Form */
@@ -488,7 +486,7 @@ margin-left: 4.5rem;
 }
 
 .gardenDetailsPatchesOrdered{
-padding-left: 1rem;
+padding-left: 1.1rem;
 }
 
 /* Profile  */
@@ -612,4 +610,15 @@ height: 2.37rem;
 .rond{
 border-radius: 15px 50px 30px 5px;
 width: 98%;
+}
+
+/* Information about login page*/
+
+.inliner{
+    display: inline-block;
+}
+
+.equalBoxSmall{
+    width: 130px;
+    text-align: center;
 }
