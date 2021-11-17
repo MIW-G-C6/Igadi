@@ -36,6 +36,10 @@ public class GardenService {
         return gardenRepository.findAll().stream().map(gardenConverter::convertToGardenDTO).collect(Collectors.toList());
     }
 
+    public List<GardenDTO> findAllGardensByUserId(int userId) {
+        return gardenRepository.findAllByUserId(userId).stream().map(gardenConverter::convertToGardenDTO).collect(Collectors.toList());
+    }
+
     public GardenDTO getGardenById(int gardenId) {
         return gardenConverter.convertToGardenDTO(gardenRepository.getById(gardenId));
     }

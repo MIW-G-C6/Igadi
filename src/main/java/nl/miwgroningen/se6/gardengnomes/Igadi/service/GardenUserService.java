@@ -41,8 +41,8 @@ public class GardenUserService {
         garden.setGardenId(gardenId);
         User user = new User();
         user.setUserId(userId);
-        return gardenUserRepository.findAllByGardenAndUser(garden, user)
-                .stream().map(gardenUserConverter::convertToGardenUserDTO).collect(Collectors.toList());
+        List<GardenUser> gardenUsers = gardenUserRepository.findAllByGardenAndUser(garden, user);
+        return gardenUsers.stream().map(gardenUserConverter::convertToGardenUserDTO).collect(Collectors.toList());
     }
 
     public List<GardenUserDTO> findAllGardenUsersByAll(int gardenId, int userId, String role) {

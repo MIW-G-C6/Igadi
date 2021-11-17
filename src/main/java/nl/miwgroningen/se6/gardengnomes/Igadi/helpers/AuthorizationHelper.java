@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthorizationHelper {
 
-    private GardenUserService gardenUserService;
+    private final GardenUserService gardenUserService;
 
     public AuthorizationHelper(GardenUserService gardenUserService) {
         this.gardenUserService = gardenUserService;
@@ -15,5 +15,9 @@ public class AuthorizationHelper {
 
     public boolean isUserGardenManager(int userId, int gardenId) {
         return !gardenUserService.findAllGardenUsersByAll(gardenId, userId, UserRole.GARDEN_MANAGER).isEmpty();
+    }
+
+    public boolean isUserGardenMember(int userId, int gardenId) {
+        return !gardenUserService.findAllGardenUsersByUserIdAndGardenId(gardenId, userId).isEmpty();
     }
 }
