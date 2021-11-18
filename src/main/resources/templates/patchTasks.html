@@ -48,8 +48,9 @@
     <div class="bigBox">
         <div class="grid-ish">
 
-            <div th:each="task : ${allPatchTasks}" class="d-flex flex-column w-100 h-100 gridSize"
+            <div th:each="task : ${allPatchTasks}" class="d-flex flex-row w-100 h-100 gridSize"
                  th:class="${task.doneOrNot()} == 'Done' ? 'colMakeUpDone' : 'colMakeUpNotDone'">
+
 
                 <img th:if="${isUserGardenManager}" th:src="'/images/icons/bin.png'" class="binIcon float-right"
                      data-toggle="modal"
@@ -62,7 +63,20 @@
                     <div class="m-1 float-left noBreakWord w-75" th:text="${task.getTaskDescription()}"></div>
                     <div class="m-1 float-right noBreakWord" th:text="${task.doneOrNot()}"></div>
 
+                <div class="d-flex flex-column w-75 align-content-around">
+                    <div class="patchTaskColumn float-left font-weight-bold w-100" th:text="${task.getTaskName()}"></div>
+                    <div class="m-1 float-left noBreakWord w-100" th:text="${task.getTaskDescription()}"></div>
                 </div>
+
+                <form th:if="${!task.isDone()}" th:action="@{/overview/details/patchTasks/{patchId}/isDone/{taskId}(taskId=${task.getTaskId()},patchId=${patchId})}"
+                          th:method="post" th:object="${task}" class="doneForm" sec:authorize="isAuthenticated()">
+                        <button th:type="submit" class="border-0 doneImgBtn m-0 p-0 w-100 h-100">
+                            <img th:src="@{/images/icons/checked.png}" class="doneImg"></button></form>
+                <img th:if="${isUserGardenManager}" th:src="'/images/icons/bin.png'" class="binIcon float-right"
+                     data-toggle="modal" th:data-target="'#igadiModal' + ${task.getTaskId()}"/>
+
+
+
                 <div class="modal modalfade" th:id="'igadiModal' + ${task.getTaskId()}" tabindex="-1" role="dialog"
                      aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
