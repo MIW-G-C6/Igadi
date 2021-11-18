@@ -52,19 +52,14 @@
         <a class="border-temp m-0" th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"></a>
     </div>
 
-<!--<div class="equalBoxPatchTasksAdd d-flex flex-column">
-    <a class="border-temp m-0"
-       th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}">
-        <button class="w-100 btn btn-outline-success float-right mb-2">View all tasks for this garden
-        </button>
-    </a>
-
+<!--
     <button th:if="${isUserGardenManager}" type="submit" class="btn btn-outline-danger float-right
         equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv" data-target="#igadiGardenDeleteModal">
         Delete garden
     </button>
 </div>-->
 
+    <button>Create patch</button>
 
     <!-- Garden Modal -->
     <div class="modal modalfade" id="igadiGardenDeleteModal" tabindex="-1" role="dialog"

@@ -106,11 +106,33 @@ public class PatchTaskController {
     public String deletePatchTaskById(@PathVariable("taskId") int taskId, @AuthenticationPrincipal User user,
                                        RedirectAttributes redirectAttributes) {
         try {
-            int patchId = patchTaskService.getPatchTaskById(taskId).getPatch().getPatchId();
+            int patchId = patchTaskService.getPatchTaskById(taskId).getPatchDTO().getPatchId();
             patchTaskService.userDeletePatchTask(user.getUserId(), patchTaskService.getPatchTaskById(taskId));
             return "redirect:/overview/details/patchTasks/" + patchId;
         } catch (SecurityException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+            return "redirect:/error";
+        }
+    }
+
+    @PostMapping("/overview/details/patchTasks/{patchId}/isDone/{taskId}")
+    public String setTaskAsDone(@PathVariable("taskId") int taskId,
+                                @ModelAttribute("patchTask") PatchTaskDTO patchTaskDTO,
+                                @PathVariable("patchId") int patchId,
+                                BindingResult result, @AuthenticationPrincipal User user,
+                                RedirectAttributes redirectAttributes) {
+        if (!result.hasErrors()) {
+            try {
+                patchTaskDTO = patchTaskService.getPatchTaskById(taskId);
+                patchTaskDTO.setDone(true);
+                patchTaskService.userSetDonePatchTask(patchTaskDTO, user.getUserId(),
+                        patchService.findGardenIdByPatchId(patchId));
+                return "redirect:/overview/details/patchTasks/" + patchId;
+            } catch (SecurityException ex) {
+                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+                return "redirect:/error";
+            }
+        } else {
             return "redirect:/error";
         }
     }
