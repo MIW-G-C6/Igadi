@@ -4,7 +4,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenTaskRepository;
-import nl.miwgroningen.se6.gardengnomes.Igadi.testing.componenttesting.Converter.GardenTaskConverter;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenTaskConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -6,9 +6,9 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchTaskDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Patch;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
-import nl.miwgroningen.se6.gardengnomes.Igadi.testing.componenttesting.Converter.GardenConverter;
-import nl.miwgroningen.se6.gardengnomes.Igadi.testing.componenttesting.Converter.PatchConverter;
-import nl.miwgroningen.se6.gardengnomes.Igadi.testing.componenttesting.Converter.PatchTaskConverter;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenConverter;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.PatchConverter;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.PatchTaskConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
