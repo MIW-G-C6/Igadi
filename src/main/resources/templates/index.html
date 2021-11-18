@@ -7,11 +7,11 @@
     <title>Homepage</title>
 </head>
 
-<body>
+<body class="bg-white">
 <div th:replace="fragments/general :: navbar"></div>
 
-<div id="userProfileBorder" class="container d-flex flex-column border-temp h-50">
-    <div class="border-temp mb-3 text-center">
+<div id="userProfileBorder" class="container">
+    <div class="mb-3 text-center">
         <h1 sec:authorize="isAnonymous()">Welcome to Igadi!</h1>
         <h3 sec:authorize="isAnonymous()">Home of the Green and the Fresh!</h3>
     </div>

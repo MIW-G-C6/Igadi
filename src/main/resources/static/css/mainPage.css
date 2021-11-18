@@ -87,8 +87,10 @@ gardenTableContainer {
 }
 
 .container {
-    width: 55vw;
+    width: 60vw;
     background-color: white;
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     padding: 5rem;
     /*min-height: calc(100vh - 120px - 73px);*/
@@ -427,13 +429,13 @@ width: 35%;
     transform: translateX(50px);
 }
 
-.igadi-about-container{
+/*.igadi-about-container{
     width:20rem;
     line-height: 1.5rem;
     background-color: #e9ecef;
-}
+}*/
 
-.igadi-about-title{
+.igadi-title{
     padding-bottom: 1rem;
     border-bottom: 2px solid darkslategray;
 }
@@ -603,7 +605,7 @@ padding-left: 1.1rem;
 }
 
 /* Contact */
-.main-container-jumbotron {
+/*.main-container-jumbotron {
     flex-direction: column;
     justify-content: center;
 
@@ -613,23 +615,23 @@ padding-left: 1.1rem;
     align-content: center;
     background-color: #F5F5F5;
 
-}
+}*/
 
-.square {
+/*.square {
     position: relative;
     background-color: #F5F5F5;
     padding: 5rem;
     align-content: center;
     align-items: center;
-}
+}*/
 
-.main-text-box {
+/*.main-text-box {
     position: relative;
     top: 0;
     text-align: center;
-}
+}*/
 
-.contact-information {
+/*.contact-information {
     position: relative;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
@@ -646,7 +648,7 @@ padding-left: 1.1rem;
 .contact-informationBox {
     margin: 1.5rem;
     text-align: left;
-}
+}*/
 
 .hiddenGarden{
     display: none;
@@ -691,6 +693,10 @@ height: 2.37rem;
 .rond{
 border-radius: 15px 50px 30px 5px;
 width: 98%;
+}
+
+.w-98 {
+    width: 98%;
 }
 
 .mb-2point5 {
