@@ -10,7 +10,7 @@ public interface GardenRepository extends JpaRepository<Garden, Integer> {
 
     void deleteById(int gardenId);
 
-    @Query(value = "SELECT * FROM Garden g LEFT JOIN Gardenuser gu ON g.gardenId = gu.garden_gardenId " +
+    @Query(value = "SELECT * FROM Garden g LEFT JOIN GardenUser gu ON g.gardenId = gu.garden_gardenId " +
             "WHERE gu.user_userId = :userId",
             nativeQuery = true)
     List<Garden> findAllByUserId(@Param("userId") int userId);
