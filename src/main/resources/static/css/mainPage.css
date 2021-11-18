@@ -156,10 +156,6 @@ gardenTableContainer {
     width: 140px;
     text-align: center;
     margin-bottom: 0px;
-
-
-
-
 }
 
 .equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv{
@@ -174,6 +170,10 @@ gardenTableContainer {
 .borderBox{
     margin-top: 0.2rem;
     border-top: 2px solid green;
+}
+
+.w-40{
+width: 30%;
 }
 
 /*contains general position information for the footer*/
@@ -273,7 +273,7 @@ margin-left: 1rem;
     width: 33%;
     justify-content: center;
     margin: auto;
-    margin-top: 4rem;
+    margin-top: 0px;
 }
 
 .grid-ish > * {
@@ -397,6 +397,17 @@ width: 35%;
        position: relative;
 
    }
+
+.titelButtonBox{
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 0px;
+
+}
+
+
+
+
 
 /*  About page */
 
