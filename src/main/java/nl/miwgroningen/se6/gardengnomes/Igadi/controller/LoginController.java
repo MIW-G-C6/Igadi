@@ -1,6 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.User;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
