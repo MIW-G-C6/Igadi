@@ -155,10 +155,7 @@ gardenTableContainer {
 .equalBoxPatchTasksAdd{
     width: 140px;
     text-align: center;
-    margin-bottom: 10px;
-    position:absolute;
-    top: 20%;
-    right: 15px;
+    margin-bottom: 0px;
 }
 
 .equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv{
@@ -173,6 +170,10 @@ gardenTableContainer {
 .borderBox{
     margin-top: 0.2rem;
     border-top: 2px solid green;
+}
+
+.w-40{
+width: 30%;
 }
 
 /*contains general position information for the footer*/
@@ -221,7 +222,7 @@ body{
 }
 
 .closeToO{
-margin-left: 4.3rem;
+margin-left: 1rem;
 }
 
 /* Patch Form */
@@ -269,14 +270,21 @@ margin-left: 4.3rem;
 .grid-ish{
     display: flex;
     flex-wrap: wrap;
-    width: 50%;
+    width: 33%;
     justify-content: center;
     margin: auto;
+    margin-top: 0px;
 }
 
 .grid-ish > * {
     flex: 1 1 100%;
 }
+
+.columnMakeUp{
+width: 35%;
+}
+
+
 
 .colMakeUpNotDone{
     display: flex;
@@ -288,6 +296,7 @@ margin-left: 4.3rem;
     border-radius: 15px;
     border-color: grey;
     margin: 3px;
+
 }
 
 .colMakeUpDone{
@@ -329,7 +338,7 @@ margin-left: 4.3rem;
 .gridSize{
     padding: 10px;
     word-wrap: break-word;
-}
+    }
 
 .noBreakWord{
     word-wrap: break-word;
@@ -372,6 +381,33 @@ margin-left: 4.3rem;
     height: 15px;
     cursor: pointer;
    }
+
+
+.binIconBig{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+   }
+
+   .penIcon{
+   width: 20px;
+       height: 20px;
+       cursor: pointer;
+       position: relative;
+
+   }
+
+.titelButtonBox{
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 0px;
+
+}
+
+
+
+
 
 /*  About page */
 
