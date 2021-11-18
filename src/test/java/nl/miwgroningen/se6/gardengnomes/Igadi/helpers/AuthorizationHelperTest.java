@@ -4,12 +4,9 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenUserService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
