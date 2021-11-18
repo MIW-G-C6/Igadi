@@ -51,15 +51,24 @@ public class PatchTaskService {
         return tasks.stream().map(patchTaskConverter::convertToPatchTaskDTO).collect(Collectors.toList());
     }
 
-    public void userDeletePatchTask(int userId, PatchTask patchTask) {
-        if (authorizationHelper.isUserGardenManager(userId, patchTask.getPatch().getGarden().getGardenId())) {
-            patchTaskRepository.delete(patchTask);
+    public void userDeletePatchTask(int userId, PatchTaskDTO patchTaskDTO) {
+        if (authorizationHelper.isUserGardenManager(userId, patchTaskDTO.getPatchDTO().getGardenDTO().getGardenId())) {
+            patchTaskRepository.delete(patchTaskConverter.convertFromPatchTaskDTO(patchTaskDTO));
         } else {
             throw new SecurityException("You are not allowed to delete this task.");
         }
     }
 
-    public PatchTask getPatchTaskById(int patchTaskId) {
-        return patchTaskRepository.getById(patchTaskId);
+    public PatchTaskDTO getPatchTaskById(int patchTaskId) {
+        return patchTaskConverter.convertToPatchTaskDTO(patchTaskRepository.getById(patchTaskId));
+    }
+
+    public void userSetDonePatchTask(PatchTaskDTO patchTaskDTO, int userId, int gardenId) {
+        if (authorizationHelper.isUserGardenManager(userId, gardenId) || authorizationHelper
+                .isUserGardenMember(userId, gardenId)) {
+            savePatchTask(patchTaskDTO);
+        } else {
+            throw new SecurityException("You are not allowed to complete this patch task.");
+        }
     }
 }

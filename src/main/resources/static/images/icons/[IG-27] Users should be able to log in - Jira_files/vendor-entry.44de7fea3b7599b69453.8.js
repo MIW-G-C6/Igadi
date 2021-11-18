@@ -1,2 +1,0 @@
-try{window.performance.mark("vendor-entry.js:eval-start")}catch(e){}(window.webpackJsonp=window.webpackJsonp||[]).push([["vendor-entry"],[],[[7,"manifest","vendor~748942c6","vendor~31ecd969","vendor~f9ca8911"]]]);try{window.__jsEvalStop("vendor-entry.js")}catch(e){}
-//# sourceMappingURL=https://statlas.prod.atl-paas.net/jira-frontend-source-maps/assets/vendor-entry.7861d2018d79456899df.8.js.map

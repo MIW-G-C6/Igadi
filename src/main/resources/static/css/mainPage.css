@@ -277,6 +277,9 @@ margin-left: 4.3rem;
 }
 
 .colMakeUpNotDone{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     padding: .3rem;
     background-color: rgba(255, 105, 97, 0.15);
     border: 2px solid;
@@ -286,6 +289,9 @@ margin-left: 4.3rem;
 }
 
 .colMakeUpDone{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     padding: .3rem;
     background-color: lightgreen;
     border: 2px solid;
@@ -328,15 +334,41 @@ margin-left: 4.3rem;
     padding-top: 0;
 }
 
+.doneImg{
+    word-wrap: break-word;
+    padding-top: 0;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.doneForm{
+    width: 2rem;
+    height: 2rem;
+}
+
+.doneImgBtn{
+    border-radius: 50%;
+    background: transparent;
+}
+
+.doneImg:hover{
+    transition-delay: 50ms;
+    transition-duration: 50ms;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 168, 0, 0.3);
+}
+
 .inlineText{
     display: inline-block;
 }
 
 .binIcon{
+    margin-bottom: auto;
+    margin-left: auto;
     width: 15px;
     height: 15px;
     cursor: pointer;
-    position: relative;
    }
 
 /*  About page */
