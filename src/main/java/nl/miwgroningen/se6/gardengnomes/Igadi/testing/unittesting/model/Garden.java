@@ -1,4 +1,4 @@
-package nl.miwgroningen.se6.gardengnomes.Igadi.model;
+package nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model;
 
 import javax.persistence.*;
 import java.util.List;

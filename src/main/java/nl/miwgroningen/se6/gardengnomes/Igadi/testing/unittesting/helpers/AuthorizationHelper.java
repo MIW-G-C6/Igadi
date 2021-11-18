@@ -1,4 +1,4 @@
-package nl.miwgroningen.se6.gardengnomes.Igadi.helpers;
+package nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.helpers;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenUserService;

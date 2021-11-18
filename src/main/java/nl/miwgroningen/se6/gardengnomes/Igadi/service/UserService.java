@@ -1,7 +1,7 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.UserDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.UserRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.UserConverter;
 import org.springframework.security.core.userdetails.UserDetails;

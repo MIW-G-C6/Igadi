@@ -1,6 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.dto;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
+import nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model.User;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>

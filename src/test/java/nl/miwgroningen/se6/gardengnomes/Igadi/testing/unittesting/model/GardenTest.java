@@ -1,4 +1,4 @@
-package nl.miwgroningen.se6.gardengnomes.Igadi.model;
+package nl.miwgroningen.se6.gardengnomes.Igadi.testing.unittesting.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
