@@ -20,31 +20,29 @@
     </ol>
 </nav>
 
-<div class="content flow">
+<div>
 
-    <div class="border-temp mb-3 text-center titelPatchTasks">
+    <div class="border-temp m-auto mb-3 text-center w-50 titelPatchTasks">
+
+        <img th:if="${isUserGardenManager}" th:src="'/images/icons/bin.png'" class="binIconBig mb-4 float-right"
+             data-toggle="modal"
+             th:data-target="'#igadiPatchDeleteModal'">
+
+        <a th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
+            <img th:if="${isUserGardenManager}" th:src="'/images/icons/pen.png'" class="penIcon mb-4">
+        </a>
+
         <h1 class="inlineText" th:text="${patch.cropInGarden()}"></h1>
     </div>
 
-    <div>
-        <a th:if="${isUserGardenManager}"
-           th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
-            <button class="equalBoxPatchTasksEdit btn btn-outline-success float-left">Edit name</button>
-        </a>
+
+    <div class="col text-right m-auto columnMakeUp">
+        <h2 class="inlineText float-left ml-3">Tasks</h2>
 
         <a th:if="${isUserGardenManager}"
            th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
             <button class="equalBoxPatchTasksAdd btn btn-outline-success float-right">Add task</button>
         </a>
-        <button th:if="${isUserGardenManager}"
-                class="equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv
-                 btn btn-outline-danger float-right" data-toggle="modal"
-                data-target="#igadiPatchDeleteModal">Delete patch
-        </button>
-    </div>
-
-    <div class="col w-50 text-right">
-        <h2 class="inlineText">Tasks</h2>
     </div>
 
     <div class="bigBox">
