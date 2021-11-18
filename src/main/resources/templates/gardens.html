@@ -17,28 +17,23 @@
 </nav>
 
 
-<div class="container d-flex flex-column border-temp h-50">
-    <div class="border-temp mb-3 text-center">
-        <h1>Gardens</h1>
-    </div>
+<div class="container w-50">
+    <h1 class="mb-4">Gardens</h1>
 
-    <div class="border-temp w-100 p-0 mb-3 closeToO">
-        <div th:each="garden: ${allGardens}" class="border-temp m-0 w-100 d-flex flex-column">
-            <div class="border-temp mb-2 w-100 d-flex justify-content-center">
+    <div class="w-100 p-0 mb-4">
+        <div th:each="garden: ${allGardens}" class="m-0 w-100 d-flex flex-column">
+            <div class="mb-2 w-100 d-flex">
                 <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
-                   class="w-25 linksColor"><p th:text="${garden.gardenName}" class="border-temp m-0"></p></a>
-                <!--                <p class="brackets border-temp m-0 w-0" th:text="${garden.location}"></p>-->
+                   class="w-25 linksColor"><p th:text="${garden.gardenName}" class="m-0"></p></a>
+                <!--                <p class="brackets m-0 w-0" th:text="${garden.location}"></p>-->
                 <!--                //TODO locatie koppelen aan gardens//-->
             </div>
         </div>
     </div>
-    <div>
-        <button type="button" class="equalBox btn btn-success mr-3 mr-auto gaNaarMiddenKnop"
-                onclick="location.href='/gardens/new'">
-            New garden
-        </button>
-    </div>
-</div>
+    <button type="button" class="btn btn-success mr-3 mr-auto"
+            onclick="location.href='/gardens/new'">
+        New garden
+    </button>
 </div>
 
 <div th:replace="fragments/general :: footer"></div>

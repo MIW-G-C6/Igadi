@@ -93,7 +93,12 @@ gardenTableContainer {
     flex-direction: column;
     flex-grow: 1;
     padding: 5rem;
+    /*box-shadow: 0 5px 20px #97ff89;*/
     /*min-height: calc(100vh - 120px - 73px);*/
+}
+
+h1 {
+    margin-bottom: 1.5rem;
 }
 
 .redMessage {
@@ -190,7 +195,7 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #eff5e8;
+    background-color: linen;
 }
 
 /*contains general position and layout information for the gardens.html*/
@@ -475,6 +480,9 @@ margin-left: 4.3rem;
 }
 
 /* Breadcrumbs  */
+.breadcrumb {
+    margin: 0;
+}
 
 .igadi-item-green{
     color: rgb(92, 184, 92);

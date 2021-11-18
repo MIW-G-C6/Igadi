@@ -17,27 +17,30 @@
     </ol>
 </nav>
 
-<div class="container d-flex flex-row">
+<div class="container w-50">
 
-    <div class="col-3"></div>
 
-    <div class="col-6 d-flex flex-column border-temp h-50">
-        <div class="border-temp mb-3 text-center">
-            <h1 th:text="${garden.getGardenName()}"></h1>
-        </div>
+    <div class="d-flex flex-column">
+        <h1 th:text="${garden.getGardenName()}"></h1>
 
-        <h2 class="inlineText w-100 text-center">Patches</h2>
+        <h5 class="inlineText w-100 mb-4">Patches</h5>
 
-        <div class="border-temp w-100 p-0 mb-3">
-            <div th:each="patch : ${allPatches}" class="border-temp m-0 w-100 d-flex flex-column">
-                <div class="border-temp mb-2 w-100 d-flex justify-content-center gardenDetailsPatchesOrdered">
+        <div class="w-100 p-0 mb-3">
+            <div th:each="patch : ${allPatches}" class="m-0 w-100 d-flex flex-column">
+                <div class="mb-2 w-100 d-flex">
                     <a th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patch.getPatchId()})}"
-                       class="w-25 linksColor"><p th:text="${patch.showWhatIsGrowing()}" class="border-temp m-0"></p></a>
+                       class="w-25 linksColor"><p th:text="${patch.showWhatIsGrowing()}" class="m-0"></p></a>
                 </div>
             </div>
         </div>
+        <a class="m-0 text-decoration-none" th:if="${isUserGardenManager}"
+           th:href="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${garden.gardenId})}">
+            <button type="button" class="btn btn-success mr-3">
+                New patch
+            </button>
+        </a>
         <div>
-            <a class="border-temp m-0 text-decoration-none" th:if="${isUserGardenManager}"
+            <a class="m-0 text-decoration-none" th:if="${isUserGardenManager}"
                th:href="@{/overview/details/{gardenId}/gardeners(gardenId=${garden.gardenId})}">
                 <button class="equalBox btn btn-success mr-3 mr-auto gaNaarMiddenKnop">Add gardeners</button>
             </a>
@@ -49,7 +52,7 @@
                 data-toggle="modal" data-target="#igadiGardenDeleteModal">
             Delete garden
         </button>
-        <a class="border-temp m-0" th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"></a>
+        <a class="m-0" th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"></a>
     </div>
 
 <!--
@@ -59,7 +62,7 @@
     </button>
 </div>-->
 
-    <button>Create patch</button>
+
 
     <!-- Garden Modal -->
     <div class="modal modalfade" id="igadiGardenDeleteModal" tabindex="-1" role="dialog"

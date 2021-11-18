@@ -17,8 +17,8 @@
   </ol>
 </nav>
 
-<div class="container d-flex flex-column border-temp h-50" th:if="${isUserGardenManager}">
-  <div class="border-temp mb-3">
+<div class="container d-flex flex-column h-50" th:if="${isUserGardenManager}">
+  <div class="mb-3">
     <h1 th:text="${garden.getGardenName()} + ' Gardeners'"></h1>
   </div>
 
