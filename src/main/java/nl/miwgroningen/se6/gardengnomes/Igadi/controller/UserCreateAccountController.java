@@ -46,7 +46,7 @@ public class UserCreateAccountController {
         if (!result.hasErrors()) {
             boolean duplicateEmail = userService.checkIfUserEmailExists(userDTO.getUserEmail());
             if (duplicateEmail) {
-                message = "Email has to be unique!";
+                message = "This email address is already being used!";
                 redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
             } else if (!userDTO.getPassword1().equals(userDTO.getPassword2())) {
                 message = "Passwords are not the same!";
