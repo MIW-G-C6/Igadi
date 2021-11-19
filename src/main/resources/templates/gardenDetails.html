@@ -19,8 +19,6 @@
 
 <div class="container w-50">
 
-
-
     <div class="d-flex flex-column">
         <div class="d-flex flex-row">
             <h1 class="" th:text="${garden.getGardenName()}"></h1>
@@ -30,8 +28,6 @@
         </div>
 
         <h5 class="inlineText w-100 mb-5">Patches</h5>
-
-
 
         <a class="mb-3 text-decoration-none" th:if="${isUserGardenManager}"
            th:href="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${garden.gardenId})}">
@@ -56,25 +52,23 @@
         </div>
     </div>
 
-    <!--<div class="col-3 d-flex flex-column">
+    <div class="col-3 d-flex flex-column">
         <button th:if="${isUserGardenManager}" class="btn btn-outline-danger mr-auto mb-auto mt-2"
                 data-toggle="modal" data-target="#igadiGardenDeleteModal">
             Delete garden
         </button>
-<<<<<<< Updated upstream
+
         <a class="m-0" th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"></a>
-    </div>-->
+    </div>
 
-
-<!--
     <button th:if="${isUserGardenManager}" type="submit" class="btn btn-outline-danger float-right
         equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv" data-target="#igadiGardenDeleteModal">
         Delete garden
     </button>
-</div>-->
+</div>
 
 
-=======
+
         <a class="border-temp m-0" th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"></a>
 
         <a class="border-temp m-0" th:if="${isUserGardenManager}"
@@ -82,7 +76,6 @@
             <button class="btn btn-success float-right w-100">Add patch</button>
         </a>
     </div>
->>>>>>> Stashed changes
 
     <!-- Garden Modal -->
     <div class="modal modalfade" id="igadiGardenDeleteModal" tabindex="-1" role="dialog"
