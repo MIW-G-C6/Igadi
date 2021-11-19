@@ -41,7 +41,7 @@ public class UserCreateAccountController {
 
     @PostMapping("/users/new")
     protected String saveOrUpdateUser(@ModelAttribute("user") UserDTO userDTO, BindingResult result,
-                                      RedirectAttributes redirectAttributes) {
+                                      RedirectAttributes redirectAttributes) throws InterruptedException {
         String message = "";
         if (!result.hasErrors()) {
             boolean duplicateEmail = userService.checkIfUserEmailExists(userDTO.getUserEmail());
@@ -62,8 +62,9 @@ public class UserCreateAccountController {
             } else {
                 userDTO.setPassword1(passwordEncoder.encode(userDTO.getPassword1()));
                 userService.saveUser(userDTO);
-                message = "Account was successfully created.";
+                message = "Welcome please login!";
                 redirectAttributes.addAttribute("message", List.of(message, "greenMessage"));
+                return "redirect:/login";
             }
         } else {
             message = "Something went wrong.";
@@ -71,4 +72,5 @@ public class UserCreateAccountController {
         }
         return "redirect:/users/new";
     }
+
 }
