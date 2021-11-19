@@ -3,10 +3,12 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.JoinGardenRequestDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.JoinGardenRequest;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.JoinGardenRequestRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.JoinGardenRequestConverter;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,7 @@ public class JoinGardenRequestService {
         this.joinGardenRequestConverter = joinGardenRequestConverter;
     }
 
+    @Transactional
     public void saveRequest(JoinGardenRequestDTO joinGardenRequestDTO) {
         joinGardenRequestRepository.save(joinGardenRequestConverter.convertFromRequestDTO(joinGardenRequestDTO));
     }
@@ -47,5 +50,19 @@ public class JoinGardenRequestService {
     public void deleteRequest(JoinGardenRequestDTO joinGardenRequestDTO) {
             joinGardenRequestRepository.delete(joinGardenRequestConverter
                     .convertFromRequestDTO(joinGardenRequestDTO));
+    }
+
+    public List<JoinGardenRequestDTO> getAllRequests() {
+        return joinGardenRequestRepository.findAll().stream().map(joinGardenRequestConverter::convertToRequestDTO)
+                .collect(Collectors.toList());
+    }
+
+    public void checkIfRequestsRemain(int gardenId, int userId) {
+        List<JoinGardenRequestDTO> requests = findAllRequestsByGardenId(gardenId);
+        for(JoinGardenRequestDTO requestDTO : requests) {
+            if(requestDTO.getUserDTO().getUserId() == userId) {
+                joinGardenRequestRepository.delete(joinGardenRequestConverter.convertFromRequestDTO(requestDTO));
+            }
+        }
     }
 }
