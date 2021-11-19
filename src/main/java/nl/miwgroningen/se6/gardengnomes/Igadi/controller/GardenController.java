@@ -144,6 +144,7 @@ public class GardenController {
                 gardenUserDTO.setGardenDTO(garden);
                 gardenUserDTO.setUserDTO(userDTO);
                 gardenUserDTO.setRole("gardener");
+                joinGardenRequestService.checkIfRequestsRemain(gardenId, userDTO.getUserId());
                 gardenUserService.saveGardenUser(gardenUserDTO);
             } catch (SecurityException ex) {
                 redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
