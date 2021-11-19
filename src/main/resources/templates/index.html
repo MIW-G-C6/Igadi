@@ -37,10 +37,10 @@
                 <div class="profile-gardens-and-roles container-fluid row">
                     <div class="col-4">
                         <div th:each="garden : ${gardens}">
-                            <div class="border-temp mb-2">
+                            <div class="mb-2">
                                 <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
                                    class="w-25 linksColor">
-                                    <div th:text="${garden.gardenName}" class="border-temp m-0">
+                                    <div th:text="${garden.gardenName}" class="m-0">
                                     </div>
                                 </a>
                             </div>
@@ -49,8 +49,8 @@
 
                     <div class="col-6">
                         <div th:each="role : ${roles}">
-                            <div class="border-temp mb-2">
-                                <div th:text="${role}" class="border-temp m-0"></div>
+                            <div class="mb-2">
+                                <div th:text="${role}" class="m-0"></div>
                             </div>
                         </div>
                     </div>

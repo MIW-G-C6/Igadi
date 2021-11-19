@@ -22,13 +22,13 @@
   </ol>
 </nav>
 
-<div class="container d-flex flex-column align-items-center border-temp h-50 text-center">
+<div class="container d-flex flex-column align-items-center h-50 text-center">
 
-  <div class="border-temp mb-3">
+  <div class="mb-3">
     <h1>Create a new task for this garden</h1>
   </div>
 
-  <div class="border-temp col-3 p-0 mb-3">
+  <div class="col-3 p-0 mb-3">
     <form th:action="@{/overview/details/gardenTasks/new/{gardenId}(gardenId=*{gardenDTO.getGardenId()})}"
           method="post" th:object="${gardenTask}">
       <input type="text" th:field="*{taskName}" class="form-control mb-3" placeholder="Title">

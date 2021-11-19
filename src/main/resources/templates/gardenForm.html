@@ -16,12 +16,13 @@
     </ol>
 </nav>
 
-<div class="container d-flex flex-column align-items-center border-temp h-50 text-center">
-    <div class="border-temp mb-3">
+<div class="container d-flex flex-column align-items-center h-50 text-center">
+    <div class="mb-3">
         <h1>Create a new garden</h1>
     </div>
 
-    <div class="border-temp col-5 p-0 mb-3">
+
+    <div class="col-5 p-0 mb-3">
         <form th:action="@{/gardens/new}" method="post" th:object="${garden}">
             <input type="text" th:field="*{gardenName}" class="form-control mb-3" placeholder="Name">
             <input type="text" th:field="*{location}" class="form-control mb-3" placeholder="Location">

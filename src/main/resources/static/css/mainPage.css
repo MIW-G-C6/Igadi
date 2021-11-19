@@ -92,8 +92,16 @@ gardenTableContainer {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 5rem;
+    padding-left: 7rem;
+    padding-right: 7rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    /*box-shadow: 0 5px 20px #97ff89;*/
     /*min-height: calc(100vh - 120px - 73px);*/
+}
+
+h1 {
+    margin-bottom: 1.5rem;
 }
 
 .redMessage {
@@ -176,6 +184,10 @@ gardenTableContainer {
 width: 30%;
 }
 
+.w-30 {
+    width: 40%;
+}
+
 /*contains general position information for the footer*/
 
 .footer {
@@ -191,7 +203,15 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #eff5e8;
+    background-color: linen;
+}
+
+.font-size-3rem {
+    font-size: 3rem;
+}
+
+.font-size-4rem {
+    font-size: 4rem;
 }
 
 /*contains general position and layout information for the gardens.html*/
@@ -384,11 +404,13 @@ width: 35%;
 
 
 .binIconBig{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     position: relative;
+    top: 0.5rem;
    }
+
 
    .penIcon{
    width: 20px;
@@ -511,6 +533,9 @@ margin-bottom: 0px;
 }
 
 /* Breadcrumbs  */
+.breadcrumb {
+    margin: 0;
+}
 
 .igadi-item-green{
     color: rgb(92, 184, 92);

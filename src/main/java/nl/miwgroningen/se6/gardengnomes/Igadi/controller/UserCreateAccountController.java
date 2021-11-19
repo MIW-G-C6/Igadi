@@ -46,7 +46,7 @@ public class UserCreateAccountController {
         if (!result.hasErrors()) {
             boolean duplicateEmail = userService.checkIfUserEmailExists(userDTO.getUserEmail());
             if (duplicateEmail) {
-                message = "This email address has already been used!";
+                message = "This email address is already being used!";
                 redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
             } else if (!userDTO.getPassword1().equals(userDTO.getPassword2())) {
                 message = "Passwords are not the same!";
@@ -57,7 +57,7 @@ public class UserCreateAccountController {
                 redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
             } else if(userDTO.getUserName().trim().equals("") || userDTO.getPassword1().trim().equals("")
                     || userDTO.getPassword2().trim().equals("")) {
-                message = "Pleas do not leave whitespace in your password.";
+                message = "Please do not leave whitespace in your password.";
                 redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
             } else {
                 userDTO.setPassword1(passwordEncoder.encode(userDTO.getPassword1()));

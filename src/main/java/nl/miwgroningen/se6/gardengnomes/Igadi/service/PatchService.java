@@ -55,13 +55,15 @@ public class PatchService {
         return patches.stream().map(patchConverter::convertToPatchDTO).collect(Collectors.toList());
     }
 
-    public void savePatch(PatchDTO patchDTO) {
-        patchRepository.save(patchConverter.convertFromPatchDTO(patchDTO));
+    public int savePatch(PatchDTO patchDTO) {
+        Patch patch = patchConverter.convertFromPatchDTO(patchDTO);
+        patchRepository.save(patch);
+        return patch.getPatchId();
     }
 
-    public void userSavePatch(PatchDTO patchDTO, int userId, int gardenId) {
+    public int userSavePatch(PatchDTO patchDTO, int userId, int gardenId) {
         if (authorizationHelper.isUserGardenManager(userId, gardenId)) {
-            savePatch(patchDTO);
+            return savePatch(patchDTO);
         } else {
             throw new SecurityException("You are not allowed to save this patch.");
         }

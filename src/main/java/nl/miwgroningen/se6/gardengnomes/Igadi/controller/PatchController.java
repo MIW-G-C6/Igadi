@@ -45,7 +45,7 @@ public class PatchController {
             patch.setGardenDTO(gardenService.getGardenById(gardenId));
             model.addAttribute("patch", patch);
             model.addAttribute("buttonText", "Create patch");
-            model.addAttribute("titleText", "Create a new patch");
+            model.addAttribute("titleText", "Add new patch:");
             return "patchForm";
         } else {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
@@ -61,7 +61,7 @@ public class PatchController {
                 PatchDTO patch = patchService.getPatchById(patchId);
                 model.addAttribute("patch", patch);
                 model.addAttribute("buttonText", "Update patch");
-                model.addAttribute("titleText", "Update this patch!");
+                model.addAttribute("titleText", "Change name:");
                 return "patchForm";
             } else {
                 redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
@@ -80,7 +80,7 @@ public class PatchController {
         if (!result.hasErrors()) {
             try {
                 patch.setGardenDTO(gardenService.getGardenById(gardenId));
-                patchService.userSavePatch(patch, user.getUserId(), gardenId);
+                patch.setPatchId(patchService.userSavePatch(patch, user.getUserId(), gardenId));
                 return "redirect:/overview/details/patchTasks/" + patch.getPatchId();
             }
             catch (SecurityException ex) {
