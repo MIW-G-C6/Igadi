@@ -18,8 +18,8 @@
 
 <div class="container aboutContainer d-flex flex-column h-50 align-items-center">
 
-    <div class="mb-3">
-        <h1>Edit patch name</h1>
+    <div class="border-temp mb-3">
+        <h1 th:text="${titleText}"></h1>
     </div>
 
     <div class="col-3 p-0 mb-3">
@@ -35,7 +35,6 @@
         </form>
     </div>
 </div>
-
 
 <div th:replace="fragments/general :: footer"></div>
 </body>

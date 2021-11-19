@@ -1,3 +1,8 @@
+/* This file is part of the userCreateAccountPage.html view.
+
+- Annemarleen Bosma
+ */
+
 $(document).ready(function() {
 
     $("#icon-click").click(function() {

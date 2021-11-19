@@ -24,9 +24,7 @@
         <div th:each="garden: ${allGardens}" class="m-0 w-100 d-flex flex-column">
             <div class="mb-2 w-100 d-flex">
                 <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
-                   class="w-25 linksColor"><p th:text="${garden.gardenName}" class="m-0"></p></a>
-                <!--                <p class="brackets m-0 w-0" th:text="${garden.location}"></p>-->
-                <!--                //TODO locatie koppelen aan gardens//-->
+                   class="w-25 linksColor"><p th:text="${garden.gardenName}" class="border-temp m-0"></p></a>
             </div>
         </div>
     </div>

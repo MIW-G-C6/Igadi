@@ -53,9 +53,6 @@
                th:href="@{/overview/details/{gardenId}/gardeners(gardenId=${garden.gardenId})}">
                 <button class="btn btn-success">Gardeners</button>
             </a>
-
-
-
         </div>
     </div>
 
@@ -64,6 +61,7 @@
                 data-toggle="modal" data-target="#igadiGardenDeleteModal">
             Delete garden
         </button>
+<<<<<<< Updated upstream
         <a class="m-0" th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"></a>
     </div>-->
 
@@ -76,6 +74,15 @@
 </div>-->
 
 
+=======
+        <a class="border-temp m-0" th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"></a>
+
+        <a class="border-temp m-0" th:if="${isUserGardenManager}"
+           th:href="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${garden.gardenId})}">
+            <button class="btn btn-success float-right w-100">Add patch</button>
+        </a>
+    </div>
+>>>>>>> Stashed changes
 
     <!-- Garden Modal -->
     <div class="modal modalfade" id="igadiGardenDeleteModal" tabindex="-1" role="dialog"
