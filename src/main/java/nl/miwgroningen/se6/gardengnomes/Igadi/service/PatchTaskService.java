@@ -17,14 +17,12 @@ import java.util.stream.Collectors;
 public class PatchTaskService {
 
     private final PatchTaskRepository patchTaskRepository;
-    private final PatchService patchService;
     private final AuthorizationHelper authorizationHelper;
     private final PatchTaskConverter patchTaskConverter;
 
-    public PatchTaskService(PatchTaskRepository patchTaskRepository, PatchService patchService,
-                            AuthorizationHelper authorizationHelper, PatchTaskConverter patchTaskConverter) {
+    public PatchTaskService(PatchTaskRepository patchTaskRepository, AuthorizationHelper authorizationHelper,
+                            PatchTaskConverter patchTaskConverter) {
         this.patchTaskRepository = patchTaskRepository;
-        this.patchService = patchService;
         this.authorizationHelper = authorizationHelper;
         this.patchTaskConverter = patchTaskConverter;
     }
