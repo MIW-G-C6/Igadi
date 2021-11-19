@@ -33,8 +33,9 @@
     </form>
 
     <div id="feedback"></div>
-    <div class="d-flex flex-column" th:each="garden: ${allGardens}">
-        <p th:text="${garden.getGardenName()}"></p>
+    <h5>Pending Requests</h5>
+    <div class="d-flex flex-column" th:each="request: ${allRequests}">
+        <p th:text="${request.getGardenDTO().getGardenName()}"></p>
 
 </div>
 </div>

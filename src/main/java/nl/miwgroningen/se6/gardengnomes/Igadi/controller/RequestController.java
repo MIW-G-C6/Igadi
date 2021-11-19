@@ -4,6 +4,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.JoinGardenRequestDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.UserDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
@@ -35,13 +36,15 @@ public class RequestController {
     private final GardenUserService gardenUserService;
     private final UserService userService;
     private final JoinGardenRequestService joinGardenRequestService;
+    private final AuthorizationHelper authorizationHelper;
 
     public RequestController(GardenService gardenService, GardenUserService gardenUserService, UserService userService,
-                             JoinGardenRequestService joinGardenRequestService) {
+                             JoinGardenRequestService joinGardenRequestService, AuthorizationHelper authorizationHelper) {
         this.gardenService = gardenService;
         this.gardenUserService = gardenUserService;
         this.userService = userService;
         this.joinGardenRequestService = joinGardenRequestService;
+        this.authorizationHelper = authorizationHelper;
     }
 
 
@@ -49,10 +52,16 @@ public class RequestController {
     protected String showGardensForRequests(Model model, @AuthenticationPrincipal User user) {
         List<GardenDTO> allGardens = gardenService.getAllGardens();
         List<GardenUser> currentSubscriptions = gardenUserService.findAllGardenUsersByUserId(user.getUserId());
+        List<JoinGardenRequestDTO> allActiveGardenRequests = joinGardenRequestService
+                .findAllRequestsByUserId(user.getUserId());
         for(GardenUser subscription : currentSubscriptions) {
             allGardens.removeIf(gardenDTO -> subscription.getGarden().getGardenId() == gardenDTO.getGardenId());
         }
+        for(JoinGardenRequestDTO request : allActiveGardenRequests) {
+            allGardens.removeIf(gardenDTO -> request.getGardenDTO().getGardenId() == gardenDTO.getGardenId());
+        }
         model.addAttribute("allGardens", allGardens);
+        model.addAttribute("allRequests", allActiveGardenRequests);
         return "requestForm";
     }
 
@@ -74,5 +83,29 @@ public class RequestController {
         }
         redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
         return "redirect:/gardens/requests";
+    }
+
+    @PostMapping("/overview/details/{gardenId}/gardeners/accept/{requestId}")
+    protected String postNewGardener(@PathVariable("gardenId") int gardenId,
+                                            @PathVariable("requestId") int requestId, @AuthenticationPrincipal User user,
+                                            RedirectAttributes redirectAttributes) {
+        if(authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)){
+            try {
+                GardenDTO garden = gardenService.getGardenById(gardenId);
+                JoinGardenRequestDTO joinGardenRequestDTO = joinGardenRequestService.getRequestById(requestId);
+                UserDTO userDTO = userService.getUserById(joinGardenRequestDTO.getUserDTO().getUserId());
+                userDTO.setGarden(garden);
+                GardenUserDTO gardenUserDTO = new GardenUserDTO();
+                gardenUserDTO.setGardenDTO(garden);
+                gardenUserDTO.setUserDTO(userDTO);
+                gardenUserDTO.setRole("gardener");
+                gardenUserService.saveGardenUser(gardenUserDTO);
+                joinGardenRequestService.deleteRequest(joinGardenRequestDTO);
+            } catch (SecurityException ex) {
+                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+                return "redirect:/error";
+            }
+        }
+        return "redirect:/overview/details/{gardenId}/gardeners";
     }
 }

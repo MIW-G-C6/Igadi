@@ -5,6 +5,7 @@ import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenUserService;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.JoinGardenRequestService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,12 +29,14 @@ public class RequestAjaxController {
     private final UserService userService;
     private final GardenUserService gardenUserService;
     private final GardenService gardenService;
+    private final JoinGardenRequestService joinGardenRequestService;
 
     public RequestAjaxController(UserService userService, GardenUserService gardenUserService,
-                                  GardenService gardenService) {
+                                  GardenService gardenService, JoinGardenRequestService joinGardenRequestService) {
         this.userService = userService;
         this.gardenUserService = gardenUserService;
         this.gardenService = gardenService;
+        this.joinGardenRequestService = joinGardenRequestService;
     }
 
     @PostMapping("/gardens/requests")
@@ -41,6 +44,8 @@ public class RequestAjaxController {
                                                           Errors errors, @AuthenticationPrincipal User user) {
         List<GardenDTO> allGardens = gardenService.getAllGardens();
         List<GardenUser> currentSubscriptions = gardenUserService.findAllGardenUsersByUserId(user.getUserId());
+        List<JoinGardenRequestDTO> allActiveGardenRequests = joinGardenRequestService
+                .findAllRequestsByUserId(user.getUserId());
 
         if(!searchGardens.getKeywords().contains(".js")) {
             if (searchGardens.getKeywords() != null && searchGardens.getKeywords().trim().isEmpty()) {
@@ -50,6 +55,9 @@ public class RequestAjaxController {
             }
             for (GardenUser subscription : currentSubscriptions) {
                 allGardens.removeIf(gardenDTO -> subscription.getGarden().getGardenId() == gardenDTO.getGardenId());
+            }
+            for(JoinGardenRequestDTO request : allActiveGardenRequests) {
+                allGardens.removeIf(gardenDTO -> request.getGardenDTO().getGardenId() == gardenDTO.getGardenId());
             }
         } else {
                 allGardens.clear();

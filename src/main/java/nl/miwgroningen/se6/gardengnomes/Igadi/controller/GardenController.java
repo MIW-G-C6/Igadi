@@ -29,9 +29,11 @@ public class GardenController {
     private GardenUserService gardenUserService;
     private AuthorizationHelper authorizationHelper;
     private TaskService taskService;
+    private JoinGardenRequestService joinGardenRequestService;
 
     public GardenController(GardenService gardenService, UserService userService, PatchService patchService,
                             GardenHelper gardenHelper, GardenUserService gardenUserService,
+                            JoinGardenRequestService joinGardenRequestService,
                             AuthorizationHelper authorizationHelper, TaskService taskService) {
         this.gardenService = gardenService;
         this.userService = userService;
@@ -39,6 +41,7 @@ public class GardenController {
         this.gardenHelper = gardenHelper;
         this.gardenUserService = gardenUserService;
         this.authorizationHelper = authorizationHelper;
+        this.joinGardenRequestService = joinGardenRequestService;
         this.taskService = taskService;
     }
 
@@ -110,6 +113,7 @@ public class GardenController {
                                   @AuthenticationPrincipal User user) {
         ArrayList<UserDTO> currentGardeners = new ArrayList<>();
         List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
+        List<JoinGardenRequestDTO> pendingRequests = joinGardenRequestService.findAllRequestsByGardenId(gardenId);
         for(GardenUserDTO userSubscription : alreadyAddedUser) {
             if(userSubscription.getGardenDTO().getGardenId() == gardenId) {
                 UserDTO userToAdd = userService.getUserById(userSubscription.getUserDTO().getUserId());
@@ -120,6 +124,7 @@ public class GardenController {
         GardenDTO garden = gardenService.getGardenById(gardenId);
         model.addAttribute("gardenId", gardenId);
         model.addAttribute("garden", garden);
+        model.addAttribute("allRequests", pendingRequests);
         model.addAttribute("currentGardeners", currentGardeners);
         model.addAttribute("isUserGardenManager", authorizationHelper
                 .isUserGardenManager(user.getUserId(), gardenId));

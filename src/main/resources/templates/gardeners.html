@@ -37,6 +37,15 @@
 
   <div class="d-flex flex-column align-items-left">
     <div class="d-flex flex-column align-items-start">
+      <h5 th:if="${!allRequests.isEmpty()}">Pending Requests</h5>
+      <div th:each="request: ${allRequests}" class="d-flex flex-row">
+        <p th:text="${request.getUserDTO().getUserName()}"></p>
+        <p th:text="${request.getRequestId()}"></p>
+        <form th:action="@{/overview/details/{gardenId}/gardeners/accept/{requestId}
+        (gardenId=${request.getGardenDTO().getGardenId()},requestId=${request.getRequestId()})}" th:method="post">
+          <button class="btn btn-success" type="submit">Accept</button>
+        </form>
+        </div>
     <h5>Current members</h5>
     <div th:each="gardener: ${currentGardeners}" class="d-flex flex-row">
     <p th:text="${gardener.getUserName()}"></p>

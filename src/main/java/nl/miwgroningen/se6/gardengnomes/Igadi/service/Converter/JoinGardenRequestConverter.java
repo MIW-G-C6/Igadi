@@ -23,7 +23,7 @@ public class JoinGardenRequestConverter {
 
     public JoinGardenRequestDTO convertToRequestDTO(JoinGardenRequest joinGardenRequest) {
         JoinGardenRequestDTO joinGardenRequestDTO = new JoinGardenRequestDTO();
-        joinGardenRequestDTO.setRequestId(joinGardenRequestDTO.getRequestId());
+        joinGardenRequestDTO.setRequestId(joinGardenRequest.getRequestId());
         joinGardenRequestDTO.setStatus(joinGardenRequestDTO.getStatus());
         joinGardenRequestDTO.setGardenDTO(gardenConverter.convertToGardenDTO(joinGardenRequest.getGarden()));
         joinGardenRequestDTO.setUserDTO(userConverter.convertToUserDTO(joinGardenRequest.getUser()));
