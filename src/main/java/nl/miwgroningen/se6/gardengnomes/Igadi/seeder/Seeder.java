@@ -167,7 +167,6 @@ public class Seeder {
             List<GardenDTO> gardens = gardenService.getAllGardens();
             for(GardenDTO gardenDTO : gardens) {
                 for(UserDTO user : testUsers) {
-                    System.out.println(user.getUserId());
                     JoinGardenRequestDTO joinGardenRequestDTO = new JoinGardenRequestDTO();
                     joinGardenRequestDTO.setStatus("pending");
                     joinGardenRequestDTO.setGardenDTO(gardenDTO);
