@@ -1,0 +1,7 @@
+package nl.miwgroningen.se6.gardengnomes.Igadi.repository;
+
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.JoinGardenRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface JoinGardenRequestRepository  extends JpaRepository<JoinGardenRequest, Integer> {
+}
