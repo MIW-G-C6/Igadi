@@ -10,9 +10,10 @@
 <div th:replace="fragments/general :: navbar"></div>
 
 <div class="container">
-        <div class="mb-4">
-            <h1>Login</h1>
-        </div>
+    <div class="mb-4">
+        <h1>Login</h1>
+    </div>
+    <p th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}"></p>
 
         <div class="col-4 p-0 mb-3">
             <form th:action="@{/login}" method="post" th:object="${user}">
