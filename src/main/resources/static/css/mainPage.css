@@ -92,7 +92,10 @@ gardenTableContainer {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 5rem;
+    padding-left: 7rem;
+    padding-right: 7rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
     /*box-shadow: 0 5px 20px #97ff89;*/
     /*min-height: calc(100vh - 120px - 73px);*/
 }
@@ -160,10 +163,7 @@ h1 {
 .equalBoxPatchTasksAdd{
     width: 140px;
     text-align: center;
-    margin-bottom: 10px;
-    position:absolute;
-    top: 20%;
-    right: 15px;
+    margin-bottom: 0px;
 }
 
 .equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv{
@@ -178,6 +178,14 @@ h1 {
 .borderBox{
     margin-top: 0.2rem;
     border-top: 2px solid green;
+}
+
+.w-40{
+width: 30%;
+}
+
+.w-30 {
+    width: 40%;
 }
 
 /*contains general position information for the footer*/
@@ -196,6 +204,14 @@ body{
     display: flex;
     flex-direction: column;
     background-color: linen;
+}
+
+.font-size-3rem {
+    font-size: 3rem;
+}
+
+.font-size-4rem {
+    font-size: 4rem;
 }
 
 /*contains general position and layout information for the gardens.html*/
@@ -226,7 +242,7 @@ body{
 }
 
 .closeToO{
-margin-left: 4.3rem;
+margin-left: 1rem;
 }
 
 /* Patch Form */
@@ -274,14 +290,21 @@ margin-left: 4.3rem;
 .grid-ish{
     display: flex;
     flex-wrap: wrap;
-    width: 50%;
+    width: 33%;
     justify-content: center;
     margin: auto;
+    margin-top: 0px;
 }
 
 .grid-ish > * {
     flex: 1 1 100%;
 }
+
+.columnMakeUp{
+width: 35%;
+}
+
+
 
 .colMakeUpNotDone{
     display: flex;
@@ -293,6 +316,7 @@ margin-left: 4.3rem;
     border-radius: 15px;
     border-color: grey;
     margin: 3px;
+
 }
 
 .colMakeUpDone{
@@ -334,7 +358,7 @@ margin-left: 4.3rem;
 .gridSize{
     padding: 10px;
     word-wrap: break-word;
-}
+    }
 
 .noBreakWord{
     word-wrap: break-word;
@@ -377,6 +401,35 @@ margin-left: 4.3rem;
     height: 15px;
     cursor: pointer;
    }
+
+
+.binIconBig{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    top: 0.5rem;
+   }
+
+
+   .penIcon{
+   width: 20px;
+       height: 20px;
+       cursor: pointer;
+       position: relative;
+
+   }
+
+.titelButtonBox{
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 0px;
+
+}
+
+
+
+
 
 /*  About page */
 
