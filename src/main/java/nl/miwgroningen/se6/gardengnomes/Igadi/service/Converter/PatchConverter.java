@@ -20,6 +20,7 @@ public class PatchConverter {
     public PatchDTO convertToPatchDTO(Patch patch) {
         PatchDTO patchDTO = new PatchDTO();
         patchDTO.setPatchId(patch.getPatchId());
+        patchDTO.setName(patch.getName());
         patchDTO.setCrop(patch.getCrop());
         patchDTO.setGardenDTO(gardenConverter.convertToGardenDTO(patch.getGarden()));
         return patchDTO;
@@ -28,6 +29,7 @@ public class PatchConverter {
     public Patch convertFromPatchDTO(PatchDTO patchDTO) {
         Patch patch  = new Patch();
         patch.setPatchId(patchDTO.getPatchId());
+        patch.setName(patchDTO.getName());
         patch.setCrop(patchDTO.getCrop());
         patch.setGarden(gardenConverter.convertFromGardenDTO(patchDTO.getGardenDTO()));
         return patch;

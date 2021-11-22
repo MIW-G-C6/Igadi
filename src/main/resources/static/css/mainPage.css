@@ -87,17 +87,23 @@ gardenTableContainer {
 }
 
 .container {
-    width: 60vw;
+    width: 55vw;
     background-color: white;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding-left: 7rem;
+    /*padding-left: 7rem;
     padding-right: 7rem;
     padding-top: 5rem;
-    padding-bottom: 5rem;
-    /*box-shadow: 0 5px 20px #97ff89;*/
+    padding-bottom: 5rem;*/
+    padding: 5rem;
+    box-shadow: 0 0 20px 0 lightgrey;
     /*min-height: calc(100vh - 120px - 73px);*/
+    z-index: 500;
+}
+
+nav {
+    z-index: 600;
 }
 
 h1 {
@@ -197,13 +203,14 @@ width: 30%;
     color: green;
     width: 100%;
     margin-bottom: 0px;
+    z-index: 600;
 }
 
 body{
-    min-height: 100vh;
+    min-height: 120vh;
     display: flex;
     flex-direction: column;
-    background-color: linen;
+    background-color: white;
 }
 
 .font-size-3rem {
@@ -748,4 +755,13 @@ width: 98%;
 .equalBoxSmall{
     width: 130px;
     text-align: center;
+}
+
+.btn-small {
+    /*font-size: 0.75rem;*/
+    padding: 0.25rem 0.5rem;
+}
+
+.border-bottom-black {
+    border-bottom: 1px solid black;
 }

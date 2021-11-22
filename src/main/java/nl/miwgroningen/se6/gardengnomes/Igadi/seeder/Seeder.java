@@ -215,6 +215,7 @@ public class Seeder {
         for (int i = 0; i < patchesPerGarden; i++) {
             int randomCrops = (int)Math.floor(Math.random() * crops.length);
             PatchDTO patchDTO = new PatchDTO();
+            patchDTO.setName("patch " + (i + 1));
             patchDTO.setCrop(crops[randomCrops]);
             patchDTO.setGardenDTO(gardenDTO);
             patches.add(patchDTO);

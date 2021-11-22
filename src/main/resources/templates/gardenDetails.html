@@ -17,65 +17,70 @@
     </ol>
 </nav>
 
-<div class="container w-50">
+<div class="container">
 
     <div class="d-flex flex-column">
-        <div class="d-flex flex-row">
-            <h1 class="" th:text="${garden.getGardenName()}"></h1>
-            <img th:if="${isUserGardenManager}" th:src="'/images/icons/bin.png'" class="binIconBig mb-4 ml-auto"
-                 data-toggle="modal"
-                 th:data-target="'#igadiGardenDeleteModal'">
+        <div class="d-flex flex-row border-bottom pb-5">
+            <div class="col-9 p-0">
+                <h1 class="mb-1" th:text="${garden.getGardenName()}"></h1>
+                <p class="m-0 pl-1" th:text="${garden.getLocation()}"></p>
+            </div>
+
+            <div class="ml-auto p-0 d-inline-flex flex-column">
+
+                <button th:if="${isUserGardenManager}" class="btn btn-small btn-outline-danger mt-2"
+                        data-toggle="modal" data-target="#igadiGardenDeleteModal">
+                    Delete garden
+                </button>
+                <a class="text-decoration-none mt-2" th:if="${isUserGardenManager}"
+                   th:href="@{/overview/details/{gardenId}/gardeners(gardenId=${garden.gardenId})}">
+                    <button class="btn btn-small btn-outline-success">See gardeners</button>
+                </a>
+                <div class="d-flex">
+                    <a class="text-decoration-none mt-2 d-flex flex-grow-1" th:if="${isUserGardenManager}"
+                       th:href="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${garden.gardenId})}">
+                        <button type="button" class="btn btn-small btn-outline-success flex-grow-1">Add patch</button>
+                    </a>
+                </div>
+
+
+            </div>
         </div>
 
-        <h5 class="inlineText w-100 mb-5">Patches</h5>
 
-        <a class="mb-3 text-decoration-none" th:if="${isUserGardenManager}"
-           th:href="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${garden.gardenId})}">
-            <button type="button" class="btn px-2 py-1 btn-success mr-3">
-                New patch
-            </button>
-        </a>
-        <div class="w-100 p-0 mb-3">
-            <div th:each="patch : ${allPatches}" class="m-0 w-100 d-flex flex-column">
-                <div class="mb-2 w-100 d-flex">
-                    <a th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patch.getPatchId()})}"
-                       class="w-25 linksColor"><p th:text="${patch.showWhatIsGrowing()}" class="m-0"></p></a>
+        <div class="d-flex flex-row mt-5 font-weight-bold">
+            <div class="col-4 p-0">Patch</div>
+            <div class="col-4 p-0">Crop</div>
+            <div class="col-4 p-0">Open tasks</div>
+        </div>
+
+        <div class="mt-1">
+            <div th:each="patch: ${allPatches}" class="d-flex flex-column mt-1">
+                <div class="d-flex flex-row">
+                    <div class="col-4 p-0">
+                        <a th:href="@{/overview/details/patchTasks/{patchId}(patchId=${patch.getPatchId()})}"
+                           class="linksColor" th:text="${patch.getName()}">
+                        </a>
+                    </div>
+                    <div class="col-4 p-0" th:text="${patch.showWhatIsGrowing()}"></div>
+                    <div class="col-4 p-0">3</div>
                 </div>
             </div>
         </div>
 
-        <div>
-            <a class="m-0 text-decoration-none" th:if="${isUserGardenManager}"
-               th:href="@{/overview/details/{gardenId}/gardeners(gardenId=${garden.gardenId})}">
-                <button class="btn btn-success">Gardeners</button>
-            </a>
-        </div>
+
+
+
     </div>
 
-    <div class="col-3 d-flex flex-column">
-        <button th:if="${isUserGardenManager}" class="btn btn-outline-danger mr-auto mb-auto mt-2"
-                data-toggle="modal" data-target="#igadiGardenDeleteModal">
-            Delete garden
-        </button>
 
-        <a class="m-0" th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"></a>
-    </div>
 
-    <button th:if="${isUserGardenManager}" type="submit" class="btn btn-outline-danger float-right
-        equalBoxPatchTasksDeletePatchFromPatchTaskPageBecauseRuerdDidntWantToMakeOneDiv" data-target="#igadiGardenDeleteModal">
-        Delete garden
-    </button>
+
 </div>
 
 
 
-        <a class="border-temp m-0" th:href="@{/overview/details/gardenTasks/{gardenId}(gardenId=${garden.gardenId})}"></a>
 
-        <a class="border-temp m-0" th:if="${isUserGardenManager}"
-           th:href="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${garden.gardenId})}">
-            <button class="btn btn-success float-right w-100">Add patch</button>
-        </a>
-    </div>
 
     <!-- Garden Modal -->
     <div class="modal modalfade" id="igadiGardenDeleteModal" tabindex="-1" role="dialog"
