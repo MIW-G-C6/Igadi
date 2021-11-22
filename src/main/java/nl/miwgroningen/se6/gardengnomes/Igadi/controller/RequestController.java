@@ -39,7 +39,8 @@ public class RequestController {
     private final AuthorizationHelper authorizationHelper;
 
     public RequestController(GardenService gardenService, GardenUserService gardenUserService, UserService userService,
-                             JoinGardenRequestService joinGardenRequestService, AuthorizationHelper authorizationHelper) {
+                             JoinGardenRequestService joinGardenRequestService,
+                             AuthorizationHelper authorizationHelper) {
         this.gardenService = gardenService;
         this.gardenUserService = gardenUserService;
         this.userService = userService;
@@ -47,9 +48,9 @@ public class RequestController {
         this.authorizationHelper = authorizationHelper;
     }
 
-
     @GetMapping("/gardens/requests")
-    protected String showGardensForRequests(Model model, @AuthenticationPrincipal User user) {
+    protected String showGardensForRequests(Model model, @AuthenticationPrincipal User user,
+                                            @ModelAttribute("message") ArrayList<String> message) {
         List<GardenDTO> allGardens = gardenService.getAllGardens();
         List<GardenUser> currentSubscriptions = gardenUserService.findAllGardenUsersByUserId(user.getUserId());
         List<JoinGardenRequestDTO> allActiveGardenRequests = joinGardenRequestService
@@ -61,6 +62,9 @@ public class RequestController {
             allGardens.removeIf(gardenDTO -> request.getGardenDTO().getGardenId() == gardenDTO.getGardenId());
         }
         model.addAttribute("allGardens", allGardens);
+        if(!message.isEmpty()) {
+            model.addAttribute("message", message);
+        }
         model.addAttribute("allRequests", allActiveGardenRequests);
         return "requestForm";
     }
@@ -68,17 +72,18 @@ public class RequestController {
     @PostMapping("/gardens/requests/{gardenId}")
     protected String postGardenRequest(@PathVariable("gardenId") int gardenId, @AuthenticationPrincipal User user,
                                        RedirectAttributes redirectAttributes,
-                                       @ModelAttribute("joinGardenRequestDTO") JoinGardenRequestDTO joinGardenRequestDTO,
                                        BindingResult result) {
         String message = "Something went wrong.";
         if (!result.hasErrors()) {
             GardenDTO gardenDTO = gardenService.getGardenById(gardenId);
+            message = "A new request for " + gardenDTO.getGardenName()  + " has been sent!";
             UserDTO userDTO = userService.getUserById(user.getUserId());
-            joinGardenRequestDTO = new JoinGardenRequestDTO();
+            JoinGardenRequestDTO joinGardenRequestDTO = new JoinGardenRequestDTO();
             joinGardenRequestDTO.setGardenDTO(gardenDTO);
             joinGardenRequestDTO.setUserDTO(userDTO);
             joinGardenRequestDTO.setStatus("Pending");
             joinGardenRequestService.saveRequest(joinGardenRequestDTO);
+            redirectAttributes.addAttribute("message", List.of(message, "greenMessage"));
             return "redirect:/gardens/requests";
         }
         redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
@@ -87,8 +92,9 @@ public class RequestController {
 
     @PostMapping("/overview/details/{gardenId}/gardeners/accept/{requestId}")
     protected String postNewGardener(@PathVariable("gardenId") int gardenId,
-                                            @PathVariable("requestId") int requestId, @AuthenticationPrincipal User user,
-                                            RedirectAttributes redirectAttributes) {
+                                            @PathVariable("requestId") int requestId,
+                                     @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
+        String message = "Something went wrong";
         if(authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)){
             try {
                 GardenDTO garden = gardenService.getGardenById(gardenId);
@@ -100,6 +106,27 @@ public class RequestController {
                 gardenUserDTO.setUserDTO(userDTO);
                 gardenUserDTO.setRole("gardener");
                 gardenUserService.saveGardenUser(gardenUserDTO);
+                message = userDTO.getUserName() + " has been added to the garden!";
+                redirectAttributes.addAttribute("message", List.of(message, "greenMessage"));
+                joinGardenRequestService.deleteRequest(joinGardenRequestDTO);
+            } catch (SecurityException ex) {
+                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+                return "redirect:/error";
+            }
+        }
+        return "redirect:/overview/details/{gardenId}/gardeners";
+    }
+
+    @PostMapping("/overview/details/{gardenId}/gardeners/decline/{requestId}")
+    protected String deleteRequest(@PathVariable("gardenId") int gardenId,
+                                     @PathVariable("requestId") int requestId, @AuthenticationPrincipal User user,
+                                     RedirectAttributes redirectAttributes) {
+        String message = "Something went wrong";
+        if(authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)){
+            try {
+                JoinGardenRequestDTO joinGardenRequestDTO = joinGardenRequestService.getRequestById(requestId);
+                message = joinGardenRequestDTO.getUserDTO().getUserName() + "'s request has been removed!";
+                redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
                 joinGardenRequestService.deleteRequest(joinGardenRequestDTO);
             } catch (SecurityException ex) {
                 redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
