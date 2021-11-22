@@ -23,15 +23,6 @@ public class Garden {
     @Column(unique = true, nullable = false, name="gardenName")
     private String gardenName;
 
-    @OneToMany(mappedBy = "garden")
-    private List<GardenTask> gardenTasks;
-
-    @OneToMany(mappedBy = "garden")
-    private List<Patch> patches;
-
-    @OneToMany(mappedBy = "garden")
-    private List<GardenUser> gardenUsers;
-
     @Column(name = "location", nullable = false)
     private String location;
 
@@ -57,30 +48,6 @@ public class Garden {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public List<GardenTask> getGardenTasks() {
-        return gardenTasks;
-    }
-
-    public void setGardenTasks(List<GardenTask> gardenTasks) {
-        this.gardenTasks = gardenTasks;
-    }
-
-    public List<Patch> getPatches() {
-        return patches;
-    }
-
-    public void setPatches(List<Patch> patches) {
-        this.patches = patches;
-    }
-
-    public List<GardenUser> getGardenUsers() {
-        return gardenUsers;
-    }
-
-    public void setGardenUsers(List<GardenUser> gardenUsers) {
-        this.gardenUsers = gardenUsers;
     }
 }
 

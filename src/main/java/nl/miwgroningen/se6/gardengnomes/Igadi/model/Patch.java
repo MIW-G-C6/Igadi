@@ -25,9 +25,6 @@ public class Patch {
     @JoinColumn(name = "garden_gardenId")
     private Garden garden;
 
-    @OneToMany(mappedBy = "patch")
-    private List<PatchTask> patchTasks;
-
     @Column(name = "name", nullable = false)
     private String name;
 

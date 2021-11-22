@@ -64,11 +64,7 @@ public class Seeder {
             for(int i = 0; i < names.length; i++) {
                 UserDTO userDTO = createUserSeed(names[i]);
                 userService.saveUser(userDTO);
-                /*UserDTO newUserDTO = userService.findUserByUsername(userDTO.getUserName());
-                GardenUserDTO gardenUserDTO = createGardenUserSeed(newUserDTO);
-                gardenUserService.saveGardenUser(gardenUserDTO);*/
             }
-            /*seedChad();*/
         }
     }
 
@@ -83,7 +79,6 @@ public class Seeder {
                 GardenUserDTO gardenUserDTO2 = createGardenUserSeed(users.get(i), gardens.get(i+1), UserRole.GARDENER);
                 gardenUserService.saveGardenUser(gardenUserDTO2);
             }
-            seedChad();
         }
     }
 
