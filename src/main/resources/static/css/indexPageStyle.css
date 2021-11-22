@@ -1,20 +1,20 @@
-@media screen and (min-width: 40.5em) {
-    .userIcon {
-        width: 50%;
-        float: right;
-    }
-}
+/*@media screen and (min-width: 40.5em) {*/
+/*    .userIcon {*/
+/*        width: 50%;*/
+/*        float: right;*/
+/*    }*/
+/*}*/
 
-.navbar-header {
-    background-color: darkgrey;
-}
+/*.navbar-header {*/
+/*    background-color: darkgrey;*/
+/*}*/
 
-.d-flex {
-    align-content: center;
-}
+/*.d-flex {*/
+/*    align-content: center;*/
+/*}*/
 
-p {
-    padding: 2em 2em 2em 2em;
-}
+/*p {*/
+/*    padding: 2em 2em 2em 2em;*/
+/*}*/
 
 
