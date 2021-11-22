@@ -92,11 +92,11 @@ gardenTableContainer {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    /*padding-left: 7rem;
+    padding-left: 7rem;
     padding-right: 7rem;
     padding-top: 5rem;
-    padding-bottom: 5rem;*/
-    padding: 5rem;
+    padding-bottom: 5rem;
+    /*padding: 5rem;*/
     box-shadow: 0 0 20px 0 lightgrey;
     /*min-height: calc(100vh - 120px - 73px);*/
     z-index: 500;
@@ -764,4 +764,8 @@ width: 98%;
 
 .border-bottom-black {
     border-bottom: 1px solid black;
+}
+
+.min-h-200px {
+    min-height: 200px;
 }
