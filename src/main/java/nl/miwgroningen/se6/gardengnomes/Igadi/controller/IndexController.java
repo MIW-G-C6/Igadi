@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Annemarleen Bosma <makeItWork2021@annemarleenbosma.nl>
@@ -36,10 +37,10 @@ public class IndexController {
     @GetMapping({"/", "/index"})
     protected String showIndexPage(Model model, @AuthenticationPrincipal User user) {
         if(user != null) {
-            user.setGardenUsers(gardenUserService.findAllGardenUsersByUserId(user.getUserId()));
+            List<GardenUser> gardenUsers = gardenUserService.findAllGardenUsersByUserId(user.getUserId());
 
             ArrayList<GardenDTO> gardens = new ArrayList<>();
-            for (GardenUser gardenUser : user.getGardenUsers()) {
+            for (GardenUser gardenUser : gardenUsers) {
                 GardenDTO newGarden = gardenService.getGardenById(gardenUser.getGarden().getGardenId());
                 gardens.add(newGarden);
             }
@@ -47,7 +48,7 @@ public class IndexController {
             ArrayList<String> roles = new ArrayList<>();
             for (GardenDTO garden : gardens) {
                 int gardenId1 = garden.getGardenId();
-                for (GardenUser gardenUser : user.getGardenUsers()) {
+                for (GardenUser gardenUser : gardenUsers) {
                     int gardenId2 = gardenUser.getGarden().getGardenId();
                     if (gardenId1 == gardenId2) {
                         roles.add(gardenUser.getRole());
