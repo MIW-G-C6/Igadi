@@ -45,7 +45,7 @@ public class PatchController {
             patch.setGardenDTO(gardenService.getGardenById(gardenId));
             model.addAttribute("patch", patch);
             model.addAttribute("buttonText", "Add patch");
-            model.addAttribute("titleText", "Add a new patch");
+            model.addAttribute("titleText", "Add a patch");
             return "patchForm";
         } else {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
