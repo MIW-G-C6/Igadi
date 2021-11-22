@@ -20,30 +20,33 @@
     </ol>
 </nav>
 
-<div class="content flow">
+<div class="w-100">
 
-
-
-    <div class="mb-3 text-center titelPatchTasks">
+    <div class="text-center titelPatchTasks">
         <h1 class="inlineText" th:text="${patch.showWhatIsGrowing()}"></h1>
 
-        <img th:if="${isUserGardenManager}" th:src="'/images/icons/bin.png'" class="binIconBig mb-4 float-right"
-             data-toggle="modal"
-             th:data-target="'#igadiPatchDeleteModal'">
 
-        <a th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
-            <img th:if="${isUserGardenManager}" th:src="'/images/icons/pen.png'" class="penIcon mb-4">
-        </a>
+
+
+            <a th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
+                <img th:if="${isUserGardenManager}" th:src="'/images/icons/pen.png'" class="penIcon mb-4 mr-3">
+            </a>
+
+            <img th:if="${isUserGardenManager}" th:src="'/images/icons/bin.png'" class="binIconBig mb-4"
+                 data-toggle="modal"
+                 th:data-target="'#igadiPatchDeleteModal'">
+
 
     </div>
+
 </div>
 
-<div class="w-40 titelButtonBox">
-    <h2 class="inlineText float-left">Tasks</h2>
+<div class="w-32 titelButtonBox">
+    <h2 class="inlineText float-left ml-1">Tasks</h2>
 
     <a th:if="${isUserGardenManager}"
        th:href="@{/overview/details/patchTasks/new/{patchId}(patchId=${patch.getPatchId()})}">
-        <button class="equalBoxPatchTasksAdd btn btn-outline-success float-right">Add task</button>
+        <button class="equalBoxPatchTasksAdd btn btn-outline-success float-right mr-1">Add task</button>
     </a>
 </div>
 
@@ -53,7 +56,7 @@
         <div th:each="task : ${allPatchTasks}" class="d-flex flex-row w-100 h-100 gridSize"
              th:class="${task.doneOrNot()} == 'Done' ? 'colMakeUpDone' : 'colMakeUpNotDone'">
 
-            <div class="d-flex flex-column w-75 align-content-around">
+            <div class="d-flex flex-column w-90 align-content-around">
                 <div class="patchTaskColumn float-left font-weight-bold w-100" th:text="${task.getTaskName()}"></div>
                 <div class="m-1 float-left noBreakWord w-100" th:text="${task.getTaskDescription()}"></div>
             </div>
@@ -64,6 +67,15 @@
                 <button th:type="submit" class="border-0 doneImgBtn m-0 p-0 w-100 h-100">
                     <img th:src="@{/images/icons/checked.png}" class="doneImg"></button>
             </form>
+
+            <form th:if="${task.isDone()}"
+                  th:action="@{/overview/details/patchTasks/{patchId}/isDone/{taskId}(taskId=${task.getTaskId()},patchId=${patchId})}"
+                  th:method="post" th:object="${task}" class="doneForm" sec:authorize="isAuthenticated()">
+                <button th:type="submit" class="border-0 doneImgBtn m-0 p-0 w-100 h-100">
+                    <img th:src="@{/images/icons/checkeddone.png}" class="doneImg"></button>
+            </form>
+
+
             <img th:if="${isUserGardenManager}" th:src="'/images/icons/bin.png'" class="binIcon float-right"
                  data-toggle="modal" th:data-target="'#igadiModal' + ${task.getTaskId()}"/>
 
