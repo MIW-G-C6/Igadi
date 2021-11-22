@@ -28,6 +28,9 @@ public class Patch {
     @OneToMany(mappedBy = "patch")
     private List<PatchTask> patchTasks;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @Column(name = "crop", nullable = true)
     private String crop;
 
@@ -45,6 +48,14 @@ public class Patch {
 
     public void setGarden(Garden garden) {
         this.garden = garden;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCrop() {

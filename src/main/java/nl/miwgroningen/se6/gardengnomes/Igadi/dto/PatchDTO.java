@@ -11,6 +11,7 @@ public class PatchDTO {
 
     private Integer patchId;
     private GardenDTO garden;
+    private String name;
     private String crop;
 
     public Integer getPatchId() {
@@ -27,6 +28,14 @@ public class PatchDTO {
 
     public void setGardenDTO(GardenDTO gardenDTO) {
         this.garden = gardenDTO;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCrop() {

@@ -10,6 +10,13 @@ $(document).ready(function() {
         let inputfieldPassword1 = $("#inputfieldPassword1");
         let inputfieldRepeatPassword1 = $("#inputfieldRepeatPassword1");
 
+        document.getElementById("iconPasswordEyeVisible").src="/images/icons/icons8-hide-24.png";
+
+        if (inputfieldPassword1 == null){
+            document.getElementById("iconPasswordEyeVisible").src="/images/icons/icons8-hide-24.png";
+
+        }
+
         if (inputfieldPassword1.attr("type") === "password" || inputfieldRepeatPassword1 === "password"){
             inputfieldPassword1.attr("type", "text");
             inputfieldRepeatPassword1.attr("type", "text");

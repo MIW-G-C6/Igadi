@@ -30,11 +30,12 @@ public class Seeder {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final GardenUserService gardenUserService;
+    private final JoinGardenRequestService joinGardenRequestService;
 
     @Autowired
     public Seeder(GardenService gardenService, GardenTaskService gardenTaskService, PatchService patchService,
                   PatchTaskService patchTaskService, UserService userService, PasswordEncoder passwordEncoder,
-                  GardenUserService gardenUserService) {
+                  GardenUserService gardenUserService, JoinGardenRequestService joinGardenRequestService) {
         this.gardenService = gardenService;
         this.gardenTaskService = gardenTaskService;
         this.patchService = patchService;
@@ -42,6 +43,7 @@ public class Seeder {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.gardenUserService = gardenUserService;
+        this.joinGardenRequestService = joinGardenRequestService;
     }
 
     @EventListener
@@ -52,6 +54,7 @@ public class Seeder {
         seedPatches();
         seedPatchTasks();
         seedGardenUsers();
+        seedGardenRequests();
     }
 
     public void seedUsers() {
@@ -142,6 +145,38 @@ public class Seeder {
         }
     }
 
+    public void seedGardenRequests() {
+        List<JoinGardenRequestDTO> requests = joinGardenRequestService.getAllRequests();
+        if(requests.isEmpty()){
+            ArrayList<UserDTO> testUsers = new ArrayList<>();
+            UserDTO kynes = createUserSeed("Kynes");
+            UserDTO lydia = createUserSeed("Lydia");
+            UserDTO donald = createUserSeed("Donald");
+            UserDTO corey = createUserSeed("Corey");
+            UserDTO rupert = createUserSeed("Rupert");
+            userService.saveUser(kynes);
+            userService.saveUser(lydia);
+            userService.saveUser(donald);
+            userService.saveUser(corey);
+            userService.saveUser(rupert);
+            testUsers.add(userService.findUserByUsername("Kynes"));
+            testUsers.add(userService.findUserByUsername("Lydia"));
+            testUsers.add(userService.findUserByUsername("Donald"));
+            testUsers.add(userService.findUserByUsername("Corey"));
+            testUsers.add(userService.findUserByUsername("Rupert"));
+            List<GardenDTO> gardens = gardenService.getAllGardens();
+            for(GardenDTO gardenDTO : gardens) {
+                for(UserDTO user : testUsers) {
+                    JoinGardenRequestDTO joinGardenRequestDTO = new JoinGardenRequestDTO();
+                    joinGardenRequestDTO.setStatus("pending");
+                    joinGardenRequestDTO.setGardenDTO(gardenDTO);
+                    joinGardenRequestDTO.setUserDTO(user);
+                    joinGardenRequestService.saveRequest(joinGardenRequestDTO);
+                }
+            }
+        }
+    }
+
     public UserDTO createUserSeed(String name) {
         List<GardenDTO> allGardens = gardenService.getAllGardens();
         /*int randomGarden = (int) (Math.random() * allGardens.size()) + 1;*/
@@ -154,18 +189,6 @@ public class Seeder {
         /*user.setGarden(gardenService.getGardenById(randomGarden));*/
         return user;
     }
-
-    /*public GardenUserDTO createGardenUserSeed(UserDTO userDTO) {
-        GardenUserDTO gardenUserDTO = new GardenUserDTO();
-        gardenUserDTO.setUserDTO(userDTO);
-        List<GardenDTO> allGardens = gardenService.getAllGardens();
-        int randomGarden = (int) (Math.random() * allGardens.size()) + 1;
-        gardenUserDTO.setGardenDTO(allGardens.stream().filter(x -> x.getGardenId() == randomGarden).findFirst().get());
-        String[] roles = new String[] {UserRole.GARDENER, UserRole.GARDEN_MANAGER};
-        int randomRole = (int) (Math.random() * roles.length);
-        gardenUserDTO.setRole(roles[randomRole]);
-        return gardenUserDTO;
-    }*/
 
     public GardenUserDTO createGardenUserSeed(UserDTO userDTO, GardenDTO gardenDTO, String role) {
         GardenUserDTO gardenUserDTO = new GardenUserDTO();
@@ -215,6 +238,7 @@ public class Seeder {
         for (int i = 0; i < patchesPerGarden; i++) {
             int randomCrops = (int)Math.floor(Math.random() * crops.length);
             PatchDTO patchDTO = new PatchDTO();
+            patchDTO.setName("patch " + (i + 1));
             patchDTO.setCrop(crops[randomCrops]);
             patchDTO.setGardenDTO(gardenDTO);
             patches.add(patchDTO);
