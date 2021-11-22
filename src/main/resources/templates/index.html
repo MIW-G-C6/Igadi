@@ -19,7 +19,8 @@
     <!--When the user logged in succesfully, he will have acces/ will see the following -->
     <div sec:authorize="isAuthenticated()" class="jumbotron profile-jumbotron-parent">
         <div>
-
+            <p id="loginMessage" th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}">
+            </p>
             <div class="profile-userImage-child1">
                 <img src="/images/icons/avatarBlack/icons8-user-50.png" alt="avatar" width="150">
 

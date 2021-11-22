@@ -72,13 +72,14 @@ public class RequestController {
     @PostMapping("/gardens/requests/{gardenId}")
     protected String postGardenRequest(@PathVariable("gardenId") int gardenId, @AuthenticationPrincipal User user,
                                        RedirectAttributes redirectAttributes,
+                                       @ModelAttribute("joinGardenRequestDTO") JoinGardenRequestDTO joinGardenRequestDTO,
                                        BindingResult result) {
         String message = "Something went wrong.";
         if (!result.hasErrors()) {
             GardenDTO gardenDTO = gardenService.getGardenById(gardenId);
             message = "A new request for " + gardenDTO.getGardenName()  + " has been sent!";
             UserDTO userDTO = userService.getUserById(user.getUserId());
-            JoinGardenRequestDTO joinGardenRequestDTO = new JoinGardenRequestDTO();
+            joinGardenRequestDTO = new JoinGardenRequestDTO();
             joinGardenRequestDTO.setGardenDTO(gardenDTO);
             joinGardenRequestDTO.setUserDTO(userDTO);
             joinGardenRequestDTO.setStatus("Pending");
