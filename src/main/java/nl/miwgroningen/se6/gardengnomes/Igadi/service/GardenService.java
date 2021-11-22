@@ -44,7 +44,8 @@ public class GardenService {
     }
 
     public GardenDTO getGardenById(int gardenId) {
-        return gardenConverter.convertToGardenDTO(gardenRepository.getById(gardenId));
+        Garden garden = gardenRepository.getById(gardenId);
+        return gardenConverter.convertToGardenDTO(garden);
     }
 
     public void saveGarden(GardenDTO garden) {
