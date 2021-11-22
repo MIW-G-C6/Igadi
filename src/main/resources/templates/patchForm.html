@@ -30,9 +30,9 @@
             <input type="text" th:field="*{name}" class="form-control mb-3"
                    placeholder="Name">
             <input type="text" th:field="*{crop}" class="form-control mb-3"
-                   placeholder="For example: 'carrots' or 'potatoes'">
+                   placeholder="Crop">
             <button type="submit" class="equalBoxSmall btn btn-success"
-                    th:text="Save">
+                    th:text="${buttonText}">
             </button>
         </form>
     </div>

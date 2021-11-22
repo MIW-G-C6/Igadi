@@ -10,7 +10,7 @@
 <body class="bg-white">
 <div th:replace="fragments/general :: navbar"></div>
 
-<div id="userProfileBorder" class="container">
+<div id="userProfileBorder" class="container shadow-none">
     <div class="mb-3 text-center">
         <h1 sec:authorize="isAnonymous()">Welcome to Igadi!</h1>
         <h3 sec:authorize="isAnonymous()">Home of the Green and the Fresh!</h3>
