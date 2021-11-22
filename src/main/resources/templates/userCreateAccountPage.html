@@ -21,25 +21,19 @@
                 <input type="email" th:field="*{userEmail}" class="form-control mb-2point5" placeholder="Email">
 
                 <div id="passwordInputFields">
-                    <div class="form-group input-group mb-0">
-                        <input type="password" th:field="*{password1}" class="form-control mb-2point5" placeholder="Password"
-                               id="inputfieldPassword1">
+                    <input type="password" th:field="*{password1}" class="form-control mb-2point5" placeholder="Password"
+                           id="inputfieldPassword1">
 
-                        <div class="form-group input-group-prepend eyeBox">
-                            <div class="input-group-text rounded-right w-98">
-                                <a href="#" class="text-dark" id="icon-click">
-                                    <img id="iconPasswordEyeVisible" th:src="@{/images/icons/icons8-eye-24.png}"
-                                         alt="eye that is open"/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <input type="password" th:field="*{password2}" class="form-control mb-3" placeholder="Repeat password"
-                               id="inputfieldRepeatPassword1">
+                    <span id="eyeSpan">
+                        <a href="#" class="text-dark" id="icon-click">
+                            <img id="iconPasswordEyeVisible" th:src="@{/images/icons/icons8-eye-24.png}" alt="eye that is open"/>
+                        </a>
+                    </span>
+                <div>
+                    <input type="password" th:field="*{password2}" class="form-control mb-3" placeholder="Repeat password"
+                           id="inputfieldRepeatPassword1">
                     </div>
                 </div>
-
             </div>
 
             <div class="d-flex">

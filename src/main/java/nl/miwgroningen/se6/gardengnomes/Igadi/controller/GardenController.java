@@ -110,7 +110,11 @@ public class GardenController {
 
     @GetMapping("/overview/details/{gardenId}/gardeners")
     protected String showPotentialGardeners(@PathVariable("gardenId") int gardenId, Model model,
-                                  @AuthenticationPrincipal User user) {
+                                  @AuthenticationPrincipal User user,
+                                            @ModelAttribute("message") ArrayList<String> message) {
+        if(!message.isEmpty()) {
+            model.addAttribute("message", message);
+        }
         ArrayList<UserDTO> currentGardeners = new ArrayList<>();
         List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
         List<JoinGardenRequestDTO> pendingRequests = joinGardenRequestService.findAllRequestsByGardenId(gardenId);
@@ -133,8 +137,8 @@ public class GardenController {
 
     @PostMapping("/overview/details/{gardenId}/gardeners/{requestId}")
     protected String postPotentialGardeners(@PathVariable("gardenId") int gardenId,
-                                            @PathVariable("requestId") int requestId, @AuthenticationPrincipal User user,
-                                            RedirectAttributes redirectAttributes) {
+                                            @PathVariable("requestId") int requestId,
+                                            @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
         if(authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)){
             try {
                 GardenDTO garden = gardenService.getGardenById(gardenId);

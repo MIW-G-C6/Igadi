@@ -211,6 +211,10 @@ width: 30%;
     z-index: 600;
 }
 
+.btn-success {
+    background-color: #015249;
+}
+
 body{
     min-height: 120vh;
     display: flex;
@@ -735,7 +739,6 @@ padding-left: 1.1rem;
 
 .eyeBox{
 height: 2.37rem;
-
 }
 
 .rond{
@@ -773,4 +776,13 @@ width: 98%;
 
 .min-h-200px {
     min-height: 200px;
+}
+
+/* Create account page*/
+#eyeSpan {
+    position: absolute;
+    right: 15px;
+    transform: translate(0, -50%);
+    top: 50%;
+    cursor: pointer;
 }
