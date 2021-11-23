@@ -33,6 +33,10 @@
                     Delete garden
                 </button>
                 <a class="text-decoration-none mt-2" th:if="${isUserGardenManager}"
+                   th:href="@{/overview/details/{gardenId}/edit(gardenId=${garden.gardenId})}">
+                    <button class="btn btn-small btn-outline-warning">Change name</button>
+                </a>
+                <a class="text-decoration-none mt-2" th:if="${isUserGardenManager}"
                    th:href="@{/overview/details/{gardenId}/gardeners(gardenId=${garden.gardenId})}">
                     <button class="btn btn-small btn-outline-success">See gardeners</button>
                 </a>
