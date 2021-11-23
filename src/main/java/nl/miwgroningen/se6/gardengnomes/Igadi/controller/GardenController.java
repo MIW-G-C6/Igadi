@@ -61,7 +61,7 @@ public class GardenController {
     }
 
     @PostMapping("gardens/new")
-    protected String createOrUpdateGarden(@ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
+    protected String createGarden(@ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
                                           RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
         String message = "Something went wrong.";
         if (!result.hasErrors()) {
@@ -110,16 +110,16 @@ public class GardenController {
 
     @GetMapping("/overview/details/{gardenId}/gardeners")
     protected String showPotentialGardeners(@PathVariable("gardenId") int gardenId, Model model,
-                                  @AuthenticationPrincipal User user,
+                                            @AuthenticationPrincipal User user,
                                             @ModelAttribute("message") ArrayList<String> message) {
-        if(!message.isEmpty()) {
+        if (!message.isEmpty()) {
             model.addAttribute("message", message);
         }
         ArrayList<UserDTO> currentGardeners = new ArrayList<>();
         List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
         List<JoinGardenRequestDTO> pendingRequests = joinGardenRequestService.findAllRequestsByGardenId(gardenId);
-        for(GardenUserDTO userSubscription : alreadyAddedUser) {
-            if(userSubscription.getGardenDTO().getGardenId() == gardenId) {
+        for (GardenUserDTO userSubscription : alreadyAddedUser) {
+            if (userSubscription.getGardenDTO().getGardenId() == gardenId) {
                 UserDTO userToAdd = userService.getUserById(userSubscription.getUserDTO().getUserId());
                 userToAdd.setUserRole(userSubscription.getRole());
                 currentGardeners.add(userToAdd);
@@ -139,7 +139,7 @@ public class GardenController {
     protected String postPotentialGardeners(@PathVariable("gardenId") int gardenId,
                                             @PathVariable("requestId") int requestId,
                                             @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
-        if(authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)){
+        if (authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)) {
             try {
                 GardenDTO garden = gardenService.getGardenById(gardenId);
                 UserDTO userDTO = userService.getUserById(requestId);
@@ -160,7 +160,7 @@ public class GardenController {
 
     @PostMapping("/overview/details/{gardenId}/leave")
     protected String leaveGarden(@ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
-                                          RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
+                                 RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
         String message = "Something went wrong.";
         if (!result.hasErrors()) {
             GardenUserDTO gardenUserDTO = gardenUserService.findOneGardenUserByUserIdAndGardenId(gardenDTO
@@ -170,8 +170,37 @@ public class GardenController {
             redirectAttributes.addAttribute("message", List.of(message, "greenMessage text-center"));
             gardenUserService.deleteGardenUser(gardenUserDTO);
             return "redirect:/index";
-            }
+        }
         redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
         return "redirect:/gardens/new";
+    }
+
+    @GetMapping("/overview/details/{gardenId}/edit")
+    protected String editGarden(Model model, @ModelAttribute("message") ArrayList<String> message,
+                                @PathVariable("gardenId") int gardenId, @ModelAttribute("garden") GardenDTO gardenDTO) {
+        gardenDTO = gardenService.getGardenById(gardenId);
+        model.addAttribute("garden", gardenDTO);
+        if (!message.isEmpty()) {
+            model.addAttribute("message", message);
+        }
+        return "gardenForm";
+    }
+
+    @PostMapping("gardens/edit")
+    protected String editGarden(@ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
+                                  RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
+        String message = "Something went wrong.";
+        if (!result.hasErrors()) {
+            try {
+                gardenService.saveGarden(gardenDTO);
+                return "redirect:/overview/details/" + gardenDTO.getGardenId();
+            } catch (Exception ex) {
+                if (gardenHelper.IsGardenNameDuplicate(ex)) {
+                    message = "That name already exists.";
+                }
+            }
+        }
+        redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
+        return "redirect:/overview/details/" + gardenDTO.getGardenId() + "/edit";
     }
 }
