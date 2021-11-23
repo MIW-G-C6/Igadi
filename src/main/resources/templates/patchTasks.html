@@ -77,14 +77,7 @@
                         <img th:src="@{/images/icons/checkeddone.png}" class="doneImg cursor-default">
                     </div>
                 </div>
-
-
-                <!--<form th:if="${task.isDone()}"
-                      th:action="@{/overview/details/patchTasks/{patchId}/isDone/{taskId}(taskId=${task.getTaskId()},patchId=${patchId})}"
-                      th:method="post" th:object="${task}" class="doneForm" sec:authorize="isAuthenticated()">
-                    <button th:type="submit" class="border-0 doneImgBtn m-0 p-0 w-100 h-100">
-                        <img th:src="@{/images/icons/checkeddone.png}" class="doneImg"></button>
-                </form>-->
+                
 
                 <img th:if="${isUserGardenManager}" th:src="'/images/icons/bin.png'" class="binIcon float-right"
                      data-toggle="modal" th:data-target="'#igadiModal' + ${task.getTaskId()}"/>
