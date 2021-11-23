@@ -27,7 +27,7 @@
         .getGardenId()})}" method="post" th:object="${patch}"
               class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
             <input type="hidden" th:field="*{patchId}">
-            <input type="text" th:field="*{name}" class="form-control mb-3"
+            <input type="text" maxlength="23" th:field="*{name}" class="form-control mb-3"
                    placeholder="Name">
             <input type="text" th:field="*{crop}" class="form-control mb-3"
                    placeholder="For example: 'carrots' or 'potatoes'">

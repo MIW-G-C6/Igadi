@@ -302,7 +302,7 @@ margin-left: 1rem;
 .grid-ish{
     display: flex;
     flex-wrap: wrap;
-    width: 33%;
+    width: 100%;
     justify-content: center;
     margin: auto;
     margin-top: 0px;
@@ -343,14 +343,10 @@ width: 35%;
     margin: 3px;
 }
 
-.titelPatchTasks{
-    padding: 20px;
 
-
-}
 
 .bigBox{
-    width:100vw;
+    width:100%;
 }
 
 .checkBox{
