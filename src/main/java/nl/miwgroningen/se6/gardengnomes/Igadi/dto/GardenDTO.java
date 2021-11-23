@@ -11,6 +11,7 @@ public class GardenDTO {
     private String gardenName;
     private int amountOfUsers;
     private String location;
+    private boolean gardenManagerStatus = false;
 
     public Integer getGardenId() {
         return gardenId;
@@ -44,4 +45,11 @@ public class GardenDTO {
         this.location = location;
     }
 
+    public boolean isGardenManagerStatus() {
+        return gardenManagerStatus;
+    }
+
+    public void setGardenManagerStatus(boolean gardenManagerStatus) {
+        this.gardenManagerStatus = gardenManagerStatus;
+    }
 }

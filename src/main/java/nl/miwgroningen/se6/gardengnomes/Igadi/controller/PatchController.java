@@ -44,8 +44,7 @@ public class PatchController {
             PatchDTO patch = new PatchDTO();
             patch.setGardenDTO(gardenService.getGardenById(gardenId));
             model.addAttribute("patch", patch);
-            model.addAttribute("buttonText", "Add patch");
-            model.addAttribute("titleText", "Add a patch");
+            model.addAttribute("titleText", "Add a new patch");
             return "patchForm";
         } else {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
@@ -60,8 +59,7 @@ public class PatchController {
             if (authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId))) {
                 PatchDTO patch = patchService.getPatchById(patchId);
                 model.addAttribute("patch", patch);
-                model.addAttribute("buttonText", "Update patch");
-                model.addAttribute("titleText", "Update a patch");
+                model.addAttribute("titleText", "Edit patch");
                 return "patchForm";
             } else {
                 redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
@@ -79,6 +77,8 @@ public class PatchController {
                                   RedirectAttributes redirectAttributes) {
         if (!result.hasErrors()) {
             try {
+                // if we edit and change the crop, we want to delete all tasks. In all other cases, keep things the same
+                /*if (patch.getPatchId() != null && )*/
                 patch.setGardenDTO(gardenService.getGardenById(gardenId));
                 patch.setPatchId(patchService.userSavePatch(patch, user.getUserId(), gardenId));
                 return "redirect:/overview/details/patchTasks/" + patch.getPatchId();

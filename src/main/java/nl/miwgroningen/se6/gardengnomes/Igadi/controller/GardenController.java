@@ -3,7 +3,6 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.*;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.GardenHelper;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.*;
 import org.springframework.http.HttpStatus;
@@ -51,7 +50,13 @@ public class GardenController {
 
     @GetMapping("/gardens")
     protected String showGardens(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("allGardens", gardenService.findAllGardensByUserId(user.getUserId()));
+        List<GardenDTO> allGardens = gardenService.findAllGardensByUserId(user.getUserId());
+        for(GardenDTO gardenDTO : allGardens) {
+            if(authorizationHelper.isUserGardenManager(user.getUserId(), gardenDTO.getGardenId())) {
+                gardenDTO.setGardenManagerStatus(true);
+            }
+        }
+        model.addAttribute("allGardens", allGardens);
         return "gardens";
     }
 
@@ -120,28 +125,34 @@ public class GardenController {
     @GetMapping("/overview/details/{gardenId}/gardeners")
     protected String showPotentialGardeners(@PathVariable("gardenId") int gardenId, Model model,
                                             @AuthenticationPrincipal User user,
-                                            @ModelAttribute("message") ArrayList<String> message) {
-        if (!message.isEmpty()) {
-            model.addAttribute("message", message);
-        }
-        ArrayList<UserDTO> currentGardeners = new ArrayList<>();
-        List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
-        List<JoinGardenRequestDTO> pendingRequests = joinGardenRequestService.findAllRequestsByGardenId(gardenId);
-        for (GardenUserDTO userSubscription : alreadyAddedUser) {
-            if (userSubscription.getGardenDTO().getGardenId() == gardenId) {
-                UserDTO userToAdd = userService.getUserById(userSubscription.getUserDTO().getUserId());
-                userToAdd.setUserRole(userSubscription.getRole());
-                currentGardeners.add(userToAdd);
+                                            @ModelAttribute("message") ArrayList<String> message,
+                                            RedirectAttributes redirectAttributes) {
+        if (authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)) {
+                if (!message.isEmpty()) {
+                    model.addAttribute("message", message);
+                }
+                ArrayList<UserDTO> currentGardeners = new ArrayList<>();
+                List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
+                List<JoinGardenRequestDTO> pendingRequests = joinGardenRequestService.findAllRequestsByGardenId(gardenId);
+                for (GardenUserDTO userSubscription : alreadyAddedUser) {
+                    if (userSubscription.getGardenDTO().getGardenId() == gardenId) {
+                        UserDTO userToAdd = userService.getUserById(userSubscription.getUserDTO().getUserId());
+                        userToAdd.setUserRole(userSubscription.getRole());
+                        currentGardeners.add(userToAdd);
+                    }
+                }
+                GardenDTO garden = gardenService.getGardenById(gardenId);
+                model.addAttribute("gardenId", gardenId);
+                model.addAttribute("garden", garden);
+                model.addAttribute("allRequests", pendingRequests);
+                model.addAttribute("currentGardeners", currentGardeners);
+                model.addAttribute("isUserGardenManager", authorizationHelper
+                        .isUserGardenManager(user.getUserId(), gardenId));
+                return "gardeners";
+            } else {
+                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+                return "redirect:/error";
             }
-        }
-        GardenDTO garden = gardenService.getGardenById(gardenId);
-        model.addAttribute("gardenId", gardenId);
-        model.addAttribute("garden", garden);
-        model.addAttribute("allRequests", pendingRequests);
-        model.addAttribute("currentGardeners", currentGardeners);
-        model.addAttribute("isUserGardenManager", authorizationHelper
-                .isUserGardenManager(user.getUserId(), gardenId));
-        return "gardeners";
     }
 
     @PostMapping("/overview/details/{gardenId}/gardeners/{requestId}")

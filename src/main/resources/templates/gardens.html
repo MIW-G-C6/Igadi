@@ -35,30 +35,20 @@
             </div>
         </div>
 
-        <!--<div class="d-flex flex-row mt-5 font-weight-bold">
-            <div>Garden</div>
-        </div>-->
-
         <div class="mt-5">
             <div th:each="garden: ${allGardens}" class="d-flex flex-column mt-1">
                 <div class="d-flex flex-row">
-                    <div>
-                        <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
+                    <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
                            class="linksColor" th:text="${garden.gardenName}">
-                        </a>
-                    </div>
+
+                    </a>
+                    <img th:if="${garden.isGardenManagerStatus()}" th:src="@{/images/icons/laurel.png}"
+                         class="igadi-manager-star mt-1 ml-2"/>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
-
-
-
-
-
 
 <div th:replace="fragments/general :: footer"></div>
 

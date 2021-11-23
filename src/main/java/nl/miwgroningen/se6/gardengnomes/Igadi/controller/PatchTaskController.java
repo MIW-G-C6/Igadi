@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
@@ -52,6 +53,10 @@ public class PatchTaskController {
                     authorizationHelper.isUserGardenManager(user.getUserId(), gardenId));
             PatchDTO patch = patchService.getPatchById(patchId);
             List<PatchTaskDTO> allPatchTasks = patchTaskService.getAllTasksByPatchId(patchId);
+            List<PatchTaskDTO> notDonePatchTasks = allPatchTasks.stream().filter(x -> !x.isDone()).collect(Collectors.toList());
+            List<PatchTaskDTO> donePatchTasks = allPatchTasks.stream().filter(x -> x.isDone()).collect(Collectors.toList());
+            allPatchTasks = notDonePatchTasks;
+            allPatchTasks.addAll(donePatchTasks);
             model.addAttribute("patch", patch);
             model.addAttribute("allPatchTasks", allPatchTasks);
             return "patchTasks";
