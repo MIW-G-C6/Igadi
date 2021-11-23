@@ -3,6 +3,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.*;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.GardenHelper;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.*;
 import org.springframework.http.HttpStatus;
@@ -30,11 +31,13 @@ public class GardenController {
     private AuthorizationHelper authorizationHelper;
     private TaskService taskService;
     private JoinGardenRequestService joinGardenRequestService;
+    private PatchTaskService patchTaskService;
 
     public GardenController(GardenService gardenService, UserService userService, PatchService patchService,
                             GardenHelper gardenHelper, GardenUserService gardenUserService,
                             JoinGardenRequestService joinGardenRequestService,
-                            AuthorizationHelper authorizationHelper, TaskService taskService) {
+                            AuthorizationHelper authorizationHelper, TaskService taskService,
+                            PatchTaskService patchTaskService) {
         this.gardenService = gardenService;
         this.userService = userService;
         this.patchService = patchService;
@@ -43,6 +46,7 @@ public class GardenController {
         this.authorizationHelper = authorizationHelper;
         this.joinGardenRequestService = joinGardenRequestService;
         this.taskService = taskService;
+        this.patchTaskService = patchTaskService;
     }
 
     @GetMapping("/gardens")
@@ -97,6 +101,11 @@ public class GardenController {
         if (authorizationHelper.isUserGardenMember(user.getUserId(), gardenId)) {
             GardenDTO garden = gardenService.getGardenById(gardenId);
             List<PatchDTO> allPatches = patchService.findAllPatchesByGardenId(gardenId);
+            for (PatchDTO patch : allPatches) {
+                List<PatchTaskDTO> patchTasks = patchTaskService.getAllTasksByPatchId(patch.getPatchId());
+                patch.setNumberOfOpenTasks((int)patchTaskService.getAllTasksByPatchId(patch.getPatchId())
+                        .stream().filter(x -> !x.isDone()).count());
+            }
             model.addAttribute("garden", garden);
             model.addAttribute("allPatches", allPatches);
             model.addAttribute("isUserGardenManager",

@@ -188,8 +188,8 @@ h1 {
     border-top: 2px solid green;
 }
 
-.w-40{
-width: 30%;
+.w-32{
+width: 33%;
 }
 
 .w-30 {
@@ -302,7 +302,7 @@ margin-left: 1rem;
 .grid-ish{
     display: flex;
     flex-wrap: wrap;
-    width: 33%;
+    width: 100%;
     justify-content: center;
     margin: auto;
     margin-top: 0px;
@@ -343,13 +343,10 @@ width: 35%;
     margin: 3px;
 }
 
-.titelPatchTasks{
-    padding: 20px;
 
-}
 
 .bigBox{
-    width:100vw;
+    width:100%;
 }
 
 .checkBox{
@@ -391,19 +388,17 @@ width: 35%;
 }
 
 .doneImgBtn{
-    border-radius: 50%;
     background: transparent;
 }
 
 .doneImg:hover{
     transition-delay: 50ms;
     transition-duration: 50ms;
-    border-radius: 50%;
-    box-shadow: 0 0 5px rgba(0, 168, 0, 0.3);
-}
+    }
 
 .inlineText{
     display: inline-block;
+
 }
 
 .binIcon{
@@ -420,13 +415,13 @@ width: 35%;
     height: 30px;
     cursor: pointer;
     position: relative;
-    top: 0.5rem;
+
    }
 
 
    .penIcon{
-   width: 20px;
-       height: 20px;
+   width: 30px;
+       height: 30px;
        cursor: pointer;
        position: relative;
 
@@ -439,9 +434,9 @@ margin-bottom: 0px;
 
 }
 
-
-
-
+.w-90{
+width: 90%;
+}
 
 /*  About page */
 
