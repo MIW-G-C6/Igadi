@@ -23,12 +23,13 @@
 <div class="container">
 
     <div class="d-flex flex-column">
-        <div class="d-flex flew-row">
-
-            <h1 class="inlineText text-truncate mb-0" th:text="${patch.getName()}"></h1>
-
+        <div class="d-flex flew-row border-bottom pb-2">
+            <div class="col-9 p-0">
+                <h1 class="inlineText text-truncate mb-0" th:text="${patch.getName()}"></h1>
+                <p class="m-0 pl-1" th:text="${patch.showWhatIsGrowing()}"></p>
+            </div>
             <div class="p-0 flex-column mt-2 float-right ml-auto">
-                <a th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}">
+                <a th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}" class="text-decoration-none">
                     <img th:if="${isUserGardenManager}" th:src="'/images/icons/pen.png'" class="penIcon mb-4 mr-3">
                 </a>
 
@@ -39,12 +40,7 @@
         </div>
     </div>
 
-    <div class="d-flex flex-row">
-        <h2 class="inlineText text-truncate" th:text="${patch.showWhatIsGrowing()}"></h2>
-    </div>
-
-
-    <div>
+    <div class="mt-2">
         <h3 class="inlineText float-left">Tasks</h3>
 
         <a th:if="${isUserGardenManager}"
@@ -72,12 +68,12 @@
                         <img th:src="@{/images/icons/checked.png}" class="doneImg"></button>
                 </form>
 
-                <form th:if="${task.isDone()}"
-                      th:action="@{/overview/details/patchTasks/{patchId}/isDone/{taskId}(taskId=${task.getTaskId()},patchId=${patchId})}"
-                      th:method="post" th:object="${task}" class="doneForm" sec:authorize="isAuthenticated()">
-                    <button th:type="submit" class="border-0 doneImgBtn m-0 p-0 w-100 h-100">
-                        <img th:src="@{/images/icons/checkeddone.png}" class="doneImg"></button>
-                </form>
+                <div th:if="${task.isDone()}" class="doneForm">
+                    <div class="border-0 doneImgBtn m-0 p-0 w-100 h-100">
+                        <img th:src="@{/images/icons/checkeddone.png}" class="doneImg cursor-default">
+                    </div>
+                </div>
+                
 
                 <img th:if="${isUserGardenManager}" th:src="'/images/icons/bin.png'" class="binIcon float-right"
                      data-toggle="modal" th:data-target="'#igadiModal' + ${task.getTaskId()}"/>
@@ -124,7 +120,6 @@
         <div class="modal-content">
             <div class="modal-header w-100 d-flex justify-content-center text-center">
                 <h5 class="modal-title" th:text="'Deleting patch: ' + ${patch.cropInGarden()}"></h5>
-
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
