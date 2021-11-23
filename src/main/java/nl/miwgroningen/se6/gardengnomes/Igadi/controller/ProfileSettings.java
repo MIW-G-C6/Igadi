@@ -5,17 +5,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * @author Annemarleen Bosma <makeItWork2021@annemarleenbosma.nl>
+ * @author Annemarleen Bosma <makeItWokr2021@annemarleenbosma.nl>
  *
- * This page controlls the contact page
+ * This page controlls the profile page, especially supporting the option to change settings
  *
  */
 
 @Controller
-public class ContactController {
+public class ProfileSettings {
 
-    @GetMapping("/contact")
+    @GetMapping("/profileSettings")
     protected String showContactPage(Model model) {
-        return "contact";
+        return "profileSettings";
     }
+
 }
