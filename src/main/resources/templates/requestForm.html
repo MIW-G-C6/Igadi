@@ -27,17 +27,20 @@
             <div class="w-100 d-flex flex-column align-items-left">
                 <input class="form-control w-50" oninput="fire_ajax_submit()" id="keywordsBox"
                        placeholder="Search for a new garden to join" type="search"/>
-                <div id="result" class="resultList w-50"><ul class="list-group-item-success w-100"></ul></div>
+                <div id="result" class="resultList w-50">
+                    <ul class="list-group-item-success w-100"></ul>
+                </div>
             </div>
         </div>
     </form>
 
     <div id="feedback"></div>
-    <h5>Pending Requests</h5>
+    <p th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}"></p>
+    <h5 th:if="${!allRequests.isEmpty()}">Pending Requests</h5>
     <div class="d-flex flex-column" th:each="request: ${allRequests}">
         <p th:text="${request.getGardenDTO().getGardenName()}"></p>
 
-</div>
+    </div>
 </div>
 
 <div th:replace="fragments/general :: footer"></div>

@@ -58,4 +58,16 @@ public class GardenUserService {
         GardenUser gardenUser = gardenUserConverter.convertFromGardenUserDTO(gardenUserDTO);
         gardenUserRepository.save(gardenUser);
     }
+
+    public GardenUserDTO findOneGardenUserByUserIdAndGardenId(int gardenId, int userId) {
+        Garden garden = new Garden();
+        garden.setGardenId(gardenId);
+        User user = new User();
+        user.setUserId(userId);
+        return gardenUserConverter.convertToGardenUserDTO(gardenUserRepository.findOneByGardenAndUser(garden, user));
+    }
+
+    public void deleteGardenUser(GardenUserDTO gardenUserDTO) {
+        gardenUserRepository.deleteById(gardenUserDTO.getGardenUserId());
+    }
 }

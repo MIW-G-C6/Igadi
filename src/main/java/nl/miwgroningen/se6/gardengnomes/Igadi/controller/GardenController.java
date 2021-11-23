@@ -110,7 +110,11 @@ public class GardenController {
 
     @GetMapping("/overview/details/{gardenId}/gardeners")
     protected String showPotentialGardeners(@PathVariable("gardenId") int gardenId, Model model,
-                                  @AuthenticationPrincipal User user) {
+                                  @AuthenticationPrincipal User user,
+                                            @ModelAttribute("message") ArrayList<String> message) {
+        if(!message.isEmpty()) {
+            model.addAttribute("message", message);
+        }
         ArrayList<UserDTO> currentGardeners = new ArrayList<>();
         List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
         List<JoinGardenRequestDTO> pendingRequests = joinGardenRequestService.findAllRequestsByGardenId(gardenId);
@@ -133,8 +137,8 @@ public class GardenController {
 
     @PostMapping("/overview/details/{gardenId}/gardeners/{requestId}")
     protected String postPotentialGardeners(@PathVariable("gardenId") int gardenId,
-                                            @PathVariable("requestId") int requestId, @AuthenticationPrincipal User user,
-                                            RedirectAttributes redirectAttributes) {
+                                            @PathVariable("requestId") int requestId,
+                                            @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
         if(authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)){
             try {
                 GardenDTO garden = gardenService.getGardenById(gardenId);
@@ -152,5 +156,22 @@ public class GardenController {
             }
         }
         return "redirect:/overview/details/{gardenId}/gardeners";
+    }
+
+    @PostMapping("/overview/details/{gardenId}/leave")
+    protected String leaveGarden(@ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
+                                          RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
+        String message = "Something went wrong.";
+        if (!result.hasErrors()) {
+            GardenUserDTO gardenUserDTO = gardenUserService.findOneGardenUserByUserIdAndGardenId(gardenDTO
+                    .getGardenId(), user.getUserId());
+            message = "You have succesfully left " +
+                    gardenService.getGardenById(gardenDTO.getGardenId()).getGardenName() + "!";
+            redirectAttributes.addAttribute("message", List.of(message, "greenMessage text-center"));
+            gardenUserService.deleteGardenUser(gardenUserDTO);
+            return "redirect:/index";
+            }
+        redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
+        return "redirect:/gardens/new";
     }
 }

@@ -44,8 +44,8 @@ public class PatchController {
             PatchDTO patch = new PatchDTO();
             patch.setGardenDTO(gardenService.getGardenById(gardenId));
             model.addAttribute("patch", patch);
-            model.addAttribute("buttonText", "Create patch");
-            model.addAttribute("titleText", "Add new patch:");
+            model.addAttribute("buttonText", "Add patch");
+            model.addAttribute("titleText", "Add a patch");
             return "patchForm";
         } else {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
@@ -61,7 +61,7 @@ public class PatchController {
                 PatchDTO patch = patchService.getPatchById(patchId);
                 model.addAttribute("patch", patch);
                 model.addAttribute("buttonText", "Update patch");
-                model.addAttribute("titleText", "Change name:");
+                model.addAttribute("titleText", "Update a patch");
                 return "patchForm";
             } else {
                 redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);

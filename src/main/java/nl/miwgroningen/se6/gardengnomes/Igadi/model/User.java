@@ -35,9 +35,6 @@ public class User implements UserDetails {
     @Column(name = "userPassword", nullable = false)
     private String userPassword;
 
-    @OneToMany(mappedBy = "user")
-    private List<GardenUser> gardenUsers;
-
     public Integer getUserId() {
         return userId;
     }
@@ -114,13 +111,5 @@ public class User implements UserDetails {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority(role));
         return authorityList;
-    }
-
-    public List<GardenUser> getGardenUsers() {
-        return gardenUsers;
-    }
-
-    public void setGardenUsers(List<GardenUser> gardenUsers) {
-        this.gardenUsers = gardenUsers;
     }
 }

@@ -4,7 +4,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
@@ -13,7 +12,6 @@ import java.util.List;
 @Entity
 public class JoinGardenRequest {
 
-    // Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="requestId")
@@ -36,10 +34,6 @@ public class JoinGardenRequest {
 
     public void setRequestId(Integer requestId) {
         this.requestId = requestId;
-    }
-
-    public String getStatus() {
-        return status;
     }
 
     public void setStatus(String status) {

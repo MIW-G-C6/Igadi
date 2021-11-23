@@ -1,9 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.JoinGardenRequestDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.dto.PatchDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.JoinGardenRequest;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.JoinGardenRequestRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.JoinGardenRequestConverter;
 import org.springframework.stereotype.Service;

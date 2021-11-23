@@ -12,29 +12,53 @@
 <nav aria-label="breadcrumb m-0">
     <ol class="breadcrumb m-0">
         <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Gardens</li>
+        <li class="breadcrumb-item active" aria-current="page">My gardens</li>
     </ol>
 </nav>
 
 
-<div class="container w-50">
-    <h1 class="mb-4">Gardens</h1>
-
-    <div class="w-100 p-0 mb-4">
-        <div th:each="garden: ${allGardens}" class="m-0 w-100 d-flex flex-column">
-            <div class="mb-2 w-100 d-flex">
-                <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
-                   class="w-25 linksColor"><p th:text="${garden.gardenName}" class="border-temp m-0"></p></a>
+<div class="container">
+    <div class="d-flex flex-column">
+        <div class="d-flex flex-row border-bottom pb-5">
+            <div class="col-9 p-0">
+                <h1>My gardens</h1>
+            </div>
+            <div class="ml-auto p-0 d-inline-flex flex-column">
+                <button type="button" class="btn btn-small btn-outline-success mt-2"
+                        onclick="location.href='/gardens/new'">
+                    Create a new garden
+                </button>
+                <button type="button" class="btn btn-small btn-outline-success mt-2"
+                        onclick="location.href='/gardens/requests'">
+                    Join a garden
+                </button>
             </div>
         </div>
+
+        <!--<div class="d-flex flex-row mt-5 font-weight-bold">
+            <div>Garden</div>
+        </div>-->
+
+        <div class="mt-5">
+            <div th:each="garden: ${allGardens}" class="d-flex flex-column mt-1">
+                <div class="d-flex flex-row">
+                    <div>
+                        <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
+                           class="linksColor" th:text="${garden.gardenName}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <button type="button" class="btn btn-success mr-3 mr-auto"
-            onclick="location.href='/gardens/new'">
-        New garden
-    </button>
-    <button type="button" class="btn btn-success mr-3 mr-auto"
-            onclick="location.href='/gardens/requests'">Join gardens</button>
 </div>
+
+
+
+
+
+
 
 <div th:replace="fragments/general :: footer"></div>
 
