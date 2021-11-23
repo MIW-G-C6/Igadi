@@ -1,5 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
-public class ProfileSettings {
+public class ProfileSettingsController {
+
+    private UserService userService;
+
+    public ProfileSettingsController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/profileSettings")
     protected String showContactPage(Model model) {
