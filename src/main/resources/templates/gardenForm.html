@@ -19,7 +19,7 @@
 <div class="container">
     <div class="mb-4">
         <h1 th:if="${garden.getGardenId() == null}">Create a new garden</h1>
-        <h1 th:if="${garden.getGardenId() != null}">Change this garden</h1>
+        <h1 th:if="${garden.getGardenId() != null}">Edit garden</h1>
     </div>
 
 
@@ -30,7 +30,7 @@
             <input type="hidden" th:field="*{gardenId}">
 
             <div class="d-flex flex-row w-100">
-                <button type="submit" class="btn btn-small btn-success">Create garden</button>
+                <button type="submit" class="btn btn-small btn-success">Save</button>
                 <a class="ml-auto" th:href="@{/gardens}"><button type="button" class="btn btn-small btn-success ml-auto">
                     Cancel
                 </button></a>
@@ -44,7 +44,7 @@
             <input type="hidden" th:field="*{gardenId}">
 
             <div class="d-flex flex-row w-100">
-                <button type="submit" class="btn btn-small btn-success">Change garden</button>
+                <button type="submit" class="btn btn-small btn-success">Save</button>
                 <a class="ml-auto" th:href="@{/gardens}"><button type="button" class="btn btn-small btn-success ml-auto">
                     Cancel
                 </button></a>

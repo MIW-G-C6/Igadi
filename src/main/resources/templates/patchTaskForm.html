@@ -29,7 +29,7 @@
 <div class="container">
 
     <div class="mb-4">
-        <h1>Add a task</h1>
+        <h1>Add a new task</h1>
     </div>
 
     <div class="col-4 p-0 mb-3">
@@ -37,7 +37,7 @@
               method="post" th:object="${patchTask}">
             <input type="text" th:field="*{taskName}" class="form-control mb-2point5" placeholder="Title">
             <input type="text" th:field="*{taskDescription}" class="form-control mb-3" placeholder="Description">
-            <button type="submit" class="btn btn-small btn-success mr-3 mr-auto">Add task</button>
+            <button type="submit" class="btn btn-small btn-success mr-3 mr-auto">Save</button>
         </form>
     </div>
 
