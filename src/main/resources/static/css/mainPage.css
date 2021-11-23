@@ -781,3 +781,7 @@ width: 98%;
     top: 49%;
     cursor: pointer;
 }
+
+.cursor-default {
+    cursor: default;
+}
