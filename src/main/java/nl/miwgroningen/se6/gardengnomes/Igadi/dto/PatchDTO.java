@@ -13,6 +13,7 @@ public class PatchDTO {
     private GardenDTO garden;
     private String name;
     private String crop;
+    private int numberOfOpenTasks;
 
     public Integer getPatchId() {
         return patchId;
@@ -63,5 +64,21 @@ public class PatchDTO {
         } else {
             return this.crop;
         }
+    }
+
+    public GardenDTO getGarden() {
+        return garden;
+    }
+
+    public void setGarden(GardenDTO garden) {
+        this.garden = garden;
+    }
+
+    public int getNumberOfOpenTasks() {
+        return numberOfOpenTasks;
+    }
+
+    public void setNumberOfOpenTasks(int numberOfOpenTasks) {
+        this.numberOfOpenTasks = numberOfOpenTasks;
     }
 }
