@@ -9,6 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,7 +36,8 @@ public class IndexController {
     }
 
     @GetMapping({"/", "/index"})
-    protected String showIndexPage(Model model, @AuthenticationPrincipal User user) {
+    protected String showIndexPage(Model model, @AuthenticationPrincipal User user,
+                                   @ModelAttribute("message") ArrayList<String> message) {
         if(user != null) {
             List<GardenUser> gardenUsers = gardenUserService.findAllGardenUsersByUserId(user.getUserId());
 
@@ -54,6 +56,9 @@ public class IndexController {
                         roles.add(gardenUser.getRole());
                     }
                 }
+            }
+            if(!message.isEmpty()) {
+                model.addAttribute("message", message);
             }
             Collections.replaceAll(roles, "gardenManager", "garden manager");
             model.addAttribute("user", user);

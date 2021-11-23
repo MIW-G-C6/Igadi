@@ -166,4 +166,21 @@ public class GardenController {
         }
         return "redirect:/overview/details/{gardenId}/gardeners";
     }
+
+    @PostMapping("/overview/details/{gardenId}/leave")
+    protected String leaveGarden(@ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
+                                          RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
+        String message = "Something went wrong.";
+        if (!result.hasErrors()) {
+            GardenUserDTO gardenUserDTO = gardenUserService.findOneGardenUserByUserIdAndGardenId(gardenDTO
+                    .getGardenId(), user.getUserId());
+            message = "You have succesfully left " +
+                    gardenService.getGardenById(gardenDTO.getGardenId()).getGardenName() + "!";
+            redirectAttributes.addAttribute("message", List.of(message, "greenMessage text-center"));
+            gardenUserService.deleteGardenUser(gardenUserDTO);
+            return "redirect:/index";
+            }
+        redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
+        return "redirect:/gardens/new";
+    }
 }

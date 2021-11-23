@@ -36,6 +36,8 @@
                    th:href="@{/overview/details/{gardenId}/gardeners(gardenId=${garden.gardenId})}">
                     <button class="btn btn-small btn-outline-success">See gardeners</button>
                 </a>
+                <button th:if="${!isUserGardenManager}" class="btn btn-small btn-outline-danger mt-2"
+                        data-toggle="modal" data-target="#igadiGardenLeaveModal">Leave garden</button>
                 <div class="d-flex">
                     <a class="text-decoration-none mt-2 d-flex flex-grow-1" th:if="${isUserGardenManager}"
                        th:href="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${garden.gardenId})}">
@@ -102,7 +104,7 @@
                     <form class="w-25"
                           th:action="@{/gardens/delete/{gardenId}(gardenId=${garden.getGardenId()})}"
                           th:method="post" th:object="${garden}">
-                        <button th:type="submit" class=" w-100 btn btn-danger taskDeleteBtn w-25">Yes
+                        <button th:type="submit" class="w-100 btn btn-danger taskDeleteBtn w-25">Yes
                         </button>
                     </form>
                     <button type="button" class="btn btn-success w-25" data-dismiss="modal">No</button>
@@ -110,6 +112,32 @@
             </div>
         </div>
     </div>
+
+<!-- Leave Garden Modal -->
+<div class="modal modalfade" id="igadiGardenLeaveModal" tabindex="-1" role="dialog" th:if="${!isUserGardenManager}"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header w-100 d-flex justify-content-center text-center">
+                <h5 class="modal-title" th:text="'Leaving garden: ' + ${garden.getGardenName()}"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body w-100 d-flex justify-content-center text-center d-flex flex-column">
+                <h4>Are you sure?</h4>
+                <p>* You can rejoin by sending a new request</p>
+            </div>
+            <div class="modal-footer w-100 d-flex justify-content-center">
+                <form th:method="post" th:if="!${isUserGardenManager}" class="w-25"
+                      th:action="@{/overview/details/{gardenId}/leave(gardenId=${garden.gardenId})}">
+                    <button class="w-100 btn btn-danger taskDeleteBtn w-25">Yes</button>
+                </form>
+                <button type="button" class="btn btn-success w-25" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
 
