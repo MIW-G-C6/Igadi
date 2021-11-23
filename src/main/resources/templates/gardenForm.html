@@ -12,7 +12,9 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
         <li class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>
-        <li class="breadcrumb-item active" aria-current="page">New Garden</li>
+        <li th:if="${garden.getGardenId() == null}" class="breadcrumb-item active" aria-current="page">New Garden</li>
+        <li th:if="${garden.getGardenId() != null}" th:text="${garden.getGardenName()}"
+            class="breadcrumb-item active" aria-current="page"></li>
     </ol>
 </nav>
 
@@ -21,7 +23,6 @@
         <h1 th:if="${garden.getGardenId() == null}">Create a new garden</h1>
         <h1 th:if="${garden.getGardenId() != null}">Change this garden</h1>
     </div>
-
 
     <div class="col-4 p-0 mb-3">
         <form th:if="${garden.getGardenId() == null}" th:action="@{/gardens/new}" method="post" th:object="${garden}">

@@ -3,7 +3,6 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.*;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.GardenHelper;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.PatchTask;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.*;
 import org.springframework.http.HttpStatus;
@@ -51,7 +50,13 @@ public class GardenController {
 
     @GetMapping("/gardens")
     protected String showGardens(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("allGardens", gardenService.findAllGardensByUserId(user.getUserId()));
+        List<GardenDTO> allGardens = gardenService.findAllGardensByUserId(user.getUserId());
+        for(GardenDTO gardenDTO : allGardens) {
+            if(authorizationHelper.isUserGardenManager(user.getUserId(), gardenDTO.getGardenId())) {
+                gardenDTO.setGardenManagerStatus(true);
+            }
+        }
+        model.addAttribute("allGardens", allGardens);
         return "gardens";
     }
 
