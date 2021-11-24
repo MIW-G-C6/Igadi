@@ -39,11 +39,10 @@
             <div th:each="garden: ${allGardens}" class="d-flex flex-column mt-1">
                 <div class="d-flex flex-row">
                     <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
-                           class="linksColor" th:text="${garden.gardenName}">
-
+                           class="linksColor w-75" th:text="${garden.gardenName}">
                     </a>
                     <img th:if="${garden.isGardenManagerStatus()}" th:src="@{/images/icons/laurel.png}"
-                         class="igadi-manager-star mt-1 ml-2"/>
+                         class="igadi-manager-star-gardens mt-1 ml-2"/>
                 </div>
             </div>
         </div>

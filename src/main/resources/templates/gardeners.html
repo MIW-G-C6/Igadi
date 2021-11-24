@@ -54,10 +54,10 @@
 
             <p th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}"></p>
             <h5>Current members</h5>
-            <div th:each="gardener: ${currentGardeners}" class="d-flex flex-row">
-                <p th:text="${gardener.getUserName()}"></p>
+            <div th:each="gardener: ${currentGardeners}" class="d-flex flex-row w-100">
+                <p th:text="${gardener.getUserName()}" class="w-75"></p>
                 <img th:if="${gardener.getUserRole().equals('gardenManager')}" th:src="@{/images/icons/laurel.png}"
-                     class="igadi-manager-star mt-1 ml-2"/>
+                     class="igadi-manager-star-gardeners mt-1 ml-2"/>
             </div>
         </div>
     </div>
