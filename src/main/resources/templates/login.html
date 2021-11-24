@@ -15,15 +15,23 @@
     </div>
     <p id="loginMessage" th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}"></p>
 
-        <div class="col-4 p-0 mb-3">
+        <div class="col-6 p-0 mb-3">
             <form th:action="@{/login}" method="post" th:object="${user}">
                 <div th:if="${param.error}">
                     <div class="alert alert-danger">Invalid email or password.</div>
                 </div>
 
-                <input type="email" id="username" name="username" class="form-control mb-2point5" autofocus="autofocus" placeholder="Email" />
-                <input type="password" id="password" name="password" class="form-control mb-3" placeholder="Password" />
-                <input type="submit" name="login-submit" id="login-submit" class="equalBox text-align-center btn btn-success mr-3 mb-4" value="Login" />
+                <div class="d-flex flex-row mb-2point5">
+                    <label class="form-control-label col-4">Email:</label>
+                    <input type="email" id="username" name="username" class="form-control"
+                           autofocus="autofocus"/>
+                </div>
+                <div class="d-flex flex-row mb-2point5">
+                    <label class="form-control-label col-4">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control"/>
+                </div>
+
+                <input type="submit" name="login-submit" id="login-submit" class="text-align-center btn btn-success mr-3 mb-4" value="Login" />
 
                 <p th:if="${message.isEmpty()}">
                     New user? <a  class="w-25 linksColor" th:href="@{/users/new}">Sign up</a>
