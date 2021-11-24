@@ -24,8 +24,29 @@
         <h1 th:if="${garden.getGardenId() != null}">Edit garden</h1>
     </div>
 
-    <div class="col-4 p-0 mb-3">
-        <form th:if="${garden.getGardenId() == null}" th:action="@{/gardens/new}" method="post" th:object="${garden}">
+    <div class="col-6 p-0 mb-3">
+        <form th:action="@{/gardens/new}" method="post" th:object="${garden}">
+
+            <div class="d-flex flex-row mb-2point5">
+                <label class="form-control-label col-4">Name:</label>
+                <input type="text" th:field="*{gardenName}" class="form-control">
+            </div>
+            <div class="d-flex flex-row mb-3">
+                <label class="form-control-label col-4">Location:</label>
+                <input type="text" th:field="*{location}" class="form-control">
+            </div>
+            <input type="hidden" th:field="*{gardenId}">
+
+            <div class="d-flex flex-row w-100">
+                <button type="submit" class="btn btn-small btn-success mr-3">Save</button>
+                <a th:href="@{/gardens}"><button type="button" class="btn btn-small btn-success">
+                    Cancel
+                </button></a>
+            </div>
+
+        </form>
+
+        <!--<form th:if="${garden.getGardenId() != null}" th:action="@{/gardens/edit}" method="post" th:object="${garden}">
             <input type="text" th:field="*{gardenName}" class="form-control mb-2point5" placeholder="Name">
             <input type="text" th:field="*{location}" class="form-control mb-3" placeholder="Location">
             <input type="hidden" th:field="*{gardenId}">
@@ -37,21 +58,7 @@
                 </button></a>
             </div>
 
-        </form>
-
-        <form th:if="${garden.getGardenId() != null}" th:action="@{/gardens/edit}" method="post" th:object="${garden}">
-            <input type="text" th:field="*{gardenName}" class="form-control mb-2point5" placeholder="Name">
-            <input type="text" th:field="*{location}" class="form-control mb-3" placeholder="Location">
-            <input type="hidden" th:field="*{gardenId}">
-
-            <div class="d-flex flex-row w-100">
-                <button type="submit" class="btn btn-small btn-success">Save</button>
-                <a class="ml-auto" th:href="@{/gardens}"><button type="button" class="btn btn-small btn-success ml-auto">
-                    Cancel
-                </button></a>
-            </div>
-
-        </form>
+        </form>-->
     </div>
     <div>
         <p th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}"></p>

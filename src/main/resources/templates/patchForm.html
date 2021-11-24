@@ -26,14 +26,14 @@
         <form th:action="@{/overview/details/garden/patches/new/{gardenId}(gardenId=${patch.getGardenDTO()
         .getGardenId()})}" method="post" th:object="${patch}">
             <input type="hidden" th:field="*{patchId}">
-            <div class="d-flex flex-row mb-2">
-                <label class="form-control-label col-4">Name:</label>
+            <div class="d-flex flex-row mb-2point5">
+                <label class="form-control-label col-3">Name:</label>
                 <input type="text" maxlength="23" th:field="*{name}" class="form-control">
             </div>
 
             <div class="d-flex flex-row mb-3">
-                <label class="form-control-label col-4">Crop:</label>
-                <input type="text" th:field="*{crop}" class="form-control" placeholder="Crop">
+                <label class="form-control-label col-3">Crop:</label>
+                <input type="text" th:field="*{crop}" class="form-control">
             </div>
             <button type="submit" class="btn btn-success"
                     th:text="Save">
