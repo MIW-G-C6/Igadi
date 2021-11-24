@@ -684,19 +684,21 @@ padding-left: 1.1rem;
 .igadi-manager-star-garden-details{
     width: 2rem;
     height: 2rem;
-    transform: translate(-50px, 42px);
+    transform: translate(-50px, -66px);
 }
 
 .igadi-manager-star-gardens{
+    position: absolute;
     width: 1rem;
     height: 1rem;
-    transform: translateX(-500px);
+    transform: translate(-215%, 0px);
 }
 
 .igadi-manager-star-gardeners{
+    position: absolute;
     width: 1rem;
     height: 1rem;
-    transform: translateX(-500px);
+    transform: translate(-215%, 0px);
 }
 
 /* Information about login page*/

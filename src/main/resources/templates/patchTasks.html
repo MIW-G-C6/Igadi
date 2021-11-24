@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <title>Patch tasks</title>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+    </script>
 </head>
 
 <body>
@@ -50,10 +65,11 @@
     </div>
 
     <div class="bigBox">
-        <div class="grid-ish">
+        <div class="grid-ish" ondrop="drop(event)" ondragover="allowDrop(event)">
 
             <div th:each="task : ${allPatchTasks}" class="d-flex flex-row w-100 h-100 gridSize"
-                 th:class="${task.doneOrNot()} == 'Done' ? 'colMakeUpDone' : 'colMakeUpNotDone'">
+                 th:class="${task.doneOrNot()} == 'Done' ? 'colMakeUpDone' : 'colMakeUpNotDone'" id="drag1"
+                 draggable="true" ondragstart="drag(event)">
 
                 <div class="d-flex flex-column w-90 align-content-around">
                     <div class="patchTaskColumn float-left font-weight-bold w-100"
