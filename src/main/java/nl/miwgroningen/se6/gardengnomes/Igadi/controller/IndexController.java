@@ -1,10 +1,12 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
+import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.GardenUser;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenService;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenUserService;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,16 +31,22 @@ public class IndexController {
 
     private GardenUserService gardenUserService;
     private GardenService gardenService;
+    private AuthorizationHelper authorizationHelper;
+    private UserService userService;
 
-    public IndexController(GardenUserService gardenUserService, GardenService gardenService) {
+    public IndexController(GardenUserService gardenUserService, GardenService gardenService,
+                           AuthorizationHelper authorizationHelper, UserService userService) {
         this.gardenUserService = gardenUserService;
         this.gardenService = gardenService;
+        this.authorizationHelper = authorizationHelper;
+        this.userService = userService;
     }
 
     @GetMapping({"/", "/index"})
     protected String showIndexPage(Model model, @AuthenticationPrincipal User user,
                                    @ModelAttribute("message") ArrayList<String> message) {
         if(user != null) {
+            model.addAttribute("isAdmin", authorizationHelper.isAdmin(user.getUserId()));
             List<GardenUser> gardenUsers = gardenUserService.findAllGardenUsersByUserId(user.getUserId());
 
             ArrayList<GardenDTO> gardens = new ArrayList<>();
