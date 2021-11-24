@@ -60,7 +60,8 @@ public class Seeder {
     public void seedUsers() {
         List<UserDTO> users = userService.getAllUsers();
         if(users.isEmpty()) {
-            String[] names = {"Jan", "Pete", "Hank", "Cees", "Rodger", "Michael", "Billy", "Luigi", "Phillip", "Peter"};
+            String[] names = {"Jan McReel", "Pete harper", "Hank de Vries", "Cees Brown", "Rodger Davis",
+                    "Michael Miller", "Billy Garcia", "Luigi Descapio", "Phillip Smith", "Peter Taylor"};
             for(int i = 0; i < names.length; i++) {
                 UserDTO userDTO = createUserSeed(names[i]);
                 userService.saveUser(userDTO);
@@ -144,21 +145,21 @@ public class Seeder {
         List<JoinGardenRequestDTO> requests = joinGardenRequestService.getAllRequests();
         if(requests.isEmpty()){
             ArrayList<UserDTO> testUsers = new ArrayList<>();
-            UserDTO kynes = createUserSeed("Kynes");
-            UserDTO lydia = createUserSeed("Lydia");
-            UserDTO donald = createUserSeed("Donald");
-            UserDTO corey = createUserSeed("Corey");
-            UserDTO rupert = createUserSeed("Rupert");
+            UserDTO kynes = createUserSeed("Kynes Rodriguez");
+            UserDTO lydia = createUserSeed("Lydia Alvarez");
+            UserDTO donald = createUserSeed("Donald Anderson");
+            UserDTO corey = createUserSeed("Corey Moore");
+            UserDTO rupert = createUserSeed("Rupert Jackson");
             userService.saveUser(kynes);
             userService.saveUser(lydia);
             userService.saveUser(donald);
             userService.saveUser(corey);
             userService.saveUser(rupert);
-            testUsers.add(userService.findUserByUsername("Kynes"));
-            testUsers.add(userService.findUserByUsername("Lydia"));
-            testUsers.add(userService.findUserByUsername("Donald"));
-            testUsers.add(userService.findUserByUsername("Corey"));
-            testUsers.add(userService.findUserByUsername("Rupert"));
+            testUsers.add(userService.findUserByUsername("Kynes Rodriguez"));
+            testUsers.add(userService.findUserByUsername("Lydia Alvarez"));
+            testUsers.add(userService.findUserByUsername("Donald Anderson"));
+            testUsers.add(userService.findUserByUsername("Corey Moore"));
+            testUsers.add(userService.findUserByUsername("Rupert Jackson"));
             List<GardenDTO> gardens = gardenService.getAllGardens();
             for(GardenDTO gardenDTO : gardens) {
                 for(UserDTO user : testUsers) {
@@ -174,9 +175,10 @@ public class Seeder {
 
     public UserDTO createUserSeed(String name) {
         List<GardenDTO> allGardens = gardenService.getAllGardens();
+        String[] firstName = name.split(" ");
         /*int randomGarden = (int) (Math.random() * allGardens.size()) + 1;*/
-        String email = name.toLowerCase() + "@hotmail.com";
-        String password = name.toLowerCase() + "123";
+        String email = firstName[0].toLowerCase() + "@hotmail.com";
+        String password = firstName[0].toLowerCase() + "123";
         UserDTO user = new UserDTO();
         user.setUserName(name);
         user.setPassword1(passwordEncoder.encode(password));
