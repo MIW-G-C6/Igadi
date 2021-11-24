@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <meta charset="UTF-8">
+    <title>Profile settings</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container w-50">
+    <h1>Profile settings</h1>
+
+        <div class="col-md-4 p-0 mb-3 profileSettings-container">
+            <form th:action="@{/login}" method="post" th:object="${user}">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">Invalid email or password.</div>
+                </div>
+            </form>
+
+                <div>
+                    <div class="details">
+                        <h4><img src="/images/icons/avatarBlack/icons8-user-50.png" alt="avatar" width="150"
+                        class="img-fluid rounded-circle shadow"></h4>
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/users/new}" method="post" th:object="${user}">
+
+                    <div id="profileSettings" class="col-md-8">
+
+                        <input type="password" id="password" name="password" class="form-control mb-3" autofocus="autofocus" placeholder="Password" />
+
+                        <input type="password" id="newPassword" name="password" class="form-control mb-3" placeholder="New password" />
+
+                        <input type="password" id="confirmedPassword" name="passwordRepeat" class="form-control mb-3" placeholder="Confirm password" />
+                        <br>
+
+                        <input type="text" id="username" name="username" class="form-control mb-2point5" autofocus="autofocus" placeholder="username" />
+
+                        <input type="text" id="newUsername" name="username" class="form-control mb-2point5" placeholder="New username" />
+                        <br>
+
+                        <input type="email" id="email" name="email" class="form-control mb-2point5" autofocus="autofocus" placeholder="Email" />
+
+                        <input type="email" id="emailRepeat" name="emailRepeat" class="form-control mb-2point5" placeholder="Repeat email" />
+                        <br>
+
+                        <input type="submit" name="changedSettings" id="changedProfileSettings" class="equalBox text-align-center btn btn-success mr-3 mb-4" value="Save settings" />
+                    </div>
+
+            </form>
+        </div>
+
+</div>
+
+</div>>
+<div th:replace="fragments/general :: footer"></div>
+
+</body>
+</html>

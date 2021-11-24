@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * @author Annemarleen Bosma <makeItWork2021@annemarleenbosma.nl>
  *
- *
+ * This page controlls the contact page
  *
  */
 

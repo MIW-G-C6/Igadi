@@ -10,19 +10,21 @@
 <body class="bg-white">
 <div th:replace="fragments/general :: navbar"></div>
 
-<div id="userProfileBorder" class="container shadow-none">
+<div id="userProfileBorder" class="container">
     <div class="mb-3 text-center">
         <h1 sec:authorize="isAnonymous()">Welcome to Igadi!</h1>
         <h3 sec:authorize="isAnonymous()">Home of the Green and the Fresh!</h3>
     </div>
 
     <!--When the user logged in succesfully, he will have acces/ will see the following -->
-    <div sec:authorize="isAuthenticated()" class="jumbotron profile-jumbotron-parent">
-        <div>
+    <div sec:authorize="isAuthenticated()" >
+        <div id="profileContainer">
+
             <p id="loginMessage" th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}">
             </p>
             <div class="profile-userImage-child1">
-                <img src="/images/icons/avatarBlack/icons8-user-50.png" alt="avatar" width="150">
+                <img id="profileAvatar" src="/images/icons/avatarBlack/icons8-user-50.png" alt="avatar" width="150"
+                     class="img-fluid rounded-circle shadow">
 
                 <div class="profile-userDetails-child2">
                     <h2 sec:authorize="isAuthenticated()" th:text="${user.getUserName()}"
@@ -57,9 +59,10 @@
                     </div>
                 </div>
 
-                <!--                <div>-->
-                <!--                    <button type="button" class="btn btn-success mr-3 mr-auto profile-btn">Change profile settings</button>-->
-                <!--                </div>-->
+                <div>
+                    <button type="button" class="btn btn-success mr-3 mr-auto profile-btn"
+                            onclick="location.href='/profileSettings'">Profile settings</button>
+                </div>
 
             </div>
         </div>
