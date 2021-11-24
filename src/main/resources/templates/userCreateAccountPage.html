@@ -28,27 +28,29 @@
                     <input type="email" th:field="*{userEmail}" class="form-control">
                 </div>
 
-                <div id="passwordInputFields">
-                    <div class="d-flex flex-row mb-2point5">
-                        <label class="form-control-label col-5">Password:</label>
+
+                <div class="d-flex flex-row mb-2point5">
+                    <label class="form-control-label col-5">Password:</label>
+                    <div class="col-7 p-0">
                         <input type="password" th:field="*{password1}" class="form-control" id="inputfieldPassword1">
+                        <span id="eyeSpan">
+                            <a href="#" class="text-dark" id="icon-click">
+                                <img id="iconPasswordEyeVisible" th:src="@{/images/icons/icons8-eye-24.png}" alt="eye that is open"/>
+                            </a>
+                        </span>
                     </div>
+                </div>
 
-                    <span id="eyeSpan">
-                        <a href="#" class="text-dark" id="icon-click">
-                            <img id="iconPasswordEyeVisible" th:src="@{/images/icons/icons8-eye-24.png}" alt="eye that is open"/>
-                        </a>
-                    </span>
 
-                    <div class="d-flex flex-row mb-3">
-                        <label class="form-control-label col-5">Repeat password:</label>
-                        <input type="password" th:field="*{password2}" class="form-control" id="inputfieldRepeatPassword1">
-                    </div>
+
+                <div class="d-flex flex-row mb-4">
+                    <label class="form-control-label col-5">Repeat password:</label>
+                    <input type="password" th:field="*{password2}" class="form-control" id="inputfieldRepeatPassword1">
                 </div>
             </div>
 
             <div class="d-flex w-100">
-                <button type="submit" class="btn btn-success mr-3">Save</button>
+                <button type="submit" class="btn btn-success mr-2point5">Save</button>
                 <button type="button" class="btn btn-success mr-3" onclick="location.href='/'">
                     Cancel
                 </button>

@@ -23,7 +23,7 @@
 <div class="container">
 
     <div class="d-flex flex-column">
-        <div class="d-flex flew-row border-bottom pb-2">
+        <div class="d-flex flew-row pb-5">
             <div class="col-9 p-0">
                 <h1 class="inlineText text-truncate mb-0" th:text="${patch.getName()}"></h1>
                 <p class="m-0 pl-1" th:text="${patch.showWhatIsGrowing()}"></p>
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="mt-2">
+    <div class="">
         <h3 class="inlineText float-left">Tasks</h3>
 
         <a th:if="${isUserGardenManager}"
