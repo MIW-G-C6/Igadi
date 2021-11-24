@@ -1,15 +1,10 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.service;
 
-import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
-import nl.miwgroningen.se6.gardengnomes.Igadi.dto.UserDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.User;
 import nl.miwgroningen.se6.gardengnomes.Igadi.repository.GardenRepository;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenConverter;
-import nl.miwgroningen.se6.gardengnomes.Igadi.service.Converter.GardenUserConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,19 +38,11 @@ public class GardenService {
         return gardenConverter.convertToGardenDTO(garden);
     }
 
-    public void saveGarden(GardenDTO garden) {
-        gardenRepository.save(gardenConverter.convertFromGardenDTO(garden));
-    }
-
-/*    public void saveGardenAndMakeUserGardenManager(GardenDTO gardenDTO, User user) {
+    public int saveGarden(GardenDTO gardenDTO) {
         Garden garden = gardenConverter.convertFromGardenDTO(gardenDTO);
         gardenRepository.save(garden);
-        GardenUserDTO gardenUserDTO = new GardenUserDTO();
-        gardenUserDTO.setGardenDTO(gardenConverter.convertToGardenDTO(garden));
-        gardenUserDTO.setUser(user);
-        gardenUserDTO.setRole(UserRole.GARDEN_MANAGER);
-        gardenUserService.saveGardenUser(gardenUserDTO);
-    }*/
+        return garden.getGardenId();
+    }
 
     public void userDeleteGarden(int userId, int gardenId) {
         if (authorizationHelper.isUserGardenManager(userId, gardenId)) {
