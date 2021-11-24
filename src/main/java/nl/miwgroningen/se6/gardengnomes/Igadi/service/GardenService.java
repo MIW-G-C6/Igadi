@@ -20,19 +20,14 @@ import java.util.stream.Collectors;
 public class GardenService {
 
     private final GardenRepository gardenRepository;
-    private final GardenUserService gardenUserService;
     private final AuthorizationHelper authorizationHelper;
     private final GardenConverter gardenConverter;
-    private final GardenUserConverter gardenUserConverter;
 
-    public GardenService(GardenRepository gardenRepository, GardenUserService gardenUserService,
-                         AuthorizationHelper authorizationHelper, GardenConverter gardenConverter,
-                         GardenUserConverter gardenUserConverter) {
+    public GardenService(GardenRepository gardenRepository, AuthorizationHelper authorizationHelper,
+                         GardenConverter gardenConverter) {
         this.gardenRepository = gardenRepository;
-        this.gardenUserService = gardenUserService;
         this.authorizationHelper = authorizationHelper;
         this.gardenConverter = gardenConverter;
-        this.gardenUserConverter = gardenUserConverter;
     }
 
     public List<GardenDTO> getAllGardens() {
@@ -52,7 +47,7 @@ public class GardenService {
         gardenRepository.save(gardenConverter.convertFromGardenDTO(garden));
     }
 
-    public void saveGardenAndMakeUserGardenManager(GardenDTO gardenDTO, User user) {
+/*    public void saveGardenAndMakeUserGardenManager(GardenDTO gardenDTO, User user) {
         Garden garden = gardenConverter.convertFromGardenDTO(gardenDTO);
         gardenRepository.save(garden);
         GardenUserDTO gardenUserDTO = new GardenUserDTO();
@@ -60,7 +55,7 @@ public class GardenService {
         gardenUserDTO.setUser(user);
         gardenUserDTO.setRole(UserRole.GARDEN_MANAGER);
         gardenUserService.saveGardenUser(gardenUserDTO);
-    }
+    }*/
 
     public void userDeleteGarden(int userId, int gardenId) {
         if (authorizationHelper.isUserGardenManager(userId, gardenId)) {

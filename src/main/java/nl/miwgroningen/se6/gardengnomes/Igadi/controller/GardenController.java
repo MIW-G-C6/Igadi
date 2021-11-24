@@ -1,5 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.*;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.GardenHelper;
@@ -75,7 +76,12 @@ public class GardenController {
         String message = "Something went wrong.";
         if (!result.hasErrors()) {
             try {
-                gardenService.saveGardenAndMakeUserGardenManager(gardenDTO, user);
+                gardenService.saveGarden(gardenDTO);
+                GardenUserDTO gardenUser = new GardenUserDTO();
+                gardenUser.setGardenDTO(gardenDTO);
+                gardenUser.setUser(user);
+                gardenUser.setRole(UserRole.GARDEN_MANAGER);
+                gardenUserService.saveGardenUser(gardenUser);
                 return "redirect:/gardens";
             } catch (Exception ex) {
                 if (gardenHelper.IsGardenNameDuplicate(ex)) {
