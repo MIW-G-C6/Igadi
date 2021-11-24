@@ -46,6 +46,11 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public void deleteUser(UserDTO userDTO) {
+        User user = userConverter.convertFromUserDTO(userDTO);
+        userRepository.delete(user);
+    }
+
     public boolean checkIfUserEmailExists(String userEmail) {
         boolean userEmailIsInDatabase = false;
         List<UserDTO> users = this.getAllUsers();
