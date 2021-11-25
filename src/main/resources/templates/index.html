@@ -55,21 +55,20 @@
                                 <div th:text="${garden.gardenName}" class="m-0">
                                 </div>
                             </a>
+
                         <!--</div>-->
                         <!--<div class="col-5 p-0 ml-auto">
                             <div th:text="${roles.get(iStat.index)}" class="m-0"></div>
                         </div>-->
                         <img th:if="${garden.isGardenManagerStatus()}" th:src="@{/images/icons/laurel.png}"
                              class="igadi-manager-star-gardens mt-1 ml-2"/>
+
                     </div>
                 </div>
             </div>
 
 
             <div>
-                <button th:if="${isAdmin}" type="button" class="btn btn-success mr-3 mr-auto profile-btn"
-                        onclick="location.href='/users'">Check Users
-                </button>
                 <!--<button type="button" class="btn btn-success mr-3 mr-auto profile-btn"
                         onclick="location.href='/profileSettings'">Profile settings
                 </button>-->

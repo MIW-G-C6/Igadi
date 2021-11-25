@@ -27,7 +27,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
-        <li class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">Gardens</a></li>
+        <li class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">My gardens</a></li>
         <li class="breadcrumb-item"><a class="igadi-item-green" th:text="${patch.getGardenDTO().getGardenName()}"
                                        th:href="@{/overview/details/{gardenId}(gardenId=${patch.getGardenDTO().getGardenId()})}"></a>
         </li>
@@ -81,12 +81,12 @@
                       th:action="@{/overview/details/patchTasks/{patchId}/isDone/{taskId}(taskId=${task.getTaskId()},patchId=${patchId})}"
                       th:method="post" th:object="${task}" class="doneForm" sec:authorize="isAuthenticated()">
                     <button th:type="submit" class="border-0 doneImgBtn m-0 p-0 w-100 h-100">
-                        <img th:src="@{/images/icons/checked.png}" class="doneImg"></button>
+                        <img th:src="@{/images/icons/checked.png}" class="doneImg1"></button>
                 </form>
 
                 <div th:if="${task.isDone()}" class="doneForm">
                     <div class="border-0 doneImgBtn m-0 p-0 w-100 h-100">
-                        <img th:src="@{/images/icons/checkeddone.png}" class="doneImg cursor-default">
+                        <img th:src="@{/images/icons/checkeddone.png}" class="doneImg ml5 cursor-default">
                     </div>
                 </div>
                 

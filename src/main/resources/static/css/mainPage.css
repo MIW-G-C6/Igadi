@@ -139,8 +139,8 @@ h1 {
 .glassButton:hover {
     transition-duration: 50ms;
     background-color: rgba(255, 255, 255, 0.3);
+    /*background-color: rgba(255, 255, 255, 0.3);*/
 }
-
 
 /*contains general position information for the links in the navigation bar*/
 
@@ -336,14 +336,19 @@ width: 35%;
     flex-direction: row;
     align-items: center;
     padding: .3rem;
-    background-color: lightgreen;
+    background-color: #a4ddc4;
+    /*background-color: rgba(67,137,69,1);*/
+    /*background-color: #438945;*/
+    /*background-color: lightgreen;*/
     border: 2px solid;
     border-radius: 15px;
     border-color: grey;
     margin: 3px;
 }
 
-
+.ml5{
+margin-left: 0.15rem;
+}
 
 .bigBox{
     width:100%;
@@ -367,7 +372,7 @@ width: 35%;
 .gridSize{
     padding: 10px;
     word-wrap: break-word;
-    }
+}
 
 .noBreakWord{
     word-wrap: break-word;
@@ -377,8 +382,16 @@ width: 35%;
 .doneImg{
     word-wrap: break-word;
     padding-top: 0;
-    width: 2rem;
-    height: 2rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    cursor: pointer;
+}
+
+.doneImg1{
+    word-wrap: break-word;
+    padding-top: 0;
+    width: 2.25rem;
+    height: 2.25rem;
     cursor: pointer;
 }
 
@@ -398,7 +411,6 @@ width: 35%;
 
 .inlineText{
     display: inline-block;
-
 }
 
 .binIcon{
@@ -409,29 +421,24 @@ width: 35%;
     cursor: pointer;
    }
 
-
 .binIconBig{
     width: 30px;
     height: 30px;
     cursor: pointer;
     position: relative;
-
-   }
-
+}
 
    .penIcon{
    width: 30px;
        height: 30px;
        cursor: pointer;
        position: relative;
-
    }
 
 .titelButtonBox{
 margin-left: auto;
 margin-right: auto;
 margin-bottom: 0px;
-
 }
 
 .w-90{
@@ -680,6 +687,9 @@ padding-left: 1.1rem;
 }
 
 .igadi-resultList-appear{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     animation: listAppears 0.5s 1;
 }
 
@@ -791,6 +801,62 @@ width: 98%;
     padding-left: 0;
     margin-bottom: 0;
 }
+
+.igadi-admin-user-item {
+    width: 1.5rem;
+    height: 1.5rem;
+    transition-delay: 50ms;
+    transition-duration: 50ms;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.igadi-delete-user-img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.igadi-delete-user-btn{
+    background-color: rgba(200, 0, 0, 0.15);
+    border-left: 1px solid rgba(200, 200, 200, 0.3);
+    border-right: 1px solid rgba(200, 200, 200, 0.3);
+    border-top: 0.5px solid rgba(200, 200, 200, 0.3);
+    border-bottom: 0.5px solid rgba(200, 200, 200, 0.3);
+    text-align: left;
+    height: 3rem;
+    width: 3rem;
+    margin-left: auto;
+    margin-right: 0px;
+    color: black;
+    transition-duration: 50ms;
+    transition-delay: 50ms;
+}
+
+.igadi-delete-user-btn:hover {
+    background-color: rgba(200, 0, 0, 0.5);
+    transition-duration: 50ms;
+    transition-delay: 50ms;
+}
+
+.igadi-change-user-btn{
+    background-color: rgba(200, 160, 0, 0.15);
+    border-left: 1px solid rgba(200, 200, 200, 0.3);
+    border-right: 1px solid rgba(200, 200, 200, 0.3);
+    border-top: 0.5px solid rgba(200, 200, 200, 0.3);
+    border-bottom: 0.5px solid rgba(200, 200, 200, 0.3);
+    text-align: left;
+    height: 3rem;
+    color: black;
+    transition-duration: 50ms;
+    transition-delay: 50ms;
+}
+
+.igadi-change-user-btn:hover {
+    background-color: rgba(200, 160, 0, 0.5);
+    transition-duration: 50ms;
+    transition-delay: 50ms;
+}
+
 
 /* Look of the buttons */
 .btn-success {

@@ -89,5 +89,4 @@ public class IndexController {
     protected String showAboutPage(Model model) {
         return "about";
     }
-
 }
