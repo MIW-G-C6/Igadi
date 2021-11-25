@@ -44,6 +44,14 @@ public class GardenService {
         return garden.getGardenId();
     }
 
+    public void userSaveGarden(int userId, GardenDTO gardenDTO) {
+        if (authorizationHelper.isUserGardenManager(userId, gardenDTO.getGardenId())) {
+            saveGarden(gardenDTO);
+        } else {
+            throw new SecurityException("You are not allowed to delete this garden.");
+        }
+    }
+
     public void userDeleteGarden(int userId, int gardenId) {
         if (authorizationHelper.isUserGardenManager(userId, gardenId)) {
             deleteGardenById(gardenId);

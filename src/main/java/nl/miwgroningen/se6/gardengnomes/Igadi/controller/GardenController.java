@@ -76,8 +76,8 @@ public class GardenController {
         String message = "Something went wrong.";
         if (!result.hasErrors()) {
             try {
-                int newGardenId = gardenService.saveGarden(gardenDTO);
                 if (gardenDTO.getGardenId() == null) {
+                    int newGardenId = gardenService.saveGarden(gardenDTO);
                     GardenUserDTO gardenUser = new GardenUserDTO();
                     gardenDTO.setGardenId(newGardenId);
                     gardenUser.setGardenDTO(gardenDTO);
@@ -86,6 +86,7 @@ public class GardenController {
                     gardenUserService.saveGardenUser(gardenUser);
                     return "redirect:/gardens";
                 } else {
+                    gardenService.userSaveGarden(user.getUserId(), gardenDTO);
                     return "redirect:/overview/details/" + gardenDTO.getGardenId();
                 }
             } catch (Exception ex) {
@@ -226,13 +227,19 @@ public class GardenController {
 
     @GetMapping("/overview/details/{gardenId}/edit")
     protected String editGarden(Model model, @ModelAttribute("message") ArrayList<String> message,
-                                @PathVariable("gardenId") int gardenId, @ModelAttribute("garden") GardenDTO gardenDTO) {
-        gardenDTO = gardenService.getGardenById(gardenId);
-        model.addAttribute("garden", gardenDTO);
-        if (!message.isEmpty()) {
-            model.addAttribute("message", message);
+                                @PathVariable("gardenId") int gardenId, @ModelAttribute("garden") GardenDTO gardenDTO,
+                                @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
+        if (authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)) {
+            gardenDTO = gardenService.getGardenById(gardenId);
+            model.addAttribute("garden", gardenDTO);
+            if (!message.isEmpty()) {
+                model.addAttribute("message", message);
+            }
+            return "gardenForm";
+        } else {
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+            return "redirect:/error";
         }
-        return "gardenForm";
     }
 
 
