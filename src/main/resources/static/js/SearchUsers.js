@@ -43,9 +43,9 @@ function fire_ajax_submit() {
 }
 
 function fillTable(data){
+    //Array.from(document.getElementsByClassName("modal")).forEach(el=>el.remove());
     let newList = document.createElement("ul");
     newList.classList.add("list-group-item", "p-0", "m-0", "w-100");
-    //Array.from(document.getElementsByClassName("modalfade")).forEach(el=>el.remove());
 
 
     data.forEach(userDTO => {
@@ -59,53 +59,53 @@ function fillTable(data){
 
 
         let deleteImg = document.createElement("img");
-        let buttonImg2 = document.createElement("img");
+        //let buttonImg2 = document.createElement("img");
         deleteImg.src = "/images/icons/bin.png";
         deleteImg.classList.add("igadi-delete-user-img", "float-right");
-        buttonImg2.src = "/images/icons/pen.png";
-        buttonImg2.classList.add("igadi-delete-user-img", "float-right");
-
+        //buttonImg2.src = "/images/icons/pen.png";
+        //buttonImg2.classList.add("igadi-delete-user-img", "float-right");
 
         let addForm = document.createElement("form");
         let deleteButton = document.createElement("button");
         let addMapping = "/users/delete/" + userDTO.userId;
 
-        let addForm2 = document.createElement("form");
-        let addButton2 = document.createElement("button");
-        let addMapping2 = "/users/edit/" + userDTO.userId;
+        //let addForm2 = document.createElement("form");
+        //let addButton2 = document.createElement("button");
+        //let addMapping2 = "/users/edit/" + userDTO.userId;
 //data-toggle="modal" data-target="#igadiGardenDeleteModal">
         listItem.classList.add("list-unstyled");
 
-        deleteButton.classList.add("btn", "w-100", "igadi-delete-user-btn");
+        deleteButton.classList.add("btn", "igadi-delete-user-btn", "float-right");
         deleteButton.setAttribute("data-toggle", "modal");
         deleteButton.setAttribute("data-target", `#userNum${userDTO.userId}`);
+        deleteButton.appendChild(deleteImg);
+
+        //addButton2.classList.add("btn", "w-100", "igadi-change-user-btn");
+        //addButton2.setAttribute("type", "submit");
+        //addForm2.setAttribute("action", addMapping);
+        //addForm2.setAttribute("method", "post");
+       // addForm2.setAttribute("object", "${user}");
+       // addButton2.appendChild(buttonImg2);
+        //addForm2.appendChild(addButton2);
+
+        userContainerDiv.appendChild(userText);
+        userContainerDiv.appendChild(deleteButton);
+        //userContainerDiv.appendChild(addForm2);
+        listItem.appendChild(userContainerDiv);
+        newList.appendChild(listItem);
+
+        if(!document.body.contains(document.getElementById(`userNum${userDTO.userId}`))) {
+            let modalDiv1 = document.createElement("div");
+            modalDiv1.classList.add("modal", "modalfade");
+            modalDiv1.setAttribute("id", `userNum${userDTO.userId}`);
+            modalDiv1.setAttribute("tabindex", "-1");
+            modalDiv1.setAttribute("role", "dialog");
+            modalDiv1.setAttribute("aria-labelledby", "myModalLabel");
 
         addForm.setAttribute("action", addMapping);
         addForm.setAttribute("method", "post");
         addForm.setAttribute("object", "${user}");
         addForm.classList.add("w-25");
-        deleteButton.appendChild(deleteImg);
-
-        addButton2.classList.add("btn", "w-100", "igadi-change-user-btn");
-        addButton2.setAttribute("type", "submit");
-        addForm2.setAttribute("action", addMapping);
-        addForm2.setAttribute("method", "post");
-        addForm2.setAttribute("object", "${user}");
-        addButton2.appendChild(buttonImg2);
-        addForm2.appendChild(addButton2);
-
-        userContainerDiv.appendChild(userText);
-        userContainerDiv.appendChild(deleteButton);
-        userContainerDiv.appendChild(addForm2);
-        listItem.appendChild(userContainerDiv);
-        newList.appendChild(listItem);
-
-        let modalDiv1 = document.createElement("div");
-        modalDiv1.classList.add("modal", "modalfade");
-        modalDiv1.setAttribute("id", `userNum${userDTO.userId}`);
-        modalDiv1.setAttribute("tabindex", "-1");
-        modalDiv1.setAttribute("role", "dialog");
-        modalDiv1.setAttribute("aria-labelledby", "myModalLabel");
 
         let modalDiv2 = document.createElement("div");
         modalDiv2.classList.add("modal-dialog");
@@ -170,6 +170,7 @@ function fillTable(data){
         modalDiv2.appendChild(modalDiv3);
         modalDiv1.appendChild(modalDiv2);
         document.getElementById("body").appendChild(modalDiv1);
+        }
     });
 
     let oldList = document.getElementById("result").firstChild;
