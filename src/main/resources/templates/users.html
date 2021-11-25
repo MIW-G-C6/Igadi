@@ -5,7 +5,7 @@
   <title>Garden Overview</title>
 </head>
 
-<body>
+<body id="body">
 
 <div th:replace="fragments/general :: navbar"></div>
 
@@ -17,7 +17,7 @@
   </ol>
 </nav>
 
-<div class="container d-flex flex-column border-temp h-50">
+<div class="container d-flex flex-column border-temp h-50" id="mainContainer">
   <div class="border-temp mb-3">
     <h1>Search Users</h1>
   </div>
@@ -39,7 +39,7 @@
   </div>
 </div>
 
-<div th:replace="fragments/general :: footer"></div>
+<div id="footer" th:replace="fragments/general :: footer"></div>
 <script type="text/javascript" th:src="@{/js/SearchUsers.js}"></script>
 </body>
 </html>

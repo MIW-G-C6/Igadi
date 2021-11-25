@@ -668,6 +668,9 @@ padding-left: 1.1rem;
 }
 
 .igadi-resultList-appear{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     animation: listAppears 0.5s 1;
 }
 
@@ -770,6 +773,59 @@ width: 98%;
     padding-left: 0;
     margin-bottom: 0;
 }
+
+.igadi-admin-user-item {
+    width: 1.5rem;
+    height: 1.5rem;
+    transition-delay: 50ms;
+    transition-duration: 50ms;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.igadi-delete-user-img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.igadi-delete-user-btn{
+    background-color: rgba(200, 0, 0, 0.15);
+    border-left: 1px solid rgba(200, 200, 200, 0.3);
+    border-right: 1px solid rgba(200, 200, 200, 0.3);
+    border-top: 0.5px solid rgba(200, 200, 200, 0.3);
+    border-bottom: 0.5px solid rgba(200, 200, 200, 0.3);
+    text-align: left;
+    height: 3rem;
+    color: black;
+    transition-duration: 50ms;
+    transition-delay: 50ms;
+}
+
+.igadi-delete-user-btn:hover {
+    background-color: rgba(200, 0, 0, 0.5);
+    transition-duration: 50ms;
+    transition-delay: 50ms;
+}
+
+.igadi-change-user-btn{
+    background-color: rgba(200, 160, 0, 0.15);
+    border-left: 1px solid rgba(200, 200, 200, 0.3);
+    border-right: 1px solid rgba(200, 200, 200, 0.3);
+    border-top: 0.5px solid rgba(200, 200, 200, 0.3);
+    border-bottom: 0.5px solid rgba(200, 200, 200, 0.3);
+    text-align: left;
+    height: 3rem;
+    color: black;
+    transition-duration: 50ms;
+    transition-delay: 50ms;
+}
+
+.igadi-change-user-btn:hover {
+    background-color: rgba(200, 160, 0, 0.5);
+    transition-duration: 50ms;
+    transition-delay: 50ms;
+}
+
 
 /* Look of the buttons */
 .btn-success {
