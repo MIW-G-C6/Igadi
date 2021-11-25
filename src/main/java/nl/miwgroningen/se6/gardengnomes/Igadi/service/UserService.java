@@ -76,6 +76,12 @@ public class UserService implements UserDetailsService {
         ));
     }
 
+    public UserDTO findUserByEmail(String email) {
+        return userConverter.convertToUserDTO(userRepository.findUserByUserEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException("Email " + email + " was not found!")
+        ));
+    }
+
     public List<UserDTO> findByNameContains(String keyword){
         List<User> foundList = userRepository.findByUserNameContains(keyword);
         List<UserDTO> userDTOs = new ArrayList<>();

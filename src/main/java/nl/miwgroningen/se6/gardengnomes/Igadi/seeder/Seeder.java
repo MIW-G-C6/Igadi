@@ -55,6 +55,7 @@ public class Seeder {
         seedPatchTasks();
         seedGardenUsers();
         seedGardenRequests();
+        seedAdmin();
     }
 
     public void seedUsers() {
@@ -195,14 +196,14 @@ public class Seeder {
         return gardenUserDTO;
     }
 
-    public void seedChad() {
-        UserDTO chad = createUserSeed("Chad");
-        userService.saveUser(chad);
-        UserDTO newChad = userService.findUserByUsername("Chad");
-        List<GardenDTO> allGardens = gardenService.getAllGardens();
-        for (GardenDTO gardenDTO : allGardens) {
-            GardenUserDTO gardenUserChad = createGardenUserSeed(newChad, gardenDTO, UserRole.GARDEN_MANAGER);
-            gardenUserService.saveGardenUser(gardenUserChad);
+    public void seedAdmin() {
+        boolean adminCreated =  userService.checkIfUserEmailExists("admin@admin.com");
+        if(!adminCreated) {
+            UserDTO admin = createUserSeed(UserRole.ADMIN);
+            admin.setUserEmail("admin@admin.com");
+            admin.setPassword1("admin");
+            admin.setPassword1(passwordEncoder.encode(admin.getPassword1()));
+            userService.saveUser(admin);
         }
     }
 

@@ -3,6 +3,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.helpers;
 import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.GardenUserDTO;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.GardenUserService;
+import nl.miwgroningen.se6.gardengnomes.Igadi.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import java.util.ArrayList;
@@ -17,11 +18,16 @@ class AuthorizationHelperTest {
         return Mockito.mock(GardenUserService.class);
     }
 
+    private UserService createUserServiceMock() {
+        return Mockito.mock(UserService.class);
+    }
+
     @Test
     void noOneIsAGardenManager() {
         // case: no one is garden manager of any garden.
         GardenUserService gardenUserService = createGardenUserServiceMock();
-        AuthorizationHelper authorizationHelper = new AuthorizationHelper(gardenUserService);
+        UserService userService = createUserServiceMock();
+        AuthorizationHelper authorizationHelper = new AuthorizationHelper(gardenUserService, userService);
         List<GardenUserDTO> gardenUsers = new ArrayList<>();
         when(gardenUserService.findAllGardenUsersByAll(anyInt(), anyInt(), anyString())).thenReturn(gardenUsers);
         assertFalse(authorizationHelper.isUserGardenManager(1,1));
@@ -32,7 +38,8 @@ class AuthorizationHelperTest {
     void oneGardenHasAManager() {
         // case: user 1 is garden manager of garden 1, but not of other gardens. No one else is garden manager of any garden.
         GardenUserService gardenUserService = createGardenUserServiceMock();
-        AuthorizationHelper authorizationHelper = new AuthorizationHelper(gardenUserService);
+        UserService userService = createUserServiceMock();
+        AuthorizationHelper authorizationHelper = new AuthorizationHelper(gardenUserService, userService);
         List<GardenUserDTO> gardenUsers = new ArrayList<>();
         gardenUsers.add(new GardenUserDTO());
         when(gardenUserService.findAllGardenUsersByAll(1, 1, UserRole.GARDEN_MANAGER)).thenReturn(gardenUsers);
@@ -45,7 +52,8 @@ class AuthorizationHelperTest {
     void noOneIsAGardenMember() {
         // case: no one is a member of any garden.
         GardenUserService gardenUserService = createGardenUserServiceMock();
-        AuthorizationHelper authorizationHelper = new AuthorizationHelper(gardenUserService);
+        UserService userService = createUserServiceMock();
+        AuthorizationHelper authorizationHelper = new AuthorizationHelper(gardenUserService, userService);
         List<GardenUserDTO> gardenUsers = new ArrayList<>();
         when(gardenUserService.findAllGardenUsersByUserIdAndGardenId(anyInt(), anyInt())).thenReturn(gardenUsers);
         assertFalse(authorizationHelper.isUserGardenMember(1, 1));
@@ -56,7 +64,8 @@ class AuthorizationHelperTest {
     void oneGardenHasAMember() {
         // case: user 1 is gardener of garden 1, but is not a member of other gardens. No one else is a member of any garden.
         GardenUserService gardenUserService = createGardenUserServiceMock();
-        AuthorizationHelper authorizationHelper = new AuthorizationHelper(gardenUserService);
+        UserService userService = createUserServiceMock();
+        AuthorizationHelper authorizationHelper = new AuthorizationHelper(gardenUserService, userService);
         List<GardenUserDTO> gardenUsers = new ArrayList<>();
         gardenUsers.add(new GardenUserDTO());
         when(gardenUserService.findAllGardenUsersByUserIdAndGardenId(1, 1)).thenReturn(gardenUsers);

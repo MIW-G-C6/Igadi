@@ -1,5 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.controller;
 
+import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.*;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.AuthorizationHelper;
 import nl.miwgroningen.se6.gardengnomes.Igadi.helpers.GardenHelper;
@@ -75,8 +76,19 @@ public class GardenController {
         String message = "Something went wrong.";
         if (!result.hasErrors()) {
             try {
-                gardenService.saveGardenAndMakeUserGardenManager(gardenDTO, user);
-                return "redirect:/gardens";
+                if (gardenDTO.getGardenId() == null) {
+                    int newGardenId = gardenService.saveGarden(gardenDTO);
+                    GardenUserDTO gardenUser = new GardenUserDTO();
+                    gardenDTO.setGardenId(newGardenId);
+                    gardenUser.setGardenDTO(gardenDTO);
+                    gardenUser.setUser(user);
+                    gardenUser.setRole(UserRole.GARDEN_MANAGER);
+                    gardenUserService.saveGardenUser(gardenUser);
+                    return "redirect:/gardens";
+                } else {
+                    gardenService.userSaveGarden(user.getUserId(), gardenDTO);
+                    return "redirect:/overview/details/" + gardenDTO.getGardenId();
+                }
             } catch (Exception ex) {
                 if (gardenHelper.IsGardenNameDuplicate(ex)) {
                     message = "That name already exists.";
@@ -86,6 +98,24 @@ public class GardenController {
         redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
         return "redirect:/gardens/new";
     }
+
+    /*@PostMapping("gardens/edit")
+    protected String editGarden(@ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
+                                RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
+        String message = "Something went wrong.";
+        if (!result.hasErrors()) {
+            try {
+                gardenService.saveGarden(gardenDTO);
+                return "redirect:/overview/details/" + gardenDTO.getGardenId();
+            } catch (Exception ex) {
+                if (gardenHelper.IsGardenNameDuplicate(ex)) {
+                    message = "That name already exists.";
+                }
+            }
+        }
+        redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
+        return "redirect:/overview/details/" + gardenDTO.getGardenId() + "/edit";
+    }*/
 
     @PostMapping("gardens/delete/{gardenId}")
     public String deleteGardenById(@PathVariable("gardenId") int gardenId, RedirectAttributes redirectAttributes,
@@ -198,30 +228,20 @@ public class GardenController {
 
     @GetMapping("/overview/details/{gardenId}/edit")
     protected String editGarden(Model model, @ModelAttribute("message") ArrayList<String> message,
-                                @PathVariable("gardenId") int gardenId, @ModelAttribute("garden") GardenDTO gardenDTO) {
-        gardenDTO = gardenService.getGardenById(gardenId);
-        model.addAttribute("garden", gardenDTO);
-        if (!message.isEmpty()) {
-            model.addAttribute("message", message);
+                                @PathVariable("gardenId") int gardenId, @ModelAttribute("garden") GardenDTO gardenDTO,
+                                @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
+        if (authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)) {
+            gardenDTO = gardenService.getGardenById(gardenId);
+            model.addAttribute("garden", gardenDTO);
+            if (!message.isEmpty()) {
+                model.addAttribute("message", message);
+            }
+            return "gardenForm";
+        } else {
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+            return "redirect:/error";
         }
-        return "gardenForm";
     }
 
-    @PostMapping("gardens/edit")
-    protected String editGarden(@ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
-                                  RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
-        String message = "Something went wrong.";
-        if (!result.hasErrors()) {
-            try {
-                gardenService.saveGarden(gardenDTO);
-                return "redirect:/overview/details/" + gardenDTO.getGardenId();
-            } catch (Exception ex) {
-                if (gardenHelper.IsGardenNameDuplicate(ex)) {
-                    message = "That name already exists.";
-                }
-            }
-        }
-        redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
-        return "redirect:/overview/details/" + gardenDTO.getGardenId() + "/edit";
-    }
+
 }
