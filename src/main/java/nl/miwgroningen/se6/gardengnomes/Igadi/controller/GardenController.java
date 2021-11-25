@@ -245,6 +245,4 @@ public class GardenController {
             return "redirect:/error";
         }
     }
-
-
 }
