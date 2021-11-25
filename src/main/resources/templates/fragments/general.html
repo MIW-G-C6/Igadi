@@ -25,6 +25,9 @@ linear-gradient(45deg, #015249, rgba(29, 236, 197, 0.5) 100%);">
             <li class="nav-item glassButton ml-3" sec:authorize="isAuthenticated()">
                 <a class="nav-link text-white equalBox" th:href="@{/gardens}">My gardens</a>
             </li>
+            <li class="nav-item glassButton ml-3" th:if="${isAdmin}" sec:authorize="isAuthenticated()">
+                <a class="nav-link text-white equalBox" th:href="@{/users}">Check users</a>
+            </li>
 
             <div class="ml-auto">
                 <li class="nav-item glassButton" sec:authorize="isAnonymous()">

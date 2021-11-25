@@ -343,7 +343,9 @@ width: 35%;
     margin: 3px;
 }
 
-
+.ml5{
+margin-left: 0.15rem;
+}
 
 .bigBox{
     width:100%;
@@ -367,7 +369,7 @@ width: 35%;
 .gridSize{
     padding: 10px;
     word-wrap: break-word;
-    }
+}
 
 .noBreakWord{
     word-wrap: break-word;
@@ -377,8 +379,16 @@ width: 35%;
 .doneImg{
     word-wrap: break-word;
     padding-top: 0;
-    width: 2rem;
-    height: 2rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    cursor: pointer;
+}
+
+.doneImg1{
+    word-wrap: break-word;
+    padding-top: 0;
+    width: 2.25rem;
+    height: 2.25rem;
     cursor: pointer;
 }
 
@@ -398,7 +408,6 @@ width: 35%;
 
 .inlineText{
     display: inline-block;
-
 }
 
 .binIcon{
@@ -409,29 +418,24 @@ width: 35%;
     cursor: pointer;
    }
 
-
 .binIconBig{
     width: 30px;
     height: 30px;
     cursor: pointer;
     position: relative;
-
-   }
-
+}
 
    .penIcon{
    width: 30px;
        height: 30px;
        cursor: pointer;
        position: relative;
-
    }
 
 .titelButtonBox{
 margin-left: auto;
 margin-right: auto;
 margin-bottom: 0px;
-
 }
 
 .w-90{

@@ -55,7 +55,7 @@ public class AdminController {
                                    @AuthenticationPrincipal User user) {
         try {
             userService.deleteUser(userService.getUserById(userId));
-            return "redirect:/gardens";
+            return "redirect:/users";
         } catch (SecurityException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
             return "redirect:/error";
