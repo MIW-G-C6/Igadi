@@ -62,7 +62,7 @@ public class UserCreateAccountController {
             } else {
                 userDTO.setPassword1(passwordEncoder.encode(userDTO.getPassword1()));
                 userService.saveUser(userDTO);
-                message = "Welcome please login!";
+                message = "Welcome, please login!";
                 redirectAttributes.addAttribute("message", List.of(message, "greenMessage"));
                 return "redirect:/login";
             }
