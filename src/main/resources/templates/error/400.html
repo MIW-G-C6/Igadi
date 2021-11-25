@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>Bad Request</title>
+
+</head>
+
+<body>
+<div th:replace="fragments/general :: navbar"></div>
+
+
+<div class="container">
+
+    <div class="justify-content-center">
+
+        <h1>Oops....</h1>
+        <h2>400 Bad Request</h2>
+        <H3>The request you sent to the server is incorrect</H3>
+        <h5>Go back to the <a class="linksColor" th:href="@{/}">home</a> page</h5>
+    </div>
+
+</div>
+
+<div th:replace="fragments/general :: footer"></div>
+
+</body>
+</html>
