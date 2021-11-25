@@ -63,6 +63,32 @@ public class UserService implements UserDetailsService {
         return userEmailIsInDatabase;
     }
 
+    public boolean checkIfUserPasswordExists(String userPassword) {
+        boolean userPasswordIsInDatabase = false;
+
+        List<UserDTO> users = this.getAllUsers();
+        for (UserDTO user : users) {
+            if (user.getPassword1().equals(userPassword)) {
+                userPasswordIsInDatabase = true;
+                break;
+            }
+        }
+        return userPasswordIsInDatabase;
+    }
+
+    public boolean checkIfUserNameExists(String userName) {
+        boolean userNameIsInDatabase = false;
+
+        List<UserDTO> users = this.getAllUsers();
+        for (UserDTO user : users) {
+            if (user.getUserName().equals(userName)) {
+                userNameIsInDatabase = true;
+                break;
+            }
+        }
+        return userNameIsInDatabase;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userRepository.findUserByUserEmail(s).orElseThrow(

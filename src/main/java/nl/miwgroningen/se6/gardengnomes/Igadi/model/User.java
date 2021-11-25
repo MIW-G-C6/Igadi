@@ -112,4 +112,5 @@ public class User implements UserDetails {
         authorityList.add(new SimpleGrantedAuthority(role));
         return authorityList;
     }
+
 }

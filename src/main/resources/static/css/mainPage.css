@@ -529,6 +529,18 @@ width: 90%;
     text-decoration: underline;
 }
 
+.linksColor-white {
+    color: white;
+}
+
+.linksColor-white:hover {
+    color: white;
+}
+
+.btnPadding {
+    padding: 0.375rem 0.75rem;
+}
+
 .linksColorGreen{
     color:green;
 }
@@ -687,7 +699,7 @@ padding-left: 1.1rem;
 .igadi-manager-star-garden-details{
     width: 2rem;
     height: 2rem;
-    transform: translate(-50px, -66px);
+    transform: translate(-50px, -42px);
 }
 
 .igadi-manager-star-gardens{
@@ -735,6 +747,11 @@ width: 98%;
 
 .equalBoxSmall{
     width: 130px;
+    text-align: center;
+}
+
+.equalBoxTiny{
+    width: 70px;
     text-align: center;
 }
 
@@ -830,6 +847,10 @@ width: 98%;
 /* Look of the buttons */
 .btn-success {
     background-color: #015249;
+}
+
+.flex-basis-0 {
+    flex-basis: 0;
 }
 
 /*background: -webkit-linear-gradient(to right, #02C8A7, #7CDBD5);*/
