@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -44,6 +45,18 @@ public class AdminController {
             model.addAttribute("allUsers", allUsers);
             return "users";
         } else {
+            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+            return "redirect:/error";
+        }
+    }
+
+    @PostMapping("users/delete/{userId}")
+    public String deleteUserById(@PathVariable("userId") int userId, RedirectAttributes redirectAttributes,
+                                   @AuthenticationPrincipal User user) {
+        try {
+            userService.deleteUser(userService.getUserById(userId));
+            return "redirect:/gardens";
+        } catch (SecurityException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
             return "redirect:/error";
         }
