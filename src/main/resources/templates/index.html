@@ -10,14 +10,14 @@
 <body class="bg-white">
 <div th:replace="fragments/general :: navbar"></div>
 
-<div id="userProfileBorder" class="container">
+<div id="userProfileBorder" class="container shadow-none">
     <div class="mb-3 text-center">
         <h1 sec:authorize="isAnonymous()">Welcome to Igadi!</h1>
         <h3 sec:authorize="isAnonymous()">Home of the Green and the Fresh!</h3>
     </div>
 
     <!--When the user logged in succesfully, he will have acces/ will see the following -->
-    <div sec:authorize="isAuthenticated()" >
+    <div sec:authorize="isAuthenticated()">
         <div id="profileContainer">
 
             <p id="loginMessage" th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}">
@@ -34,37 +34,33 @@
                 </div>
             </div>
 
-            <div class="profile-userDetails-child3">
+            <div class="w-100 d-flex justify-content-center">
 
                 <!--Container that contains the names of the gardens and a list of the role of the user for that particular garden -->
-                <div class="profile-gardens-and-roles container-fluid row">
-                    <div class="col-4">
-                        <div th:each="garden : ${gardens}">
-                            <div class="mb-2">
-                                <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
-                                   class="w-25 linksColor">
-                                    <div th:text="${garden.gardenName}" class="m-0">
-                                    </div>
-                                </a>
-                            </div>
+                <div class="mt-3 w-50">
+                    <div th:each="garden, iStat : ${gardens}" class="d-flex flex-row w-100 mt-2">
+                        <div class="col-6 p-0">
+                            <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.gardenId})}"
+                               class="linksColor">
+                                <div th:text="${garden.gardenName}" class="m-0">
+                                </div>
+                            </a>
                         </div>
-                    </div>
-
-                    <div class="col-6">
-                        <div th:each="role : ${roles}">
-                            <div class="mb-2">
-                                <div th:text="${role}" class="m-0"></div>
-                            </div>
+                        <div class="col-6 p-0">
+                            <div th:text="${roles.get(iStat.index)}" class="m-0"></div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div>
-                    <button th:if="${isAdmin}" type="button" class="btn btn-success mr-3 mr-auto profile-btn"
-                            onclick="location.href='/users'">Check Users</button>
-<!--                    <button type="button" class="btn btn-success mr-3 mr-auto profile-btn"-->
-<!--                            onclick="location.href='/profileSettings'">Profile settings</button>-->
-                </div>
+
+            <div>
+                <button th:if="${isAdmin}" type="button" class="btn btn-success mr-3 mr-auto profile-btn"
+                        onclick="location.href='/users'">Check Users
+                </button>
+                <!--<button type="button" class="btn btn-success mr-3 mr-auto profile-btn"
+                        onclick="location.href='/profileSettings'">Profile settings
+                </button>-->
 
             </div>
         </div>

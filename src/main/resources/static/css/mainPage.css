@@ -716,6 +716,10 @@ padding-left: 1.1rem;
     transform: translate(-215%, 0px);
 }
 
+.translate-up {
+    transform: translate(0px, -130%);
+}
+
 /* Information about login page*/
 
 .eyeBox{
