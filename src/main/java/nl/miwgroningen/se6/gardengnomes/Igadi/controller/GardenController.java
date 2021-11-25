@@ -52,6 +52,9 @@ public class GardenController {
     @GetMapping("/gardens")
     protected String showGardens(Model model, @AuthenticationPrincipal User user) {
         List<GardenDTO> allGardens = gardenService.findAllGardensByUserId(user.getUserId());
+        if(authorizationHelper.isAdmin(user.getUserId())) {
+            allGardens = gardenService.getAllGardens();
+        }
         for(GardenDTO gardenDTO : allGardens) {
             if(authorizationHelper.isUserGardenManager(user.getUserId(), gardenDTO.getGardenId())) {
                 gardenDTO.setGardenManagerStatus(true);
