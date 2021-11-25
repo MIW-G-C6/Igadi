@@ -53,50 +53,47 @@ public class ProfileSettingsController {
 
         return "profileSettings";
     }
-
-    @PostMapping("profileSettings/new")
-    protected String changeUserProfileSettings(@ModelAttribute("user") UserDTO userDTO, BindingResult result,
-                                               RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
-
-
-        if (!result.hasErrors()) {
-            String originalEmail = user.getUserEmail();
-
-//            boolean duplicateEmail = userService.checkIfUserEmailExists(userDTO.getUserEmail());
-            boolean duplicateEmail = userService.checkIfUserEmailExists(originalEmail);
-
-            String message = "on my way to the -if duplicate Email-";
-
-            if (duplicateEmail) {
-                System.out.println("The input email is in the db");
-
-                // now I want to get the input of the second inputfield of the email
-
-                userDTO.setUserEmail(userDTO.getUserEmail()); // here the input of the new email has to be put
-                userDTO.setUserName(user.getUserName());
-                userDTO.setPassword1(user.getUserPassword());
-                userDTO.setPassword2(user.getUserPassword());
-
-//                if(!userDTO.getUserEmail().equals()) {
-//                    System.out.println("going on");
-//                }
-//                userDTO.setUserEmail(userDTO.getUserEmail());
-                userService.saveUser(userDTO);
-            try {
-                userService.saveUser(userDTO);
-                System.out.println(" in the try of the saveUser");
-
-                return "redirect:/gardens";
-            } catch (Exception ex) {
-                System.out.println("this is the exception catch from changeUserProfileSettings");
-            }
-            }
-            redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
-            return "redirect:/";
-        }
-        return "gardens";
-    }
+//
+//    @PostMapping("profileSettings/new")
+//    protected String changeUserProfileSettings(@ModelAttribute("user") UserDTO userDTO, BindingResult result,
+//                                               RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
+//
+//
+//        if (!result.hasErrors()) {
+//            String originalEmail = user.getUserEmail();
+//
+////            boolean duplicateEmail = userService.checkIfUserEmailExists(userDTO.getUserEmail());
+//            boolean duplicateEmail = userService.checkIfUserEmailExists(originalEmail);
+//
+//            String message = "on my way to the -if duplicate Email-";
+//
+//            if (duplicateEmail) {
+//                System.out.println("The input email is in the db");
+//
+//                // now I want to get the input of the second inputfield of the email
+//
+//                userDTO.setUserEmail(userDTO.getUserEmail()); // here the input of the new email has to be put
+//                userDTO.setUserName(user.getUserName());
+//                userDTO.setPassword1(user.getUserPassword());
+//                userDTO.setPassword2(user.getUserPassword());
+//
+////                if(!userDTO.getUserEmail().equals()) {
+////                    System.out.println("going on");
+////                }
+////                userDTO.setUserEmail(userDTO.getUserEmail());
+//                userService.saveUser(userDTO);
+//            try {
+//                userService.saveUser(userDTO);
+//                System.out.println(" in the try of the saveUser");
+//
+//                return "redirect:/gardens";
+//            } catch (Exception ex) {
+//                System.out.println("this is the exception catch from changeUserProfileSettings");
+//            }
+//            }
+//            redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
+//            return "redirect:/";
+//        }
+//        return "gardens";
+//    }
 }
-
-
-
