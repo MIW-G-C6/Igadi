@@ -96,6 +96,7 @@ public class GardenController {
             return "redirect:/gardens";
         } catch (SecurityException ex) {
             redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
+            redirectAttributes.addAttribute("message", ex.getMessage());
             return "redirect:/error";
         }
     }
