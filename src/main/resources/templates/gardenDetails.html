@@ -25,7 +25,8 @@
                 <h1 class="pb-1 m-0 text-truncate" th:text="${garden.getGardenName()}"></h1>
                 <img th:if="${isUserGardenManager}" th:src="@{/images/icons/laurel.png}"
                      class="igadi-manager-star-garden-details"/>
-                <p class="m-0 pl-1 translate-up" th:text="${garden.getLocation()}"></p>
+                <p th:if="${isUserGardenManager}" class="m-0 pl-1 translate-up" th:text="${garden.getLocation()}"></p>
+                <p th:if="${!isUserGardenManager}" class="m-0 pl-1" th:text="${garden.getLocation()}"></p>
             </div>
 
             <div class="ml-auto p-0 d-inline-flex flex-column">
