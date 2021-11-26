@@ -48,6 +48,15 @@ public class RequestController {
         this.authorizationHelper = authorizationHelper;
     }
 
+    @ModelAttribute("isAdmin")
+    public boolean isAdmin(@AuthenticationPrincipal User user) {
+        if (user != null) {
+            return authorizationHelper.isAdmin(user.getUserId());
+        } else {
+            return false;
+        }
+    }
+
     @GetMapping("/gardens/requests")
     protected String showGardensForRequests(Model model, @AuthenticationPrincipal User user,
                                             @ModelAttribute("message") ArrayList<String> message) {

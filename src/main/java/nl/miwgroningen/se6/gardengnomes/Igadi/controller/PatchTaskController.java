@@ -38,6 +38,15 @@ public class PatchTaskController {
         this.authorizationHelper = authorizationHelper;
     }
 
+    @ModelAttribute("isAdmin")
+    public boolean isAdmin(@AuthenticationPrincipal User user) {
+        if (user != null) {
+            return authorizationHelper.isAdmin(user.getUserId());
+        } else {
+            return false;
+        }
+    }
+
     @GetMapping("/overview/details/patchTasks/{patchId}")
     protected String showPatchTasks(@PathVariable("patchId") int patchId, Model model, @AuthenticationPrincipal User user,
                                     RedirectAttributes redirectAttributes) {

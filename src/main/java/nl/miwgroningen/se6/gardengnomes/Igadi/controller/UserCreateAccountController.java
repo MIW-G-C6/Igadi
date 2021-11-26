@@ -21,12 +21,10 @@ import java.util.List;
 public class UserCreateAccountController {
 
     private final UserService userService;
-    private final GardenService gardenService;
     private final PasswordEncoder passwordEncoder;
 
-    public UserCreateAccountController(UserService userService, GardenService gardenService, PasswordEncoder passwordEncoder) {
+    public UserCreateAccountController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
-        this.gardenService = gardenService;
         this.passwordEncoder = passwordEncoder;
     }
 

@@ -12,7 +12,8 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a class="igadi-item-green" href="/">Home</a></li>
-        <li class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">My gardens</a></li>
+        <li th:if="${!isAdmin}" class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">My gardens</a></li>
+        <li th:if="${isAdmin}" class="breadcrumb-item"><a class="igadi-item-green" href="/gardens">All gardens</a></li>
         <li class="breadcrumb-item"><a class="igadi-item-green" th:text="${garden.getGardenName()}"
                                        th:href="@{/overview/details/{gardenId}(gardenId=${garden.getGardenId()})}"></a>
         </li>

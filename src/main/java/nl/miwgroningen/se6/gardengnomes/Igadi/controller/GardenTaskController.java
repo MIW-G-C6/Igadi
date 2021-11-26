@@ -36,6 +36,15 @@ public class GardenTaskController {
         this.authorizationHelper = authorizationHelper;
     }
 
+    @ModelAttribute("isAdmin")
+    public boolean isAdmin(@AuthenticationPrincipal User user) {
+        if (user != null) {
+            return authorizationHelper.isAdmin(user.getUserId());
+        } else {
+            return false;
+        }
+    }
+
     @GetMapping("/overview/details/gardenTasks/{gardenId}")
     protected String showGardenTasks(@PathVariable("gardenId") int gardenId, Model model, @AuthenticationPrincipal User user,
                                          RedirectAttributes redirectAttributes) {
