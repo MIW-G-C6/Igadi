@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
  *
- *     This is our seeder class, that is run every thing the project is started. In fills the database with entries if
+ *     This is our seeder class, that is run every thing the project is started. It fills the database with entries if
  *     no entries are present. To do this, we created a createSeed function for each class, as normally the classes are
  *     saved using a DTO object from the front-end.
  */
