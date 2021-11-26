@@ -30,13 +30,10 @@ function fire_ajax_submit() {
             timeout: 6000,
 
             success: function (resultData) {
-                fillTable(resultData)
-                console.log("POST: ", searchData);
-                console.log("SUCCESS : ", resultData);
+                fillTable(resultData);
                 $("#btn-search").prop("disabled", false);
             },
             error: function (e) {
-                console.log("ERROR : ", e);
                 $("#btn-search").prop("disabled", false);
             }
         });

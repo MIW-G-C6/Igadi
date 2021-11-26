@@ -25,5 +25,4 @@ function togglePasswordEye() {
         document.getElementById("iconPasswordEyeVisible").src="/images/icons/icons8-eye-24.png";
     }
     };
-
 });

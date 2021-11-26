@@ -89,7 +89,6 @@
                         <img th:src="@{/images/icons/checkeddone.png}" class="doneImg ml5 cursor-default">
                     </div>
                 </div>
-                
 
                 <img th:if="${isUserGardenManager}" th:src="'/images/icons/bin.png'" class="binIcon float-right"
                      data-toggle="modal" th:data-target="'#igadiModal' + ${task.getTaskId()}"/>
@@ -98,8 +97,8 @@
         </div>
     </div>
 </div>
-<!-- Patch Modal -->
 
+<!-- Patch Modal -->
 <div th:each="task : ${allPatchTasks}">
     <div class="modal modalfade" th:id="'igadiModal' + ${task.getTaskId()}" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel">

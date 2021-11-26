@@ -40,5 +40,4 @@ public class GardenUserConverter {
         }
         return gardenUser;
     }
-
 }

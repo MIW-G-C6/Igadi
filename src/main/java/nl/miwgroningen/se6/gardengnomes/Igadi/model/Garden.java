@@ -1,7 +1,6 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
@@ -50,4 +49,3 @@ public class Garden {
         this.location = location;
     }
 }
-
