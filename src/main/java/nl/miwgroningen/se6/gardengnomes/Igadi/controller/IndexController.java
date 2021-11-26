@@ -54,6 +54,11 @@ public class IndexController {
                 GardenDTO newGarden = gardenService.getGardenById(gardenUser.getGarden().getGardenId());
                 gardens.add(newGarden);
             }
+            for(GardenDTO gardenDTO : gardens) {
+                if(authorizationHelper.isUserGardenManager(user.getUserId(), gardenDTO.getGardenId())) {
+                    gardenDTO.setGardenManagerStatus(true);
+                }
+            }
 
             ArrayList<String> roles = new ArrayList<>();
             for (GardenDTO garden : gardens) {
