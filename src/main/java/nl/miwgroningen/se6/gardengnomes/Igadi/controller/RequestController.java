@@ -120,8 +120,7 @@ public class RequestController {
                 redirectAttributes.addAttribute("message", List.of(message, "greenMessage"));
                 joinGardenRequestService.deleteRequest(joinGardenRequestDTO);
             } catch (SecurityException ex) {
-                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-                return "redirect:/error";
+                return "error/403";
             }
         }
         return "redirect:/overview/details/{gardenId}/gardeners";
@@ -139,8 +138,7 @@ public class RequestController {
                 redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
                 joinGardenRequestService.deleteRequest(joinGardenRequestDTO);
             } catch (SecurityException ex) {
-                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-                return "redirect:/error";
+                return "error/403";
             }
         }
         return "redirect:/overview/details/{gardenId}/gardeners";

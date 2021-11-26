@@ -54,8 +54,7 @@ public class PatchTaskController {
         try {
             gardenId = patchService.findGardenIdByPatchId(patchId);
         } catch (NullPointerException ex) {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
-            return "redirect:/error";
+            return "error/404";
         }
         if (authorizationHelper.isUserGardenMember(user.getUserId(), gardenId)) {
             model.addAttribute("isUserGardenManager",
@@ -70,8 +69,7 @@ public class PatchTaskController {
             model.addAttribute("allPatchTasks", allPatchTasks);
             return "patchTasks";
         } else {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-            return "redirect:/error";
+            return "error/403";
         }
     }
 
@@ -86,12 +84,10 @@ public class PatchTaskController {
                 model.addAttribute("patchTask", patchTaskDTO);
                 return "patchTaskForm";
             } else {
-                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-                return "redirect:/error";
+                return "error/403";
             }
         }  catch (NullPointerException ex) {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
-            return "redirect:/error";
+            return "error/404";
         }
     }
 
@@ -108,8 +104,7 @@ public class PatchTaskController {
                 return "redirect:/overview/details/patchTasks/{patchId}";
             }
             catch (SecurityException ex) {
-                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-                return "redirect:/error";
+                return "error/403";
             }
         } else {
             return "redirect:/overview/details/patchTasks/new/{patchId}";
@@ -124,8 +119,7 @@ public class PatchTaskController {
             patchTaskService.userDeletePatchTask(user.getUserId(), patchTaskService.getPatchTaskById(taskId));
             return "redirect:/overview/details/patchTasks/" + patchId;
         } catch (SecurityException ex) {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-            return "redirect:/error";
+            return "error/403";
         }
     }
 
@@ -143,11 +137,10 @@ public class PatchTaskController {
                         patchService.findGardenIdByPatchId(patchId));
                 return "redirect:/overview/details/patchTasks/" + patchId;
             } catch (SecurityException ex) {
-                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-                return "redirect:/error";
+                return "error/403";
             }
         } else {
-            return "redirect:/error";
+            return "redirect:/overview/details/patchTasks/" + patchId;
         }
     }
 }

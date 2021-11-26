@@ -56,8 +56,7 @@ public class PatchController {
             model.addAttribute("titleText", "Add a new patch");
             return "patchForm";
         } else {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-            return "redirect:/error";
+            return "error/403";
         }
     }
 
@@ -71,12 +70,10 @@ public class PatchController {
                 model.addAttribute("titleText", "Edit patch");
                 return "patchForm";
             } else {
-                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-                return "redirect:/error";
+                return "error/403";
             }
         } catch (NullPointerException ex) {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
-            return "redirect:/error";
+            return "error/404";
         }
     }
 
@@ -93,8 +90,7 @@ public class PatchController {
                 return "redirect:/overview/details/patchTasks/" + patch.getPatchId();
             }
             catch (SecurityException ex) {
-                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-                return "redirect:/error";
+                return "error/403";
             }
         } else {
             return "redirect:/overview/details/patchTasks/" + patch.getPatchId();
@@ -110,8 +106,7 @@ public class PatchController {
             taskService.deleteUnreferencedEntries();
             return "redirect:/overview/details/" + gardenId;
         } catch (SecurityException ex) {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-            return "redirect:/error";
+            return "error/403";
         }
     }
 }

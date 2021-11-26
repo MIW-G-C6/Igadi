@@ -50,8 +50,7 @@ public class AdminController {
             model.addAttribute("allUsers", allUsers);
             return "users";
         } else {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-            return "redirect:/error";
+            return "error/403";
         }
     }
 
@@ -62,8 +61,7 @@ public class AdminController {
             userService.deleteUser(userService.getUserById(userId));
             return "redirect:/users";
         } catch (SecurityException ex) {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-            return "redirect:/error";
+            return "error/403";
         }
     }
 }

@@ -57,8 +57,7 @@ public class GardenTaskController {
                     authorizationHelper.isUserGardenManager(user.getUserId(), gardenId));
             return "gardenTasks";
         } else {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-            return "redirect:/error";
+            return "error/403";
         }
     }
 
@@ -70,8 +69,7 @@ public class GardenTaskController {
             gardenTaskService.userDeleteGardenTask(user.getUserId(), gardenTaskService.getGardenTaskById(taskId));
             return "redirect:/overview/details/gardenTasks/" + gardenId;
         } catch (SecurityException ex) {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-            return "redirect:/error";
+            return "error/403";
         }
     }
 
@@ -86,12 +84,10 @@ public class GardenTaskController {
                 model.addAttribute("gardenTask", gardenTaskDTO);
                 return "gardenTaskForm";
             } else {
-                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-                return "redirect:/error";
+                return "error/403";
             }
         }  catch (NullPointerException ex) {
-            redirectAttributes.addAttribute("httpStatus", HttpStatus.NOT_FOUND);
-            return "redirect:/error";
+            return "error/404";
         }
     }
 
@@ -107,8 +103,7 @@ public class GardenTaskController {
                 return "redirect:/overview/details/gardenTasks/{gardenId}";
             }
             catch (SecurityException ex) {
-                redirectAttributes.addAttribute("httpStatus", HttpStatus.FORBIDDEN);
-                return "redirect:/error";
+                return "error/403";
             }
         } else {
             return "redirect:/overview/details/gardenTasks/new/{gardenId}";
