@@ -111,24 +111,6 @@ public class GardenController {
         return "redirect:/gardens/new";
     }
 
-    /*@PostMapping("gardens/edit")
-    protected String editGarden(@ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
-                                RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
-        String message = "Something went wrong.";
-        if (!result.hasErrors()) {
-            try {
-                gardenService.saveGarden(gardenDTO);
-                return "redirect:/overview/details/" + gardenDTO.getGardenId();
-            } catch (Exception ex) {
-                if (gardenHelper.IsGardenNameDuplicate(ex)) {
-                    message = "That name already exists.";
-                }
-            }
-        }
-        redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
-        return "redirect:/overview/details/" + gardenDTO.getGardenId() + "/edit";
-    }*/
-
     @PostMapping("gardens/delete/{gardenId}")
     public String deleteGardenById(@PathVariable("gardenId") int gardenId, RedirectAttributes redirectAttributes,
                                    @AuthenticationPrincipal User user) {

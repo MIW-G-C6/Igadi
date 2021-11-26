@@ -21,4 +21,3 @@ public class UserHelper {
                 ex.getCause().getCause().getMessage().contains("Duplicate entry");
     }
 }
-

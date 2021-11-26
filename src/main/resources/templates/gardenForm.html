@@ -58,34 +58,10 @@
                             Cancel
                         </button>
                     </a>
-                    <!--<button th:if="${garden.getGardenId() == null}" type="button" class="btn btn-success flex-basis-0 flex-grow-1">
-                        <a th:href="@{/gardens}" class="text-decoration-none linksColor-white">
-                            Cancel
-                        </a>
-                    </button>
-                    <button th:if="${garden.getGardenId() != null}" type="button" class="btn btn-success flex-basis-0 flex-grow-1">
-                        <a th:href="@{/overview/details/{gardenId}(gardenId=${garden.getGardenId()})}" class="text-decoration-none linksColor-white">
-                            Cancel
-                        </a>
-                    </button>-->
                 </div>
             </div>
 
         </form>
-
-        <!--<form th:if="${garden.getGardenId() != null}" th:action="@{/gardens/edit}" method="post" th:object="${garden}">
-            <input type="text" th:field="*{gardenName}" class="form-control mb-2point5" placeholder="Name">
-            <input type="text" th:field="*{location}" class="form-control mb-3" placeholder="Location">
-            <input type="hidden" th:field="*{gardenId}">
-
-            <div class="d-flex flex-row w-100">
-                <button type="submit" class="btn btn-small btn-success">Save</button>
-                <a class="ml-auto" th:href="@{/gardens}"><button type="button" class="btn btn-small btn-success ml-auto">
-                    Cancel
-                </button></a>
-            </div>
-
-        </form>-->
     </div>
     <div>
         <p th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}"></p>

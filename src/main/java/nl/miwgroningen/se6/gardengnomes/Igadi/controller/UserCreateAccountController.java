@@ -70,5 +70,4 @@ public class UserCreateAccountController {
         }
         return "redirect:/users/new";
     }
-
 }

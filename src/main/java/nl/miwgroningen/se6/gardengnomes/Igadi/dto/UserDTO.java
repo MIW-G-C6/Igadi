@@ -69,5 +69,4 @@ public class UserDTO {
     public void setPassword2(String password2) {
         this.password2 = password2;
     }
-
 }

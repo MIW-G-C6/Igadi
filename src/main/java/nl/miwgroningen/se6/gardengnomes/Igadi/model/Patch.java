@@ -3,7 +3,6 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * @author Tjerk Nagel

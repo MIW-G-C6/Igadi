@@ -15,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
 /**
  * @author Annemarleen Bosma <makeItWork2021@annemarleenbosma.nl>
  * Determine what security should go where
@@ -46,7 +45,6 @@ public class IgadiSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
                 .antMatchers("/" , "/index", "/about", "/contact", "/users/new", "/login").permitAll()
-                /*.antMatchers("/gardens").hasAuthority("garden_manager")*/
                 .anyRequest().authenticated().and()
                 .formLogin()
                 .loginPage("/login")

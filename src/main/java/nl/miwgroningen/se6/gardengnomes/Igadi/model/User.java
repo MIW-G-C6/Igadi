@@ -70,10 +70,6 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        /*for (GardenUser gardenUser : this.gardenUsers) {
-            authorityList.add(new SimpleGrantedAuthority(
-                    (gardenUser.getGarden().getGardenId() + "_" + gardenUser.getRole())));
-        }*/
         return authorityList;
     }
 
@@ -106,11 +102,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    public Collection<? extends GrantedAuthority> changeAuthority(String role) {
-        List<GrantedAuthority> authorityList = new ArrayList<>();
-        authorityList.add(new SimpleGrantedAuthority(role));
-        return authorityList;
-    }
-
 }

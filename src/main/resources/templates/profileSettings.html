@@ -32,33 +32,15 @@
                         <div id="profileSettings" class="d-flex flex-row mb-2point5">
                             <label class="form-control-label col-4">Email:</label>
                         </div>
-<!--                        <input type="hidden" th:field="*{userId}">-->
-<!--                        <div >-->
-<!--                        <input type="password" id="originalPassword" name="originalPassword" class="form-control mb-3" autofocus="autofocus" placeholder="Password" />-->
-
-<!--                        <input type="password" id="newPassword" name="newPassword" class="form-control mb-3" placeholder="New password" />-->
-
-<!--                        <input type="password" id="confirmedPassword" name="passwordRepeat" class="form-control mb-3" placeholder="Confirm password" />-->
-<!--                        <br>-->
-<!--                        </div>-->
-
-<!--                        <div>-->
-<!--                        <input type="text" id="username" name="originalUsername" class="form-control mb-2point5" autofocus="autofocus" placeholder="Username" />-->
-
-<!--                        <input type="text" id="newUsername" name="newUsername" class="form-control mb-2point5" placeholder="New username" />-->
-<!--                        <br>-->
-<!--                        </div>-->
 
                         <input type="email" id="email" name="originalEmail" class="form-control mb-2point5" autofocus="autofocus" placeholder="Email" />
 
                         <input type="email" id="newEmail" name="newEmail" class="form-control mb-2point5" placeholder="New email" />
                         <input type="hidden" th:field="*{userId}">
-<!--                        <img id="inputValidation" th:src="@{/images/icons/icons8-ok-48.png}" alt="green check"/>-->
                         <br>
 
                         <div class="d-flex flex-row w-100">
                             <button type="submit" th:text="${buttonText}" class="btn btn-success mr-2point5"></button>
-<!--                            <input type="submit" name="changedSettings" id="changedProfileSettings" class="equalBox text-align-center btn btn-success mr-3 mb-4" value="Save settings" />-->
                         </div>
 
             </form>
