@@ -49,6 +49,15 @@ public class GardenController {
         this.patchTaskService = patchTaskService;
     }
 
+    @ModelAttribute("isAdmin")
+    public boolean isAdmin(@AuthenticationPrincipal User user) {
+        if (user != null) {
+            return authorizationHelper.isAdmin(user.getUserId());
+        } else {
+            return false;
+        }
+    }
+
     @GetMapping("/gardens")
     protected String showGardens(Model model, @AuthenticationPrincipal User user) {
         List<GardenDTO> allGardens = gardenService.findAllGardensByUserId(user.getUserId());

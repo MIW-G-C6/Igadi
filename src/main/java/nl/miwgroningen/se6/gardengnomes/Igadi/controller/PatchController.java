@@ -37,6 +37,15 @@ public class PatchController {
         this.taskService = taskService;
     }
 
+    @ModelAttribute("isAdmin")
+    public boolean isAdmin(@AuthenticationPrincipal User user) {
+        if (user != null) {
+            return authorizationHelper.isAdmin(user.getUserId());
+        } else {
+            return false;
+        }
+    }
+
     @GetMapping("/overview/details/garden/patches/new/{gardenId}")
     protected String newPatchForm(@PathVariable(value = "gardenId") Integer gardenId, Model model,
                                   @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {

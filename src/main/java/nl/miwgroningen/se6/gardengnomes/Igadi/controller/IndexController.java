@@ -32,21 +32,27 @@ public class IndexController {
     private GardenUserService gardenUserService;
     private GardenService gardenService;
     private AuthorizationHelper authorizationHelper;
-    private UserService userService;
 
     public IndexController(GardenUserService gardenUserService, GardenService gardenService,
-                           AuthorizationHelper authorizationHelper, UserService userService) {
+                           AuthorizationHelper authorizationHelper) {
         this.gardenUserService = gardenUserService;
         this.gardenService = gardenService;
         this.authorizationHelper = authorizationHelper;
-        this.userService = userService;
+    }
+
+    @ModelAttribute("isAdmin")
+    public boolean isAdmin(@AuthenticationPrincipal User user) {
+        if (user != null) {
+            return authorizationHelper.isAdmin(user.getUserId());
+        } else {
+            return false;
+        }
     }
 
     @GetMapping({"/", "/index"})
     protected String showIndexPage(Model model, @AuthenticationPrincipal User user,
                                    @ModelAttribute("message") ArrayList<String> message) {
         if(user != null) {
-            model.addAttribute("isAdmin", authorizationHelper.isAdmin(user.getUserId()));
             List<GardenUser> gardenUsers = gardenUserService.findAllGardenUsersByUserId(user.getUserId());
 
             ArrayList<GardenDTO> gardens = new ArrayList<>();
