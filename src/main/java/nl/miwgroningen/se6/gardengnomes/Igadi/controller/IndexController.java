@@ -60,23 +60,12 @@ public class IndexController {
                 }
             }
 
-            ArrayList<String> roles = new ArrayList<>();
-            for (GardenDTO garden : gardens) {
-                int gardenId1 = garden.getGardenId();
-                for (GardenUser gardenUser : gardenUsers) {
-                    int gardenId2 = gardenUser.getGarden().getGardenId();
-                    if (gardenId1 == gardenId2) {
-                        roles.add(gardenUser.getRole());
-                    }
-                }
-            }
             if(!message.isEmpty()) {
                 model.addAttribute("message", message);
             }
-            Collections.replaceAll(roles, "gardenManager", "garden manager");
             model.addAttribute("user", user);
             model.addAttribute("gardens", gardens);
-            model.addAttribute("roles", roles);
+
         } else {
             user = new User();
             user.setUserName("admin");
