@@ -265,48 +265,50 @@ public class Seeder {
     }
 
     public void seedForPresentation() {
+        if (!userService.checkIfUserEmailExists("lukas@hotmail.com")) {
+            UserDTO userDTO = createUserSeed("Lukas de Ruiter");
+            int userId = userService.saveUser(userDTO);
+            userDTO.setUserId(userId);
 
-        UserDTO userDTO = createUserSeed("Lukas de Ruiter");
-        int userId = userService.saveUser(userDTO);
-        userDTO.setUserId(userId);
+            GardenDTO gardenDTO = createGardenSeed("De vier wijken", "Groningen");
+            int gardenId = gardenService.saveGarden(gardenDTO);
+            gardenDTO.setGardenId(gardenId);
 
-        GardenDTO gardenDTO = createGardenSeed("De vier wijken", "Groningen");
-        int gardenId = gardenService.saveGarden(gardenDTO);
-        gardenDTO.setGardenId(gardenId);
+            GardenUserDTO gardenUserDTO = createGardenUserSeed(userDTO, gardenDTO, "gardenManager");
+            gardenUserService.saveGardenUser(gardenUserDTO);
 
-        GardenUserDTO gardenUserDTO = createGardenUserSeed(userDTO, gardenDTO, "gardenManager");
-        gardenUserService.saveGardenUser(gardenUserDTO);
+            ArrayList<PatchDTO> patches = createPatchSeed(gardenDTO);
+            patches.get(0).setName("Links achterin");
+            patches.get(1).setName("Naast de vijver");
+            patches.get(2).setName("minimoestuin");
 
-        ArrayList<PatchDTO> patches = createPatchSeed(gardenDTO);
-        patches.get(0).setName("Links achterin");
-        patches.get(1).setName("Naast de vijver");
-        patches.get(2).setName("minimoestuin");
+            patches.get(0).setCrop("Pompoen");
+            patches.get(1).setCrop("Aardappel");
+            patches.get(2).setCrop("Winterpeen");
 
-        patches.get(0).setCrop("Pompoen");
-        patches.get(1).setCrop("Aardappel");
-        patches.get(2).setCrop("Winterpeen");
+            for(PatchDTO patchDTO : patches) {
+                int patchId = patchService.savePatch(patchDTO);
+                patchDTO.setPatchId(patchId);
 
-        for(PatchDTO patchDTO : patches) {
-            int patchId = patchService.savePatch(patchDTO);
-            patchDTO.setPatchId(patchId);
+                ArrayList<PatchTaskDTO> tasks = new ArrayList<>();
+                String[] tasksList = {"Aanvegen", "Bemesten", "Water geven", "Schoffelen", "Wieden", "Zaaien", "Oogsten", "Opsteken"};
+                String[] description = new String[] {"Veeg de bladeren bij elkaar", "Geef deze perk extra voeding","Dit perkje heeft extra water nodig", "Maak de grond los en woel om",
+                        "Verwijder het onkruid", "Plant zaadjes op 10 cm afstand van elkaar", "Haal de groente uit de tuin of pluk het fruit",
+                        "Zet de plant vast aan een rek, zodat deze niet omvalt"};
 
-            ArrayList<PatchTaskDTO> tasks = new ArrayList<>();
-            String[] tasksList = {"Aanvegen", "Bemesten", "Water geven", "Schoffelen", "Wieden", "Zaaien", "Oogsten", "Opsteken"};
-            String[] description = new String[] {"Veeg de bladeren bij elkaar", "Geef deze perk extra voeding","Dit perkje heeft extra water nodig", "Maak de grond los en woel om",
-                    "Verwijder het onkruid", "Plant zaadjes op 10 cm afstand van elkaar", "Haal de groente uit de tuin of pluk het fruit",
-                    "Zet de plant vast aan een rek, zodat deze niet omvalt"};
+                for(int i = 0; i < tasksList.length; i++) {
+                    String title = tasksList[i];
+                    String description2 = description[i];
+                    PatchTaskDTO patchTaskDTO = new PatchTaskDTO();
+                    patchTaskDTO.setTaskName(title);
+                    patchTaskDTO.setTaskDescription(description2);
+                    patchTaskDTO.setDone(false);
+                    patchTaskDTO.setPatchDTO(patchDTO);
+                    patchTaskService.savePatchTask(patchTaskDTO);
+                }
 
-            for(int i = 0; i < tasksList.length; i++) {
-                String title = tasksList[i];
-                String description2 = description[i];
-                PatchTaskDTO patchTaskDTO = new PatchTaskDTO();
-                patchTaskDTO.setTaskName(title);
-                patchTaskDTO.setTaskDescription(description2);
-                patchTaskDTO.setDone(false);
-                patchTaskDTO.setPatchDTO(patchDTO);
-                patchTaskService.savePatchTask(patchTaskDTO);
             }
-
         }
+
     }
 }

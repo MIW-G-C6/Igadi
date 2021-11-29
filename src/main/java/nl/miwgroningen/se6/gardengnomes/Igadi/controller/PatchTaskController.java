@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -93,7 +94,7 @@ public class PatchTaskController {
 
     @PostMapping("/overview/details/patchTasks/new/{patchId}")
     protected String saveOrUpdatePatchTask(@PathVariable("patchId") int patchId,
-                                           @ModelAttribute("patchTask") PatchTaskDTO patchTaskDTO,
+                                           @Valid @ModelAttribute("patchTask") PatchTaskDTO patchTaskDTO,
                                            BindingResult result, @AuthenticationPrincipal User user,
                                            RedirectAttributes redirectAttributes) {
         if (!result.hasErrors()) {

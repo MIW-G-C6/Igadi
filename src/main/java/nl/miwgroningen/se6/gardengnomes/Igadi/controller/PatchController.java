@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
  */
@@ -78,7 +80,7 @@ public class PatchController {
     }
 
     @PostMapping ("/overview/details/garden/patches/new/{gardenId}")
-    protected String saveNewPatch(@PathVariable("gardenId") int gardenId, @ModelAttribute("patch") PatchDTO patch,
+    protected String saveNewPatch(@PathVariable("gardenId") int gardenId, @Valid @ModelAttribute("patch") PatchDTO patch,
                                   BindingResult result, @AuthenticationPrincipal User user,
                                   RedirectAttributes redirectAttributes) {
         if (!result.hasErrors()) {
