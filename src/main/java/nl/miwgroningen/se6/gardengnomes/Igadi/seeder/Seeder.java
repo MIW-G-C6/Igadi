@@ -56,7 +56,7 @@ public class Seeder {
         seedGardenUsers();
         seedGardenRequests();
         seedAdmin();
-//        seedForPresentation();
+        seedForPresentation();
     }
 
     public void seedUsers() {
@@ -261,39 +261,42 @@ public class Seeder {
         }
         return tasks;
     }
-//
-//    public void seedForPresentation() {
-//
-//        UserDTO userDTO = createUserSeed("Lukas de Ruiter");
-//        userService.saveUser(userDTO);
-//
-//        GardenDTO gardenDTO = createGardenSeed("De vier wijken", "Groningen");
-//        gardenService.saveGarden(gardenDTO);
-//
-//        ArrayList<PatchDTO> patches = createPatchSeed(gardenDTO);
-//        patches.get(0).setName("Links achterin");
-//        patches.get(1).setName("Naast de vijver");
-//        patches.get(2).setName("minimoestuin");
-//
-//        patches.get(0).setName("Pompoen");
-//        patches.get(1).setName("Aardappel");
-//        patches.get(2).setName("Winterpeen");
-//
-//        String[] tasksList = {"Aanvegen", "Bemesten", "Water geven", "Schoffelen", "Wieden", "Zaaien", "Oogsten", "Opsteken"};
-//        String[] description = {"Veeg de bladeren bij elkaar", "Geef deze perk extra voeding","Dit perkje heeft extra water nodig", "Maak de grond los en woel om",
-//                "Verwijder het onkruid", "Plant zaadjes op 10 cm afstand van elkaar", "Haal de groente uit de tuin of pluk het fruit",
-//                "Zet de plant vast aan een rek, zodat deze niet omvalt"};
-//
-//        for(PatchDTO patchDTO : patches) {
-//            patchService.savePatch(patchDTO);
-//
-//            ArrayList<PatchTaskDTO> tasks = createPatchTaskSeed(patchDTO);
-//            for(int i = 0; i < tasksList.length; i++) {
-//                for (int j = 0; j < description.length; j++) {
-//
-//
-//                }
-//            }
-//        }
-//    }
+
+    public void seedForPresentation() {
+
+        UserDTO userDTO = createUserSeed("Lukas de Ruiter");
+        userService.saveUser(userDTO);
+
+        GardenDTO gardenDTO = createGardenSeed("De vier wijken", "Groningen");
+        gardenService.saveGarden(gardenDTO);
+
+        ArrayList<PatchDTO> patches = createPatchSeed(gardenDTO);
+        patches.get(0).setName("Links achterin");
+        patches.get(1).setName("Naast de vijver");
+        patches.get(2).setName("minimoestuin");
+
+        patches.get(0).setName("Pompoen");
+        patches.get(1).setName("Aardappel");
+        patches.get(2).setName("Winterpeen");
+
+        for(PatchDTO patchDTO : patches) {
+            patchService.savePatch(patchDTO);
+
+            ArrayList<PatchTaskDTO> tasks = new ArrayList<>();
+            String[] tasksList = {"Aanvegen", "Bemesten", "Water geven", "Schoffelen", "Wieden", "Zaaien", "Oogsten", "Opsteken"};
+
+            for(int i = 0; i < tasksList.length; i++) {
+                createPatchTaskSeed(patchDTO);
+            }
+
+            String[] description = new String[] {"Veeg de bladeren bij elkaar", "Geef deze perk extra voeding","Dit perkje heeft extra water nodig", "Maak de grond los en woel om",
+                    "Verwijder het onkruid", "Plant zaadjes op 10 cm afstand van elkaar", "Haal de groente uit de tuin of pluk het fruit",
+                    "Zet de plant vast aan een rek, zodat deze niet omvalt"};
+
+            for (int j = 0; j < description.length; j++) {
+                createPatchTaskSeed(patchDTO);
+            }
+
+        }
+    }
 }
