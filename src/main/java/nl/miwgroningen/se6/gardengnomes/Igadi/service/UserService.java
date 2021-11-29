@@ -41,9 +41,10 @@ public class UserService implements UserDetailsService {
         return userConverter.convertToUserDTO(user);
     }
 
-    public void saveUser(UserDTO userDTO) {
+    public int saveUser(UserDTO userDTO) {
         User user = userConverter.convertFromUserDTO(userDTO);
         userRepository.save(user);
+        return user.getUserId();
     }
 
     public void deleteUser(UserDTO userDTO) {

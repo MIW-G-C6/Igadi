@@ -2,6 +2,7 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.seeder;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.*;
+import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -62,8 +63,8 @@ public class Seeder {
     public void seedUsers() {
         List<UserDTO> users = userService.getAllUsers();
         if(users.isEmpty()) {
-            String[] names = {"Jan McReel", "Pete harper", "Hank de Vries", "Cees Brown", "Rodger Davis",
-                    "Michael Miller", "Billy Garcia", "Luigi Descapio", "Phillip Smith", "Peter Taylor"};
+            String[] names = {"Jan Naaktgeboren", "Lisa van Veen", "Akim Hassous", "Frank Roelofsen", "Frederick in't Veld",
+                    "Tigo Prins", "Saskia Bakker", "Evert de Boer", "Youssouf Mehmu", "Peter Straatman"};
             for(int i = 0; i < names.length; i++) {
                 UserDTO userDTO = createUserSeed(names[i]);
                 userService.saveUser(userDTO);
@@ -88,11 +89,11 @@ public class Seeder {
     public void seedGardens() {
         List<GardenDTO> gardens = gardenService.getAllGardens();
         if(gardens.isEmpty()) {
-            String[] gardenNames = {"Eden", "Hanging Gardens", "Central Park", "Madison Square Garden",
-                    "Bowsers Big Balloon Castle", "Orange County Park", "Red Reindeer Square", "Thousand needles",
-                    "The Barrens", "Howling Fjord", "Extra Garden"};
-            String[] locations = {"New York", "Hollywood", "OudeHaske", "London", "Toronto", "Buffalo", "Orlando",
-                    "Oxford", "Berlin", "Caketown", "Groningen"};
+            String[] gardenNames = {"Eden", "Noorder Plantsoentje", "De Groene Weelde", "Bij het Meertje",
+                    "Bowsers Big Balloon Castle", "Het Dorpstuintje", "Samen in de Tuin", "Het Groene Kwartier",
+                    "Achter de Kerk", "Howling Fjord", "Het Moeras"};
+            String[] locations = {"Amsterdam", "Groningen", "Oudehaske", "Assen", "Haren", "Emmen", "Hengelo",
+                    "Hoogeveen", "Meppel", "Leeuwarden", "Grootegast"};
             for(int i = 0; i < gardenNames.length; i++) {
                 GardenDTO gardenDTO = createGardenSeed(gardenNames[i], locations[i]);
                 gardenService.saveGarden(gardenDTO);
@@ -147,21 +148,21 @@ public class Seeder {
         List<JoinGardenRequestDTO> requests = joinGardenRequestService.getAllRequests();
         if(requests.isEmpty()){
             ArrayList<UserDTO> testUsers = new ArrayList<>();
-            UserDTO kynes = createUserSeed("Kynes Rodriguez");
-            UserDTO lydia = createUserSeed("Lydia Alvarez");
-            UserDTO donald = createUserSeed("Donald Anderson");
-            UserDTO corey = createUserSeed("Corey Moore");
-            UserDTO rupert = createUserSeed("Rupert Jackson");
+            UserDTO kynes = createUserSeed("Wim Naaktgeboren");
+            UserDTO lydia = createUserSeed("Anne van Veen");
+            UserDTO donald = createUserSeed("Klaas Hassous");
+            UserDTO corey = createUserSeed("Wouter Roelofsen");
+            UserDTO rupert = createUserSeed("Greetje in't Veld");
             userService.saveUser(kynes);
             userService.saveUser(lydia);
             userService.saveUser(donald);
             userService.saveUser(corey);
             userService.saveUser(rupert);
-            testUsers.add(userService.findUserByUsername("Kynes Rodriguez"));
-            testUsers.add(userService.findUserByUsername("Lydia Alvarez"));
-            testUsers.add(userService.findUserByUsername("Donald Anderson"));
-            testUsers.add(userService.findUserByUsername("Corey Moore"));
-            testUsers.add(userService.findUserByUsername("Rupert Jackson"));
+            testUsers.add(userService.findUserByUsername("Wim Naaktgeboren"));
+            testUsers.add(userService.findUserByUsername("Anne van Veen"));
+            testUsers.add(userService.findUserByUsername("Klaas Hassous"));
+            testUsers.add(userService.findUserByUsername("Wouter Roelofsen"));
+            testUsers.add(userService.findUserByUsername("Greetje in't Veld"));
             List<GardenDTO> gardens = gardenService.getAllGardens();
             for(GardenDTO gardenDTO : gardens) {
                 for(UserDTO user : testUsers) {
@@ -217,10 +218,10 @@ public class Seeder {
 
     public ArrayList<GardenTaskDTO> createGardenTaskSeed(GardenDTO gardenDTO) {
         ArrayList<GardenTaskDTO> tasks = new ArrayList<>();
-        String[] titles = {"Sweep the paths", "Remove weeds", "Gather trash", "Repair fences", "Paint fences", "Ponder",
-                "Toast toasters", "Empty trashcans"};
+        String[] titles = {"Veeg het pad aan", "Haal onkruid weg", "Ruim troep op", "Repareer het hekje", "Verf het hekje", "Ponder",
+                "Toast toasters", "Leeg de afvalbak"};
         for(int i = 0; i < titles.length; i++) {
-            String description = "Please " + titles[i].toLowerCase() + " today";
+            String description = titles[i].toLowerCase();
             GardenTaskDTO gardenTaskDTO = new GardenTaskDTO();
             gardenTaskDTO.setTaskName(titles[i]);
             gardenTaskDTO.setTaskDescription(description);
@@ -233,11 +234,12 @@ public class Seeder {
 
     public ArrayList<PatchDTO> createPatchSeed(GardenDTO gardenDTO) {
         ArrayList<PatchDTO> patches = new ArrayList<>();
-        String[] crops = {"turnips", "carrots", "potatoes", "grapes", "pumpkins", "berry bushes", "strawberries"};
+        String[] crops = {"rapen", "wortels", "aardappelen", "druiven", "pompoenen", "braamstruiken", "aardbei"};
+        String[] patchNames = {"rechts achterin", "naast de eik", "het strookje"};
         for (int i = 0; i < patchesPerGarden; i++) {
             int randomCrops = (int)Math.floor(Math.random() * crops.length);
             PatchDTO patchDTO = new PatchDTO();
-            patchDTO.setName("patch " + (i + 1));
+            patchDTO.setName(patchNames[i]);
             patchDTO.setCrop(crops[randomCrops]);
             patchDTO.setGardenDTO(gardenDTO);
             patches.add(patchDTO);
@@ -247,11 +249,11 @@ public class Seeder {
 
     public ArrayList<PatchTaskDTO> createPatchTaskSeed(PatchDTO patchDTO) {
         ArrayList<PatchTaskDTO> tasks = new ArrayList<>();
-        String[] titles = {"Plant", "Fertilize", "Water", "Clean", "Prune", "Weed", "Hoe", "Harvest"};
+        String[] titles = {"Planten", "Bemesten", "Water geven", "Schoonmaken", "Snoeien", "Onkruid wieden", "Schoffelen", "Oogsten"};
         for(int i = 0; i < titles.length; i++) {
             String crop = patchDTO.getCrop();
-            String title = titles[i] + " the " + crop;
-            String description = "Please " + titles[i].toLowerCase() + " the " + crop + " soon";
+            String title = titles[i];
+            String description = "Het is tijd om te " + titles[i].toLowerCase();
             PatchTaskDTO patchTaskDTO = new PatchTaskDTO();
             patchTaskDTO.setTaskName(title);
             patchTaskDTO.setTaskDescription(description);
@@ -265,36 +267,44 @@ public class Seeder {
     public void seedForPresentation() {
 
         UserDTO userDTO = createUserSeed("Lukas de Ruiter");
-        userService.saveUser(userDTO);
+        int userId = userService.saveUser(userDTO);
+        userDTO.setUserId(userId);
 
         GardenDTO gardenDTO = createGardenSeed("De vier wijken", "Groningen");
-        gardenService.saveGarden(gardenDTO);
+        int gardenId = gardenService.saveGarden(gardenDTO);
+        gardenDTO.setGardenId(gardenId);
+
+        GardenUserDTO gardenUserDTO = createGardenUserSeed(userDTO, gardenDTO, "gardenManager");
+        gardenUserService.saveGardenUser(gardenUserDTO);
 
         ArrayList<PatchDTO> patches = createPatchSeed(gardenDTO);
         patches.get(0).setName("Links achterin");
         patches.get(1).setName("Naast de vijver");
         patches.get(2).setName("minimoestuin");
 
-        patches.get(0).setName("Pompoen");
-        patches.get(1).setName("Aardappel");
-        patches.get(2).setName("Winterpeen");
+        patches.get(0).setCrop("Pompoen");
+        patches.get(1).setCrop("Aardappel");
+        patches.get(2).setCrop("Winterpeen");
 
         for(PatchDTO patchDTO : patches) {
-            patchService.savePatch(patchDTO);
+            int patchId = patchService.savePatch(patchDTO);
+            patchDTO.setPatchId(patchId);
 
             ArrayList<PatchTaskDTO> tasks = new ArrayList<>();
             String[] tasksList = {"Aanvegen", "Bemesten", "Water geven", "Schoffelen", "Wieden", "Zaaien", "Oogsten", "Opsteken"};
-
-            for(int i = 0; i < tasksList.length; i++) {
-                createPatchTaskSeed(patchDTO);
-            }
-
             String[] description = new String[] {"Veeg de bladeren bij elkaar", "Geef deze perk extra voeding","Dit perkje heeft extra water nodig", "Maak de grond los en woel om",
                     "Verwijder het onkruid", "Plant zaadjes op 10 cm afstand van elkaar", "Haal de groente uit de tuin of pluk het fruit",
                     "Zet de plant vast aan een rek, zodat deze niet omvalt"};
 
-            for (int j = 0; j < description.length; j++) {
-                createPatchTaskSeed(patchDTO);
+            for(int i = 0; i < tasksList.length; i++) {
+                String title = tasksList[i];
+                String description2 = description[i];
+                PatchTaskDTO patchTaskDTO = new PatchTaskDTO();
+                patchTaskDTO.setTaskName(title);
+                patchTaskDTO.setTaskDescription(description2);
+                patchTaskDTO.setDone(false);
+                patchTaskDTO.setPatchDTO(patchDTO);
+                patchTaskService.savePatchTask(patchTaskDTO);
             }
 
         }
