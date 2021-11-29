@@ -1,5 +1,9 @@
 package nl.miwgroningen.se6.gardengnomes.Igadi.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 /**
  * @author Tjerk Nagel
  * doel:
@@ -8,6 +12,10 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.dto;
 public class GardenDTO {
 
     private Integer gardenId;
+
+    @NotNull
+    @NotEmpty
+    @NotBlank
     private String gardenName;
     private int amountOfUsers;
     private String location;

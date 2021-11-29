@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 import java.util.*;
 
 /**
@@ -83,8 +85,8 @@ public class GardenController {
     }
 
     @PostMapping("gardens/new")
-    protected String createGarden(@ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
-                                          RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
+    protected String createGarden(@Valid @ModelAttribute("garden") GardenDTO gardenDTO, BindingResult result,
+                                  RedirectAttributes redirectAttributes, @AuthenticationPrincipal User user) {
         String message = "Something went wrong.";
         if (!result.hasErrors()) {
             try {
