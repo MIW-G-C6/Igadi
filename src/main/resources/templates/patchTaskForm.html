@@ -63,7 +63,9 @@
             </div>
         </form>
     </div>
-
+    <div>
+        <p th:if="${!message.isEmpty()}" th:class="${message.get(1)}" th:text="${message.get(0)}"></p>
+    </div>
 </div>
 
 <div th:replace="fragments/general :: footer"></div>

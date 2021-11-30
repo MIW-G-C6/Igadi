@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,13 +77,17 @@ public class PatchTaskController {
 
     @GetMapping("/overview/details/patchTasks/new/{patchId}")
     protected String showPatchTaskForm(@PathVariable("patchId") int patchId, Model model,
-                                       @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
+                                       @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes,
+                                       @ModelAttribute("message") ArrayList<String> message) {
         try {
             if (authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId))) {
                 PatchTaskDTO patchTaskDTO = new PatchTaskDTO();
                 patchTaskDTO.setPatchDTO(patchService.getPatchById(patchId));
                 patchTaskDTO.setDone(false);
                 model.addAttribute("patchTask", patchTaskDTO);
+                if (!message.isEmpty()) {
+                    model.addAttribute("message", message);
+                }
                 return "patchTaskForm";
             } else {
                 return "error/403";
@@ -97,6 +102,7 @@ public class PatchTaskController {
                                            @Valid @ModelAttribute("patchTask") PatchTaskDTO patchTaskDTO,
                                            BindingResult result, @AuthenticationPrincipal User user,
                                            RedirectAttributes redirectAttributes) {
+        String message = "Something went wrong.";
         if (!result.hasErrors()) {
             try {
                 patchTaskDTO.setPatchDTO(patchService.getPatchById(patchId));
@@ -107,9 +113,11 @@ public class PatchTaskController {
             catch (SecurityException ex) {
                 return "error/403";
             }
-        } else {
-            return "redirect:/overview/details/patchTasks/new/{patchId}";
+        } else if (result.hasFieldErrors("taskName") || result.hasFieldErrors("taskDescription")) {
+            message = "Please fill in a name and a description.";
         }
+        redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
+        return "redirect:/overview/details/patchTasks/new/{patchId}";
     }
 
     @PostMapping("/overview/details/patchTasks/delete/{taskId}")
