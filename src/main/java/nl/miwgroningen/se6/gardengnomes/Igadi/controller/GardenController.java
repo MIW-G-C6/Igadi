@@ -108,9 +108,15 @@ public class GardenController {
                     message = "That name already exists.";
                 }
             }
+        } else if (result.hasFieldErrors("gardenName")) {
+            message = "Please fill in a name.";
         }
         redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
-        return "redirect:/gardens/new";
+        if (gardenDTO.getGardenId() == null) {
+            return "redirect:/gardens/new";
+        } else {
+            return "redirect:/overview/details/" + gardenDTO.getGardenId() + "/edit";
+        }
     }
 
     @PostMapping("gardens/delete/{gardenId}")

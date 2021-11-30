@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Lukas de Ruiter <lukas_kremlin@hotmail.com>
@@ -50,12 +52,16 @@ public class PatchController {
 
     @GetMapping("/overview/details/garden/patches/new/{gardenId}")
     protected String newPatchForm(@PathVariable(value = "gardenId") Integer gardenId, Model model,
-                                  @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
+                                  @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes,
+                                  @ModelAttribute("message") ArrayList<String> message) {
         if (authorizationHelper.isUserGardenManager(user.getUserId(), gardenId)) {
             PatchDTO patch = new PatchDTO();
             patch.setGardenDTO(gardenService.getGardenById(gardenId));
             model.addAttribute("patch", patch);
             model.addAttribute("titleText", "Add a new patch");
+            if (!message.isEmpty()) {
+                model.addAttribute("message", message);
+            }
             return "patchForm";
         } else {
             return "error/403";
@@ -64,12 +70,16 @@ public class PatchController {
 
     @GetMapping("/overview/details/garden/patches/edit/{patchId}")
     protected String editPatchForm(@PathVariable(value = "patchId") Integer patchId, Model model,
-                                   @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
+                                   @AuthenticationPrincipal User user, RedirectAttributes redirectAttributes,
+                                   @ModelAttribute("message") ArrayList<String> message) {
         try {
             if (authorizationHelper.isUserGardenManager(user.getUserId(), patchService.findGardenIdByPatchId(patchId))) {
                 PatchDTO patch = patchService.getPatchById(patchId);
                 model.addAttribute("patch", patch);
                 model.addAttribute("titleText", "Edit patch");
+                if (!message.isEmpty()) {
+                    model.addAttribute("message", message);
+                }
                 return "patchForm";
             } else {
                 return "error/403";
@@ -83,6 +93,7 @@ public class PatchController {
     protected String saveNewPatch(@PathVariable("gardenId") int gardenId, @Valid @ModelAttribute("patch") PatchDTO patch,
                                   BindingResult result, @AuthenticationPrincipal User user,
                                   RedirectAttributes redirectAttributes) {
+        String message = "Something went wrong.";
         if (!result.hasErrors()) {
             try {
                 // if we edit and change the crop, we want to delete all tasks. In all other cases, keep things the same
@@ -94,8 +105,14 @@ public class PatchController {
             catch (SecurityException ex) {
                 return "error/403";
             }
+        } else if (result.hasFieldErrors("name")) {
+            message = "Please fill in a name.";
+        }
+        redirectAttributes.addAttribute("message", List.of(message, "redMessage"));
+        if (patch.getPatchId() == null) {
+            return "redirect:/overview/details/garden/patches/new/" + gardenId;
         } else {
-            return "redirect:/overview/details/patchTasks/" + patch.getPatchId();
+            return "redirect:/overview/details/garden/patches/edit/" + patch.getPatchId();
         }
     }
 
