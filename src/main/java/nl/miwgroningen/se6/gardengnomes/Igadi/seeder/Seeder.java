@@ -2,7 +2,6 @@ package nl.miwgroningen.se6.gardengnomes.Igadi.seeder;
 
 import nl.miwgroningen.se6.gardengnomes.Igadi.configuration.UserRole;
 import nl.miwgroningen.se6.gardengnomes.Igadi.dto.*;
-import nl.miwgroningen.se6.gardengnomes.Igadi.model.Garden;
 import nl.miwgroningen.se6.gardengnomes.Igadi.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -306,9 +305,7 @@ public class Seeder {
                     patchTaskDTO.setPatchDTO(patchDTO);
                     patchTaskService.savePatchTask(patchTaskDTO);
                 }
-
             }
         }
-
     }
 }
