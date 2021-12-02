@@ -38,8 +38,7 @@ public class GardenerAjaxController {
 
     @PostMapping("/overview/details/{gardenId}/gardeners")
     public ResponseEntity<?> getSearchResultViaAjax(@PathVariable("gardenId") int gardenId,
-                                                    @Valid @RequestBody GardenerSearchCriteriaDTO searchGardeners,
-                                                    Errors errors) {
+                                                    @Valid @RequestBody GardenerSearchCriteriaDTO searchGardeners) {
         List<UserDTO> users = userService.getAllUsers();
         List<GardenUserDTO> alreadyAddedUser = gardenUserService.findAllGardenUsersByGardenId(gardenId);
 
