@@ -44,6 +44,7 @@
                 <h1 class="pb-1 m-0 text-truncate" th:text="${patch.getName()}"></h1>
                 <p class="m-0 pl-1" th:text="${patch.showWhatIsGrowing()}"></p>
             </div>
+
             <div class="p-0 flex-column mt-2 float-right ml-auto">
                 <a th:href="@{/overview/details/garden/patches/edit/{patchId}(patchId=${patch.getPatchId()})}" class="text-decoration-none">
                     <img th:if="${isUserGardenManager}" th:src="'/images/icons/pen.png'" class="penIcon mb-4 mr-3">
@@ -53,6 +54,7 @@
                      data-toggle="modal"
                      th:data-target="'#igadiPatchDeleteModal'">
             </div>
+
         </div>
     </div>
 

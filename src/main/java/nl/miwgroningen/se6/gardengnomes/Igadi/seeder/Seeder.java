@@ -53,9 +53,9 @@ public class Seeder {
         seedGardenTasks();
         seedPatches();
         seedPatchTasks();
+        seedGardenUsers();
         seedAdmin();
         seedForPresentation();
-        seedGardenUsers();
         seedGardenRequests();
     }
 
