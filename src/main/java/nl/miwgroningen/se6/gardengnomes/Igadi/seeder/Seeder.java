@@ -53,10 +53,10 @@ public class Seeder {
         seedGardenTasks();
         seedPatches();
         seedPatchTasks();
-        seedGardenUsers();
-        seedGardenRequests();
         seedAdmin();
         seedForPresentation();
+        seedGardenUsers();
+        seedGardenRequests();
     }
 
     public void seedUsers() {
